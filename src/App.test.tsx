@@ -3,13 +3,16 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import App from './App';
+import {BrowserRouter} from "react-router-dom";
 
-test('renders learn react link', () => {
-  // const { getByText } = render(
-  //   <Provider store={store}>
-  //     <App />
-  //   </Provider>
-  // );
+test('renders react app', () => {
+  const { getByText } = render(
+      <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+      </BrowserRouter>
+  );
 
-  // expect(getByText(/learn/i)).not.toBeUndefined();
+  expect(getByText('React Pizza')).toBeInTheDocument()
 });
