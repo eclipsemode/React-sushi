@@ -1,0 +1,48 @@
+@import '../../assets/styles/variables';
+
+.root {
+  border-bottom: 1px solid $gray-line;
+  padding: 40px 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: $container-width;
+  margin: 0 auto;
+  column-gap: 1rem;
+
+  @media (max-width: 860px) {
+    flex-direction: column;
+    row-gap: 1.5rem;
+  }
+}
+
+.logo {
+  display: flex;
+
+  img {
+    margin-right: 15px;
+  }
+
+  h1 {
+    color: #181818;
+    font-size: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  p {
+    color: #7b7b7b;
+    white-space: nowrap;
+  }
+}
+
+.card_search {
+  display: flex;
+  column-gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
