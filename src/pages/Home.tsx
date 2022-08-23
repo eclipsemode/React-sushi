@@ -1,20 +1,27 @@
-import React from 'react';
+import React from "react";
 
-import { Categories, Sort, Products } from '../components';
+import { Categories, Sort, Products } from "../components";
+import { useAppSelector } from "../redux/hooks";
+import { selectFilter } from "../redux/features/filterSlice";
+import categoryNames from "../components/Categories/categoryNames";
 
 const Home: React.FC = () => {
-    return (
-        <>
-            <div className="content__top">
-                <Categories />
-            </div>
-          <div className="content__head">
-            <h2 className="content__title">Все пиццы</h2>
-            <Sort/>
-          </div>
-            <Products />
-        </>
-    );
+  const { categoryNumber } = useAppSelector(selectFilter);
+  React.useEffect(() => {
+
+  }, [categoryNumber]);
+  return (
+    <>
+      <div className="content__top">
+        <Categories />
+      </div>
+      <div className="content__head">
+        <h2 className="content__title">{categoryNames[categoryNumber]}</h2>
+        <Sort />
+      </div>
+      <Products />
+    </>
+  );
 };
 
 export default Home;

@@ -7,10 +7,11 @@ import cat4Img from "../../assets/img/4.png";
 import cat5Img from "../../assets/img/5.png";
 import cat6Img from "../../assets/img/6.png";
 
+import categoryNames from "./categoryNames";
+
 import { setCategoryNumber, selectFilter } from "../../redux/features/filterSlice";
 
 const Categories: React.FC = () => {
-  const categories: String[] = ["Все", "Сеты", "Фирменные", "Суши", "Горячие", "Запеченные"];
   const dispatch = useDispatch();
   const { categoryNumber } = useSelector(selectFilter);
 
@@ -38,7 +39,7 @@ const Categories: React.FC = () => {
   return (
     <nav className="categories">
       <ul>
-        {categories.map((name, index) => (
+        {categoryNames.map((name, index) => (
           <li
             key={index}
             onClick={() => handleClickCategory(index)}
