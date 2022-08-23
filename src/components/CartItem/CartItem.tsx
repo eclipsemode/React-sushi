@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { removeItemById, addItem, removeItem } from '../../redux/features/cartSlice';
+import { removeItemById } from '../../redux/features/cartSlice';
 import { CartButtonMinus, CartButtonPlus } from '../UI';
 import { ProductsType } from '../../redux/features/productsSlice';
 
@@ -14,13 +14,6 @@ const CartItem: React.FC<CartItemProps> = ({ obj }) => {
     const handleRemoveItemById = (id: string) => {
         dispatch(removeItemById(id));
     };
-    const handleAddItem = () => {
-        dispatch(addItem(obj));
-    };
-
-    const handleRemoveItem = () => {
-        dispatch(removeItem(obj.id));
-    };
     return (
         <div className="cart__item">
             <div className="cart__item-img">
@@ -31,9 +24,9 @@ const CartItem: React.FC<CartItemProps> = ({ obj }) => {
                 <p>тонкое тесто, 26 см.</p>
             </div>
             <div className="cart__item-count">
-                <CartButtonMinus obj={obj} handleRemoveItem={handleRemoveItem} />
+                <CartButtonMinus product={obj} />
                 <b>{obj.amount}</b>
-                <CartButtonPlus handleAddItem={handleAddItem} obj={obj} />
+                <CartButtonPlus product={obj} />
             </div>
             <div className="cart__item-price">
                 <b>{obj.price * obj.amount} ₽</b>

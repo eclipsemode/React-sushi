@@ -43,12 +43,13 @@
     height: 32px;
     min-width: 32px;
     padding: 0;
-    border-width: 2px;
+    border-width: 1px;
 }
 
 @mixin Button--outline {
-    background-color: #fff;
-    border-color: $orange;
+    background-color: transparent;
+    border-color: $dark;
+    transition: all ease-in-out 0.2s;
     &,
     span {
         color: $orange;
@@ -56,12 +57,13 @@
 
     svg {
         path {
-            fill: $orange;
+            fill: $dark;
         }
     }
 
     &:hover {
-        background-color: $orange;
+        background-color: $main-color;
+        border-color: transparent;
 
         &,
         span {

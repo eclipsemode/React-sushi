@@ -13,11 +13,11 @@
 
   ul {
     display: flex;
+    column-gap: 17px;
 
     li {
-      background-color: #f9f9f9;
+      background-color: $header-background;
       padding: 13px 30px;
-      margin-right: 10px;
       cursor: pointer;
       transition: background-color 0.1s ease-in-out;
       @include noselect();
@@ -27,19 +27,19 @@
       justify-content: center;
       column-gap: 10px;
       font-weight: 500;
-      width: 201px;
+      width: 206px;
       height: 70px;
 
       &:hover {
-        background-color: darken(#f9f9f9, 2%);
+        background-color: darken($header-background, 2%);
       }
 
       &:active {
-        background-color: darken(#f9f9f9, 5%);
+        background-color: darken($header-background, 5%);
       }
 
       &.categories-item--active {
-        background-color: #282828;
+        background-color: $header-color;
         color: #fff;
       }
     }

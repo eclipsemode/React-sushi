@@ -40,7 +40,7 @@ body {
   &__items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 11px;
+    grid-column-gap: 20px;
     grid-row-gap: 55px;
     justify-items: center;
 
@@ -153,109 +153,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-
-  &__item {
-    display: flex;
-    width: 100%;
-    padding-top: 30px;
-    margin-top: 30px;
-
-    &-img {
-      display: flex;
-      align-items: center;
-      margin-right: 15px;
-      width: 10%;
-
-      img {
-        width: 80px;
-        height: 80px;
-      }
-    }
-
-    &-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 40%;
-
-      h3 {
-        font-weight: bold;
-        font-size: 22px;
-        line-height: 27px;
-        letter-spacing: 0.01em;
-      }
-
-      p {
-        font-size: 18px;
-        color: #8d8d8d;
-      }
-    }
-
-    &-count {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 13%;
-
-      &-minus {
-        svg {
-          path:first-of-type {
-            display: none;
-          }
-        }
-      }
-
-      b {
-        font-size: 22px;
-      }
-    }
-
-    &-price {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 33%;
-
-      b {
-        font-weight: bold;
-        font-size: 22px;
-        letter-spacing: 0.01em;
-      }
-    }
-
-    &-remove {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      width: 4%;
-
-      .button {
-        border-color: darken($color: $gray-line, $amount: 10);
-      }
-
-      svg {
-        transform: rotate(45deg);
-
-        path {
-          fill: darken($color: $gray-line, $amount: 15);
-        }
-      }
-
-      .button {
-        svg {
-          width: 11.5px;
-          height: 11.5px;
-          position: relative;
-        }
-
-        &:hover,
-        &:active {
-          border-color: darken($color: $gray-line, $amount: 80);
-          background-color: darken($color: $gray-line, $amount: 80);
-        }
-      }
-    }
   }
 
   &__bottom {

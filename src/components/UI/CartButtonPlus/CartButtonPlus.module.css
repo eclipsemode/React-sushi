@@ -54,9 +54,10 @@ a {
   height: 32px;
   min-width: 32px;
   padding: 0;
-  border-width: 2px;
-  background-color: #fff;
-  border-color: #fe5f1e;
+  border-width: 1px;
+  background-color: transparent;
+  border-color: #212529;
+  transition: all ease-in-out 0.2s;
 }
 .root,
 .root span {
@@ -80,10 +81,11 @@ a {
   color: #fe5f1e;
 }
 .root svg path {
-  fill: #fe5f1e;
+  fill: #212529;
 }
 .root:hover {
-  background-color: #fe5f1e;
+  background-color: rgb(206, 40, 41);
+  border-color: transparent;
 }
 .root:hover,
 .root:hover span {

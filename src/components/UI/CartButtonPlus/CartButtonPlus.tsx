@@ -1,15 +1,22 @@
 import React from 'react';
 import styles from '../CartButtonMinus/CartButtonMinus.module.css';
-import { CartItemProps } from '../../CartItem/CartItem';
 import { TiPlus } from 'react-icons/ti';
+import { useDispatch } from "react-redux";
+import { addItem } from "../../../redux/features/cartSlice";
+import { ProductsType } from "../../../redux/features/productsSlice";
 
-interface CartButtonPlusType extends CartItemProps {
-    handleAddItem: () => void;
+interface CartButtonPlusType {
+    product: ProductsType
 }
 
-const CartButtonPlus: React.FC<CartButtonPlusType> = React.memo(({ obj, handleAddItem }) => {
+const CartButtonPlus: React.FC<CartButtonPlusType> = React.memo(({ product }) => {
+  const dispatch = useDispatch();
+
+  const handleAddItem = () => {
+    dispatch(addItem(product))
+  }
     return (
-        <button disabled={obj.amount === 99} onClick={() => handleAddItem()} className={styles.root}>
+        <button disabled={product.amount === 99} onClick={() => handleAddItem()} className={styles.root}>
             <TiPlus />
         </button>
     );
