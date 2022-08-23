@@ -11,7 +11,7 @@ import categoryNames from "./categoryNames";
 
 import { setCategoryNumber, selectFilter } from "../../redux/features/filterSlice";
 
-const Categories: React.FC = () => {
+const Categories: React.FC = React.memo(() => {
   const dispatch = useDispatch();
   const { categoryNumber } = useSelector(selectFilter);
 
@@ -52,6 +52,6 @@ const Categories: React.FC = () => {
       </ul>
     </nav>
   );
-};
+});
 
 export default Categories;

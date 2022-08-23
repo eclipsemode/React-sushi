@@ -1,5 +1,4 @@
 import logoImg from '../../assets/img/logo.png';
-import cartImg from '../../assets/img/shopping-cart.png';
 import phoneImg from '../../assets/img/phone.png';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
@@ -8,6 +7,7 @@ import React from 'react';
 
 import { selectCart } from '../../redux/features/cartSlice';
 import {useAppSelector} from "../../redux/hooks";
+import CartBlock from "../UI/CartBlock/CartBlock";
 
 const Header: React.FC = () => {
     const { totalPrice, totalAmount } = useAppSelector(selectCart);
@@ -37,13 +37,7 @@ const Header: React.FC = () => {
                   <li className={styles.root__link}><Link to={'/'}>Контакты</Link></li>
                 </ul>
               <div className={styles.root__info}>
-                <div className={styles.root__cart}>
-                  <Link to={'/cart'}>
-                  <img width="32" height="32" src={cartImg} alt="cart"/>
-                  <div>{totalAmount}</div>
-                  </Link>
-                  <span>{totalPrice} ₽</span>
-                </div>
+                <CartBlock totalPrice={totalPrice} totalAmount={totalAmount}/>
                 <div className={styles.root__phone}>
                   <img width="32" height="32" src={phoneImg} alt="phone"/>
                   <span>8 (800) 200-27-92</span>
