@@ -415,6 +415,10 @@ body {
   background-color: #fff;
 }
 
+.App {
+  position: relative;
+}
+
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;

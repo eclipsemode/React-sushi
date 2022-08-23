@@ -1,0 +1,11 @@
+@import "../../assets/styles/variables";
+
+.root {
+  position: fixed;
+  bottom: 7rem;
+  right: 3rem;
+  width: 44px;
+  height: 44px;
+  fill: $main-color;
+  cursor: pointer;
+}

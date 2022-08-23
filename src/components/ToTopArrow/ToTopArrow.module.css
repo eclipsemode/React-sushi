@@ -1,0 +1,11 @@
+.root {
+  position: fixed;
+  bottom: 7rem;
+  right: 3rem;
+  width: 44px;
+  height: 44px;
+  fill: rgb(206, 40, 41);
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=ToTopArrow.module.css.map */

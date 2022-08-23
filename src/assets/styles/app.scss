@@ -9,6 +9,10 @@ body {
   background-color: $background;
 }
 
+.App {
+  position: relative;
+}
+
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;
