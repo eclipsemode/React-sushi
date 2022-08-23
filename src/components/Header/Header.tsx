@@ -33,8 +33,8 @@ const Header: React.FC = () => {
                 <img className={styles.root__logo} width="60" height="60" src={logoImg} alt="Item logo"/>
               </Link>
                 <ul className={styles.root__menu}>
-                  <li className={styles.root__link}><Link to={'/'}>Главная</Link></li>
-                  <li className={styles.root__link}><Link to={'/'}>Контакты</Link></li>
+                  <li className={styles.root__link}><a href="#top">Главная</a></li>
+                  <li className={styles.root__link}><a href='#footer'>Контакты</a></li>
                 </ul>
               <div className={styles.root__info}>
                 <CartBlock totalPrice={totalPrice} totalAmount={totalAmount}/>

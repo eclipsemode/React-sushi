@@ -4,7 +4,7 @@ import { FaFacebookF, FaGooglePlusG, FaTwitter } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
-    <footer className={styles.root}>
+    <footer id="footer" className={styles.root}>
       <div className={styles.root__container}>
         <div className={styles.root__about}></div>
         <div className={styles.root__menu}></div>

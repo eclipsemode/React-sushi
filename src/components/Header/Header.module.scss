@@ -32,11 +32,11 @@
 
   &__link {
     text-transform: uppercase;
-
     & a {
       font-size: 16px;
       color: $header-color;
       transition: color ease-in-out 0.2s;
+
     }
 
     & a:hover {
