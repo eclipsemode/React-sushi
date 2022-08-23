@@ -5,14 +5,29 @@ import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 
 import React from 'react';
+
 import { selectCart } from '../../redux/features/cartSlice';
 import {useAppSelector} from "../../redux/hooks";
 
 const Header: React.FC = () => {
     const { totalPrice, totalAmount } = useAppSelector(selectCart);
+    const headerRef = React.useRef<HTMLDivElement>(null);
+
+    const isHandleClassName = React.useCallback(() => {
+      window.scrollY > 0
+        ? headerRef.current?.classList.add(styles.root__fixed)
+        : headerRef.current?.classList.remove(styles.root__fixed);
+    }, [])
+
+    React.useEffect(() => {
+      isHandleClassName();
+      window.addEventListener('scroll', () => {
+        isHandleClassName();
+      })
+    }, [isHandleClassName])
 
     return (
-        <header className={styles.root}>
+        <header ref={headerRef} className={styles.root}>
             <div className={styles.root__container}>
               <Link to={'/'}>
                 <img className={styles.root__logo} width="60" height="60" src={logoImg} alt="Pizza logo"/>
