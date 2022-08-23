@@ -1,5 +1,5 @@
 import React from 'react';
-import Skeleton from '../Pizza/Skeleton';
+import Skeleton from '../Item/Skeleton';
 
 const Pending: React.FC = () => {
     return (

@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./Pizza.module.css";
+import styles from "./Item.module.css";
 import { ProductsType } from "../../../redux/features/productsSlice";
 import { AddToCartButton } from "../../UI";
 
-const Pizza: React.FC<ProductsType> = ({ ...product }) => {
+const Item: React.FC<ProductsType> = ({ ...product }) => {
   const [imgScale, setImgScale] = React.useState<boolean>(false);
 
   const handleOnMouseOver = () => setImgScale(true);
@@ -11,7 +11,7 @@ const Pizza: React.FC<ProductsType> = ({ ...product }) => {
 
   return (
     <div className={styles.root} onMouseEnter={() => handleOnMouseOver()} onMouseLeave={() => handleOnMouseLeave()}>
-      <img className={styles.image + ' ' + (imgScale ? styles.image__resize : null)} src={product.imageUrl} alt="Pizza" />
+      <img className={styles.image + ' ' + (imgScale ? styles.image__resize : null)} src={product.imageUrl} alt="Item" />
       <div className={styles.root__content}>
         <h4 className={styles.title}>{product.name}</h4>
         <div className={styles.root__rating}>
@@ -29,4 +29,4 @@ const Pizza: React.FC<ProductsType> = ({ ...product }) => {
   );
 };
 
-export default Pizza;
+export default Item;

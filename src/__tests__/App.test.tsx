@@ -14,5 +14,5 @@ test('renders react app', () => {
       </BrowserRouter>
   );
 
-  expect(getByText('React Pizza')).toBeInTheDocument()
+  expect(getByText('React Item')).toBeInTheDocument()
 });

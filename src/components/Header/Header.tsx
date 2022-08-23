@@ -30,7 +30,7 @@ const Header: React.FC = () => {
         <header ref={headerRef} className={styles.root}>
             <div className={styles.root__container}>
               <Link to={'/'}>
-                <img className={styles.root__logo} width="60" height="60" src={logoImg} alt="Pizza logo"/>
+                <img className={styles.root__logo} width="60" height="60" src={logoImg} alt="Item logo"/>
               </Link>
                 <ul className={styles.root__menu}>
                   <li className={styles.root__link}><Link to={'/'}>Главная</Link></li>
