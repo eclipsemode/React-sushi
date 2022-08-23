@@ -45,6 +45,7 @@
 }
 .root__info span {
   color: #292929;
+  font-weight: 500;
 }
 .root__cart {
   display: flex;

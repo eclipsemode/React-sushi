@@ -42,7 +42,7 @@ const Header: React.FC = () => {
                   <img width="32" height="32" src={cartImg} alt="cart"/>
                   <div>{totalAmount}</div>
                   </Link>
-                  <span>{totalPrice}</span>
+                  <span>{totalPrice} ₽</span>
                 </div>
                 <div className={styles.root__phone}>
                   <img width="32" height="32" src={phoneImg} alt="phone"/>

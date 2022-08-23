@@ -7,9 +7,11 @@ const Home: React.FC = () => {
         <>
             <div className="content__top">
                 <Categories />
-                <Sort />
             </div>
+          <div className="content__head">
             <h2 className="content__title">Все пиццы</h2>
+            <Sort/>
+          </div>
             <Products />
         </>
     );

@@ -1,41 +1,41 @@
 @font-face {
-  font-family: "Nunito";
+  font-family: "Barlow";
   src: url("../fonts/Barlow-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
-  font-family: "Nunito";
+  font-family: "Barlow";
   src: url("../fonts/Barlow-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: "Nunito";
+  font-family: "Barlow";
   src: url("../fonts/Barlow-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
-  font-family: "Nunito";
+  font-family: "Barlow";
   src: url("../fonts/Barlow-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
-  font-family: "Nunito";
+  font-family: "Barlow";
   src: url("../fonts/Barlow-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
-  font-family: "Nunito";
+  font-family: "Barlow";
   src: url("../fonts/Barlow-ExtraBold.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
 }
 @font-face {
-  font-family: "Nunito";
+  font-family: "Barlow";
   src: url("../fonts/Barlow-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
@@ -314,7 +314,6 @@ a {
 }
 
 .categories {
-  max-width: 820px;
   width: 100%;
   position: relative;
 }
@@ -331,9 +330,7 @@ a {
 .categories ul li {
   background-color: #f9f9f9;
   padding: 13px 30px;
-  border-radius: 30px;
   margin-right: 10px;
-  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.1s ease-in-out;
   -webkit-touch-callout: none; /* iOS Safari */
@@ -342,6 +339,14 @@ a {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
            supported by Chrome, Opera and Firefox */
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  font-weight: 500;
+  width: 201px;
+  height: 70px;
 }
 .categories ul li:hover {
   background-color: #f4f4f4;
@@ -418,6 +423,11 @@ body {
 
 .content {
   padding: 100px 0;
+}
+.content__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .content__title {
   margin-top: 60px;
@@ -536,7 +546,6 @@ body {
 .cart__item {
   display: flex;
   width: 100%;
-  border-top: 1px solid #f6f6f6;
   padding-top: 30px;
   margin-top: 30px;
 }

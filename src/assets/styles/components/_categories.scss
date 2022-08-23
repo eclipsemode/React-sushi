@@ -2,7 +2,6 @@
 @import '../libs/normalize';
 
 .categories {
-  max-width: 820px;
   width: 100%;
   position: relative;
 
@@ -18,12 +17,18 @@
     li {
       background-color: #f9f9f9;
       padding: 13px 30px;
-      border-radius: 30px;
       margin-right: 10px;
-      font-weight: bold;
       cursor: pointer;
       transition: background-color 0.1s ease-in-out;
       @include noselect();
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 10px;
+      font-weight: 500;
+      width: 201px;
+      height: 70px;
 
       &:hover {
         background-color: darken(#f9f9f9, 2%);
