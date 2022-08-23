@@ -4,14 +4,16 @@ import { Outlet } from 'react-router-dom';
 
 const MainLayout: React.FC = () => {
     return (
+      <>
+      <Header />
         <div className="wrapper">
-            <Header />
             <div className="content">
                 <div className="container">
                     <Outlet />
                 </div>
             </div>
         </div>
+      </>
     );
 };
 

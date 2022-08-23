@@ -5,16 +5,15 @@
 @import 'components/all';
 
 body {
-  background-color: $background;
+  background-color: #fff;
 }
 
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;
-  background-color: #fff;
-  margin: 50px auto;
+  margin: 0 auto;
   border-radius: 10px;
-  max-width: 1400px;
+  max-width: 1320px;
 
   @media (max-width: 465px) {
     width: 100%;
@@ -333,11 +332,6 @@ body {
       line-height: 145.4%;
       letter-spacing: 0.01em;
       color: #777777;
-    }
-
-    icon {
-      position: relative;
-      top: 2px;
     }
 
     img {
