@@ -9,6 +9,7 @@ const Skeleton: React.FC = (props) => (
       viewBox="0 0 306 386"
       backgroundColor="#f3f3f3"
       foregroundColor="#ecebeb"
+      title="Загрузка..."
       {...props}
     >
         <rect x="165" y="451" rx="4" ry="4" width="230" height="53" />

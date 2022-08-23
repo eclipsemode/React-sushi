@@ -9,15 +9,17 @@
 
     svg {
       margin-right: 8px;
+      color: $dark;
     }
 
     b {
       margin-right: 8px;
+      color: $dark;
     }
 
     span {
-      color: $orange;
-      border-bottom: 1px dashed $orange;
+      color: $main-color;
+      border-bottom: 1px dashed $main-color;
       cursor: pointer;
     }
   }
@@ -45,7 +47,7 @@
 
         &.active {
           font-weight: bold;
-          color: $orange;
+          color: $main-color;
         }
       }
     }

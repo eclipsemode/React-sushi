@@ -15,10 +15,10 @@ const Home: React.FC = () => {
       <div className="content__top">
         <Categories />
       </div>
-      <div className="content__head">
+      <section className="content__head">
         <h2 className="content__title">{categoryNames[categoryNumber]}</h2>
         <Sort />
-      </div>
+      </section>
       <Products />
     </>
   );

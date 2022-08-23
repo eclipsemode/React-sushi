@@ -371,13 +371,15 @@ a {
 }
 .sort__label svg {
   margin-right: 8px;
+  color: #212529;
 }
 .sort__label b {
   margin-right: 8px;
+  color: #212529;
 }
 .sort__label span {
-  color: #fe5f1e;
-  border-bottom: 1px dashed #fe5f1e;
+  color: rgb(206, 40, 41);
+  border-bottom: 1px dashed rgb(206, 40, 41);
   cursor: pointer;
 }
 .sort__popup {
@@ -402,7 +404,7 @@ a {
 }
 .sort__popup ul li.active {
   font-weight: bold;
-  color: #fe5f1e;
+  color: rgb(206, 40, 41);
 }
 
 body {
@@ -436,6 +438,7 @@ body {
   margin-bottom: 60px;
   font-weight: 800;
   font-size: 36px;
+  color: #212529;
 }
 .content__items {
   display: grid;
@@ -480,15 +483,10 @@ body {
 }
 
 .container {
-  width: 98%;
+  max-width: 1320px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
-}
-.container--cart {
-  max-width: 820px;
-  margin: 90px auto;
-}
-.container--cart .content__title {
-  margin: 0;
 }
 
 .cart__top {

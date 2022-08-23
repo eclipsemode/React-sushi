@@ -1,0 +1,41 @@
+@import "../../assets/styles/variables";
+@import '../../assets/styles/mixins/container';
+
+.root {
+  width: 100%;
+  background: $header-background;
+  height: 561px;
+  display: flex;
+  flex-direction: column;
+
+  &__container {
+    @include Container;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__additional {
+    height: 90px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    & span {
+      color: $paragraph-color;
+    }
+  }
+
+  &__social {
+    display: flex;
+    column-gap: 10px;
+    & svg {
+      cursor: pointer;
+      fill: $dark;
+      width: 20px;
+      transition: fill ease-in-out 0.2s;
+    }
+
+    & svg:hover {
+      fill: $main-color;
+    }
+  }
+}

@@ -3,7 +3,7 @@
   height: 80px;
   position: fixed;
   transition: background-color ease-in-out 0.2s;
-  z-index: 1;
+  z-index: 2;
 }
 .root__fixed {
   background-color: rgba(250, 247, 242, 0.9);
@@ -13,9 +13,9 @@
 }
 .root__container {
   max-width: 1320px;
-  margin: 0 auto;
   width: 100%;
   height: 100%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;

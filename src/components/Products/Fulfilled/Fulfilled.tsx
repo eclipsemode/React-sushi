@@ -6,11 +6,11 @@ import { ProductsType, selectProducts } from '../../../redux/features/productsSl
 const Fulfilled: React.FC = () => {
     const { products } = useSelector(selectProducts);
     return (
-        <div className="content__items">
+        <section className="content__items">
             {products.map((product: ProductsType) => (
                 <Item key={product.id} {...product} />
             ))}
-        </div>
+        </section>
     );
 };
 
