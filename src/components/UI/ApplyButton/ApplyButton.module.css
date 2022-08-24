@@ -1,0 +1,46 @@
+.root {
+  width: fit-content;
+  height: 56px;
+  appearance: none;
+  background: #fdc913;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 8px;
+  overflow: hidden;
+  position: relative;
+  padding: 15px 35px;
+}
+.root span {
+  z-index: 1;
+  text-transform: uppercase;
+}
+.root::after {
+  content: "";
+  background: #fff;
+  position: absolute;
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+  transition-duration: 0.4s;
+  height: 100%;
+  left: -35%;
+  top: 0;
+  -webkit-transform: skew(30deg);
+  transform: skew(30deg);
+  -webkit-transition-duration: 0.4s;
+  -webkit-transform-origin: top left;
+  transform-origin: top left;
+  width: 0;
+}
+.root:hover::after {
+  height: 100%;
+  width: 135%;
+  background: #fdc913;
+}
+
+/*# sourceMappingURL=ApplyButton.module.css.map */
