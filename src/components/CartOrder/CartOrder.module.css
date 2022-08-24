@@ -1,0 +1,17 @@
+.root {
+  border-radius: 6px;
+  overflow: hidden;
+}
+.root th:not(:last-of-type), .root td:not(:last-of-type) {
+  border-right: 1px solid rgba(41, 41, 41, 0.1);
+}
+.root__table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.root thead {
+  background: #F6F1E7;
+  height: 59px;
+}
+
+/*# sourceMappingURL=CartOrder.module.css.map */

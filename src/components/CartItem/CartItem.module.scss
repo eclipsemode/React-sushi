@@ -1,0 +1,56 @@
+@import '../../assets/styles/variables';
+
+.root {
+  background: $background;
+  height: 179px;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid rgba(41, 41, 41, 0.1);
+  }
+  &__product {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    column-gap: 3rem;
+    height: inherit;
+
+    & svg {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      transition: fill ease-in-out 0.2s;
+      margin-left: 1rem;
+    }
+
+    & svg:hover {
+      fill: $main-color;
+    }
+  }
+
+  &__price {
+    font-size: 20px;
+    font-weight: 600;
+    color: $dark;
+    width: 142px;
+    text-align: center;
+  }
+
+  &__amount {
+    width: 270px;
+
+    & div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 1rem;
+    }
+  }
+
+  &__total {
+    font-size: 20px;
+    font-weight: 600;
+    color: $dark;
+    width: 204px;
+    text-align: center;
+  }
+}

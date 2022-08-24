@@ -70,6 +70,12 @@ h2 {
   line-height: 30px;
 }
 
+h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #212529;
+}
+
 a {
   text-decoration: none;
 }
@@ -104,6 +110,12 @@ h2 {
   line-height: 30px;
 }
 
+h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #212529;
+}
+
 a {
   text-decoration: none;
 }
@@ -136,6 +148,12 @@ h2 {
   font-weight: 600;
   font-size: 28px;
   line-height: 30px;
+}
+
+h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #212529;
 }
 
 a {
@@ -313,6 +331,12 @@ h2 {
   font-weight: 600;
   font-size: 28px;
   line-height: 30px;
+}
+
+h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #212529;
 }
 
 a {

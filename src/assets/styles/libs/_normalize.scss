@@ -1,3 +1,4 @@
+@import '../variables';
 * {
     padding: 0;
     margin: 0;
@@ -26,6 +27,12 @@ h2 {
     font-weight: 600;
     font-size: 28px;
     line-height: 30px;
+}
+
+h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: $dark;
 }
 
 a {
