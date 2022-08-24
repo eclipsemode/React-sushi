@@ -23,6 +23,9 @@
   height: 322px;
   flex: 1;
 }
+.root__block > h2 {
+  margin-bottom: 22px;
+}
 .root__block span {
   color: rgba(27, 27, 27, 0.7);
   font-size: 16px;

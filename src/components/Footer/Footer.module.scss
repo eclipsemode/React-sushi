@@ -24,6 +24,10 @@
     height: 322px;
     flex: 1;
 
+    & > h2 {
+      margin-bottom: 22px;
+    }
+
     & span {
       color: $paragraph-color;
       font-size: 16px;
