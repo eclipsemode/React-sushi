@@ -15,8 +15,6 @@ export type ProductsType = {
     name: string;
     price: number;
     rating: number;
-    sizes: number[];
-    types: number[];
     amount: number;
 };
 

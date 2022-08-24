@@ -8,8 +8,6 @@ export type CartItemType = {
     name: string;
     price: number;
     rating: number;
-    sizes: number[];
-    types: number[];
     amount: number;
 };
 
