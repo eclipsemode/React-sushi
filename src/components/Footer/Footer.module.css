@@ -1,6 +1,6 @@
 .root {
   width: 100%;
-  background: #FAF7F2;
+  background: #F6F1E7;
   height: 561px;
   display: flex;
   flex-direction: column;
@@ -13,6 +13,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  column-gap: 1rem;
+}
+.root__block {
+  display: flex;
+  flex-direction: column;
+  row-gap: 22px;
+  align-items: flex-start;
+  height: 322px;
+  flex: 1;
+}
+.root__block span {
+  color: rgba(27, 27, 27, 0.7);
+  font-size: 16px;
 }
 .root__additional {
   height: 90px;
@@ -33,6 +46,14 @@
 }
 .root__social svg:hover {
   fill: rgb(206, 40, 41);
+}
+
+.about {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: #292929;
+  column-gap: 20px;
 }
 
 /*# sourceMappingURL=Footer.module.css.map */

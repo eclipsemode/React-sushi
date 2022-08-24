@@ -3,7 +3,7 @@
 
 .root {
   width: 100%;
-  background: $header-background;
+  background: $body-background;
   height: 561px;
   display: flex;
   flex-direction: column;
@@ -13,6 +13,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    column-gap: 1rem;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    row-gap: 22px;
+    align-items: flex-start;
+    height: 322px;
+    flex: 1;
+
+    & span {
+      color: $paragraph-color;
+      font-size: 16px;
+    }
   }
 
   &__additional {
@@ -38,4 +53,12 @@
       fill: $main-color;
     }
   }
+}
+
+.about {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: $header-color;
+  column-gap: 20px;
 }
