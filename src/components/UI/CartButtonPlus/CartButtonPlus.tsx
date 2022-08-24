@@ -6,17 +6,18 @@ import { addItem } from "../../../redux/features/cartSlice";
 import { ProductsType } from "../../../redux/features/productsSlice";
 
 interface CartButtonPlusType {
-    product: ProductsType
+    product: ProductsType;
+    amount: number;
 }
 
-const CartButtonPlus: React.FC<CartButtonPlusType> = React.memo(({ product }) => {
+const CartButtonPlus: React.FC<CartButtonPlusType> = React.memo(({ product, amount }) => {
   const dispatch = useDispatch();
 
   const handleAddItem = () => {
     dispatch(addItem(product))
   }
     return (
-        <button disabled={product.amount === 99} onClick={() => handleAddItem()} className={styles.root}>
+        <button disabled={amount === 99} onClick={() => handleAddItem()} className={styles.root}>
             <TiPlus />
         </button>
     );

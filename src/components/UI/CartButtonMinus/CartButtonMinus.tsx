@@ -7,15 +7,16 @@ import { removeItem } from "../../../redux/features/cartSlice";
 
 interface CartButtonMinusType {
   product: ProductsType;
+  amount: number;
 }
 
-const CartButtonMinus: React.FC<CartButtonMinusType> = React.memo(({ product }) => {
+const CartButtonMinus: React.FC<CartButtonMinusType> = React.memo(({ product, amount }) => {
   const dispatch = useDispatch();
   const handleRemoveItem = () => {
     dispatch(removeItem(product.id))
   }
   return (
-    <button disabled={product.amount === 1} onClick={() => handleRemoveItem()} className={styles.root}>
+    <button disabled={amount === 1} onClick={() => handleRemoveItem()} className={styles.root}>
       <TiMinus />
     </button>
   );

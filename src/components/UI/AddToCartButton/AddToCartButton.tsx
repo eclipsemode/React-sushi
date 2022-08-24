@@ -13,7 +13,7 @@ type AddToCartButtonProps = {
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({product}) => {
   const dispatch = useDispatch();
   const cartItem = useAppSelector((state) => state.cart.items.find((obj: ProductsType) => obj.id === product.id));
-  const amount = !cartItem ? 0 : cartItem.amount;
+  let amount = !cartItem ? 0 : cartItem.amount;
 
   const handleAddProduct = () => {
     dispatch(addItem(product))
@@ -22,9 +22,9 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({product}) => {
   return (
     amount > 0 ? (
       <div className={styles.root__amountBlock}>
-        <CartButtonMinus product={product} />
+        <CartButtonMinus product={product} amount={amount} />
         <span>{amount}</span>
-        <CartButtonPlus product={product}/>
+        <CartButtonPlus product={product} amount={amount}/>
       </div>
     ) : (
       <button className={styles.root} onClick={() => handleAddProduct()}>
