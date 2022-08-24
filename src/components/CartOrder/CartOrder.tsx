@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { removeAll, selectCart } from '../../redux/features/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './CartOrder.module.css';
+import ClearButton from "../UI/ClearButton/ClearButton";
+import ApplyButton from "../UI/ApplyButton/ApplyButton";
 
 const CartOrder: React.FC = () => {
     const { items, totalPrice, totalAmount } = useSelector(selectCart);
@@ -33,6 +35,25 @@ const CartOrder: React.FC = () => {
                 ))
             }
             </tbody>
+            <tfoot>
+            <tr>
+                <td colSpan="4">
+                    <div className={styles.root__footer}>
+                        <ClearButton handleClick={handleRemoveAll}>Очистить корзину</ClearButton>
+                        <div className={styles.root__order}>
+                            <div className={styles.root__total}>
+                                <h4>Стоимость</h4>
+                                <div><span>Количество</span><span>{totalAmount} шт.</span></div>
+                                <div><span>Доставка</span><span>0 ₽</span></div>
+                                <div><span>Итого</span><span>{totalPrice} ₽</span></div>
+                            </div>
+                            <ApplyButton>Отправить заказ</ApplyButton>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+            </tfoot>
         </table>
       </div>
         // <div className="container container--cart">

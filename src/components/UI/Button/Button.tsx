@@ -5,7 +5,7 @@ type Button = {
   children: React.ReactNode
 }
 
-const ApplyButton: React.FC<Button> = (props) => {
+const Button: React.FC<Button> = (props) => {
   return (
     <button className={styles.root}>
       <span>{props.children}</span>
@@ -13,4 +13,4 @@ const ApplyButton: React.FC<Button> = (props) => {
   );
 };
 
-export default ApplyButton;
+export default Button;
