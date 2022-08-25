@@ -35,7 +35,6 @@ const Products: React.FC = () => {
     }, [dispatch, location.search]);
 
     React.useEffect(() => {
-        window.scrollTo(0, 0)
         dispatch(fetchProducts({ categoryNumber, sortType, sortOrder, searchValue }));
     }, [categoryNumber, dispatch, searchValue, sortOrder, sortType]);
 

@@ -4,7 +4,7 @@ import { store } from './redux/store';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
-test('renders react app', () => {
+test('renders react element', () => {
     const { getByText } = render(
         <BrowserRouter>
             <Provider store={store}>
@@ -13,5 +13,5 @@ test('renders react app', () => {
         </BrowserRouter>,
     );
 
-    expect(getByText('Главная')).toBeInTheDocument();
+    expect(getByText(/главная/i)).toBeInTheDocument();
 });
