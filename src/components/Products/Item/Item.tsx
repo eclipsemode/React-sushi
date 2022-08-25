@@ -11,7 +11,8 @@ const Item: React.FC<ProductsType> = ({ ...product }) => {
 
   return (
     <div className={styles.root} onMouseEnter={() => handleOnMouseOver()} onMouseLeave={() => handleOnMouseLeave()}>
-      <img className={styles.image + ' ' + (imgScale ? styles.image__resize : null)} src={product.imageUrl} alt="Item" />
+      <img className={styles.image + " " + (imgScale ? styles.image__resize : null)} src={product.imageUrl}
+           alt="Item" />
       <div className={styles.root__content}>
         <h4 className={styles.title}>{product.name}</h4>
         <div className={styles.root__rating}>
@@ -22,7 +23,7 @@ const Item: React.FC<ProductsType> = ({ ...product }) => {
         </div>
         <div className={styles.bottom}>
           <div className={styles.price}>{product.price} ₽</div>
-          <AddToCartButton product={product}/>
+          <AddToCartButton product={product} />
         </div>
       </div>
     </div>

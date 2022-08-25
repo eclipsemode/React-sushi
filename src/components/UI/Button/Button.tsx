@@ -1,11 +1,11 @@
 import React from "react";
 import styles from './Button.module.css';
 
-type Button = {
+type ButtonProps = {
   children: React.ReactNode
 }
 
-const Button: React.FC<Button> = (props) => {
+const Button: React.FC<ButtonProps> = (props) => {
   return (
     <button className={styles.root}>
       <span>{props.children}</span>
