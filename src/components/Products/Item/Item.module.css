@@ -55,21 +55,8 @@ a {
   flex-direction: column;
   justify-content: space-between;
 }
-.root__rating {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  column-gap: 0.5rem;
-}
-.root__rate {
+.root__description p {
   color: rgba(27, 27, 27, 0.7);
-  font-weight: 600;
-}
-.root__stars {
-  color: #d80027;
-}
-.root__stars span {
-  font-size: 20px;
 }
 
 .image {

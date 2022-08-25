@@ -6,6 +6,7 @@ export type CartItemType = {
     id: string;
     imageUrl: string;
     name: string;
+    description: string;
     price: number;
     rating: number;
     amount: number;
@@ -48,8 +49,8 @@ export const cartSlice = createSlice({
             if (!foundItem) return;
 
             foundItem.amount > 1
-              ? foundItem.amount--
-              : state.items = state.items.filter(obj => obj.id !== action.payload);
+                ? foundItem.amount--
+                : (state.items = state.items.filter((obj) => obj.id !== action.payload));
 
             state.totalPrice = state.items.reduce((value, obj) => value + obj.price * obj.amount, 0);
             state.totalAmount = state.items.reduce((value, obj) => value + obj.amount, 0);

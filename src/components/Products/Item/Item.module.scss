@@ -19,25 +19,12 @@
     justify-content: space-between;
   }
 
-  &__rating {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 0.5rem;
-  }
-
-  &__rate {
-    color: $paragraph-color;
-    font-weight: 600;
-  }
-
-  &__stars {
-    color: #d80027;
-
-    & span {
-      font-size: 20px;
+  &__description {
+    & p {
+      color: $paragraph-color;
     }
   }
+
 }
 
 .image {

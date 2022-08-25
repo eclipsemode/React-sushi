@@ -13,6 +13,7 @@ export type ProductsType = {
     id: string;
     imageUrl: string;
     name: string;
+    description: string;
     price: number;
     rating: number;
     amount: number;
