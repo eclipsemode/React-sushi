@@ -5,11 +5,12 @@ import { BsFillArrowUpSquareFill } from "react-icons/bs";
 const ToTopArrow: React.FC = () => {
   const [arrowHidden, setArrowHidden] = React.useState<boolean>(true);
 
-  const isCheckOffset = () => {
+  const isCheckOffset = React.useCallback(() => {
     window.scrollY > 100
       ? setArrowHidden(false)
       : setArrowHidden(true)
-  };
+  }, []);
+
   React.useEffect(() => {
     isCheckOffset();
     window.addEventListener("scroll", () => {
