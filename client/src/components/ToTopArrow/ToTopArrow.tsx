@@ -17,7 +17,7 @@ const ToTopArrow: React.FC = () => {
     });
   }, [isCheckOffset]);
   return (
-    arrowHidden ? null : <a href="#top"><BsFillArrowUpSquareFill className={styles.root} /></a>
+    arrowHidden ? null : <a href="src/components/ToTopArrow/ToTopArrow#top"><BsFillArrowUpSquareFill className={styles.root} /></a>
   );
 };
 

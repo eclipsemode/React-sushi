@@ -24,7 +24,8 @@
     "noUnusedLocals": true, // Report errors on unused locals
     "noUnusedParameters": true, // Report errors on unused parameters
     "incremental": true, // Enable incremental compilation by reading/writing information from prior compilations to a file on disk
-    "typeRoots": ["./src/@types", "./node_modules/@types"]
+    "typeRoots": [
+      "./src/@types", "./node_modules/@types"]
   },
   "include": [
     "src"

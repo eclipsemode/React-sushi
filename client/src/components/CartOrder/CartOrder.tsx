@@ -1,5 +1,5 @@
 import React from 'react';
-import { CartItem } from '../../components';
+import { CartItem } from '../index';
 import { removeAll, selectCart } from '../../redux/features/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './CartOrder.module.css';
