@@ -35,17 +35,17 @@ Basket.belongsTo(User);
 Basket.hasMany(BasketProduct);
 BasketProduct.belongsTo(Basket);
 
-Category.hasMany(Product);
-Product.belongsTo(Category);
-
 Product.hasMany(BasketProduct);
 BasketProduct.belongsTo(Product);
+
+Category.hasMany(Product);
+Product.belongsTo(Category);
 
 module.exports = {
   User,
   Basket,
   BasketProduct,
-  Category,
-  Product
+  Product,
+  Category
 
 };
