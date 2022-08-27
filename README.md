@@ -8,6 +8,10 @@ SPA application with client-server architecture.
 4. Page with Product categories. **`In Progress...`**
 5. Product sorting capability. **`In Progress...`**
 
+## Deploy
+
+https://eclipsemode.github.io/React-sushi/
+
 ## Used technologies
 
 * React, Typescript
@@ -16,7 +20,7 @@ SPA application with client-server architecture.
 * NodeJS, Express
 * PostgreSQL
 
-## Packages
+## Packages Frontend**
 
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
@@ -41,9 +45,16 @@ SPA application with client-server architecture.
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
 
-## Deploy
+## Packages Backend**
 
-https://eclipsemode.github.io/React-sushi/
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.21.4",
+    "uuid": "^8.3.2"
 
 ## Admin data
 
