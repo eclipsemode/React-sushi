@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksushi_shop=self.webpackChunksushi_shop||[]).push([[72],{8303:function(s,n,u){u.r(n);u(2791);var e=u(9434),t=u(3360),c=u(184);n.default=function(){var s=(0,e.v9)((function(s){return s.cart})).items;return(0,c.jsx)("div",{className:"content",children:s.length>0?(0,c.jsx)(t.ug,{}):(0,c.jsx)(t.uZ,{})})}}}]);
-//# sourceMappingURL=Cart.f1107305.chunk.js.map
