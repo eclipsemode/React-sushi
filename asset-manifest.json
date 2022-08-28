@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/React-sushi/static/css/main.b1f22596.css",
+    "main.js": "/React-sushi/static/js/main.dcc8c74c.js",
+    "Cart.js": "/React-sushi/static/js/Cart.f1107305.chunk.js",
+    "NotFound.js": "/React-sushi/static/js/NotFound.adf83037.chunk.js",
+    "static/media/Barlow-Black.ttf": "/React-sushi/static/media/Barlow-Black.5b6aa950a7733ff40634.ttf",
+    "static/media/Barlow-ExtraBold.ttf": "/React-sushi/static/media/Barlow-ExtraBold.777e300ed64d3d47cc85.ttf",
+    "static/media/Barlow-SemiBold.ttf": "/React-sushi/static/media/Barlow-SemiBold.8247eaeb0799c0acafc6.ttf",
+    "static/media/Barlow-Bold.ttf": "/React-sushi/static/media/Barlow-Bold.0cb1ab864072bf9e0991.ttf",
+    "static/media/Barlow-Regular.ttf": "/React-sushi/static/media/Barlow-Regular.e7eb634d040a6f384033.ttf",
+    "static/media/Barlow-Medium.ttf": "/React-sushi/static/media/Barlow-Medium.d4afdc134fc10b739bab.ttf",
+    "static/media/Barlow-Light.ttf": "/React-sushi/static/media/Barlow-Light.19f244ecb11218b9a7de.ttf",
+    "static/media/logo.png": "/React-sushi/static/media/logo.d64fb4ba341596abb2a8.png",
+    "static/media/empty-cart.png": "/React-sushi/static/media/empty-cart.db905d1f4b063162f25b.png",
+    "index.html": "/React-sushi/index.html",
+    "main.b1f22596.css.map": "/React-sushi/static/css/main.b1f22596.css.map",
+    "main.dcc8c74c.js.map": "/React-sushi/static/js/main.dcc8c74c.js.map",
+    "Cart.f1107305.chunk.js.map": "/React-sushi/static/js/Cart.f1107305.chunk.js.map",
+    "NotFound.adf83037.chunk.js.map": "/React-sushi/static/js/NotFound.adf83037.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b1f22596.css",
+    "static/js/main.dcc8c74c.js"
+  ]
+}
