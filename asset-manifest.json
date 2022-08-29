@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/React-sushi/static/css/main.4015bc67.css",
-    "main.js": "/React-sushi/static/js/main.2bdd7429.js",
+    "main.js": "/React-sushi/static/js/main.513fbe3e.js",
     "Cart.js": "/React-sushi/static/js/Cart.f1107305.chunk.js",
     "NotFound.js": "/React-sushi/static/js/NotFound.adf83037.chunk.js",
     "static/media/Barlow-Black.ttf": "/React-sushi/static/media/Barlow-Black.5b6aa950a7733ff40634.ttf",
@@ -15,12 +15,12 @@
     "static/media/empty-cart.png": "/React-sushi/static/media/empty-cart.db905d1f4b063162f25b.png",
     "index.html": "/React-sushi/index.html",
     "main.4015bc67.css.map": "/React-sushi/static/css/main.4015bc67.css.map",
-    "main.2bdd7429.js.map": "/React-sushi/static/js/main.2bdd7429.js.map",
+    "main.513fbe3e.js.map": "/React-sushi/static/js/main.513fbe3e.js.map",
     "Cart.f1107305.chunk.js.map": "/React-sushi/static/js/Cart.f1107305.chunk.js.map",
     "NotFound.adf83037.chunk.js.map": "/React-sushi/static/js/NotFound.adf83037.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4015bc67.css",
-    "static/js/main.2bdd7429.js"
+    "static/js/main.513fbe3e.js"
   ]
 }
