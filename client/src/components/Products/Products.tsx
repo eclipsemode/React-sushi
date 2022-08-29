@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { fetchProducts, ProductsStatus, selectProducts } from '../../redux/features/productsSlice';
@@ -15,24 +16,24 @@ const Products: React.FC = () => {
     const navigate = useNavigate();
     const isMounted = React.useRef<boolean>(false);
 
-    React.useEffect(() => {
-        if (isMounted.current) {
-            const queryString: string = qs.stringify({
-                categoryNumber,
-            });
+    // React.useEffect(() => {
+    //     if (isMounted.current) {
+    //         const queryString: string = qs.stringify({
+    //             categoryNumber,
+    //         });
+    //
+    //         navigate(`?${queryString}`);
+    //     }
+    //
+    //     isMounted.current = true;
+    // }, [categoryNumber, sortType, sortOrder, navigate]);
 
-            navigate(`?${queryString}`);
-        }
-
-        isMounted.current = true;
-    }, [categoryNumber, sortType, sortOrder, navigate]);
-
-    React.useEffect(() => {
-        if (location.search) {
-            const queryStr = qs.parse(window.location.search.substring(1)) as unknown as FilterStateType;
-            dispatch(setCategoryNumber(queryStr.categoryNumber));
-        }
-    }, [dispatch, location.search]);
+    // React.useEffect(() => {
+    //     if (location.search) {
+    //         const queryStr = qs.parse(window.location.search.substring(1)) as unknown as FilterStateType;
+    //         dispatch(setCategoryNumber(queryStr.categoryNumber));
+    //     }
+    // }, [dispatch, location.search]);
 
     React.useEffect(() => {
         dispatch(fetchProducts({ categoryNumber, sortType, sortOrder, searchValue }));
