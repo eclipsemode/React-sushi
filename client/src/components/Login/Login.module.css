@@ -1,0 +1,24 @@
+.root {
+  width: 700px;
+  margin: 0 auto;
+}
+.root__container {
+  background: #F6F1E7;
+  padding: 20px;
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+.root__input {
+  appearance: none;
+  background: #fff;
+  border: 1px solid #f6f6f6;
+  padding: 0.8rem;
+  border-radius: 6px;
+}
+.root p {
+  margin-top: 1rem;
+}
+
+/*# sourceMappingURL=Login.module.css.map */
