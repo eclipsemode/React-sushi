@@ -47,10 +47,13 @@
   color: #292929;
   font-weight: 500;
 }
+.root__info a {
+  all: unset;
+  cursor: pointer;
+}
 .root__info svg {
   width: 30px;
   height: 30px;
-  cursor: pointer;
 }
 .root__phone {
   display: flex;

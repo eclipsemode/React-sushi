@@ -54,10 +54,14 @@
       font-weight: 500;
     }
 
+    & a {
+      all: unset;
+      cursor: pointer;
+    }
+
     & svg {
       width: 30px;
       height: 30px;
-      cursor: pointer;
     }
   }
 

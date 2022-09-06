@@ -35,10 +35,10 @@ const Header: React.FC = () => {
               </Link>
                 <ul className={styles.root__menu}>
                   <li className={styles.root__link}><Link to={'/'}>Главная</Link></li>
-                  <li className={styles.root__link}><a href='src/components/Header/Header#footer'>Контакты</a></li>
+                  <li className={styles.root__link}><a href='#footer'>Контакты</a></li>
                 </ul>
               <div className={styles.root__info}>
-                <BsPersonCircle/>
+                <Link to='login'><BsPersonCircle/></Link>
                 <CartBlock totalPrice={totalPrice} totalAmount={totalAmount}/>
                 <div className={styles.root__phone}>
                   <img width="32" height="32" src={phoneImg} alt="phone"/>
