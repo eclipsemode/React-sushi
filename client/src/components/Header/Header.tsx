@@ -8,6 +8,7 @@ import React from 'react';
 import { selectCart } from '../../redux/features/cartSlice';
 import {useAppSelector} from "../../redux/hooks";
 import CartBlock from "../UI/CartBlock/CartBlock";
+import { BsPersonCircle } from "react-icons/bs";
 
 const Header: React.FC = () => {
     const { totalPrice, totalAmount } = useAppSelector(selectCart);
@@ -37,6 +38,7 @@ const Header: React.FC = () => {
                   <li className={styles.root__link}><a href='src/components/Header/Header#footer'>Контакты</a></li>
                 </ul>
               <div className={styles.root__info}>
+                <BsPersonCircle/>
                 <CartBlock totalPrice={totalPrice} totalAmount={totalAmount}/>
                 <div className={styles.root__phone}>
                   <img width="32" height="32" src={phoneImg} alt="phone"/>

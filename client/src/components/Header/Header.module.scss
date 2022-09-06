@@ -53,6 +53,12 @@
       color: $header-color;
       font-weight: 500;
     }
+
+    & svg {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
   }
 
   &__phone {
