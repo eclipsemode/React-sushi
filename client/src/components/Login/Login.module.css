@@ -27,5 +27,9 @@
 .root p span:hover {
   color: darkslateblue;
 }
+.root__error {
+  color: red;
+  font-size: 14px;
+}
 
 /*# sourceMappingURL=Login.module.css.map */
