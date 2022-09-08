@@ -1,0 +1,1 @@
+{"version":3,"sourceRoot":"","sources":["Registration.module.scss","../../assets/styles/mixins/_authorisation.scss","../../assets/styles/_variables.scss"],"names":[],"mappings":"AAEA;ECCE;EACA;;AAEA;EACE,YCFc;EDGd;EACA;EACA;EACA;EACA;;AAGF;EACE;EACA,YChBS;EDiBT;EACA;EACA;;ADfF;EACE;EACA;EACA;EACA;;AAEA;EACE;;AAGF;AAAA;EAEE;EACA;;AAGF;EACE","file":"Registration.module.css"}

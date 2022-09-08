@@ -1,0 +1,28 @@
+import React from "react";
+import styles from './Registration.module.css';
+import { ApplyButton } from "../UI";
+
+const Registration: React.FC = () => {
+  return (
+    <div className={styles.root}>
+      <form className={styles.root__container}>
+        <input className={styles.root__input} placeholder="Имя" type="text" required={true} />
+        <input className={styles.root__input} placeholder="Фамилия" type="text" />
+        <input className={styles.root__input} placeholder="Email" type="email" required={true} />
+        <input className={styles.root__input} placeholder="Пароль" type="password" required={true} />
+        <input className={styles.root__input} placeholder="Повторите пароль" type="password" required={true} />
+        <input className={styles.root__input} placeholder="Номер телефона" type="text" required={true} />
+        <input className={styles.root__input} placeholder="Улица" type="text" />
+        <div className={styles.root__address}>
+          <input className={styles.root__input} placeholder="Дом" type="number" />
+          <input className={styles.root__input} placeholder="Подьезд" type="number" />
+          <input className={styles.root__input} placeholder="Этаж" type="number" />
+          <input className={styles.root__input} placeholder="Квартира" type="number" />
+        </div>
+      </form>
+      <ApplyButton>Регистрация</ApplyButton>
+    </div>
+  );
+};
+
+export default Registration;

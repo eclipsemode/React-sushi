@@ -20,5 +20,12 @@
 .root p {
   margin-top: 1rem;
 }
+.root p span {
+  cursor: pointer;
+  color: blue;
+}
+.root p span:hover {
+  color: darkslateblue;
+}
 
 /*# sourceMappingURL=Login.module.css.map */

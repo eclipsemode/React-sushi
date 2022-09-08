@@ -7,7 +7,7 @@ type ApplyButtonProps = {
 
 const ApplyButton: React.FC<ApplyButtonProps> = (props) => {
   return (
-    <button className={styles.root}>
+    <button className={styles.root} type="submit">
       <span>{props.children}</span>
     </button>
   );

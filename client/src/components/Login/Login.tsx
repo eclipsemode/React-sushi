@@ -1,17 +1,24 @@
 import React from "react";
 import styles from './Login.module.css';
 import { ApplyButton } from "../UI";
-import { Link } from "react-router-dom";
 
-const Login: React.FC = () => {
+type LoginProps = {
+  setAuth: (value: boolean) => void;
+}
+
+const Login: React.FC<LoginProps> = ({ setAuth }) => {
+  const handleAuth = () => {
+    setAuth(false);
+  }
+
   return (
     <div className={styles.root}>
-      <div className={styles.root__container}>
+      <form className={styles.root__container}>
       <input className={styles.root__input} placeholder="Имя пользователя" type="text" />
       <input className={styles.root__input} placeholder="Пароль" type="password" />
-      </div>
+      </form>
       <ApplyButton>Войти</ApplyButton>
-      <p>Впервые у нас? <Link to="/">Зарегистрироваться</Link></p>
+      <p>Впервые у нас? <span onClick={() => handleAuth()}>Зарегистрироваться</span></p>
     </div>
   );
 };
