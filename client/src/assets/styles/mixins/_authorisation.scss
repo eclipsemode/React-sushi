@@ -1,7 +1,7 @@
 @import '../variables';
 
 @mixin Authorisation {
-  width: 700px;
+  max-width: 450px;
   margin: 0 auto;
 
   &__container {
@@ -19,5 +19,18 @@
     border: 1px solid $gray-line;
     padding: 0.8rem;
     border-radius: 6px;
+    width: 100%;
+  }
+
+  & h1 {
+    text-align: center;
+    color: $header-color;
+    font-size: 36px;
+  }
+
+  &__error {
+    color: red;
+    font-size: 12px;
+    margin-bottom: -0.5rem;
   }
 }

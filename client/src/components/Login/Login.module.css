@@ -1,5 +1,5 @@
 .root {
-  width: 700px;
+  max-width: 450px;
   margin: 0 auto;
 }
 .root__container {
@@ -16,6 +16,17 @@
   border: 1px solid #f6f6f6;
   padding: 0.8rem;
   border-radius: 6px;
+  width: 100%;
+}
+.root h1 {
+  text-align: center;
+  color: #292929;
+  font-size: 36px;
+}
+.root__error {
+  color: red;
+  font-size: 12px;
+  margin-bottom: -0.5rem;
 }
 .root p {
   margin-top: 1rem;
@@ -27,9 +38,17 @@
 .root p span:hover {
   color: darkslateblue;
 }
-.root__error {
-  color: red;
-  font-size: 14px;
+.root__password {
+  position: relative;
+}
+.root__password svg {
+  position: absolute;
+  top: calc(34.6px - 50%);
+  right: 1rem;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  fill: #212529;
 }
 
 /*# sourceMappingURL=Login.module.css.map */

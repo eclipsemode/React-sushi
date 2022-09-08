@@ -1,5 +1,5 @@
 .root {
-  width: 700px;
+  max-width: 450px;
   margin: 0 auto;
 }
 .root__container {
@@ -16,6 +16,17 @@
   border: 1px solid #f6f6f6;
   padding: 0.8rem;
   border-radius: 6px;
+  width: 100%;
+}
+.root h1 {
+  text-align: center;
+  color: #292929;
+  font-size: 36px;
+}
+.root__error {
+  color: red;
+  font-size: 12px;
+  margin-bottom: -0.5rem;
 }
 .root__address {
   display: flex;
