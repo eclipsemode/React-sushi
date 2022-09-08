@@ -2,12 +2,13 @@ import React from "react";
 import styles from './ApplyButton.module.css';
 
 type ApplyButtonProps = {
-  children: React.ReactNode
+  children: React.ReactNode,
+  clickEvent?: () => void
 }
 
 const ApplyButton: React.FC<ApplyButtonProps> = (props) => {
   return (
-    <button className={styles.root} type="submit">
+    <button className={styles.root} type="submit" onClick={() => props.clickEvent && props.clickEvent()}>
       <span>{props.children}</span>
     </button>
   );

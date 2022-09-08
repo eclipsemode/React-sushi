@@ -18,27 +18,18 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
 
   const handlePasswordHidden = () => {
     setPasswordHidden(!passwordHidden);
-  }
+  };
 
-  const blurHandle = (e: React.FocusEvent<HTMLInputElement>) => {
-    switch (e.currentTarget.name) {
-      case "login":
+  const handleSubmit = () => {
         setLoginDirty(true);
         if (!login) {
           setLoginError("Логин не может быть пустым.");
         }
-        break;
-      case "password":
+
         setPasswordDirty(true);
         if (!password) {
           setPasswordError("Пароль не может быть пустым.");
         }
-        break;
-      default:
-        setLoginDirty(false);
-        setPasswordDirty(false);
-        break;
-    }
   };
 
   const handleLogin = (value: string) => {
@@ -49,6 +40,10 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
       setLoginError("Данный email неккоректен.");
     } else {
       setLoginError("");
+    }
+
+    if (!value) {
+      setLoginError("Логин не может быть пустым.");
     }
   };
 
@@ -66,19 +61,20 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
       <form className={styles.root__container}>
         <h1>Вход</h1>
         {(loginError && loginDirty) && <span className={styles.root__error}>{loginError}</span>}
-        <input className={styles.root__input} value={login} name="login" onBlur={(e) => blurHandle(e)}
+        <input className={styles.root__input} value={login} name="login"
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleLogin(e.currentTarget.value)}
                placeholder="Имя пользователя" type="text" />
         {(passwordError && passwordDirty) && <span className={styles.root__error}>{passwordError}</span>}
         <div className={styles.root__password}>
-          <input className={styles.root__input} value={password} name="password" onBlur={(e) => blurHandle(e)}
+          <input className={styles.root__input} value={password} name="password"
                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePassword(e.currentTarget.value)}
-                 placeholder="Пароль" type={passwordHidden ? 'password' : 'text'} />
-          { passwordHidden ? <HiEye onClick={() => handlePasswordHidden()}/> : <HiEyeOff onClick={() => handlePasswordHidden()}/>}
+                 placeholder="Пароль" type={passwordHidden ? "password" : "text"} />
+          {passwordHidden ? <HiEye onClick={() => handlePasswordHidden()} /> :
+            <HiEyeOff onClick={() => handlePasswordHidden()} />}
         </div>
 
       </form>
-      <ApplyButton>Войти</ApplyButton>
+      <ApplyButton clickEvent={handleSubmit}>Войти</ApplyButton>
       <p>Впервые у нас? <span onClick={() => handleAuth()}>Зарегистрироваться</span></p>
     </div>
   );
