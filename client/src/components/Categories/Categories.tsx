@@ -10,25 +10,25 @@ import cat6Img from "../../assets/img/6.png";
 import categoryNames from "./categoryNames";
 
 import { setCategoryNumber, selectFilter } from "../../redux/features/filterSlice";
-import axios from "axios";
+// import axios from "axios";
 
 const Categories: React.FC = React.memo(() => {
   const dispatch = useDispatch();
   const { categoryNumber } = useSelector(selectFilter);
-  const [categories, setCategories] = React.useState<string[]>([]);
+  // const [categories, setCategories] = React.useState<string[]>([]);
 
-  React.useEffect(() => {
-    (async function fetchCategories() {
-      try {
-        const res = await axios.get('http://localhost:5000/api/category')
-        const data = res.data;
-        setCategories(data.map((obj: any) => obj.name));
-      } catch (e: any) {
-        setCategories(categoryNames.map((category: any) => category))
-        console.error('Cannot get Categories')
-      }
-    })()
-  }, [])
+  // React.useEffect(() => {
+  //   (async function fetchCategories() {
+  //     try {
+  //       const res = await axios.get('http://localhost:5000/api/category')
+  //       const data = res.data;
+  //       setCategories(data.map((obj: any) => obj.name));
+  //     } catch (e: any) {
+  //       setCategories(categoryNames.map((category: any) => category))
+  //       console.error('Cannot get Categories')
+  //     }
+  //   })()
+  // }, [])
 
   const handleClickCategory = (index: number) => {
     dispatch(setCategoryNumber(index));
@@ -54,7 +54,7 @@ const Categories: React.FC = React.memo(() => {
   return (
     <nav className="categories">
       <ul>
-        {categories.map((category: string, index) => (
+        {categoryNames.map((category, index) => (
           <li
             key={index}
             onClick={() => handleClickCategory(index)}
