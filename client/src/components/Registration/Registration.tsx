@@ -6,6 +6,7 @@ const Registration: React.FC = () => {
   return (
     <div className={styles.root}>
       <form className={styles.root__container}>
+        <h1>Регистрация</h1>
         <input className={styles.root__input} placeholder="Имя" type="text" required={true} />
         <input className={styles.root__input} placeholder="Фамилия" type="text" />
         <input className={styles.root__input} placeholder="Email" type="email" required={true} />

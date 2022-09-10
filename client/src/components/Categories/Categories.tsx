@@ -10,10 +10,25 @@ import cat6Img from "../../assets/img/6.png";
 import categoryNames from "./categoryNames";
 
 import { setCategoryNumber, selectFilter } from "../../redux/features/filterSlice";
+import axios from "axios";
 
 const Categories: React.FC = React.memo(() => {
   const dispatch = useDispatch();
   const { categoryNumber } = useSelector(selectFilter);
+  const [categories, setCategories] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    (async function fetchCategories() {
+      try {
+        const res = await axios.get('http://localhost:5000/api/category')
+        const data = res.data;
+        setCategories(data.map((obj: any) => obj.name));
+      } catch (e: any) {
+        setCategories(categoryNames.map((category: any) => category))
+        console.error('Cannot get Categories')
+      }
+    })()
+  }, [])
 
   const handleClickCategory = (index: number) => {
     dispatch(setCategoryNumber(index));
@@ -39,14 +54,14 @@ const Categories: React.FC = React.memo(() => {
   return (
     <nav className="categories">
       <ul>
-        {categoryNames.map((name, index) => (
+        {categories.map((category: string, index) => (
           <li
             key={index}
             onClick={() => handleClickCategory(index)}
             className={categoryNumber === index ? "categories-item--active" : ""}
           >
             <img width="42" height="42" src={categoryImg(index)} alt="category" />
-            <span>{name}</span>
+            <span>{category}</span>
           </li>
         ))}
       </ul>

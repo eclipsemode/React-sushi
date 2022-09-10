@@ -47,5 +47,4 @@ module.exports = {
   BasketProduct,
   Product,
   Category
-
 };
