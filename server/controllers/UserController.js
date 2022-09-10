@@ -46,12 +46,13 @@ class UserController {
     return res.json({token});
   }
 
-  async auth(req, res, next) {
-    const query = req.query;
-    if (!query.message) {
-      return next(ApiError.badRequest('Не задано сообщение'));
-    }
-    res.json(query.message);
+  async auth(req, res) {
+    const token = jwt.sign(
+      {id: req.user.id, email: req.user.email, role: req.user.role},
+      process.env.SECRET_KEY,
+      {expiresIn: '24h'}
+    );
+    return res.json({token})
   }
 }
 
