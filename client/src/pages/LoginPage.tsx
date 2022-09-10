@@ -12,7 +12,7 @@ const LoginPage: React.FC = () => {
   }, [auth, navigate])
 
   return (
-    auth ? <Login setAuth={setAuth} /> : <Registration/>
+    auth ? <Login setAuth={setAuth} /> : <Registration setAuth={setAuth}/>
   );
 };
 

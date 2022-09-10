@@ -1,8 +1,16 @@
 import React from "react";
-import styles from './Registration.module.css';
+import styles from "./Registration.module.css";
 import { ApplyButton } from "../UI";
 
-const Registration: React.FC = () => {
+type RegistrationProps = {
+  setAuth: (value: boolean) => void;
+}
+
+const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
+  const handleAuth = () => {
+    setAuth(true);
+  };
+
   return (
     <div className={styles.root}>
       <form className={styles.root__container}>
@@ -22,6 +30,7 @@ const Registration: React.FC = () => {
         </div>
       </form>
       <ApplyButton>Регистрация</ApplyButton>
+      <p>Есть аккаунт? <span onClick={() => handleAuth()}>Войти</span></p>
     </div>
   );
 };

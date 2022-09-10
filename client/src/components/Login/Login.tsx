@@ -15,9 +15,11 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
   const [passwordError, setPasswordError] = React.useState<string>("Пароль не может быть пустым.");
   const [passwordDirty, setPasswordDirty] = React.useState<boolean>(false);
   const [passwordHidden, setPasswordHidden] = React.useState<boolean>(true);
+  const passwordRef = React.useRef<HTMLInputElement>(null);
 
   const handlePasswordHidden = () => {
     setPasswordHidden(!passwordHidden);
+    passwordRef.current?.focus();
   };
 
   const handleSubmit = () => {
@@ -68,6 +70,7 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
         <div className={styles.root__password}>
           <input className={styles.root__input} value={password} name="password"
                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePassword(e.currentTarget.value)}
+                 ref={passwordRef}
                  placeholder="Пароль" type={passwordHidden ? "password" : "text"} />
           {passwordHidden ? <HiEye onClick={() => handlePasswordHidden()} /> :
             <HiEyeOff onClick={() => handlePasswordHidden()} />}

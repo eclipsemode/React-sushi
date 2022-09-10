@@ -23,4 +23,17 @@
       -moz-appearance: textfield;
     }
   }
+
+  & p {
+    margin-top: 1rem;
+
+    & span {
+      cursor: pointer;
+      color: blue;
+
+      &:hover {
+        color: darkslateblue;
+      }
+    }
+  }
 }

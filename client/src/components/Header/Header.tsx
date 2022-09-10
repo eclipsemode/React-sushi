@@ -1,6 +1,6 @@
 import logoImg from '../../assets/img/logo.png';
 import phoneImg from '../../assets/img/phone.png';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from "react-router-dom";
 import styles from './Header.module.css';
 
 import React from 'react';
@@ -38,7 +38,7 @@ const Header: React.FC = () => {
                   <li className={styles.root__link}><a href='#footer'>Контакты</a></li>
                 </ul>
               <div className={styles.root__info}>
-                <Link to='login'><BsPersonCircle/></Link>
+                <NavLink to='login'><BsPersonCircle/></NavLink>
                 <CartBlock totalPrice={totalPrice} totalAmount={totalAmount}/>
                 <div className={styles.root__phone}>
                   <img width="32" height="32" src={phoneImg} alt="phone"/>
