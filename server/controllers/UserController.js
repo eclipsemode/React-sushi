@@ -5,10 +5,18 @@ const { User, Basket} = require('../models/models');
 
 class UserController {
   async registration(req, res, next) {
-    const  { email, password, role } = req.body;
+    const  { email, password, role, name, surname, tel, street, house, floor, entrance, room } = req.body;
 
     if (!email || !password) {
       return next(ApiError.badRequest('Неккоректный email или пароль.'))
+    }
+
+    if (!name) {
+      return next(ApiError.badRequest('Введите имя.'))
+    }
+
+    if (!tel) {
+      return next(ApiError.badRequest('Введите телефон.'))
     }
 
     const candidate = await User.findOne({where: {email}});
@@ -18,7 +26,7 @@ class UserController {
     }
 
     const hashPassword = await bcrypt.hash(password, 5);
-    const user = await User.create({email, password: hashPassword, role});
+    const user = await User.create({email, password: hashPassword, role, name, surname, tel, street, house, floor, entrance, room});
     const basket = await Basket.create({userId: user.id});
     const token = jwt.sign(
       {id: user.id, email: user.email, role: user.role},
