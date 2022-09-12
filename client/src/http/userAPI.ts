@@ -1,6 +1,6 @@
 import { $host } from "./index";
 
-const registration = async (email: string, password: string, name: string, surname: string, tel: string, street: string, house: number, floor: number, entrance: number, room: number) => {
+const registration = async (email: string, password: string, name: string, surname: string, tel: string, street: string, house: string, floor: string, entrance: string, room: string) => {
   const response = await $host.post('api/user/registration', {email, password, name, surname, tel, street, house, floor, entrance, room});
   return response;
 }
