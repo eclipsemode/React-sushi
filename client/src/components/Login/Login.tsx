@@ -2,12 +2,15 @@ import React from "react";
 import styles from "./Login.module.css";
 import { ApplyButton } from "../UI";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import ValidationError from "../../error/ValidationError";
+import { login as loginUser } from '../../http/userAPI';
+import { AxiosResponse } from "axios";
 
 type LoginProps = {
   setAuth: (value: boolean) => void;
 }
 
-const Login: React.FC<LoginProps> = ({ setAuth }) => {
+const Login: React.FC<LoginProps> = React.memo(({ setAuth }) => {
   const [login, setLogin] = React.useState<string>("");
   const [loginError, setLoginError] = React.useState<string>("Логин не может быть пустым.");
   const [loginDirty, setLoginDirty] = React.useState<boolean>(false);
@@ -22,8 +25,9 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
     passwordRef.current?.focus();
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
         setLoginDirty(true);
+        setPasswordDirty(true);
         if (!login) {
           setLoginError("Логин не может быть пустым.");
         }
@@ -31,7 +35,16 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
         setPasswordDirty(true);
         if (!password) {
           setPasswordError("Пароль не может быть пустым.");
+        } else if (password.length < 8) {
+          setPasswordError('Пароль не может иметь меньше 8 символов.')
         }
+
+        if (loginError || passwordError) {
+          throw new ValidationError('Заполните все поля.')
+        }
+      // @ts-ignore
+        const response: AxiosResponse = await loginUser(login, password);
+
   };
 
   const handleLogin = (value: string) => {
@@ -50,7 +63,17 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
   };
 
   const handlePassword = (value: string) => {
+    const re = /^[0-9a-zA-Z!@#$%^&*]+$/g;
     setPassword(value);
+    if (!value) {
+      setPasswordError("Пароль не может быть пустым.");
+    } else if (!value.match(re)) {
+      setPasswordError('Пароль должен состоять из латинских букв и цифр.');
+    } else if (value.length < 8) {
+      setPasswordError('Пароль не может иметь меньше 8 символов.');
+    } else {
+      setPasswordError('');
+    }
   };
 
 
@@ -81,6 +104,6 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
       <p>Впервые у нас? <span onClick={() => handleAuth()}>Зарегистрироваться</span></p>
     </div>
   );
-};
+});
 
 export default Login;
