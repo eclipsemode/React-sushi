@@ -44,8 +44,7 @@ const Login: React.FC<LoginProps> = React.memo(({ setAuth }) => {
           throw new ValidationError('Заполните все поля.')
         }
 
-    const response = await dispatch(fetchLogin({ login, password }))
-    console.log(response)
+    await dispatch(fetchLogin({ login, password }));
   };
 
   const handleLogin = (value: string) => {

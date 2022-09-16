@@ -1,4 +1,4 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit";
 
 import filter from './features/filterSlice';
 import products from './features/productsSlice';
@@ -9,8 +9,15 @@ const persistedStateCart: CartStateType = localStorage.getItem('cart')
     ? JSON.parse(localStorage.getItem('cart') || '')
     : {};
 
+const rootReducer = combineReducers({
+  filter,
+  products,
+  cart,
+  user
+})
+
 export const store = configureStore({
-  reducer: {filter, products, cart, user},
+  reducer: rootReducer,
   preloadedState: { cart: persistedStateCart },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false

@@ -25,7 +25,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
   };
 
   const handleSubmit = async () => {
-    const response = await dispatch(fetchRegistration({
+    await dispatch(fetchRegistration({
       name,
       surname,
       email,
@@ -37,7 +37,6 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
       entrance,
       room
     }))
-    console.log(response)
   }
 
   return (
