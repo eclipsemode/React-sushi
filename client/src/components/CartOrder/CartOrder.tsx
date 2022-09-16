@@ -1,14 +1,14 @@
 import React from 'react';
 import { CartItem } from '../index';
 import { removeAll, selectCart } from '../../redux/features/cartSlice';
-import { useDispatch, useSelector } from 'react-redux';
 import styles from './CartOrder.module.css';
 import ClearButton from '../UI/ClearButton/ClearButton';
 import ApplyButton from '../UI/ApplyButton/ApplyButton';
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 const CartOrder: React.FC = () => {
-    const { items, totalPrice, totalAmount } = useSelector(selectCart);
-    const dispatch = useDispatch();
+    const { items, totalPrice, totalAmount } = useAppSelector(selectCart);
+    const dispatch = useAppDispatch();
     const deliveryPrice: 0 | 100 = totalPrice > 1200 ? 0 : 100;
 
     const handleRemoveAll = () => {

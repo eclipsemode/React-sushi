@@ -1,17 +1,17 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { removeItemById } from '../../redux/features/cartSlice';
 import { CartButtonMinus, CartButtonPlus } from '../UI';
 import { ProductsType } from '../../redux/features/productsSlice';
 import styles from './CartItem.module.css';
 import { IoClose } from 'react-icons/io5';
+import { useAppDispatch } from "../../redux/hooks";
 
 export type CartItemProps = {
     obj: ProductsType;
 };
 
 const CartItem: React.FC<CartItemProps> = ({ obj }) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handleRemoveItemById = () => {
         dispatch(removeItemById(obj.id));

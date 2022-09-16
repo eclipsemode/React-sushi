@@ -1,10 +1,10 @@
 import React from 'react';
 import Item from '../Item/Item';
-import { useSelector } from 'react-redux';
 import { ProductsType, selectProducts } from '../../../redux/features/productsSlice';
+import { useAppSelector } from "../../../redux/hooks";
 
 const Fulfilled: React.FC = () => {
-    const { products } = useSelector(selectProducts);
+    const { products } = useAppSelector(selectProducts);
     return (
         <section className="content__items">
             {products.map((product: ProductsType) => (

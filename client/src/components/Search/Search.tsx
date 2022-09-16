@@ -1,15 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import debounce from 'lodash.debounce';
-
 import { setSearchValue, clearSearchValue } from '../../redux/features/filterSlice';
 import styles from './search.module.css';
 import { BsSearch } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useAppDispatch } from "../../redux/hooks";
 
 const Search: React.FC = () => {
     const [searchValueLocal, setSearchValueLocal] = React.useState<string>('');
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const searchRef = React.useRef<HTMLInputElement>(null);
 
     // eslint-disable-next-line

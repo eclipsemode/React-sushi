@@ -1,13 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import Popup from './Popup/Popup';
 import sortNames, { SortNameType } from './SortNames';
 import { selectFilter } from '../../redux/features/filterSlice';
+import { useAppSelector } from "../../redux/hooks";
 
 const Sort: React.FC = () => {
     const [popupHidden, setPopupHidden] = React.useState<boolean>(true);
-    const { sortId } = useSelector(selectFilter);
+    const { sortId } = useAppSelector(selectFilter);
     const popupRef = React.useRef<any>(null);
 
     const sortedItem = sortNames?.find((obj: SortNameType) => obj.id === sortId)?.text;

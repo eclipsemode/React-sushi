@@ -1,16 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { fetchProducts, ProductsStatus, selectProducts } from "../../redux/features/productsSlice";
 import { selectFilter, FilterStateType, setCategoryNumber } from "../../redux/features/filterSlice";
 import qs from "qs";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { Rejected, Pending, Fulfilled } from "./index";
 
 const Products: React.FC = () => {
   const location = useLocation();
-  const { searchValue, categoryNumber, sortType, sortOrder } = useSelector(selectFilter);
-  const { productsStatus } = useSelector(selectProducts);
+  const { searchValue, categoryNumber, sortType, sortOrder } = useAppSelector(selectFilter);
+  const { productsStatus } = useAppSelector(selectProducts);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isMounted = React.useRef<boolean>(false);

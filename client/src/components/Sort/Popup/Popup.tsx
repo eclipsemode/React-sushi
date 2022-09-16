@@ -1,8 +1,8 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 
 import { setSortType, setSortId, setSortOrder, selectFilter } from '../../../redux/features/filterSlice';
 import { SortNameType } from '../SortNames';
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 
 type PopupProps = {
     popupHidden: boolean;
@@ -12,8 +12,8 @@ type PopupProps = {
 };
 
 const Popup: React.FC<PopupProps> = ({ popupHidden, sortNames, handlePopup, popupRef }) => {
-    const { sortId } = useSelector(selectFilter);
-    const dispatch = useDispatch();
+    const { sortId } = useAppSelector(selectFilter);
+    const dispatch = useAppDispatch();
 
     const handleSortType = (id: number) => {
         const sortObj = sortNames.find((obj: SortNameType) => obj.id === id);

@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
 import cat1Img from "../../assets/img/1.png";
 import cat2Img from "../../assets/img/2.png";
 import cat3Img from "../../assets/img/3.png";
@@ -10,11 +9,12 @@ import cat6Img from "../../assets/img/6.png";
 import categoryNames from "./categoryNames";
 
 import { setCategoryNumber, selectFilter } from "../../redux/features/filterSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 // import axios from "axios";
 
 const Categories: React.FC = React.memo(() => {
-  const dispatch = useDispatch();
-  const { categoryNumber } = useSelector(selectFilter);
+  const dispatch = useAppDispatch();
+  const { categoryNumber } = useAppSelector(selectFilter);
   // const [categories, setCategories] = React.useState<string[]>([]);
 
   // React.useEffect(() => {
