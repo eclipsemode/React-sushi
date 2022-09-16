@@ -3,14 +3,15 @@ import styles from "./Login.module.css";
 import { ApplyButton } from "../UI";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import ValidationError from "../../error/ValidationError";
-import { login as loginUser } from '../../http/userAPI';
-import { AxiosResponse } from "axios";
+import { useAppDispatch } from "../../redux/hooks";
+import { fetchLogin } from "../../redux/features/userSlice";
 
 type LoginProps = {
   setAuth: (value: boolean) => void;
 }
 
 const Login: React.FC<LoginProps> = React.memo(({ setAuth }) => {
+  const dispatch = useAppDispatch();
   const [login, setLogin] = React.useState<string>("");
   const [loginError, setLoginError] = React.useState<string>("Логин не может быть пустым.");
   const [loginDirty, setLoginDirty] = React.useState<boolean>(false);
@@ -42,9 +43,9 @@ const Login: React.FC<LoginProps> = React.memo(({ setAuth }) => {
         if (loginError || passwordError) {
           throw new ValidationError('Заполните все поля.')
         }
-      // @ts-ignore
-        const response: AxiosResponse = await loginUser(login, password);
 
+    const response = await dispatch(fetchLogin({ login, password }))
+    console.log(response)
   };
 
   const handleLogin = (value: string) => {

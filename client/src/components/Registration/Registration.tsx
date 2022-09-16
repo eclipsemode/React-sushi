@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./Registration.module.css";
 import { ApplyButton } from "../UI";
-import { registration } from "../../http/userAPI";
-import { AxiosResponse } from "axios";
+import { useAppDispatch } from "../../redux/hooks";
+import { fetchRegistration } from "../../redux/features/userSlice";
 
 type RegistrationProps = {
   setAuth: (value: boolean) => void;
 }
 
 const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
+  const dispatch = useAppDispatch();
   const [name, setName] = React.useState<string>('');
   const [surname, setSurname] = React.useState<string>('');
   const [email, setEmail] = React.useState<string>('');
@@ -24,19 +25,19 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
   };
 
   const handleSubmit = async () => {
-    // @ts-ignore
-      const response: AxiosResponse = await registration(
-        name,
-        surname,
-        email,
-        password,
-        tel,
-        street,
-        house,
-        floor,
-        entrance,
-        room
-      );
+    const response = await dispatch(fetchRegistration({
+      name,
+      surname,
+      email,
+      password,
+      tel,
+      street,
+      house,
+      floor,
+      entrance,
+      room
+    }))
+    console.log(response)
   }
 
   return (
