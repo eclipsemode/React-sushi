@@ -1,5 +1,5 @@
 import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { $host } from "../../http";
+import { $authHost, $host } from "../../http";
 import jwtDecode from "jwt-decode";
 
 type RegistrationPropsType = {
@@ -49,17 +49,21 @@ const fetchLogin = createAsyncThunk<UserType, LoginPropsType, { rejectValue: str
   async ({ login, password }, { rejectWithValue }) => {
     try {
       const { data } = await $host.post("api/user/login", { email: login, password });
-      return jwtDecode(data.token) as UserType;
+      const token: string = data.token;
+      localStorage.setItem('token', token);
+      const tokenDecoded: UserType = jwtDecode(token);
+      return tokenDecoded;
     } catch (e: any) {
       return rejectWithValue(e.response.data.message);
     }
   }
 );
 
-const fetchAuth = createAsyncThunk(
+const fetchAuth = createAsyncThunk<UserType, void>(
   "user/fetchAuth",
   async () => {
-    const { data } = await $host.post("api/user/auth");
+    const { data } = await $authHost.get("api/user/auth");
+    localStorage.setItem('token', data.token);
     return jwtDecode(data.token);
   }
 );
@@ -98,6 +102,14 @@ const userSlice = createSlice({
       .addCase(fetchLogin.fulfilled, (state, action: PayloadAction<UserType>) => {
         state.isAuth = true;
         state.user = action.payload;
+      })
+      .addCase(fetchAuth.fulfilled, (state, action: PayloadAction<UserType>) => {
+          state.user = action.payload;
+          state.isAuth = true;
+      })
+      .addCase(fetchAuth.rejected, (state) => {
+        state.user = {};
+        state.isAuth = false;
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.error = action.payload;

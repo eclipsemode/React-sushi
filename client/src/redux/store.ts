@@ -2,23 +2,29 @@ import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/t
 
 import filter from './features/filterSlice';
 import products from './features/productsSlice';
-import cart, { CartStateType } from './features/cartSlice';
+import cart, { CartStateType } from "./features/cartSlice";
 import user from './features/userSlice';
 
-const persistedStateCart: CartStateType = localStorage.getItem('cart')
-    ? JSON.parse(localStorage.getItem('cart') || '')
-    : {};
+const persistedStateCart: CartStateType = localStorage.getItem('cart') !== null
+  ? JSON.parse(localStorage.getItem('cart') || '')
+  : null;
 
 const rootReducer = combineReducers({
   filter,
   products,
   cart,
   user
-})
+});
 
 export const store = configureStore({
   reducer: rootReducer,
-  preloadedState: { cart: persistedStateCart },
+  preloadedState: {
+    cart: {
+      items: persistedStateCart?.items || [],
+      totalPrice: persistedStateCart?.totalPrice || 0,
+      totalAmount: persistedStateCart?.totalAmount || 0
+    }
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false
   })
