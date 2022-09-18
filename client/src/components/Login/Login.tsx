@@ -3,7 +3,7 @@ import styles from "./Login.module.css";
 import { ApplyButton } from "../UI";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import ValidationError from "../../error/ValidationError";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchLogin } from "../../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ type LoginProps = {
 }
 
 const Login: React.FC<LoginProps> = React.memo(({ setAuth }) => {
+  const { error } = useAppSelector(state => state.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [login, setLogin] = React.useState<string>("");
@@ -46,10 +47,20 @@ const Login: React.FC<LoginProps> = React.memo(({ setAuth }) => {
       throw new ValidationError("Необходимо заполнить все поля.");
     }
 
-    dispatch(fetchLogin({ login, password }));
+    const data = await dispatch(fetchLogin({ login, password }));
 
-    navigate('/')
+    if (typeof data.payload === 'string') return;
+
+    navigate("/");
   };
+
+  React.useEffect(() => {
+    if (error?.match("email")) {
+      setLoginError(error);
+    } else if (error?.match("пароль")) {
+      setPasswordError(error);
+    }
+  }, [error]);
 
   const handleLogin = (value: string) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
