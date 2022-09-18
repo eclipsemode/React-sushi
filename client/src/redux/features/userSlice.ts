@@ -1,7 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { $host } from "../../http";
-import { AnyAsyncThunk, RejectedWithValueActionFromAsyncThunk } from "@reduxjs/toolkit/dist/matchers";
-import jwtDecode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 
 type RegistrationPropsType = {
   email: string,
@@ -21,43 +20,51 @@ type LoginPropsType = {
   password: string
 }
 
-const fetchRegistration = createAsyncThunk<RegistrationPropsType | RejectedWithValueActionFromAsyncThunk<AnyAsyncThunk>, RegistrationPropsType>(
-  'user/fetchRegistration',
-  async ({ email, password, name, surname, tel, street, house, floor, entrance, room }, thunkAPI) => {
+const fetchRegistration = createAsyncThunk<RegistrationPropsType, RegistrationPropsType, { rejectValue: string }>(
+  "user/fetchRegistration",
+  async ({ email, password, name, surname, tel, street, house, floor, entrance, room }, { rejectWithValue }) => {
     try {
-      const { data } = await $host.post("api/user/registration", { email, password, name, surname, tel, street, house, floor, entrance, room });
-      const token = jwtDecode(data.token);
-      return token;
-    } catch (e) {
-      return thunkAPI.rejectWithValue('Не удалось зарегистрироваться.')
+      const { data } = await $host.post("api/user/registration", {
+        email,
+        password,
+        name,
+        surname,
+        tel,
+        street,
+        house,
+        floor,
+        entrance,
+        room
+      });
+      return jwtDecode(data.token);
+    } catch (e: any) {
+      return rejectWithValue(e.response.data.message);
     }
   }
-)
+);
 
-const fetchLogin = createAsyncThunk<LoginPropsType | RejectedWithValueActionFromAsyncThunk<AnyAsyncThunk>, LoginPropsType>(
-  'user/fetchLogin',
-  async ({ login, password }, { rejectWithValue, dispatch }) => {
+
+const fetchLogin = createAsyncThunk<UserType, LoginPropsType, { rejectValue: string }>(
+  "user/fetchLogin",
+  async ({ login, password }, { rejectWithValue }) => {
     try {
       const { data } = await $host.post("api/user/login", { email: login, password });
-      const userData = jwtDecode(data.token);
-      dispatch(setUser(userData));
-      dispatch(setAuth(true));
-      return userData;
-    } catch (e) {
-      return rejectWithValue('Не удалось войти.')
+      return jwtDecode(data.token) as UserType;
+    } catch (e: any) {
+      return rejectWithValue(e.response.data.message);
     }
   }
-)
+);
 
 const fetchAuth = createAsyncThunk(
-  'user/fetchAuth',
+  "user/fetchAuth",
   async () => {
     const { data } = await $host.post("api/user/auth");
     return jwtDecode(data.token);
   }
-)
+);
 
-type userType = {
+type UserType = {
   id: number,
   email: string,
   role: "USER" | "ADMIN",
@@ -65,13 +72,18 @@ type userType = {
   exp?: number
 }
 
-const initialState: { isAuth: boolean, user: userType | {} } = {
-  isAuth: false,
-  user: {}
+function isError(action: AnyAction) {
+  return action.type.endsWith('rejected');
 }
 
+const initialState: { isAuth: boolean, user: UserType | {}, error: string | null } = {
+  isAuth: false,
+  user: {},
+  error: null
+};
+
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: initialState,
   reducers: {
     setAuth: (state, action: PayloadAction<boolean>) => {
@@ -80,9 +92,18 @@ const userSlice = createSlice({
     setUser: (state, action: PayloadAction<any>) => {
       state.user = action.payload;
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchLogin.fulfilled, (state, action: PayloadAction<UserType>) => {
+        state.isAuth = true;
+        state.user = action.payload;
+      })
+      .addMatcher(isError, (state, action: PayloadAction<string>) => {
+        state.error = action.payload;
+      })
   }
-})
+});
 
-export const { setAuth, setUser } = userSlice.actions;
 export { fetchRegistration, fetchLogin, fetchAuth };
 export default userSlice.reducer;

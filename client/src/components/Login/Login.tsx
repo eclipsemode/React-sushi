@@ -5,12 +5,14 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 import ValidationError from "../../error/ValidationError";
 import { useAppDispatch } from "../../redux/hooks";
 import { fetchLogin } from "../../redux/features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 type LoginProps = {
   setAuth: (value: boolean) => void;
 }
 
 const Login: React.FC<LoginProps> = React.memo(({ setAuth }) => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [login, setLogin] = React.useState<string>("");
   const [loginError, setLoginError] = React.useState<string>("Логин не может быть пустым.");
@@ -27,28 +29,30 @@ const Login: React.FC<LoginProps> = React.memo(({ setAuth }) => {
   };
 
   const handleSubmit = async () => {
-        setLoginDirty(true);
-        setPasswordDirty(true);
-        if (!login) {
-          setLoginError("Логин не может быть пустым.");
-        }
+    setLoginDirty(true);
+    setPasswordDirty(true);
+    if (!login) {
+      setLoginError("Логин не может быть пустым.");
+    }
 
-        setPasswordDirty(true);
-        if (!password) {
-          setPasswordError("Пароль не может быть пустым.");
-        } else if (password.length < 8) {
-          setPasswordError('Пароль не может иметь меньше 8 символов.')
-        }
+    setPasswordDirty(true);
+    if (!password) {
+      setPasswordError("Пароль не может быть пустым.");
+    } else if (password.length < 8) {
+      setPasswordError("Пароль не может иметь меньше 8 символов.");
+    }
 
-        if (loginError || passwordError) {
-          throw new ValidationError('Заполните все поля.')
-        }
+    if (loginError || passwordError) {
+      throw new ValidationError("Необходимо заполнить все поля.");
+    }
 
-    await dispatch(fetchLogin({ login, password }));
+    dispatch(fetchLogin({ login, password }));
+
+    navigate('/')
   };
 
   const handleLogin = (value: string) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     setLogin(value);
 
     if (!re.test(String(value).toLowerCase())) {
@@ -68,11 +72,11 @@ const Login: React.FC<LoginProps> = React.memo(({ setAuth }) => {
     if (!value) {
       setPasswordError("Пароль не может быть пустым.");
     } else if (!value.match(re)) {
-      setPasswordError('Пароль должен состоять из латинских букв и цифр.');
+      setPasswordError("Пароль должен состоять из латинских букв и цифр.");
     } else if (value.length < 8) {
-      setPasswordError('Пароль не может иметь меньше 8 символов.');
+      setPasswordError("Пароль не может иметь меньше 8 символов.");
     } else {
-      setPasswordError('');
+      setPasswordError("");
     }
   };
 
