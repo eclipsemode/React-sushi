@@ -8,7 +8,7 @@ export enum ProductsStatus {
     REJECTED,
 }
 
-export type ProductsType = {
+export interface IProducts {
     category: number[];
     id: string;
     imageUrl: string;
@@ -20,7 +20,7 @@ export type ProductsType = {
 };
 
 type ProductsStateType = {
-    products: ProductsType[];
+    products: IProducts[];
     productsStatus: ProductsStatus;
 };
 
@@ -31,11 +31,11 @@ type FetchParamsType = {
     searchValue: string | undefined;
 };
 
-export const fetchProducts = createAsyncThunk<ProductsType[], FetchParamsType>(
+export const fetchProducts = createAsyncThunk<IProducts[], FetchParamsType>(
     'products/fetchProducts',
     async ({ ...params }) => {
         const { categoryNumber, sortType, sortOrder, searchValue } = params;
-        const { data } = await axios.get<ProductsType[]>(
+        const { data } = await axios.get<IProducts[]>(
             'https://62d7c93949c87ff2af3cd25a.mockapi.io/products?' +
                 (categoryNumber ? 'category=' + categoryNumber + '&' : '') +
                 'sortBy=' +
@@ -62,7 +62,7 @@ export const productsSlice = createSlice({
             state.productsStatus = ProductsStatus.PENDING;
             state.products = [];
         });
-        builder.addCase(fetchProducts.fulfilled, (state, action: PayloadAction<ProductsType[]>) => {
+        builder.addCase(fetchProducts.fulfilled, (state, action: PayloadAction<IProducts[]>) => {
             state.products = action.payload;
             state.productsStatus = ProductsStatus.FULFILLED;
         });

@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './Item.module.css';
-import { ProductsType } from '../../../redux/features/productsSlice';
+import { IProducts } from '../../../redux/features/productsSlice';
 import { AddToCartButton } from '../../UI';
 
-const Item: React.FC<ProductsType> = ({ ...product }) => {
+const Item: React.FC<IProducts> = ({ ...product }) => {
     const [imgScale, setImgScale] = React.useState<boolean>(false);
 
     const handleOnMouseOver = () => setImgScale(true);

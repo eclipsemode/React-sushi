@@ -3,10 +3,10 @@ import styles from '../CartButtonMinus/CartButtonMinus.module.css';
 import { TiPlus } from 'react-icons/ti';
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../redux/features/cartSlice";
-import { ProductsType } from "../../../redux/features/productsSlice";
+import { IProducts } from "../../../redux/features/productsSlice";
 
 interface CartButtonPlusType {
-    product: ProductsType;
+    product: IProducts;
     amount: number;
 }
 

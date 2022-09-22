@@ -1,17 +1,17 @@
 import React from "react";
 import styles from "./AddToCartButton.module.css";
 import { CartButtonMinus, CartButtonPlus } from "../index";
-import { ProductsType } from "../../../redux/features/productsSlice";
+import { IProducts } from "../../../redux/features/productsSlice";
 import { addItem } from "../../../redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 
 type AddToCartButtonProps = {
-  product: ProductsType;
+  product: IProducts;
 }
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
   const dispatch = useAppDispatch();
-  const cartItem = useAppSelector((state) => state.cart.items.find((obj: ProductsType) => obj.id === product.id));
+  const cartItem = useAppSelector((state) => state.cart.items.find((obj: IProducts) => obj.id === product.id));
   let amount = !cartItem ? 0 : cartItem.amount;
 
   const handleAddProduct = () => {

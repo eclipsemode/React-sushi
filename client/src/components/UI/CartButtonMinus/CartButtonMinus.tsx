@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./CartButtonMinus.module.css";
 import { TiMinus } from "react-icons/ti";
-import { ProductsType } from "../../../redux/features/productsSlice";
+import { IProducts } from "../../../redux/features/productsSlice";
 import { useDispatch } from "react-redux";
 import { removeItem } from "../../../redux/features/cartSlice";
 
 interface CartButtonMinusType {
-  product: ProductsType;
+  product: IProducts;
   amount: number;
   disabled?: boolean
 }
@@ -16,7 +16,6 @@ const CartButtonMinus: React.FC<CartButtonMinusType> = React.memo(({ product, am
 
   const handleRemoveItem = () => {
     dispatch(removeItem(product.id))
-    // amount > 1 ? dispatch(removeItem(product.id)) : dispatch(removeItemById(product.id));
   }
 
   if (disabled === undefined) disabled = true;

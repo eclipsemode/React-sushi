@@ -2,10 +2,10 @@ import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/t
 
 import filter from './features/filterSlice';
 import products from './features/productsSlice';
-import cart, { CartStateType } from "./features/cartSlice";
+import cart, { ICartState } from "./features/cartSlice";
 import user from './features/userSlice';
 
-const persistedStateCart: CartStateType = localStorage.getItem('cart') !== null
+const persistedStateCart: ICartState = localStorage.getItem('cart') !== null
   ? JSON.parse(localStorage.getItem('cart') || '')
   : null;
 

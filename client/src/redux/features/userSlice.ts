@@ -2,7 +2,7 @@ import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxj
 import { $authHost, $host } from "../../http";
 import jwtDecode from "jwt-decode";
 
-type RegistrationPropsType = {
+interface IRegistrationProps {
   email: string,
   password: string,
   name: string,
@@ -15,12 +15,12 @@ type RegistrationPropsType = {
   room: string
 }
 
-type LoginPropsType = {
+interface ILoginProps {
   login: string,
   password: string
 }
 
-const fetchRegistration = createAsyncThunk<RegistrationPropsType, RegistrationPropsType, { rejectValue: string }>(
+const fetchRegistration = createAsyncThunk<IRegistrationProps, IRegistrationProps, { rejectValue: string }>(
   "user/fetchRegistration",
   async ({ email, password, name, surname, tel, street, house, floor, entrance, room }, { rejectWithValue }) => {
     try {
@@ -44,7 +44,7 @@ const fetchRegistration = createAsyncThunk<RegistrationPropsType, RegistrationPr
 );
 
 
-const fetchLogin = createAsyncThunk<UserType, LoginPropsType, { rejectValue: string }>(
+const fetchLogin = createAsyncThunk<UserType, ILoginProps, { rejectValue: string }>(
   "user/fetchLogin",
   async ({ login, password }, { rejectWithValue }) => {
     try {

@@ -1,6 +1,6 @@
 import React from "react";
 import { fetchProducts, ProductsStatus, selectProducts } from "../../redux/features/productsSlice";
-import { selectFilter, FilterStateType, setCategoryNumber } from "../../redux/features/filterSlice";
+import { selectFilter, IFilterState, setCategoryNumber } from "../../redux/features/filterSlice";
 import qs from "qs";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -28,7 +28,7 @@ const Products: React.FC = () => {
 
   React.useEffect(() => {
       if (location.search) {
-        const queryStr = qs.parse(window.location.search.substring(1)) as unknown as FilterStateType;
+        const queryStr = qs.parse(window.location.search.substring(1)) as unknown as IFilterState;
         dispatch(setCategoryNumber(queryStr.categoryNumber));
       }
     // eslint-disable-next-line

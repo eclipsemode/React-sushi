@@ -11,7 +11,7 @@ export enum SortOrderType {
     DESC = 'desc',
 }
 
-export type FilterStateType = {
+export interface IFilterState {
     sortId: number;
     searchValue?: string;
     sortType: SortType;
@@ -19,7 +19,7 @@ export type FilterStateType = {
     categoryNumber: number;
 };
 
-const initialState: FilterStateType = {
+const initialState: IFilterState = {
     sortId: 0,
     searchValue: '',
     sortType: SortType.RATING,

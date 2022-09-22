@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-export type CartItemType = {
+interface ICartItem {
     category: number[];
     id: string;
     imageUrl: string;
@@ -12,13 +12,13 @@ export type CartItemType = {
     amount: number;
 };
 
-export type CartStateType = {
-    items: CartItemType[];
+export interface ICartState {
+    items: ICartItem[];
     totalPrice: number;
     totalAmount: number;
 };
 
-const initialState: CartStateType = {
+const initialState: ICartState = {
     items: [],
     totalPrice: 0,
     totalAmount: 0,
@@ -28,7 +28,7 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addItem: (state, action: PayloadAction<CartItemType>) => {
+        addItem: (state, action: PayloadAction<ICartItem>) => {
             const foundItem = state.items.find((obj) => obj.id === action.payload.id);
 
             foundItem
