@@ -51,8 +51,8 @@ const fetchLogin = createAsyncThunk<IUser, ILoginProps, { rejectValue: string }>
   async ({ login, password }, { rejectWithValue }) => {
     try {
       const { data } = await $host.post("api/user/login", { email: login, password });
-      const token: string = data.token;
-      localStorage.setItem('token', token);
+      const token: string = await data.token;
+      await localStorage.setItem('token', token);
       return jwtDecode(token);
     } catch (e: any) {
       return rejectWithValue(e.response.data.message);
@@ -64,7 +64,7 @@ const fetchAuth = createAsyncThunk<IUser, void>(
   "user/fetchAuth",
   async () => {
     const { data } = await $authHost.get("api/user/auth");
-    localStorage.setItem('token', data.token);
+    await localStorage.setItem('token', data.token);
     return jwtDecode(data.token);
   }
 );
