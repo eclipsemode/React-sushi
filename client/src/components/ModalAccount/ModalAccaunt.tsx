@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from "react";
 import styles from './ModalAccaunt.module.css'
 import { MdExitToApp, MdManageAccounts } from "react-icons/md";

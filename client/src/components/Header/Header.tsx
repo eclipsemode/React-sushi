@@ -56,17 +56,18 @@ const Header: React.FC = () => {
   };
 
   React.useEffect(() => {
-    const handleClickOutsideModal = (e: MouseEvent | React.PropsWithRef<any>) => {
-        if (modalRef.current && !modalRef.current.contains(e.target)) {
-          setAccModal(true);
-        }
-    };
-    document.body.addEventListener('click', handleClickOutsideModal);
+    function handleClickOutside (event: MouseEvent | React.PropsWithRef<any>) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setAccModal(false);
+      }
+    }
+
+    document.body.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.body.removeEventListener('click', handleClickOutsideModal);
-    }
-  }, [accModal]);
+      document.body.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <header ref={headerRef} className={styles.root}>
