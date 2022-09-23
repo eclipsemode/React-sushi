@@ -2,7 +2,7 @@ import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxj
 import { $authHost, $host } from "../../http";
 import jwtDecode from "jwt-decode";
 
-interface IRegistrationProps {
+export interface IRegistrationProps {
   id?: number
   email: string,
   password: string,

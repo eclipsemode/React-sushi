@@ -11,7 +11,7 @@ const App: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchUserInfo());
-  }, [isAuth]);
+  }, [isAuth, dispatch]);
 
   return (
     <div className="App">

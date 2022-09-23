@@ -6,12 +6,16 @@ import styles from './Header.module.css';
 import React from 'react';
 
 import { selectCart } from '../../redux/features/cartSlice';
-import {useAppSelector} from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import CartBlock from "../UI/CartBlock/CartBlock";
 import { BsPersonCircle } from "react-icons/bs";
+import { fetchUserInfo, IRegistrationProps } from "../../redux/features/userSlice";
 
 const Header: React.FC = () => {
+  const dispatch = useAppDispatch();
     const { totalPrice, totalAmount } = useAppSelector(selectCart);
+    const { isAuth } = useAppSelector(state => state.user);
+    const [userInfo, setUserInfo] = React.useState<{ name: string, surname: string }>();
     const headerRef = React.useRef<HTMLDivElement>(null);
 
     const isHandleClassName = React.useCallback(() => {
@@ -20,11 +24,24 @@ const Header: React.FC = () => {
         : headerRef.current?.classList.remove(styles.root__fixed);
     }, [])
 
+  React.useEffect(() => {
+    async function getUserInfo() {
+      const { payload }: { payload: IRegistrationProps } = await dispatch(fetchUserInfo()) as any;
+      setUserInfo({
+        name: payload.name,
+        surname: payload.surname
+      })
+    }
+    getUserInfo()
+  }, [isAuth, dispatch])
+
     React.useEffect(() => {
       isHandleClassName();
-      window.addEventListener('scroll', () => {
-        isHandleClassName();
-      })
+      window.addEventListener('scroll', isHandleClassName)
+
+      return () => {
+        window.removeEventListener('scroll', isHandleClassName);
+      }
     }, [isHandleClassName])
 
     return (
@@ -38,11 +55,26 @@ const Header: React.FC = () => {
                   <li className={styles.root__link}><a href='#footer'>Контакты</a></li>
                 </ul>
               <div className={styles.root__info}>
-                <NavLink to='login'><BsPersonCircle/></NavLink>
+                <NavLink to={isAuth ? 'personal' : 'login'}>
+                  {
+                    isAuth
+                      ? (
+                        <div className={styles.root__auth}>
+                          <div>
+                            <p>Добро пожаловать!</p>
+                            <p>{userInfo?.name} {userInfo?.surname}</p>
+                          </div>
+                          <BsPersonCircle/>
+                        </div>
+                      )
+                      : <BsPersonCircle/>
+                  }
+
+                </NavLink>
                 <CartBlock totalPrice={totalPrice} totalAmount={totalAmount}/>
                 <div className={styles.root__phone}>
                   <img width="32" height="32" src={phoneImg} alt="phone"/>
-                  <span>8 (800) 200-27-92</span>
+                  <span onClick={() => console.log(userInfo)}>8 (800) 200-27-92</span>
                 </div>
               </div>
             </div>

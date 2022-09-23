@@ -51,7 +51,7 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
 
     if (typeof data.payload === 'string') return;
 
-    navigate("/");
+    navigate('/');
   };
 
   React.useEffect(() => {

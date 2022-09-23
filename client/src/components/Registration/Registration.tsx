@@ -3,12 +3,14 @@ import styles from "./Registration.module.css";
 import { ApplyButton } from "../UI";
 import { useAppDispatch } from "../../redux/hooks";
 import { fetchRegistration } from "../../redux/features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 type RegistrationProps = {
   setAuth: (value: boolean) => void;
 }
 
 const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [name, setName] = React.useState<string>("");
   const [surname, setSurname] = React.useState<string>("");
@@ -39,9 +41,9 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
         room
       }));
     } catch (e) {
-
+      return
     }
-
+    navigate('/')
   };
 
   return (

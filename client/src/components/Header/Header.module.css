@@ -60,5 +60,20 @@
   align-items: center;
   column-gap: 1rem;
 }
+.root__auth {
+  display: flex;
+  column-gap: 1rem;
+  align-items: center;
+}
+.root__auth p {
+  text-align: right;
+}
+.root__auth p:first-child {
+  color: rgba(31, 32, 65, 0.5);
+  font-size: 12px;
+}
+.root__auth p:last-child {
+  font-size: 18px;
+}
 
 /*# sourceMappingURL=Header.module.css.map */
