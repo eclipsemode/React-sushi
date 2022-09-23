@@ -54,6 +54,10 @@
 .root__info svg {
   width: 30px;
   height: 30px;
+  transition: fill ease-in-out 0.2s;
+}
+.root__info svg:hover {
+  fill: rgb(206, 40, 41);
 }
 .root__phone {
   display: flex;
@@ -64,6 +68,8 @@
   display: flex;
   column-gap: 1rem;
   align-items: center;
+  border-right: 1px solid rgba(31, 32, 65, 0.2);
+  padding-right: 2rem;
 }
 .root__auth p {
   text-align: right;

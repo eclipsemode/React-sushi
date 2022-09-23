@@ -32,6 +32,7 @@
 
   &__link {
     text-transform: uppercase;
+
     & a {
       font-size: 16px;
       color: $header-color;
@@ -62,6 +63,11 @@
     & svg {
       width: 30px;
       height: 30px;
+      transition: fill ease-in-out 0.2s;
+    }
+
+    & svg:hover {
+      fill: $main-color;
     }
   }
 
@@ -75,6 +81,8 @@
     display: flex;
     column-gap: 1rem;
     align-items: center;
+    border-right: 1px solid rgba(31, 32, 65, .2);;
+    padding-right: 2rem;
 
     p {
       text-align: right;
@@ -82,7 +90,7 @@
   }
 
   &__auth p:first-child {
-    color: rgba(31,32,65,.5);
+    color: rgba(31, 32, 65, .5);
     font-size: 12px;
   }
 
