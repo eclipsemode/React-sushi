@@ -12,8 +12,6 @@ const persistedStateCart: ICartState = localStorage.getItem('cart') !== null
 
 const persistedStateUser: IUser | null | string = localStorage.getItem('token') && jwtDecode(localStorage.getItem('token') ? localStorage.getItem('token') as string : '');
 
-console.log(!!persistedStateUser)
-
 const rootReducer = combineReducers({
   filter,
   products,
