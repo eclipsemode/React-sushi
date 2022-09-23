@@ -65,10 +65,6 @@
       height: 30px;
       transition: fill ease-in-out 0.2s;
     }
-
-    & svg:hover {
-      fill: $main-color;
-    }
   }
 
   &__phone {
@@ -83,6 +79,7 @@
     align-items: center;
     border-right: 1px solid rgba(31, 32, 65, .2);;
     padding-right: 2rem;
+    position: relative;
 
     p {
       text-align: right;
@@ -96,5 +93,9 @@
 
   &__auth p:last-child {
     font-size: 18px;
+  }
+
+  &__authSvg:hover {
+    fill: $main-color;
   }
 }

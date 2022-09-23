@@ -1,28 +1,31 @@
-import logoImg from '../../assets/img/logo.png';
-import phoneImg from '../../assets/img/phone.png';
+import logoImg from "../../assets/img/logo.png";
+import phoneImg from "../../assets/img/phone.png";
 import { Link, NavLink } from "react-router-dom";
-import styles from './Header.module.css';
+import styles from "./Header.module.css";
 
-import React from 'react';
+import React  from "react";
 
-import { selectCart } from '../../redux/features/cartSlice';
+import { selectCart } from "../../redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import CartBlock from "../UI/CartBlock/CartBlock";
 import { BsPersonCircle } from "react-icons/bs";
 import { fetchUserInfo, IRegistrationProps } from "../../redux/features/userSlice";
+import { ModalAccount } from "../index";
 
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();
-    const { totalPrice, totalAmount } = useAppSelector(selectCart);
-    const { isAuth } = useAppSelector(state => state.user);
-    const [userInfo, setUserInfo] = React.useState<{ name: string, surname: string }>();
-    const headerRef = React.useRef<HTMLDivElement>(null);
+  const { totalPrice, totalAmount } = useAppSelector(selectCart);
+  const { isAuth } = useAppSelector(state => state.user);
+  const [userInfo, setUserInfo] = React.useState<{ name: string, surname: string }>();
+  const [accModal, setAccModal] = React.useState<boolean>(false);
+  const headerRef = React.useRef<HTMLDivElement>(null);
+  const modalRef = React.useRef<HTMLDivElement>(null);
 
-    const isHandleClassName = React.useCallback(() => {
-      window.scrollY > 0
-        ? headerRef.current?.classList.add(styles.root__fixed)
-        : headerRef.current?.classList.remove(styles.root__fixed);
-    }, [])
+  const isHandleClassName = React.useCallback(() => {
+    window.scrollY > 0
+      ? headerRef.current?.classList.add(styles.root__fixed)
+      : headerRef.current?.classList.remove(styles.root__fixed);
+  }, []);
 
   React.useEffect(() => {
     async function getUserInfo() {
@@ -30,56 +33,78 @@ const Header: React.FC = () => {
       setUserInfo({
         name: payload.name,
         surname: payload.surname
-      })
+      });
     }
-    getUserInfo()
-  }, [isAuth, dispatch])
 
-    React.useEffect(() => {
-      isHandleClassName();
-      window.addEventListener('scroll', isHandleClassName)
+    if (isAuth) {
+      getUserInfo();
+    }
+  }, [isAuth, dispatch]);
 
-      return () => {
-        window.removeEventListener('scroll', isHandleClassName);
-      }
-    }, [isHandleClassName])
+  React.useEffect(() => {
+    isHandleClassName();
+    window.addEventListener("scroll", isHandleClassName);
 
-    return (
-        <header ref={headerRef} className={styles.root}>
-            <div className={styles.root__container}>
-              <Link to={'/'}>
-                <img className={styles.root__logo} width="60" height="60" src={logoImg} alt="Item logo"/>
-              </Link>
-                <ul className={styles.root__menu}>
-                  <li className={styles.root__link}><Link to={'/'}>Главная</Link></li>
-                  <li className={styles.root__link}><a href='#footer'>Контакты</a></li>
-                </ul>
-              <div className={styles.root__info}>
-                <NavLink to={isAuth ? 'personal' : 'login'}>
-                  {
-                    isAuth
-                      ? (
-                        <div className={styles.root__auth}>
-                          <div>
-                            <p>Добро пожаловать!</p>
-                            <p>{userInfo?.name} {userInfo?.surname}</p>
-                          </div>
-                          <BsPersonCircle/>
-                        </div>
-                      )
-                      : <BsPersonCircle/>
-                  }
+    return () => {
+      window.removeEventListener("scroll", isHandleClassName);
+    };
+  }, [isHandleClassName]);
 
-                </NavLink>
-                <CartBlock totalPrice={totalPrice} totalAmount={totalAmount}/>
-                <div className={styles.root__phone}>
-                  <img width="32" height="32" src={phoneImg} alt="phone"/>
-                  <span onClick={() => console.log(userInfo)}>8 (800) 200-27-92</span>
-                </div>
-              </div>
-            </div>
-        </header>
-    );
+  const accHandle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setAccModal(!accModal);
+  };
+
+  React.useEffect(() => {
+    const handleClickOutsideModal = (e: MouseEvent | React.PropsWithRef<any>) => {
+        if (modalRef.current && !modalRef.current.contains(e.target)) {
+          setAccModal(true);
+        }
+    };
+    document.body.addEventListener('click', handleClickOutsideModal);
+
+    return () => {
+      document.body.removeEventListener('click', handleClickOutsideModal);
+    }
+  }, [accModal]);
+
+  return (
+    <header ref={headerRef} className={styles.root}>
+      <div className={styles.root__container}>
+        <Link to={"/"}>
+          <img className={styles.root__logo} width="60" height="60" src={logoImg} alt="Item logo" />
+        </Link>
+        <ul className={styles.root__menu}>
+          <li className={styles.root__link}><Link to={"/"}>Главная</Link></li>
+          <li className={styles.root__link}><a href="#footer">Контакты</a></li>
+        </ul>
+        <div className={styles.root__info}>
+          <NavLink to={isAuth ? '' : 'login'}>
+            {
+              isAuth
+                ? (
+                  <div className={styles.root__auth} onClick={(e: React.MouseEvent) => accHandle(e)}>
+                    <div>
+                      <p>Добро пожаловать!</p>
+                      <p>{userInfo?.name} {userInfo?.surname}</p>
+                    </div>
+                    <BsPersonCircle className={styles.root__authSvg} />
+                    {accModal && <ModalAccount modalRef={modalRef} />}
+                  </div>
+                )
+                : <BsPersonCircle />
+            }
+          </NavLink>
+
+          <CartBlock totalPrice={totalPrice} totalAmount={totalAmount} />
+          <div className={styles.root__phone}>
+            <img width="32" height="32" src={phoneImg} alt="phone" />
+            <span onClick={() => console.log(userInfo)}>8 (800) 200-27-92</span>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 };
 
 export default Header;

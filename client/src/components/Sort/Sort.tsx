@@ -8,14 +8,14 @@ import { useAppSelector } from "../../redux/hooks";
 const Sort: React.FC = () => {
     const [popupHidden, setPopupHidden] = React.useState<boolean>(true);
     const { sortId } = useAppSelector(selectFilter);
-    const popupRef = React.useRef<any>(null);
+    const popupRef = React.useRef<HTMLDivElement>(null);
 
     const sortedItem = sortNames?.find((obj: SortNameType) => obj.id === sortId)?.text;
 
     const handlePopup = () => setPopupHidden(!popupHidden);
 
     React.useEffect(() => {
-        const handleClickOutside = (event: MouseEvent | React.MouseEvent) => {
+        const handleClickOutside = (event: MouseEvent | React.PropsWithRef<any>) => {
             if (popupRef.current && !popupRef.current.contains(event.target)) {
                 setPopupHidden(true);
             }

@@ -135,4 +135,5 @@ const userSlice = createSlice({
 });
 
 export { fetchRegistration, fetchLogin, fetchAuth, fetchUserInfo };
+export const { setAuth, setUser } = userSlice.actions;
 export default userSlice.reducer;
