@@ -11,7 +11,7 @@ type LoginProps = {
   setAuth: (value: boolean) => void;
 }
 
-const Login: React.FC<LoginProps> = React.memo(({ setAuth }) => {
+const Login: React.FC<LoginProps> = ({ setAuth }) => {
   const { error } = useAppSelector(state => state.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -119,6 +119,6 @@ const Login: React.FC<LoginProps> = React.memo(({ setAuth }) => {
       <p>Впервые у нас? <span onClick={() => handleAuth()}>Зарегистрироваться</span></p>
     </div>
   );
-});
+};
 
 export default Login;

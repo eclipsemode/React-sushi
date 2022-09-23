@@ -1,13 +1,18 @@
 import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit";
+import jwtDecode from "jwt-decode";
 
 import filter from './features/filterSlice';
 import products from './features/productsSlice';
 import cart, { ICartState } from "./features/cartSlice";
-import user from './features/userSlice';
+import user, { IUser } from "./features/userSlice";
 
 const persistedStateCart: ICartState = localStorage.getItem('cart') !== null
   ? JSON.parse(localStorage.getItem('cart') || '')
   : null;
+
+const persistedStateUser: IUser | null | string = localStorage.getItem('token') && jwtDecode(localStorage.getItem('token') ? localStorage.getItem('token') as string : '');
+
+console.log(!!persistedStateUser)
 
 const rootReducer = combineReducers({
   filter,
@@ -23,6 +28,11 @@ export const store = configureStore({
       items: persistedStateCart?.items || [],
       totalPrice: persistedStateCart?.totalPrice || 0,
       totalAmount: persistedStateCart?.totalAmount || 0
+    },
+    user: {
+      isAuth: !!persistedStateUser,
+      user: !!persistedStateUser ? persistedStateUser : {},
+      error: null
     }
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({

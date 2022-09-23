@@ -36,7 +36,9 @@ const fetchRegistration = createAsyncThunk<IRegistrationProps, IRegistrationProp
         entrance,
         room
       });
-      return jwtDecode(data.token);
+      const token: string = data.token;
+      localStorage.setItem('token', token);
+      return jwtDecode(token);
     } catch (e: any) {
       return rejectWithValue(e.response.data.message);
     }
@@ -44,22 +46,21 @@ const fetchRegistration = createAsyncThunk<IRegistrationProps, IRegistrationProp
 );
 
 
-const fetchLogin = createAsyncThunk<UserType, ILoginProps, { rejectValue: string }>(
+const fetchLogin = createAsyncThunk<IUser, ILoginProps, { rejectValue: string }>(
   "user/fetchLogin",
   async ({ login, password }, { rejectWithValue }) => {
     try {
       const { data } = await $host.post("api/user/login", { email: login, password });
       const token: string = data.token;
       localStorage.setItem('token', token);
-      const tokenDecoded: UserType = jwtDecode(token);
-      return tokenDecoded;
+      return jwtDecode(token);
     } catch (e: any) {
       return rejectWithValue(e.response.data.message);
     }
   }
 );
 
-const fetchAuth = createAsyncThunk<UserType, void>(
+const fetchAuth = createAsyncThunk<IUser, void>(
   "user/fetchAuth",
   async () => {
     const { data } = await $authHost.get("api/user/auth");
@@ -68,19 +69,23 @@ const fetchAuth = createAsyncThunk<UserType, void>(
   }
 );
 
-type UserType = {
+export interface IUser {
   id: number,
   email: string,
-  role: "USER" | "ADMIN",
-  iat?: number,
-  exp?: number
+  role: "USER" | "ADMIN"
+}
+
+export interface IUserState {
+  isAuth: boolean,
+  user: IUser | {},
+  error: string | undefined | null
 }
 
 function isError(action: AnyAction) {
   return action.type.endsWith('rejected');
 }
 
-const initialState: { isAuth: boolean, user: UserType | {}, error: string | null } = {
+const initialState: IUserState = {
   isAuth: false,
   user: {},
   error: null
@@ -99,19 +104,17 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchLogin.fulfilled, (state, action: PayloadAction<UserType>) => {
+      .addCase(fetchLogin.fulfilled, (state, action: PayloadAction<IUser>) => {
         state.isAuth = true;
         state.user = action.payload;
       })
-      .addCase(fetchAuth.fulfilled, (state, action: PayloadAction<UserType>) => {
+      .addCase(fetchAuth.fulfilled, (state, action: PayloadAction<IUser>) => {
           state.user = action.payload;
           state.isAuth = true;
       })
-      .addCase(fetchAuth.rejected, (state) => {
+      .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.user = {};
         state.isAuth = false;
-      })
-      .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.error = action.payload;
       })
   }
