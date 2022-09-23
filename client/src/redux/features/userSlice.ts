@@ -3,6 +3,7 @@ import { $authHost, $host } from "../../http";
 import jwtDecode from "jwt-decode";
 
 interface IRegistrationProps {
+  id?: number
   email: string,
   password: string,
   name: string,
@@ -18,6 +19,18 @@ interface IRegistrationProps {
 interface ILoginProps {
   login: string,
   password: string
+}
+
+export interface IUser {
+  id: number,
+  email: string,
+  role: "USER" | "ADMIN"
+}
+
+export interface IUserState {
+  isAuth: boolean,
+  user: IUser | {},
+  error: string | undefined | null
 }
 
 const fetchRegistration = createAsyncThunk<IRegistrationProps, IRegistrationProps, { rejectValue: string }>(
@@ -69,17 +82,18 @@ const fetchAuth = createAsyncThunk<IUser, void>(
   }
 );
 
-export interface IUser {
-  id: number,
-  email: string,
-  role: "USER" | "ADMIN"
-}
-
-export interface IUserState {
-  isAuth: boolean,
-  user: IUser | {},
-  error: string | undefined | null
-}
+const fetchUserInfo = createAsyncThunk<IRegistrationProps, void, { state: { user: any } }>(
+  'user/fetchUserInfo',
+  async (_, { getState }) => {
+    const { user } = await getState();
+    const { data }: any = await $authHost.post('api/user/info', { id: user.user.id });
+    if (user.isAuth) {
+      return data.user;
+    } else {
+      throw Error();
+    }
+  }
+)
 
 function isError(action: AnyAction) {
   return action.type.endsWith('rejected');
@@ -120,5 +134,5 @@ const userSlice = createSlice({
   }
 });
 
-export { fetchRegistration, fetchLogin, fetchAuth };
+export { fetchRegistration, fetchLogin, fetchAuth, fetchUserInfo };
 export default userSlice.reducer;

@@ -66,7 +66,7 @@ class UserController {
 
   async getUserData(req, res) {
     const { id } = req.body;
-    const user = await User.findOne({ where: id })
+    const user = await User.findOne({ where: { id } })
     return res.json({user})
   }
 }

@@ -1,10 +1,10 @@
 import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit";
-import jwtDecode from "jwt-decode";
 
 import filter from './features/filterSlice';
 import products from './features/productsSlice';
 import cart, { ICartState } from "./features/cartSlice";
 import user, { IUser } from "./features/userSlice";
+import jwtDecode from "jwt-decode";
 
 const persistedStateCart: ICartState = localStorage.getItem('cart') !== null
   ? JSON.parse(localStorage.getItem('cart') || '')
