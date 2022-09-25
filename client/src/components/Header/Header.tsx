@@ -37,7 +37,7 @@ const Header: React.FC = () => {
     }
 
     if (isAuth) {
-      getUserInfo();
+      getUserInfo().then();
     }
   }, [isAuth, dispatch]);
 
