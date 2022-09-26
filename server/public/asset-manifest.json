@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1a790052.css",
+    "main.js": "/static/js/main.1bf16621.js",
+    "Cart.js": "/static/js/Cart.b2e64cab.chunk.js",
+    "NotFound.js": "/static/js/NotFound.5ad69dc3.chunk.js",
+    "Personal.js": "/static/js/Personal.cc1320fb.chunk.js",
+    "LoginPage.js": "/static/js/LoginPage.92c369d1.chunk.js",
+    "static/media/Barlow-Black.ttf": "/static/media/Barlow-Black.5b6aa950a7733ff40634.ttf",
+    "static/media/Barlow-ExtraBold.ttf": "/static/media/Barlow-ExtraBold.777e300ed64d3d47cc85.ttf",
+    "static/media/Barlow-SemiBold.ttf": "/static/media/Barlow-SemiBold.8247eaeb0799c0acafc6.ttf",
+    "static/media/Barlow-Bold.ttf": "/static/media/Barlow-Bold.0cb1ab864072bf9e0991.ttf",
+    "static/media/Barlow-Regular.ttf": "/static/media/Barlow-Regular.e7eb634d040a6f384033.ttf",
+    "static/media/Barlow-Medium.ttf": "/static/media/Barlow-Medium.d4afdc134fc10b739bab.ttf",
+    "static/media/Barlow-Light.ttf": "/static/media/Barlow-Light.19f244ecb11218b9a7de.ttf",
+    "static/media/logo.png": "/static/media/logo.d64fb4ba341596abb2a8.png",
+    "static/media/empty-cart.png": "/static/media/empty-cart.db905d1f4b063162f25b.png",
+    "index.html": "/index.html",
+    "main.1a790052.css.map": "/static/css/main.1a790052.css.map",
+    "main.1bf16621.js.map": "/static/js/main.1bf16621.js.map",
+    "Cart.b2e64cab.chunk.js.map": "/static/js/Cart.b2e64cab.chunk.js.map",
+    "NotFound.5ad69dc3.chunk.js.map": "/static/js/NotFound.5ad69dc3.chunk.js.map",
+    "Personal.cc1320fb.chunk.js.map": "/static/js/Personal.cc1320fb.chunk.js.map",
+    "LoginPage.92c369d1.chunk.js.map": "/static/js/LoginPage.92c369d1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1a790052.css",
+    "static/js/main.1bf16621.js"
+  ]
+}
