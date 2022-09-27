@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksushi_shop=self.webpackChunksushi_shop||[]).push([[25],{1847:function(s,e,u){u.r(e);u(2791);var n=u(184);e.default=function(){return(0,n.jsx)("div",{children:"Hello, it's your personal page!"})}}}]);
-//# sourceMappingURL=Personal.cc1320fb.chunk.js.map

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksushi_shop=self.webpackChunksushi_shop||[]).push([[789],{4030:function(s,t,u){u.r(t);var e=u(885),n=u(2791),h=u(4326),i=u(6871),f=u(184);t.default=function(){var s=(0,i.s0)(),t=n.useState(!0),u=(0,e.Z)(t,2),r=u[0],a=u[1];return n.useEffect((function(){s(r?"/login":"/registration")}),[r,s]),r?(0,f.jsx)(h.m3,{setAuth:a}):(0,f.jsx)(h.YM,{setAuth:a})}}}]);
-//# sourceMappingURL=LoginPage.92c369d1.chunk.js.map
