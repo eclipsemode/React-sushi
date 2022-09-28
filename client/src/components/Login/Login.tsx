@@ -6,6 +6,7 @@ import ValidationError from "../../error/ValidationError";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchLogin } from "../../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
+import { serverError } from "../../error";
 
 type LoginProps = {
   setAuth: (value: boolean) => void;
@@ -43,18 +44,18 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
       throw new ValidationError("Необходимо заполнить все поля.");
     }
 
-    const data = await dispatch(fetchLogin({ login, password }));
+    const { payload } = await dispatch(fetchLogin({ login, password }));
 
-    if (typeof data.payload === 'string') return;
+    if (typeof payload === "string") return;
 
     navigate('/');
   };
 
   React.useEffect(() => {
-    if (error?.match("email")) {
-      setLoginError(error);
-    } else if (error?.match("пароль")) {
-      setPasswordError(error);
+    if (error?.match(serverError.USER_NOT_FOUND)) {
+      setLoginError(serverError.USER_NOT_FOUND);
+    } else if (error?.match(serverError.PASSWORD_INCORRECT)) {
+      setPasswordError(serverError.PASSWORD_INCORRECT);
     }
   }, [error]);
 
@@ -63,7 +64,7 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
     setLogin(value);
 
     if (!re.test(String(value).toLowerCase())) {
-      setLoginError("Данный email неккоректен.");
+      setLoginError("Данный email некорректен.");
     } else {
       setLoginError("");
     }

@@ -37,7 +37,7 @@ const fetchRegistration = createAsyncThunk<IRegistrationProps, IRegistrationProp
   "user/fetchRegistration",
   async ({ email, password, name, surname, tel, street, house, floor, entrance, room }, { rejectWithValue }) => {
     try {
-      const { data } = await $host.post("api/user/registration", {
+      const response = await $host.post("api/user/registration", {
         email,
         password,
         name,
@@ -49,7 +49,7 @@ const fetchRegistration = createAsyncThunk<IRegistrationProps, IRegistrationProp
         entrance,
         room
       });
-      const token: string = data.token;
+      const token: string = response.data.token;
       localStorage.setItem('token', token);
       return jwtDecode(token);
     } catch (e: any) {

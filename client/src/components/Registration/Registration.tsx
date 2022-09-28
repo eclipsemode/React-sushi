@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Registration.module.css";
 import { ApplyButton } from "../UI";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchRegistration } from "../../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
-import ValidationError from "../../error/ValidationError";
+import { serverError, ValidationError } from "../../error";
 import InputMask from 'react-input-mask';
 
 type RegistrationProps = {
@@ -14,6 +14,7 @@ type RegistrationProps = {
 const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { error } = useAppSelector(state => state.user);
   const [name, setName] = React.useState<string>("");
   const [surname, setSurname] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
@@ -38,6 +39,12 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
     setAuth(true);
   };
 
+  React.useEffect(() => {
+    if (error?.match(serverError.EMAIL)) {
+      setEmailError(error)
+    }
+  }, [error])
+
   const handleSubmit = async () => {
     setFormDirty(true);
 
@@ -46,7 +53,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
     }
 
     try {
-      await dispatch(fetchRegistration({
+      const { payload } = await dispatch(fetchRegistration({
         name,
         surname,
         email,
@@ -58,9 +65,11 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
         entrance,
         room
       }));
+      if (typeof payload === 'string') return;
     } catch (e) {
       return;
     }
+
     navigate("/");
   };
 

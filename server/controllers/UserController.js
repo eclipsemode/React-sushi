@@ -8,7 +8,7 @@ class UserController {
     const  { email, password, role, name, surname, tel, street, house, floor, entrance, room } = req.body;
 
     if (!email || !password) {
-      return next(ApiError.badRequest('Неккоректный email или пароль.'))
+      return next(ApiError.badRequest('Некорректный email или пароль.'))
     }
 
     if (!name) {
