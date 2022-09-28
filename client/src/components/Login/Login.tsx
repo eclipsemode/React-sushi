@@ -17,12 +17,11 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
   const dispatch = useAppDispatch();
   const [login, setLogin] = React.useState<string>("");
   const [loginError, setLoginError] = React.useState<string>("Логин не может быть пустым.");
-  const [loginDirty, setLoginDirty] = React.useState<boolean>(false);
   const [password, setPassword] = React.useState<string>("");
   const [passwordError, setPasswordError] = React.useState<string>("Пароль не может быть пустым.");
-  const [passwordDirty, setPasswordDirty] = React.useState<boolean>(false);
   const [passwordHidden, setPasswordHidden] = React.useState<boolean>(true);
   const passwordRef = React.useRef<HTMLInputElement>(null);
+  const [formDirty, setFormDirty] = React.useState<boolean>(false);
 
   const handlePasswordHidden = () => {
     setPasswordHidden(!passwordHidden);
@@ -30,13 +29,10 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
   };
 
   const handleSubmit = async () => {
-    setLoginDirty(true);
-    setPasswordDirty(true);
+    setFormDirty(true);
     if (!login) {
       setLoginError("Логин не может быть пустым.");
     }
-
-    setPasswordDirty(true);
     if (!password) {
       setPasswordError("Пароль не может быть пустым.");
     } else if (password.length < 8) {
@@ -100,11 +96,11 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
     <div className={styles.root}>
       <form className={styles.root__container}>
         <h1>Вход</h1>
-        {(loginError && loginDirty) && <span className={styles.root__error}>{loginError}</span>}
+        {(loginError && formDirty) && <span className={styles.root__error}>{loginError}</span>}
         <input className={styles.root__input} value={login} name="login"
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleLogin(e.currentTarget.value)}
                placeholder="Имя пользователя" type="text" />
-        {(passwordError && passwordDirty) && <span className={styles.root__error}>{passwordError}</span>}
+        {(passwordError && formDirty) && <span className={styles.root__error}>{passwordError}</span>}
         <div className={styles.root__password}>
           <input className={styles.root__input} value={password} name="password" autoComplete="on"
                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePassword(e.currentTarget.value)}
