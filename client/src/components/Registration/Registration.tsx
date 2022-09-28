@@ -57,10 +57,10 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSurname(e.currentTarget.value)} type="text" />
         <input className={styles.root__input} placeholder="Email" name="email" value={email} type="email"
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value)} required={true} />
-        <input className={styles.root__input} placeholder="Пароль" name="password" value={password}
+        <input className={styles.root__input} placeholder="Пароль" name="password" value={password} autoComplete="on"
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)} type="password"
                required={true} />
-        <input className={styles.root__input} placeholder="Повторите пароль" type="password" required={true} />
+        <input className={styles.root__input} placeholder="Повторите пароль" type="password" required={true} autoComplete="on" />
         <input className={styles.root__input} placeholder="Номер телефона" name="tel" value={tel}
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTel(e.currentTarget.value)} type="text"
                required={true} />

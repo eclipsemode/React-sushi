@@ -106,7 +106,7 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
                placeholder="Имя пользователя" type="text" />
         {(passwordError && passwordDirty) && <span className={styles.root__error}>{passwordError}</span>}
         <div className={styles.root__password}>
-          <input className={styles.root__input} value={password} name="password"
+          <input className={styles.root__input} value={password} name="password" autoComplete="on"
                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePassword(e.currentTarget.value)}
                  ref={passwordRef}
                  placeholder="Пароль" type={passwordHidden ? "password" : "text"} />
