@@ -19,7 +19,7 @@ class UserController {
       return next(ApiError.badRequest('Введите телефон.'))
     }
 
-    const candidate = await User.findOne({where: {email}});
+    const candidate = await User.findOne( { where: { email } } );
 
     if (candidate) {
       return next(ApiError.badRequest('Пользователь с таким email уже существует.'))
