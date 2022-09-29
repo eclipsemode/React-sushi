@@ -6,32 +6,21 @@ import cat4Img from "../../assets/img/4.png";
 import cat5Img from "../../assets/img/5.png";
 import cat6Img from "../../assets/img/6.png";
 
-import categoryNames from "./categoryNames";
-
 import { setCategoryNumber, selectFilter } from "../../redux/features/filterSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-// import axios from "axios";
+import { fetchCategories } from "../../redux/features/categoriesSlice";
 
 const Categories: React.FC = React.memo(() => {
   const dispatch = useAppDispatch();
+  const { categories } = useAppSelector(state => state.category);
   const { categoryNumber } = useAppSelector(selectFilter);
-  // const [categories, setCategories] = React.useState<string[]>([]);
 
-  // React.useEffect(() => {
-  //   (async function fetchCategories() {
-  //     try {
-  //       const res = await axios.get('http://localhost:5000/api/category')
-  //       const data = res.data;
-  //       setCategories(data.map((obj: any) => obj.name));
-  //     } catch (e: any) {
-  //       setCategories(categoryNames.map((category: any) => category))
-  //       console.error('Cannot get Categories')
-  //     }
-  //   })()
-  // }, [])
+  React.useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch])
 
-  const handleClickCategory = (index: number) => {
-    dispatch(setCategoryNumber(index));
+  const handleClickCategory = (id: number) => {
+    dispatch(setCategoryNumber(id));
   };
 
   const categoryImg = (i: number) => {
@@ -54,14 +43,14 @@ const Categories: React.FC = React.memo(() => {
   return (
     <nav className="categories">
       <ul>
-        {categoryNames.map((category, index) => (
+        {categories.map((category, index) => (
           <li
-            key={index}
-            onClick={() => handleClickCategory(index)}
-            className={categoryNumber === index ? "categories-item--active" : ""}
+            key={category.id}
+            onClick={() => handleClickCategory(category.id)}
+            className={categoryNumber === category.id ? "categories-item--active" : ""}
           >
             <img width="42" height="42" src={categoryImg(index)} alt="category" />
-            <span>{category}</span>
+            <span>{category.name}</span>
           </li>
         ))}
       </ul>

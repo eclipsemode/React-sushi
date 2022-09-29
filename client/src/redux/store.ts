@@ -4,6 +4,7 @@ import filter from './features/filterSlice';
 import products from './features/productsSlice';
 import cart, { ICartState } from "./features/cartSlice";
 import user, { IUser } from "./features/userSlice";
+import category from './features/categoriesSlice';
 import jwtDecode from "jwt-decode";
 
 const persistedStateCart: ICartState = localStorage.getItem('cart') !== null
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   filter,
   products,
   cart,
-  user
+  user,
+  category
 });
 
 export const store = configureStore({

@@ -24,7 +24,7 @@ const initialState: IFilterState = {
     searchValue: '',
     sortType: SortType.RATING,
     sortOrder: SortOrderType.ASC,
-    categoryNumber: 0,
+    categoryNumber: 1,
 };
 
 export const filterSlice = createSlice({
