@@ -15,5 +15,10 @@
 .root__link2 {
   color: #292929 !important;
 }
+.root__loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /*# sourceMappingURL=Account.module.css.map */

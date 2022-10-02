@@ -22,4 +22,10 @@
   &__link2 {
     color: $header-color !important;
   }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

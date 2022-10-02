@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["Account.module.scss","../../assets/styles/_variables.scss"],"names":[],"mappings":"AAGE;EACE;EACA;;AAGF;EACE,OCHW;;ADMb;EACE,OCFG;EDGH;;AAGF;EACE,qBCPG;;ADUL;EACE","file":"Account.module.css"}
+{"version":3,"sourceRoot":"","sources":["Account.module.scss","../../assets/styles/_variables.scss"],"names":[],"mappings":"AAGE;EACE;EACA;;AAGF;EACE,OCHW;;ADMb;EACE,OCFG;EDGH;;AAGF;EACE,qBCPG;;ADUL;EACE;;AAGF;EACE;EACA;EACA","file":"Account.module.css"}
