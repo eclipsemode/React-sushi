@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../store";
+// import { $host } from "../../http";
 
 export enum ProductsStatus {
   PENDING,
@@ -34,7 +35,7 @@ type FetchParamsType = {
 export const fetchProducts = createAsyncThunk<IProducts[], FetchParamsType>(
   "products/fetchProducts",
   async ({ ...params }) => {
-    const { categoryNumber, sortType, sortOrder, searchValue } = params;
+    const { categoryNumber, sortType, sortOrder, searchValue } = await params;
     const { data } = await axios.get<IProducts[]>(
       "https://62d7c93949c87ff2af3cd25a.mockapi.io/products?" +
       (categoryNumber ? "category=" + categoryNumber + "&" : "") +
@@ -44,6 +45,7 @@ export const fetchProducts = createAsyncThunk<IProducts[], FetchParamsType>(
       sortOrder +
       (searchValue ? "&search=" + searchValue : "")
     );
+    // const { data } = $host.get()
     return data;
   }
 );

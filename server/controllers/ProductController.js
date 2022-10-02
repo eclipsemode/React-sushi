@@ -6,11 +6,11 @@ const path = require('path');
 class ProductController {
   async create(req, res, next) {
     try {
-      const { name, price, description, categoryId } = req.body;
+      const { name, price, description, categoryId, rating } = req.body;
       const { image } = req.files;
       let fileName = uuid.v4() + '.jpg';
       image.mv(path.resolve(__dirname, '..', 'static', fileName));
-      const product = await Product.create({ name, price, description, categoryId, image: fileName });
+      const product = await Product.create({ name, price, description, rating, categoryId, image: fileName });
       return res.json(product);
     } catch (error) {
       next(ApiError.badRequest(error.message));
@@ -27,7 +27,13 @@ class ProductController {
   }
 
   async getAll(req, res) {
-    const products = await Product.findAll();
+    const { categoryId, sortType, sortOrder } = req.query;
+    let products;
+    if (categoryId) {
+      products = await Product.findAll({ where: { categoryId } });
+    } else {
+      products = await Product.findAll();
+    }
     return res.json(products);
   }
 }
