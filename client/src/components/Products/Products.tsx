@@ -35,7 +35,7 @@ const Products: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-      dispatch(fetchProducts({ categoryNumber, sortType, sortOrder, searchValue }));
+      dispatch(fetchProducts({ categoryNumber, sortType, sortOrder }));
 
   }, [categoryNumber, dispatch, searchValue, sortOrder, sortType]);
 

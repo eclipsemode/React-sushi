@@ -24,7 +24,7 @@ const CartOrder: React.FC = () => {
                     <tr>
                         <th>Товар</th>
                         <th>Стоимость</th>
-                        <th>Колличество</th>
+                        <th>Количество</th>
                         <th>Общая стоимость</th>
                     </tr>
                 </thead>

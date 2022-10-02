@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
 import { RootState } from "../store";
-// import { $host } from "../../http";
+import { $host } from "../../http";
 
 export enum ProductsStatus {
   PENDING,
@@ -12,13 +11,13 @@ export enum ProductsStatus {
 export interface IProducts {
   category: number[];
   id: string;
-  imageUrl: string;
+  image: string;
   name: string;
   description: string;
   price: number;
   rating: number;
   amount: number;
-};
+}
 
 type ProductsStateType = {
   products: IProducts[];
@@ -29,23 +28,13 @@ type FetchParamsType = {
   categoryNumber: number;
   sortType: string;
   sortOrder: string;
-  searchValue: string | undefined;
 };
 
 export const fetchProducts = createAsyncThunk<IProducts[], FetchParamsType>(
   "products/fetchProducts",
   async ({ ...params }) => {
-    const { categoryNumber, sortType, sortOrder, searchValue } = await params;
-    const { data } = await axios.get<IProducts[]>(
-      "https://62d7c93949c87ff2af3cd25a.mockapi.io/products?" +
-      (categoryNumber ? "category=" + categoryNumber + "&" : "") +
-      "sortBy=" +
-      sortType +
-      "&order=" +
-      sortOrder +
-      (searchValue ? "&search=" + searchValue : "")
-    );
-    // const { data } = $host.get()
+    const { categoryNumber, sortType, sortOrder } = await params;
+    const { data } = await $host.get(`api/product?categoryId=${categoryNumber}&sortBy=${sortType}&sortOrder=${sortOrder}`);
     return data;
   }
 );

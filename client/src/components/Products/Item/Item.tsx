@@ -13,7 +13,7 @@ const Item: React.FC<IProducts> = ({ ...product }) => {
         <div className={styles.root} onMouseEnter={() => handleOnMouseOver()} onMouseLeave={() => handleOnMouseLeave()}>
             <img
                 className={styles.image + ' ' + (imgScale ? styles.image__resize : null)}
-                src={product.imageUrl}
+                src={process.env.REACT_APP_API_URL + product.image}
                 alt="Item"
             />
             <div className={styles.root__content}>

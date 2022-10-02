@@ -1,22 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-
-interface ICartItem {
-    category: number[];
-    id: string;
-    imageUrl: string;
-    name: string;
-    description: string;
-    price: number;
-    rating: number;
-    amount: number;
-};
+import { IProducts } from "./productsSlice";
 
 export interface ICartState {
-    items: ICartItem[];
+    items: IProducts[];
     totalPrice: number;
     totalAmount: number;
-};
+}
 
 const initialState: ICartState = {
     items: [],
@@ -28,7 +18,7 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addItem: (state, action: PayloadAction<ICartItem>) => {
+        addItem: (state, action: PayloadAction<IProducts>) => {
             const foundItem = state.items.find((obj) => obj.id === action.payload.id);
 
             foundItem

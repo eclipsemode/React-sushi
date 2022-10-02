@@ -20,7 +20,7 @@ const CartItem: React.FC<CartItemProps> = ({ obj }) => {
         <tr className={styles.root}>
             <td className={styles.root__product}>
                 <IoClose onClick={() => handleRemoveItemById()} />
-                <img height="100" src={obj.imageUrl} alt="productImg" />
+                <img height="100" src={process.env.REACT_APP_API_URL + obj.image} alt="productImg" />
                 <h5>{obj.name}</h5>
             </td>
             <td className={styles.root__price}>{obj.price} ₽</td>
