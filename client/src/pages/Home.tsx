@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Categories, Sort, Products } from "../components";
+import { Categories, Sort, Products, Banner } from "../components";
 import { useAppSelector } from "../redux/hooks";
 import { selectFilter } from "../redux/features/filterSlice";
 
@@ -11,6 +11,7 @@ const Home: React.FC = () => {
   return (
     <>
       <div className="content__top">
+        <Banner />
         <Categories />
       </div>
       <section className="content__head">
