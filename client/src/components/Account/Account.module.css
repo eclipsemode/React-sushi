@@ -1,0 +1,19 @@
+.root__head {
+  display: flex;
+  column-gap: 0.5rem;
+}
+.root__head > p {
+  color: #292929;
+}
+.root__link {
+  color: #8ba4f9;
+  border-bottom: 2px solid transparent;
+}
+.root__link:hover {
+  border-bottom-color: #8ba4f9;
+}
+.root__link2 {
+  color: #292929 !important;
+}
+
+/*# sourceMappingURL=Account.module.css.map */

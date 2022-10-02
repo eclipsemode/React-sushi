@@ -1,0 +1,25 @@
+@import '../../assets/styles/variables';
+
+.root {
+  &__head {
+    display: flex;
+    column-gap: 0.5rem;
+  }
+
+  &__head > p {
+    color: $header-color;
+  }
+
+  &__link {
+    color: $link;
+    border-bottom: 2px solid transparent;
+  }
+
+  &__link:hover {
+    border-bottom-color: $link;
+  }
+
+  &__link2 {
+    color: $header-color !important;
+  }
+}
