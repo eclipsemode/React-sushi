@@ -26,20 +26,26 @@ class ProductController {
     return res.status(200).json({message: 'Deleted successfully'});
   }
 
-  async getAll(req, res) {
-    const { categoryId, sortBy, sortOrder } = req.query;
-    let products;
-    if (categoryId) {
-      products = await Product.findAll({
-        where: { categoryId },
-        order: [
-          [ sortBy, sortOrder]
-        ]
-      });
-    } else {
-      products = await Product.findAll();
+  async getAll(req, res, next) {
+    try {
+      const { categoryId, sortBy, sortOrder } = req.query;
+      let products;
+      if (categoryId) {
+        if (!sortBy || !sortOrder) next(ApiError.badRequest('Не указана сортировка.'));
+        products = await Product.findAll({
+          where: { categoryId },
+          order: [
+            [ sortBy, sortOrder]
+          ]
+        });
+      } else {
+        products = await Product.findAll();
+      }
+      return res.json(products);
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
     }
-    return res.json(products);
+
   }
 }
 
