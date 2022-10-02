@@ -45,7 +45,6 @@ class ProductController {
     } catch (e) {
       next(ApiError.badRequest(e.message));
     }
-
   }
 }
 
