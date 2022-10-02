@@ -27,10 +27,15 @@ class ProductController {
   }
 
   async getAll(req, res) {
-    const { categoryId, sortType, sortOrder } = req.query;
+    const { categoryId, sortBy, sortOrder } = req.query;
     let products;
     if (categoryId) {
-      products = await Product.findAll({ where: { categoryId } });
+      products = await Product.findAll({
+        where: { categoryId },
+        order: [
+          [ sortBy, sortOrder]
+        ]
+      });
     } else {
       products = await Product.findAll();
     }
