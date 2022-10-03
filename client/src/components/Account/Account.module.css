@@ -20,5 +20,9 @@
   justify-content: center;
   align-items: center;
 }
+.root__body {
+  display: flex;
+  justify-content: space-between;
+}
 
 /*# sourceMappingURL=Account.module.css.map */

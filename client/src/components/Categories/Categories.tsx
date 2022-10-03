@@ -9,10 +9,11 @@ import cat6Img from "../../assets/img/6.png";
 import { setCategoryNumber, selectFilter } from "../../redux/features/filterSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchCategories } from "../../redux/features/categoriesSlice";
+import CategoriesSkeleton from "./CategoriesSkeleton";
 
 const Categories: React.FC = React.memo(() => {
   const dispatch = useAppDispatch();
-  const { categories } = useAppSelector(state => state.category);
+  const { categories, categoriesStatus } = useAppSelector(state => state.category);
   const { categoryNumber } = useAppSelector(selectFilter);
 
   React.useEffect(() => {
@@ -43,16 +44,31 @@ const Categories: React.FC = React.memo(() => {
   return (
     <nav className="categories">
       <ul>
-        {categories.map((category, index) => (
-          <li
-            key={category.id}
-            onClick={() => handleClickCategory(category.id)}
-            className={categoryNumber === category.id ? "categories-item--active" : ""}
-          >
-            <img width="42" height="42" src={categoryImg(index)} alt="category" />
-            <span>{category.name}</span>
-          </li>
-        ))}
+        {
+          categoriesStatus === 'pending' || categoriesStatus === 'rejected'
+            ? [...new Array(6)].map((_, index) => (
+              <CategoriesSkeleton key={index}/>
+            ))
+            : categories.map((category, index) => (<li
+              key={category.id}
+              onClick={() => handleClickCategory(category.id)}
+              className={categoryNumber === category.id ? "categories-item--active" : ""}
+            >
+              <img width="42" height="42" src={categoryImg(index)} alt="category" />
+              <span>{category.name}</span>
+            </li>))
+        }
+
+        {/*{*/}
+        {/*  categories.map((category, index) => (<li*/}
+        {/*    key={category.id}*/}
+        {/*    onClick={() => handleClickCategory(category.id)}*/}
+        {/*    className={categoryNumber === category.id ? "categories-item--active" : ""}*/}
+        {/*  >*/}
+        {/*    <img width="42" height="42" src={categoryImg(index)} alt="category" />*/}
+        {/*    <span>{category.name}</span>*/}
+        {/*  </li>))*/}
+        {/*}*/}
       </ul>
     </nav>
   );

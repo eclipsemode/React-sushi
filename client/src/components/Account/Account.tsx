@@ -33,6 +33,9 @@ const Account: React.FC = () => {
           <p>/</p>
           <p className={styles.root__link2}>{ userInfo?.name + ' ' + userInfo?.surname }</p>
         </div>
+      <div className={styles.root__body}>
+
+      </div>
     </div>
   );
 };

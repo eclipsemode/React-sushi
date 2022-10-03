@@ -19,18 +19,18 @@ export interface IProducts {
   amount: number;
 }
 
-type ProductsStateType = {
+interface IProductsState {
   products: IProducts[];
   productsStatus: ProductsStatus;
 };
 
-type FetchParamsType = {
+interface IFetchParams {
   categoryNumber: number;
   sortType: string;
   sortOrder: string;
 };
 
-export const fetchProducts = createAsyncThunk<IProducts[], FetchParamsType>(
+export const fetchProducts = createAsyncThunk<IProducts[], IFetchParams>(
   "products/fetchProducts",
   async ({ ...params }) => {
     const { categoryNumber, sortType, sortOrder } = await params;
@@ -39,7 +39,7 @@ export const fetchProducts = createAsyncThunk<IProducts[], FetchParamsType>(
   }
 );
 
-const initialState: ProductsStateType = {
+const initialState: IProductsState = {
   products: [],
   productsStatus: ProductsStatus.PENDING
 };

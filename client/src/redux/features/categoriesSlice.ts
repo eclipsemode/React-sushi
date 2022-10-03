@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { $host } from "../../http";
 
 export const fetchCategories = createAsyncThunk<ICategoriesState, void, { rejectValue: string }>(
@@ -13,12 +13,16 @@ export const fetchCategories = createAsyncThunk<ICategoriesState, void, { reject
   }
 );
 
+type CategoriesStatusType = 'fulfilled' | 'pending' | 'rejected';
+
 export interface ICategoriesState {
   categories: { id: number, name: string }[];
+  categoriesStatus: CategoriesStatusType
 }
 
 const initialState: ICategoriesState = {
-  categories: []
+  categories: [],
+  categoriesStatus: 'pending'
 };
 
 export const categoriesSlice = createSlice({
@@ -27,8 +31,15 @@ export const categoriesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCategories.fulfilled, (state, action: PayloadAction<any>) => {
-        state.categories = action.payload;
+      .addCase(fetchCategories.fulfilled, (state, action) => {
+        state.categories = action.payload as any;
+        state.categoriesStatus = 'fulfilled';
+      })
+      .addCase(fetchCategories.pending, (state) => {
+        state.categoriesStatus = 'pending';
+      })
+      .addCase(fetchCategories.rejected, (state) => {
+        state.categoriesStatus = 'rejected';
       });
   }
 });
