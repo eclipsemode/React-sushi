@@ -8,4 +8,17 @@
   height: 44px;
   fill: $main-color;
   cursor: pointer;
+  background: white;
+  border-radius: 6px;
+  animation: .5s infinite alternate arrow;
+}
+
+@keyframes arrow {
+  from {
+    bottom: 7rem;
+  }
+
+  to {
+    bottom: 7.3rem;
+  }
 }
