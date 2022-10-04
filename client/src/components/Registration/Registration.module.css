@@ -18,6 +18,14 @@
   border-radius: 6px;
   width: 100%;
 }
+.root__input_required {
+  appearance: none;
+  background: #fff;
+  border: 1px solid #f6f6f6;
+  padding: 0.8rem;
+  border-radius: 6px;
+  width: 100%;
+}
 .root h1 {
   text-align: center;
   color: #292929;
@@ -27,6 +35,14 @@
   color: red;
   font-size: 12px;
   margin-bottom: -0.5rem;
+}
+.root__topInfo {
+  font-size: 14px;
+}
+.root__topInfo > svg {
+  width: 9px;
+  height: 9px;
+  color: red;
 }
 .root__address {
   display: flex;
@@ -54,6 +70,17 @@
 }
 .root p span:hover {
   color: darkslateblue;
+}
+.root__requiredBlock {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+.root__requiredBlock svg {
+  margin-right: 1rem;
+  width: 9px;
+  height: 9px;
+  color: red;
 }
 
 /*# sourceMappingURL=Registration.module.css.map */

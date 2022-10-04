@@ -6,6 +6,7 @@ import { fetchRegistration } from "../../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
 import { serverError, ValidationError } from "../../error";
 import InputMask from 'react-input-mask';
+import { BsAsterisk } from "react-icons/bs";
 
 type RegistrationProps = {
   setAuth: (value: boolean) => void;
@@ -143,29 +144,45 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
     <div className={styles.root}>
       <form className={styles.root__container} name="reg_form">
         <h1>Регистрация</h1>
+        <p className={styles.root__topInfo}><BsAsterisk/> - Обязательные поля.</p>
         {(nameError && formDirty) && <span className={styles.root__error}>{nameError}</span>}
-        <input className={styles.root__input} placeholder="Имя" name="name" value={name}
+        <div className={styles.root__requiredBlock}>
+        <input className={styles.root__input_required} placeholder="Имя" name="name" value={name}
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleName(e.currentTarget.value)} type="text"
                required={true} />
+          <BsAsterisk/>
+        </div>
         <input className={styles.root__input} placeholder="Фамилия" name="surname" value={surname}
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSurname(e.currentTarget.value)} type="text" />
         {(emailError && formDirty) && <span className={styles.root__error}>{emailError}</span>}
+        <div className={styles.root__requiredBlock}>
         <input className={styles.root__input} placeholder="Email" name="email" value={email} type="email"
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmail(e.currentTarget.value)}
                required={true} />
+          <BsAsterisk/>
+        </div>
         {(passwordError && formDirty) && <span className={styles.root__error}>{passwordError}</span>}
+        <div className={styles.root__requiredBlock}>
         <input className={styles.root__input} placeholder="Пароль" name="password" value={password} autoComplete="on"
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePassword(e.currentTarget.value)}
                type="password"
                required={true} />
+          <BsAsterisk/>
+        </div>
         {(passwordSecError && formDirty) && <span className={styles.root__error}>{passwordSecError}</span>}
+        <div className={styles.root__requiredBlock}>
         <input className={styles.root__input} placeholder="Повторите пароль" type="password" name="passwordSec"
                required={true} autoComplete="on"
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordSec(e.currentTarget.value)} />
+          <BsAsterisk/>
+    </div>
         {(telError && formDirty) && <span className={styles.root__error}>{telError}</span>}
+        <div className={styles.root__requiredBlock}>
         <InputMask className={styles.root__input} placeholder="+7 (xxx) xxx-xx-xx" name="tel" value={tel}
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleTel(e.currentTarget.value)} type="tel"
                required={true} mask="+7 (999) 999-99-99" maskChar='' />
+          <BsAsterisk/>
+        </div>
         <input className={styles.root__input} placeholder="Улица" name="street" value={street}
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStreet(e.currentTarget.value)} type="text" />
         <div className={styles.root__address}>

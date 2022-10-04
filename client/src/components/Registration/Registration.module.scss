@@ -3,6 +3,16 @@
 .root {
   @include Authorisation;
 
+  &__topInfo {
+    font-size: 14px;
+
+   & > svg {
+     width: 9px;
+     height: 9px;
+     color: red;
+    }
+  }
+
   &__address {
     display: flex;
     flex-wrap: wrap;
@@ -34,6 +44,19 @@
       &:hover {
         color: darkslateblue;
       }
+    }
+  }
+
+  &__requiredBlock {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+
+    & svg {
+      margin-right: 1rem;
+      width: 9px;
+      height: 9px;
+      color: red;
     }
   }
 }

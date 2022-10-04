@@ -18,6 +18,14 @@
   border-radius: 6px;
   width: 100%;
 }
+.root__input_required {
+  appearance: none;
+  background: #fff;
+  border: 1px solid #f6f6f6;
+  padding: 0.8rem;
+  border-radius: 6px;
+  width: 100%;
+}
 .root h1 {
   text-align: center;
   color: #292929;
