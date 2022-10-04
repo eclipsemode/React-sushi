@@ -5,7 +5,7 @@ const { User, Basket} = require('../models/models');
 
 class UserController {
   async registration(req, res, next) {
-    const  { email, password, role, name, surname, tel, street, house, floor, entrance, room } = req.body;
+    const  { email, password, role, name, surname, dateOfBirth, tel, street, house, floor, entrance, room } = req.body;
 
     if (!email || !password) {
       return next(ApiError.badRequest('Некорректный email или пароль.'))
@@ -13,6 +13,10 @@ class UserController {
 
     if (!name) {
       return next(ApiError.badRequest('Введите имя.'))
+    }
+
+    if (!!dateOfBirth.match(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/)) {
+      return next(ApiError.badRequest('Неверный формат даты.'))
     }
 
     if (!tel) {
@@ -26,7 +30,7 @@ class UserController {
     }
 
     const hashPassword = await bcrypt.hash(password, 5);
-    const user = await User.create({email, password: hashPassword, role, name, surname, tel, street, house, floor, entrance, room});
+    const user = await User.create({email, password: hashPassword, role, name, surname, dateOfBirth, tel, street, house, floor, entrance, room});
     const basket = await Basket.create({userId: user.id});
     const token = jwt.sign(
       {id: user.id, email: user.email, role: user.role},

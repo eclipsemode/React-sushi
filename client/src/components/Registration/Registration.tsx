@@ -18,7 +18,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
   const { error } = useAppSelector(state => state.user);
   const [name, setName] = React.useState<string>("");
   const [surname, setSurname] = React.useState<string>("");
-  const [date, setDate] = React.useState<string>('');
+  const [dateOfBirth, setDateOfBirth] = React.useState<string>('');
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [passwordSec, setPasswordSec] = React.useState<string>("");
@@ -34,6 +34,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
   const [passwordError, setPasswordError] = React.useState<string>("Пароль не может быть пустым.");
   const [passwordSecError, setPasswordSecError] = React.useState<string>("");
   const [telError, setTelError] = React.useState<string>("Введите номер телефона.");
+  const [dateOfBirthError, setDateOfBirthError ] = React.useState<string>('');
 
   const [formDirty, setFormDirty] = React.useState<boolean>(false);
 
@@ -54,10 +55,15 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
       throw new ValidationError("Необходимо заполнить все поля.");
     }
 
+    // if (!dateOfBirth.match(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/)) {
+    //   setDateOfBirthError('Дата рождения имеет недопустимые значения.');
+    // }
+
     try {
       const { payload } = await dispatch(fetchRegistration({
         name,
         surname,
+        dateOfBirth,
         email,
         password,
         tel,
@@ -81,7 +87,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
     if (!value) {
       setNameError("Имя не может быть пустым.");
     } else if (!value.match(re)) {
-      setNameError("Имя не может содержать цифры и специальные симовлы.");
+      setNameError("Имя не может содержать цифры и специальные символы.");
     } else {
       setNameError("");
     }
@@ -141,6 +147,16 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
     }
   };
 
+  const handleDateOfBirth = (value: string) => {
+    setDateOfBirth(value);
+    if (!value.match(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/)) {
+      setDateOfBirthError('');
+    } else {
+      setDateOfBirthError('');
+    }
+
+  }
+
   return (
     <div className={styles.root}>
       <form className={styles.root__container} name="reg_form">
@@ -155,8 +171,9 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
         </div>
         <input className={styles.root__input} placeholder="Фамилия" name="surname" value={surname}
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSurname(e.currentTarget.value)} type="text" />
-        <InputMask className={styles.root__input} placeholder="Дата рождения" name="date" value={date}
-                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDate(e.currentTarget.value)} type="text"
+        {(dateOfBirthError) && <span className={styles.root__error}>{dateOfBirthError}</span>}
+        <InputMask className={styles.root__input} placeholder="Дата рождения" name="date" value={dateOfBirth}
+                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleDateOfBirth(e.currentTarget.value)} type="text"
                    mask="99/99/9999" />
         {(emailError && formDirty) && <span className={styles.root__error}>{emailError}</span>}
         <div className={styles.root__requiredBlock}>

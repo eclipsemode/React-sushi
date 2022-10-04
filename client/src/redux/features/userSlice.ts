@@ -5,6 +5,7 @@ import jwtDecode from "jwt-decode";
 export interface IRegistrationProps {
   id?: number
   email: string,
+  dateOfBirth: string,
   password: string,
   name: string,
   surname: string,
@@ -35,13 +36,14 @@ export interface IUserState {
 
 const fetchRegistration = createAsyncThunk<IRegistrationProps, IRegistrationProps, { rejectValue: string }>(
   "user/fetchRegistration",
-  async ({ email, password, name, surname, tel, street, house, floor, entrance, room }, { rejectWithValue }) => {
+  async ({ email, password, name, surname, dateOfBirth, tel, street, house, floor, entrance, room }, { rejectWithValue }) => {
     try {
       const response = await $host.post("api/user/registration", {
         email,
         password,
         name,
         surname,
+        dateOfBirth,
         tel,
         street,
         house,
