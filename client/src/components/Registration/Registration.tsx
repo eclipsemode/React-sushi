@@ -18,6 +18,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
   const { error } = useAppSelector(state => state.user);
   const [name, setName] = React.useState<string>("");
   const [surname, setSurname] = React.useState<string>("");
+  const [date, setDate] = React.useState<string>('');
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [passwordSec, setPasswordSec] = React.useState<string>("");
@@ -154,6 +155,9 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
         </div>
         <input className={styles.root__input} placeholder="Фамилия" name="surname" value={surname}
                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSurname(e.currentTarget.value)} type="text" />
+        <InputMask className={styles.root__input} placeholder="Дата рождения" name="date" value={date}
+                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDate(e.currentTarget.value)} type="text"
+                   mask="99/99/9999" />
         {(emailError && formDirty) && <span className={styles.root__error}>{emailError}</span>}
         <div className={styles.root__requiredBlock}>
         <input className={styles.root__input} placeholder="Email" name="email" value={email} type="email"
