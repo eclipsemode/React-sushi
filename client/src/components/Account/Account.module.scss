@@ -1,6 +1,9 @@
 @import '../../assets/styles/variables';
 
 .root {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
   &__head {
     display: flex;
     column-gap: 0.5rem;
@@ -32,5 +35,60 @@
   &__body {
     display: flex;
     justify-content: space-between;
+
+    & aside {
+      min-height: 500px;
+      height: 100%;
+      background: #f5f5f5;
+      border-right: 3px solid rgba(31,32,65,.1);
+      padding: 8px 0;
+    }
+
+    & aside li {
+      display: flex;
+      align-items: center;
+      padding: 6px 16px;
+      cursor: pointer;
+      font-size: 20px;
+      column-gap: 0.5rem;
+    }
+
+    & aside li:hover:not(.root__selected) {
+      background: $secondary-color--0_5;
+      position: relative;
+      &::after {
+        content: '';
+        position: absolute;
+        right: -3px;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background: #d8a802;
+      }
+    }
+
+    & aside li svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    & aside .root__selected {
+      background: $secondary-color;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: -3px;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background: #d8a802;
+      }
+    }
+
+    & section {
+      flex: 2 auto;
+    }
   }
 }
