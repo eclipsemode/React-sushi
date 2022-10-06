@@ -1,7 +1,7 @@
 const { Product } = require("../models/models");
 const ApiError = require("../error/ApiError");
-const uuid = require('uuid');
-const path = require('path');
+const uuid = require("uuid");
+const path = require("path");
 
 class ProductController {
   async create(req, res, next) {
@@ -10,11 +10,11 @@ class ProductController {
       const { image } = req.files;
 
       if (+rating > 10 || rating < 1) {
-        next(ApiError.badRequest('Неверные значения рейтинга.'))
-        return
+        next(ApiError.badRequest("Неверные значения рейтинга."));
+        return;
       }
-      let fileName = uuid.v4() + '.jpg';
-      image.mv(path.resolve(__dirname, '..', 'static', fileName));
+      let fileName = uuid.v4() + ".jpg";
+      image.mv(path.resolve(__dirname, "..", "static", fileName));
       const product = await Product.create({ name, price, description, rating, categoryId, image: fileName });
       return res.json(product);
     } catch (error) {
@@ -27,8 +27,8 @@ class ProductController {
       where: {
         id: req.params.id
       }
-    })
-    return res.status(200).json({message: 'Deleted successfully'});
+    });
+    return res.status(200).json({ message: "Deleted successfully" });
   }
 
   async getAll(req, res, next) {
@@ -36,17 +36,17 @@ class ProductController {
       const { categoryId, sortBy, sortOrder } = req.query;
       let products;
       if (categoryId) {
-        if (!sortBy || !sortOrder) next(ApiError.badRequest('Не указана сортировка.'));
+        if (!sortBy || !sortOrder) next(ApiError.badRequest("Не указана сортировка."));
         products = await Product.findAll({
           where: { categoryId },
           order: [
-            [ sortBy, sortOrder]
+            [sortBy, sortOrder]
           ]
         });
       } else {
         products = await Product.findAll();
       }
-      return res.json(products);
+      return res.json(sortBy === 'rating' ? products.reverse() : products);
     } catch (e) {
       next(ApiError.badRequest(e.message));
     }
