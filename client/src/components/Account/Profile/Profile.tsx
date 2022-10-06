@@ -9,13 +9,19 @@ const Profile: React.FC = () => {
   React.useEffect(() => {
     (async function getUsers() {
       const { payload } = await dispatch(fetchUserInfo());
-      console.log(payload)
+      setUser(payload as IRegistrationProps)
     })()
   }, [user, setUser, dispatch])
 
   return (
     <section>
-  Hello
+      <p>Имя: { user?.name }</p>
+      <p>Фамилия: { user?.surname }</p>
+      <p>Дата рождения: { user?.dateOfBirth }</p>
+      <p>Email: { user?.email }</p>
+      <p>Пароль: *******</p>
+      <p>Телефон: { user?.tel }</p>
+      <p>Адресс: { user?.street + ' ' + user?.house }, подьезд { user?.entrance }, этаж { user?.floor }, кв. { user?.room }</p>
     </section>
   );
 };
