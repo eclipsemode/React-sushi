@@ -32,6 +32,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 95%;
+  overflow-y: auto;
   transition: width ease-in-out 0.3s;
 
   &__resize {

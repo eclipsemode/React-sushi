@@ -8,6 +8,11 @@ class ProductController {
     try {
       const { name, price, description, categoryId, rating } = req.body;
       const { image } = req.files;
+
+      if (+rating > 10 || rating < 1) {
+        next(ApiError.badRequest('Неверные значения рейтинга.'))
+        return
+      }
       let fileName = uuid.v4() + '.jpg';
       image.mv(path.resolve(__dirname, '..', 'static', fileName));
       const product = await Product.create({ name, price, description, rating, categoryId, image: fileName });
