@@ -73,6 +73,31 @@ class UserController {
     const user = await User.findOne({ where: { id } })
     return res.json({user})
   }
+
+  async patchUserData(req, res, next) {
+    try {
+      const { id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room } = req.body;
+      let user = await User.findOne({ where: { id } });
+      const userData = {
+        id: user.id,
+        password: user.password,
+        email: email || user.email,
+        name: name || user.name,
+        surname: surname || user.surname,
+        dateOfBirth: dateOfBirth || user.dateOfBirth,
+        tel: tel || user.tel,
+        street: street || user.street,
+        house: house || user.house,
+        floor: floor || user.floor,
+        entrance: entrance || user.entrance,
+        room: room || user.room
+      }
+      const newUser = await User.update(userData, { where: { id } })
+       return res.json('Информаиця обновлена.')
+    } catch (e) {
+      return next(ApiError.badRequest(e.message))
+    }
+  }
 }
 
 module.exports = new UserController();

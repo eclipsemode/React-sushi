@@ -11,7 +11,7 @@ const Profile: React.FC = () => {
       const { payload } = await dispatch(fetchUserInfo());
       setUser(payload as IRegistrationProps)
     })()
-  }, [user, setUser, dispatch])
+  }, [dispatch])
 
   return (
     <section>
