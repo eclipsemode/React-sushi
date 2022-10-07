@@ -19,7 +19,6 @@ const Profile: React.FC = () => {
       <p>Фамилия: { user?.surname }</p>
       <p>Дата рождения: { user?.dateOfBirth }</p>
       <p>Email: { user?.email }</p>
-      <p>Пароль: *******</p>
       <p>Телефон: { user?.tel }</p>
       <p>Адресс: { user?.street + ' ' + user?.house }, подьезд { user?.entrance }, этаж { user?.floor }, кв. { user?.room }</p>
     </section>
