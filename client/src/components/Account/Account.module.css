@@ -32,7 +32,7 @@
 }
 .root__body aside {
   min-height: 500px;
-  height: 100%;
+  height: auto;
   background: #f5f5f5;
   border-right: 3px solid rgba(31, 32, 65, 0.1);
   padding: 8px 0;

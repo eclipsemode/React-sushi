@@ -97,6 +97,13 @@ const fetchUserInfo = createAsyncThunk<IRegistrationProps, void, { state: { user
   }
 )
 
+// const fetchPatchUserInfo = createAsyncThunk<any, Omit<IRegistrationProps, 'password'>>(
+//   'user/fetchPatchUserInfo',
+//   async ({email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room}, {getState}) => {
+//       await $host.patch('api/user/patch', {id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room});
+//   }
+// )
+
 function isError(action: AnyAction) {
   return action.type.endsWith('rejected');
 }

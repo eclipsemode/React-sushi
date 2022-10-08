@@ -29,6 +29,7 @@
 }
 .root__link {
   text-transform: uppercase;
+  cursor: pointer;
 }
 .root__link a {
   font-size: 16px;
