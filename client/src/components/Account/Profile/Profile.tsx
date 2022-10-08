@@ -7,6 +7,12 @@ const Profile: React.FC = () => {
   const [user, setUser] = React.useState<IRegistrationProps | null>(null);
 
   React.useEffect(() => {
+    window.scrollTo({
+      top: 0
+    })
+  });
+
+  React.useEffect(() => {
     (async function getUsers() {
       const { payload } = await dispatch(fetchUserInfo());
       setUser(payload as IRegistrationProps)

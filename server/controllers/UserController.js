@@ -77,7 +77,7 @@ class UserController {
   async patchUserData(req, res, next) {
     try {
       const { id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room } = req.body;
-      let user = await User.findOne({ where: { id } });
+      const user = await User.findOne({ where: { id } });
       const userData = {
         id: user.id,
         password: user.password,
@@ -93,7 +93,8 @@ class UserController {
         room: room || user.room
       }
       const newUser = await User.update(userData, { where: { id } })
-       return res.json('Информаиця обновлена.')
+
+       return res.json( 'Информация успешно обновлена.' );
     } catch (e) {
       return next(ApiError.badRequest(e.message))
     }

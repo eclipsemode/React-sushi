@@ -15,7 +15,7 @@ import { ModalAccount } from "../index";
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const { totalPrice, totalAmount } = useAppSelector(selectCart);
-  const { isAuth } = useAppSelector(state => state.user);
+  const { isAuth, user } = useAppSelector(state => state.user);
   const [userInfo, setUserInfo] = React.useState<{ name: string, surname: string }>();
   const [accModal, setAccModal] = React.useState<boolean>(false);
   const headerRef = React.useRef<HTMLDivElement>(null);
@@ -39,7 +39,7 @@ const Header: React.FC = () => {
     if (isAuth) {
       getUserInfo().then();
     }
-  }, [isAuth, dispatch]);
+  }, [isAuth, user, dispatch]);
 
   React.useEffect(() => {
     isHandleClassName();

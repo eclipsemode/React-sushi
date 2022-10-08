@@ -1,39 +1,48 @@
 import React from "react";
-import { fetchUserInfo, IRegistrationProps } from "../../../redux/features/userSlice";
+import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "../../../redux/features/userSlice";
 import { useAppDispatch } from "../../../redux/hooks";
 import TextInput from "../../UI/TextInput/TextInput";
 import styles from "./Settings.module.css";
 
 const Settings: React.FC = () => {
-  const [user, setUser] = React.useState<IRegistrationProps | null>(null);
+  const [user, setUser] = React.useState<IRegistrationProps>();
   const dispatch = useAppDispatch();
-  const [name, setName] = React.useState<string | undefined>("");
-  const [surname, setSurname] = React.useState<string | undefined>("");
-  const [email, setEmail] = React.useState<string | undefined>("");
-  const [dateOfBirth, setDateOfBirth] = React.useState<string | undefined>("");
-  const [tel, setTel] = React.useState<string | undefined>("");
-  const [street, setStreet] = React.useState<string | undefined>("");
-  const [house, setHouse] = React.useState<number | string | undefined>(0);
-  const [entrance, setEntrance] = React.useState<number | string | undefined>(0);
-  const [floor, setFloor] = React.useState<number | string | undefined>(0);
-  const [room, setRoom] = React.useState<number | string | undefined>(0);
+  const [name, setName] = React.useState<string>("");
+  const [surname, setSurname] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
+  const [dateOfBirth, setDateOfBirth] = React.useState<string>("");
+  const [tel, setTel] = React.useState<string>("");
+  const [street, setStreet] = React.useState<string>("");
+  const [house, setHouse] = React.useState<number | string>(0);
+  const [entrance, setEntrance] = React.useState<number | string>(0);
+  const [floor, setFloor] = React.useState<number | string>(0);
+  const [room, setRoom] = React.useState<number | string>(0);
 
   const handleResetButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     window.scrollTo({
       top: 0
     });
-    setName(user?.name);
-    setSurname(user?.surname);
-    setEmail(user?.email);
-    setDateOfBirth(user?.dateOfBirth);
-    setTel(user?.tel);
-    setStreet(user?.street);
-    setHouse(user?.house);
-    setEntrance(user?.entrance);
-    setFloor(user?.floor);
-    setRoom(user?.room);
-  }
+    if (user) {
+      setName(user.name);
+      setSurname(user.surname);
+      setEmail(user.email);
+      setDateOfBirth(user.dateOfBirth);
+      setTel(user.tel);
+      setStreet(user.street);
+      setHouse(user.house);
+      setEntrance(user.entrance);
+      setFloor(user.floor);
+      setRoom(user.room);
+    }
+  };
+
+  const handleSubmitButton = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    window.confirm('Подтвердить изменение информации?');
+    await dispatch(fetchPatchUserInfo({email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room}));
+    window.location.reload();
+  };
 
   React.useEffect(() => {
     (async function getUserInfo() {
@@ -105,8 +114,12 @@ const Settings: React.FC = () => {
           </div>
         </div>
         <div className={styles.root__buttons}>
-          <button className={styles.root__btn_reset} onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleResetButton(e)}><span>Вернуть</span></button>
-          <button className={styles.root__btn_submit}><span>Отправить</span></button>
+          <button className={styles.root__btn_reset}
+                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleResetButton(e)}><span>Вернуть</span>
+          </button>
+          <button className={styles.root__btn_submit}
+                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmitButton(e)}><span>Отправить</span>
+          </button>
         </div>
       </form>
     </section>
