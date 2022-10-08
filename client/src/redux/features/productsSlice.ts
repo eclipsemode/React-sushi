@@ -19,16 +19,16 @@ export interface IProducts {
   amount: number;
 }
 
-interface IProductsState {
+export interface IProductsState {
   products: IProducts[];
   productsStatus: ProductsStatus;
-};
+}
 
 interface IFetchParams {
   categoryNumber: number;
   sortType: string;
   sortOrder: string;
-};
+}
 
 export const fetchProducts = createAsyncThunk<IProducts[], IFetchParams>(
   "products/fetchProducts",
