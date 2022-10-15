@@ -1,25 +1,32 @@
-const { Category } = require('../models/models');
 const ApiError = require('../error/ApiError');
+const CategoryService = require('../service/CategoryService');
 
 class CategoryController {
-  async create(req, res) {
-    const { name } = req.body;
-    const category = await Category.create({name});
-    return res.json(category);
+  async create(req, res, next) {
+    try {
+      const category = await CategoryService.create(req.body)
+      return res.json(category);
+    } catch (e) {
+      return next(ApiError.badRequest(e.message));
+    }
   }
 
-  async getAll(req, res) {
-    const categories = await Category.findAll();
-    return res.json(categories);
+  async getAll(req, res, next) {
+    try {
+      const categories = await CategoryService.getAll();
+      return res.json(categories);
+    } catch (e) {
+      return next(ApiError.badRequest(e.message));
+    }
   }
 
-  async delete(req, res) {
-    await Category.destroy({
-      where: {
-        id: req.params.id
-      }
-    })
-    return res.status(200).json({message: 'Deleted successfully'});
+  async delete(req, res, next) {
+    try {
+      const result = await CategoryService.delete(req.params.id)
+      return res.status(200).json( result );
+    } catch (e) {
+      return next(ApiError.badRequest(e.message));
+    }
   }
 }
 

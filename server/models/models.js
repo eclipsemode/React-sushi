@@ -14,8 +14,15 @@ const User = sequelize.define("user", {
   house: { type: DataTypes.STRING },
   floor: { type: DataTypes.STRING },
   entrance: { type: DataTypes.STRING },
-  room: { type: DataTypes.STRING }
+  room: { type: DataTypes.STRING },
+  isActivated: {type: DataTypes.BOOLEAN, default: false},
+  activationLink: {type: DataTypes.STRING},
 });
+
+const Token = sequelize.define('token', {
+  userRef: {type: DataTypes.INTEGER},
+  refreshToken: {type: DataTypes.STRING, required: true},
+})
 
 const Basket = sequelize.define("basket", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
@@ -43,6 +50,9 @@ const Category = sequelize.define("category", {
 User.hasOne(Basket);
 Basket.belongsTo(User);
 
+Token.hasOne(User);
+User.hasOne(Token);
+
 Basket.hasMany(BasketProduct);
 BasketProduct.belongsTo(Basket);
 
@@ -57,5 +67,6 @@ module.exports = {
   Basket,
   BasketProduct,
   Product,
-  Category
+  Category,
+  Token
 };
