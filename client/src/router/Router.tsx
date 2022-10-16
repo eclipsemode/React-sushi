@@ -3,12 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
 import { PulseLoader } from "react-spinners";
-import ActivatedPage from "../pages/ActivatedPage";
 
 const Cart = React.lazy(() => import(/* webpackChunkName: "Cart" */ "../pages/Cart"));
 const NotFound = React.lazy(() => import(/* webpackChunkName: "NotFound" */ "../pages/NotFound"));
 const Personal = React.lazy(() => import(/* webpackChunkName: "Personal" */ "../pages/Personal"));
 const LoginPage = React.lazy(() => import(/* webpackChunkName: "LoginPage" */ "../pages/LoginPage"));
+const ActivatedPage = React.lazy(() => import(/* webpackChunkName: "ActivatedPage" */ '../pages/ActivatedPage'));
 
 const Router: React.FC = () => {
   const loader = (
