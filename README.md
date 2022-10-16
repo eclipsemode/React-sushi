@@ -3,10 +3,12 @@
 SPA application with client-server architecture.
 
 1. Authorisation / Registration. JWT. **`Done.`**
-2. User's Personal account with previous orders and personal data. **`In Progress...`**
-3. Administrator's panel (create / delete / update products, users, categories). **`In Progress...`**
-4. Page with Product categories. **`Done.`**
-5. Product sorting capability. **`Done.`**
+2. REST Api with Postgresql (CRUD) **`Done.`**
+3. Advanced authorisation, access tokens, refresh tokens etc... **`Done.`**
+4. User's Personal account with previous orders and personal data. **`In Progress...`**
+5. Administrator's panel (create / delete / update products, users, categories). **`In Progress...`**
+6. Page with Product categories. **`Done.`**
+7. Product sorting capability. **`Done.`**
 
 ## Deploy
 
@@ -47,10 +49,13 @@ https://eclipsemode.github.io/React-sushi/  **`Without server`**
 
 ## Packages Backend**
 
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-fileupload": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.21.4",
@@ -58,7 +63,7 @@ https://eclipsemode.github.io/React-sushi/  **`Without server`**
 
 ## Admin data
 
-<pre>login: admin
+<pre>login: admin@mail.ru
 password: 12345678</pre>
 
 ## UML Project
