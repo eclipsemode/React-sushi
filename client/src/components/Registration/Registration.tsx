@@ -149,6 +149,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
 
   const handleDateOfBirth = (value: string) => {
     setDateOfBirth(value);
+    // eslint-disable-next-line
     if (!value.match(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/)) {
       setDateOfBirthError('');
     } else {
