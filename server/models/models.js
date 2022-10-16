@@ -51,8 +51,8 @@ const Category = sequelize.define("category", {
 User.hasOne(Basket);
 Basket.belongsTo(User);
 
-Token.hasOne(User);
 User.hasOne(Token);
+Token.belongsTo(User);
 
 Basket.hasMany(BasketProduct);
 BasketProduct.belongsTo(Basket);
