@@ -11,3 +11,4 @@ export { default as Sort } from './Sort/Sort';
 export { default as Login } from './Login/Login';
 export { default as Registration } from './Registration/Registration';
 export { default as ModalAccount } from './ModalAccount/ModalAccaunt';
+export { default as ActivatedPageBlock } from './ActivatedPageBlock/ActivatedPageBlock';
