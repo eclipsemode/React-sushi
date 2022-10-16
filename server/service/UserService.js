@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const TokenService = require('./TokenService');
 const UserDto = require('../dtos/UserDto');
+const uuid = require('uuid');
 
 class UserService {
   async registration({ email, password, role, name, surname, dateOfBirth, tel, street, house, floor, entrance, room }, next) {
@@ -32,10 +33,12 @@ class UserService {
     }
 
     const hashPassword = await bcrypt.hash(password, 5);
-    const activationLink = uuid.v4();
+    const activationLink = await uuid.v4();
     const user = await User.create({email, password: hashPassword, role, name, surname, dateOfBirth, tel, street, house, floor, entrance, room, activationLink});
     const basket = await Basket.create({userId: user.id});
     await MailService.sendActivationMail(email, activationLink);
+
+    // const user = {email, password: hashPassword, role, name, surname, dateOfBirth, tel, street, house, floor, entrance, room, activationLink};
 
     const userDto = new UserDto(user);
     const tokens = TokenService.generateTokens({ ...userDto });
