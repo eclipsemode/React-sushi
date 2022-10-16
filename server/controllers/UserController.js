@@ -12,6 +12,14 @@ class UserController {
     }
   }
 
+  async activate(req, res, next) {
+    try {
+
+    } catch (e) {
+      return next(ApiError.badRequest(e.message));
+    }
+  }
+
   async login(req, res, next) {
     try {
       const token = await UserService.login(req.body, next);

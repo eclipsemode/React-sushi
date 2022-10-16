@@ -36,10 +36,7 @@ class UserService {
     const activationLink = await uuid.v4();
     const user = await User.create({email, password: hashPassword, role, name, surname, dateOfBirth, tel, street, house, floor, entrance, room, activationLink});
     const basket = await Basket.create({userId: user.id});
-    await MailService.sendActivationMail(email, activationLink);
-
-    // const user = {email, password: hashPassword, role, name, surname, dateOfBirth, tel, street, house, floor, entrance, room, activationLink};
-
+    await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
     const userDto = new UserDto(user);
     const tokens = TokenService.generateTokens({ ...userDto });
     await TokenService.saveToken(userDto.id, tokens.refreshToken);
