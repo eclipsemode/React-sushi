@@ -9,6 +9,6 @@ router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/auth', authMiddleware, userController.auth);
 router.post('/info', authMiddleware, userController.getUserData)
-router.patch('/patch', authMiddleware, userController.patchUserData)
+router.patch('/patch', userController.patchUserData)
 
 module.exports = router;
