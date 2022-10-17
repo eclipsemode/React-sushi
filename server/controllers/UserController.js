@@ -29,8 +29,9 @@ class UserController {
 
   async login(req, res, next) {
     try {
-      const token = await UserService.login(req.body, next);
-      return res.json({ token });
+      const user = await UserService.login(req.body, next);
+      res.cookie("refreshToken", user.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+      return res.json({ user });
     } catch (e) {
       return next(ApiError.badRequest(e.message));
     }
@@ -38,9 +39,23 @@ class UserController {
 
   async logout(req, res, next) {
     try {
-
+      const { refreshToken } = req.cookies;
+      const token = await UserService.logout(refreshToken);
+      res.clearCookie('refreshToken');
+      return res.status(200).json('Successfully logged out.');
     } catch (e) {
+      return next(ApiError.internal(e.message));
+    }
+  }
 
+  async refresh(req, res, next) {
+    try {
+      const { refreshToken } = req.cookies;
+      const userData = await UserService.refreshToken(refreshToken);
+      res.cookie("refreshToken", userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+      return res.json(userData);
+    } catch (e) {
+      return next(ApiError.badRequest(e.message));
     }
   }
 

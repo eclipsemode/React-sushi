@@ -9,7 +9,7 @@ class ApiError extends Error{
     return new ApiError(404, message, errors);
   }
 
-  static unauthorized(message, errors = []) {
+  static unauthorized(message = 'Необходимо авторизоваться.', errors = []) {
     return new ApiError(401, message, errors);
   }
 

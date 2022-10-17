@@ -4,7 +4,7 @@ const ApiError = require("../error/ApiError");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const TokenService = require('./TokenService');
-const UserDto = require('../dtos/UserDto');
+const UserDto = require('../dto/UserDto');
 const uuid = require('uuid');
 
 class UserService {
@@ -58,28 +58,47 @@ class UserService {
     const user = await User.findOne({where: {email}});
 
     if (!user) {
-      return next(ApiError.internal('Пользователь с таким email не найден.'))
+      return next(ApiError.badRequest('Пользователь с таким email не найден.'))
     }
 
     let comparePassword = bcrypt.compareSync(password, user.password);
 
     if (!comparePassword) {
-      return next(ApiError.internal('Указан неверный пароль.'))
+      return next(ApiError.badRequest('Указан неверный пароль.'))
     }
-    const token = jwt.sign(
-      {id: user.id, email: user.email, role: user.role},
-      process.env.SECRET_KEY,
-      {expiresIn: '24h'}
-    );
 
-    return token;
+    const userDto = new UserDto(user);
+    const tokens = TokenService.generateTokens({...userDto});
+
+    await TokenService.saveToken(userDto.id, tokens.refreshToken);
+    return {
+      ...tokens,
+      user: userDto
+    }
   }
 
-  async logout(req, res, next) {
-    try {
+  async logout(refreshToken) {
+    return await TokenService.removeToken(refreshToken);
+  }
 
-    } catch (e) {
+  async refreshToken(refreshToken) {
+    if (!refreshToken) {
+      throw ApiError.unauthorized();
+    }
+    const userData = TokenService.validateRefreshToken(refreshToken);
+    const tokenFromDb = await TokenService.findToken(refreshToken);
+    if (!userData || !tokenFromDb) {
+      throw ApiError.unauthorized();
+    }
 
+    const user = await User.findOne({ where: { id: userData.id } });
+    const userDto = new UserDto(user);
+    const tokens = TokenService.generateTokens({...userDto});
+
+    await TokenService.saveToken(userDto.id, tokens.refreshToken);
+    return {
+      ...tokens,
+      user: userDto
     }
   }
 
