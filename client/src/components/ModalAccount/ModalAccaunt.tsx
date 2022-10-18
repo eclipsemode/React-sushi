@@ -2,7 +2,7 @@ import React from "react";
 import styles from './ModalAccaunt.module.css'
 import { MdExitToApp, MdManageAccounts } from "react-icons/md";
 import { useAppDispatch } from "../../redux/hooks";
-import { setAuth, setUser } from "../../redux/features/userSlice";
+import { fetchLogout } from "../../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
 
 interface IModalAccountProps {
@@ -17,10 +17,8 @@ const ModalAccount: React.FC<IModalAccountProps> = ({ modalRef }) => {
     navigate('/personal')
   }
 
-  const handleExit = () => {
-    localStorage.removeItem('token');
-    dispatch(setUser({}));
-    dispatch(setAuth(false));
+  const handleExit = async () => {
+    await dispatch(fetchLogout());
     navigate('')
   }
   return (

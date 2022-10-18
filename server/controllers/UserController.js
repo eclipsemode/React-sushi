@@ -42,7 +42,7 @@ class UserController {
       const { refreshToken } = req.cookies;
       const token = await UserService.logout(refreshToken);
       res.clearCookie('refreshToken');
-      return res.status(200).json('Successfully logged out.');
+      return res.json('Successfully logged out.')
     } catch (e) {
       return next(ApiError.internal(e.message));
     }
@@ -70,8 +70,9 @@ class UserController {
 
   async getUserData(req, res, next) {
     try {
-      const user = await UserService.getUserData(req.body);
-      return res.json({ user });
+      const { refreshToken } = req.cookies;
+      const user = await UserService.getUserData(refreshToken);
+      return res.json(user);
     } catch (e) {
       return next(ApiError.badRequest(e.message));
     }

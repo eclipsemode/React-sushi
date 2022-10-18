@@ -111,8 +111,9 @@ class UserService {
     return token;
   }
 
-  async getUserData({ id }) {
-    const user = await User.findOne({ where: { id } });
+  async getUserData(token) {
+    const { userId } = await TokenService.findToken(token);
+    const user = await User.findOne({ where: { id: userId } });
     return user;
   }
 

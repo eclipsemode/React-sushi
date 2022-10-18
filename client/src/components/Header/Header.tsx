@@ -1,3 +1,4 @@
+// @ts-nocheck
 import logoImg from "../../assets/img/logo.png";
 import phoneImg from "../../assets/img/phone.png";
 import { Link, NavLink } from "react-router-dom";
@@ -30,14 +31,15 @@ const Header: React.FC = () => {
   React.useEffect(() => {
     async function getUserInfo() {
       const { payload }: { payload: IRegistrationProps } = await dispatch(fetchUserInfo()) as any;
-      setUserInfo({
-        name: payload.name,
-        surname: payload.surname
-      });
+
+        setUserInfo({
+          name: payload.name ? payload.name : 'Загрузка...',
+          surname: payload.surname ? payload.surname : ''
+        });
     }
 
     if (isAuth) {
-      getUserInfo().then();
+      getUserInfo();
     }
   }, [isAuth, user, dispatch]);
 
