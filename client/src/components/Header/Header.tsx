@@ -29,17 +29,19 @@ const Header: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    async function getUserInfo() {
-      const { payload }: { payload: IRegistrationProps } = await dispatch(fetchUserInfo()) as any;
+    const tm = setTimeout( () => {
+      (async function getUserInfo() {
+        const { payload }: { payload: IRegistrationProps } = await dispatch(fetchUserInfo()) as any;
 
         setUserInfo({
           name: payload.name ? payload.name : 'Загрузка...',
           surname: payload.surname ? payload.surname : ''
         });
-    }
+      })()
+    }, 10)
 
-    if (isAuth) {
-      getUserInfo();
+    return () => {
+      clearTimeout(tm)
     }
   }, [isAuth, user, dispatch]);
 
