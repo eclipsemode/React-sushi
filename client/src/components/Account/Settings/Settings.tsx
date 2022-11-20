@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "../../../redux/features/userSlice";
 import { useAppDispatch } from "../../../redux/hooks";
@@ -44,23 +45,23 @@ const Settings: React.FC = () => {
     window.location.reload();
   };
 
-  React.useEffect(() => {
-    (async function getUserInfo() {
-      const { payload } = await dispatch(fetchUserInfo());
-      const payloadData = payload as unknown as IRegistrationProps;
-      setUser(payload as IRegistrationProps);
-      setName(payloadData.name);
-      setSurname(payloadData.surname);
-      setEmail(payloadData.email);
-      setDateOfBirth(payloadData.dateOfBirth);
-      setTel(payloadData.tel);
-      setStreet(payloadData.street);
-      setHouse(payloadData.house);
-      setEntrance(payloadData.entrance);
-      setFloor(payloadData.floor);
-      setRoom(payloadData.room);
-    })();
-  }, [dispatch]);
+  // React.useEffect(() => {
+  //   (async function getUserInfo() {
+  //     const { payload } = await dispatch(fetchUserInfo());
+  //     const payloadData = payload as unknown as IRegistrationProps;
+  //     setUser(payload as IRegistrationProps);
+  //     setName(payloadData.name);
+  //     setSurname(payloadData.surname);
+  //     setEmail(payloadData.email);
+  //     setDateOfBirth(payloadData.dateOfBirth);
+  //     setTel(payloadData.tel);
+  //     setStreet(payloadData.street);
+  //     setHouse(payloadData.house);
+  //     setEntrance(payloadData.entrance);
+  //     setFloor(payloadData.floor);
+  //     setRoom(payloadData.room);
+  //   })();
+  // }, [dispatch]);
 
   return (
     <section className={styles.root}>

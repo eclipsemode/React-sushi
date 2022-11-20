@@ -1,4 +1,3 @@
-// @ts-nocheck
 import logoImg from "../../assets/img/logo.png";
 import phoneImg from "../../assets/img/phone.png";
 import { Link, NavLink } from "react-router-dom";
@@ -10,14 +9,20 @@ import { selectCart } from "../../redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import CartBlock from "../UI/CartBlock/CartBlock";
 import { BsPersonCircle } from "react-icons/bs";
-import { fetchUserInfo, IRegistrationProps } from "../../redux/features/userSlice";
+import { fetchUserInfo } from "../../redux/features/userSlice";
 import { ModalAccount } from "../index";
+import { PayloadAction } from "@reduxjs/toolkit";
+
+interface IUserInfo {
+  name: string,
+  surname: string
+}
 
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const { totalPrice, totalAmount } = useAppSelector(selectCart);
   const { isAuth, user } = useAppSelector(state => state.user);
-  const [userInfo, setUserInfo] = React.useState<{ name: string, surname: string }>();
+  const [userInfo, setUserInfo] = React.useState<IUserInfo>();
   const [accModal, setAccModal] = React.useState<boolean>(false);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const modalRef = React.useRef<HTMLDivElement>(null);
@@ -29,21 +34,11 @@ const Header: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    const tm = setTimeout( () => {
-      (async function getUserInfo() {
-        const { payload }: { payload: IRegistrationProps } = await dispatch(fetchUserInfo()) as any;
-
-        setUserInfo({
-          name: payload.name ? payload.name : 'Загрузка...',
-          surname: payload.surname ? payload.surname : ''
-        });
-      })()
-    }, 10)
-
-    return () => {
-      clearTimeout(tm)
+    if (isAuth && localStorage.getItem('token') && user) {
+      dispatch(fetchUserInfo())
+        .then((data: PayloadAction<any>): void => data.payload ? setUserInfo({ name: data.payload.name, surname: data.payload.surname }) : setUserInfo({ name: 'Загрузка...', surname: 'Загрузка...' }));
     }
-  }, [isAuth, user, dispatch]);
+  }, [dispatch, isAuth, user])
 
   React.useEffect(() => {
     isHandleClassName();

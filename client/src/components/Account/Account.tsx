@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import styles from "./Account.module.css";
 import { Link } from "react-router-dom";
@@ -17,13 +18,13 @@ const Account: React.FC = () => {
   const [loading, setLoading] = React.useState<boolean>(true);
   const [selected, setSelected] = React.useState<SelectedType>("profile");
 
-  React.useEffect(() => {
-    (async function getUserInfo() {
-      const { payload } = await dispatch(fetchUserInfo() as any);
-      setUserInfo(payload);
-      setLoading(false);
-    })();
-  }, [dispatch]);
+  // React.useEffect(() => {
+  //   (async function getUserInfo() {
+  //     const { payload } = await dispatch(fetchUserInfo() as any);
+  //     setUserInfo(payload);
+  //     setLoading(false);
+  //   })();
+  // }, [dispatch]);
 
   if (loading) return (
     <div className={styles.root__loading}>

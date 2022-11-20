@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { $authHost, $host } from "../../http";
 import jwtDecode from "jwt-decode";
@@ -23,15 +23,28 @@ interface ILoginProps {
   password: string
 }
 
+export interface IUserInfo {
+  activationLink: string,
+  dateOfBirth: string,
+  id: number,
+  email: string,
+  isActivated: boolean,
+  password: string,
+  name: string,
+  surname: string,
+  tel: string,
+  street: string,
+  house: string,
+  floor: string ,
+  entrance: string,
+  room: string
+}
+
 export interface IUser {
-  accessToken: string,
-  refreshToken: string,
-  user: {
     email: string,
     id: number,
     isActivated: boolean,
     role: 'USER' | 'ADMIN'
-  }
 }
 
 export interface IUserState {
@@ -112,31 +125,32 @@ const fetchAuth = createAsyncThunk<IUser, void>(
     try {
       const response = await $host.get('api/user/refresh');
       localStorage.setItem('token', response.data.accessToken);
-    } catch (e) {
+      return response.data;
+    } catch (e: any) {
       return rejectWithValue(e.response.data.message);
     }
   }
 );
 
-const fetchUserInfo = createAsyncThunk<IRegistrationProps, void >(
-  "user/fetchUserInfo",
+const fetchUserInfo = createAsyncThunk<IUserInfo, void>(
+  'user/fetchUserInfo',
   async (_, { rejectWithValue }) => {
     try {
-      const { data }: any = await $authHost.get("api/user/info");
-      return data;
-    } catch (e) {
-      return rejectWithValue(e.data.message);
+      const response =await $authHost.get('api/user/info');
+      return response.data;
+    } catch (e: any) {
+      return rejectWithValue(e.response.data.message)
     }
   }
-);
+)
 
 const fetchPatchUserInfo = createAsyncThunk<any, Omit<IRegistrationProps, "password">, { state: { user: IUserState } }>(
   "user/fetchPatchUserInfo",
   async ({ email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room }, { getState }) => {
     const { user }  = await getState();
-    if ("user" in user.user && "id" in user.user.user) {
+    if ("user" in user && "id" in user.user) {
       return await $authHost.patch("api/user/patch", {
-        id: user.user.user.id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room
+        id: user.user.id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room
       });
     }
   }

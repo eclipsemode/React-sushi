@@ -11,7 +11,7 @@ const MainLayout: React.FC = () => {
 
   React.useEffect(() => {
     if (localStorage.getItem('token')) {
-      dispatch(fetchAuth());
+      dispatch(fetchAuth())
     }
   }, [dispatch])
 

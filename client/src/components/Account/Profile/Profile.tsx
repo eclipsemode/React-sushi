@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import { useAppDispatch } from "../../../redux/hooks";
 import { fetchUserInfo, IRegistrationProps } from "../../../redux/features/userSlice";
@@ -12,12 +13,12 @@ const Profile: React.FC = () => {
     })
   });
 
-  React.useEffect(() => {
-    (async function getUsers() {
-      const { payload } = await dispatch(fetchUserInfo());
-      setUser(payload as IRegistrationProps)
-    })()
-  }, [dispatch])
+  // React.useEffect(() => {
+  //   (async function getUsers() {
+  //     const { payload } = await dispatch(fetchUserInfo());
+  //     setUser(payload as IRegistrationProps)
+  //   })()
+  // }, [dispatch])
 
   return (
     <section>
