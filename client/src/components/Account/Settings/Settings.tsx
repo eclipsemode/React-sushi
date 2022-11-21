@@ -1,13 +1,13 @@
-//@ts-nocheck
 import React from "react";
 import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "../../../redux/features/userSlice";
-import { useAppDispatch } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import TextInput from "../../UI/TextInput/TextInput";
 import styles from "./Settings.module.css";
 
 const Settings: React.FC = () => {
-  const [user, setUser] = React.useState<IRegistrationProps>();
+  const [userInfo, setUserInfo] = React.useState<IRegistrationProps>();
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector(state => state.user);
   const [name, setName] = React.useState<string>("");
   const [surname, setSurname] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
@@ -24,17 +24,17 @@ const Settings: React.FC = () => {
     window.scrollTo({
       top: 0
     });
-    if (user) {
-      setName(user.name);
-      setSurname(user.surname);
-      setEmail(user.email);
-      setDateOfBirth(user.dateOfBirth);
-      setTel(user.tel);
-      setStreet(user.street);
-      setHouse(user.house);
-      setEntrance(user.entrance);
-      setFloor(user.floor);
-      setRoom(user.room);
+    if (userInfo) {
+      setName(userInfo.name);
+      setSurname(userInfo.surname);
+      setEmail(userInfo.email);
+      setDateOfBirth(userInfo.dateOfBirth);
+      setTel(userInfo.tel);
+      setStreet(userInfo.street);
+      setHouse(userInfo.house);
+      setEntrance(userInfo.entrance);
+      setFloor(userInfo.floor);
+      setRoom(userInfo.room);
     }
   };
 
@@ -45,23 +45,25 @@ const Settings: React.FC = () => {
     window.location.reload();
   };
 
-  // React.useEffect(() => {
-  //   (async function getUserInfo() {
-  //     const { payload } = await dispatch(fetchUserInfo());
-  //     const payloadData = payload as unknown as IRegistrationProps;
-  //     setUser(payload as IRegistrationProps);
-  //     setName(payloadData.name);
-  //     setSurname(payloadData.surname);
-  //     setEmail(payloadData.email);
-  //     setDateOfBirth(payloadData.dateOfBirth);
-  //     setTel(payloadData.tel);
-  //     setStreet(payloadData.street);
-  //     setHouse(payloadData.house);
-  //     setEntrance(payloadData.entrance);
-  //     setFloor(payloadData.floor);
-  //     setRoom(payloadData.room);
-  //   })();
-  // }, [dispatch]);
+  React.useEffect(() => {
+    if (user) {
+      (async function getUserInfo() {
+        const { payload } = await dispatch(fetchUserInfo());
+        const payloadData = payload as unknown as IRegistrationProps;
+        setUserInfo(payload as IRegistrationProps);
+        setName(payloadData.name);
+        setSurname(payloadData.surname);
+        setEmail(payloadData.email);
+        setDateOfBirth(payloadData.dateOfBirth);
+        setTel(payloadData.tel);
+        setStreet(payloadData.street);
+        setHouse(payloadData.house);
+        setEntrance(payloadData.entrance);
+        setFloor(payloadData.floor);
+        setRoom(payloadData.room);
+      })();
+    }
+  }, [dispatch, user]);
 
   return (
     <section className={styles.root}>

@@ -1,11 +1,11 @@
-//@ts-nocheck
 import React from "react";
-import { useAppDispatch } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { fetchUserInfo, IRegistrationProps } from "../../../redux/features/userSlice";
 
 const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [user, setUser] = React.useState<IRegistrationProps | null>(null);
+  const { user } = useAppSelector(state => state.user);
+  const [userData, setUserData] = React.useState<IRegistrationProps | null>(null);
 
   React.useEffect(() => {
     window.scrollTo({
@@ -13,21 +13,23 @@ const Profile: React.FC = () => {
     })
   });
 
-  // React.useEffect(() => {
-  //   (async function getUsers() {
-  //     const { payload } = await dispatch(fetchUserInfo());
-  //     setUser(payload as IRegistrationProps)
-  //   })()
-  // }, [dispatch])
+  React.useEffect(() => {
+    if (user) {
+      (async function getUsers() {
+        const { payload } = await dispatch(fetchUserInfo());
+        setUserData(payload as IRegistrationProps)
+      })()
+    }
+  }, [dispatch, user])
 
   return (
     <section>
-      <p>Имя: { user?.name }</p>
-      <p>Фамилия: { user?.surname }</p>
-      <p>Дата рождения: { user?.dateOfBirth }</p>
-      <p>Email: { user?.email }</p>
-      <p>Телефон: { user?.tel }</p>
-      <p>Адресс: { user?.street + ' ' + user?.house }, подьезд { user?.entrance }, этаж { user?.floor }, кв. { user?.room }</p>
+      <p>Имя: { userData?.name }</p>
+      <p>Фамилия: { userData?.surname }</p>
+      <p>Дата рождения: { userData?.dateOfBirth }</p>
+      <p>Email: { userData?.email }</p>
+      <p>Телефон: { userData?.tel }</p>
+      <p>Адресс: { userData?.street + ' ' + userData?.house }, подьезд { userData?.entrance }, этаж { userData?.floor }, кв. { userData?.room }</p>
     </section>
   );
 };

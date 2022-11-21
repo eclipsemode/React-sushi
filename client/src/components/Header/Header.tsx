@@ -11,7 +11,6 @@ import CartBlock from "../UI/CartBlock/CartBlock";
 import { BsPersonCircle } from "react-icons/bs";
 import { fetchUserInfo } from "../../redux/features/userSlice";
 import { ModalAccount } from "../index";
-import { PayloadAction } from "@reduxjs/toolkit";
 
 interface IUserInfo {
   name: string,
@@ -34,11 +33,13 @@ const Header: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    if (isAuth && localStorage.getItem('token') && user) {
-      dispatch(fetchUserInfo())
-        .then((data: PayloadAction<any>): void => data.payload ? setUserInfo({ name: data.payload.name, surname: data.payload.surname }) : setUserInfo({ name: 'Загрузка...', surname: 'Загрузка...' }));
+    if (user) {
+      (async function getUserInfo() {
+        const { payload } = await dispatch(fetchUserInfo() as any);
+        setUserInfo(payload);
+      })();
     }
-  }, [dispatch, isAuth, user])
+  }, [dispatch, user])
 
   React.useEffect(() => {
     isHandleClassName();

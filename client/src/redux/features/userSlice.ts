@@ -132,7 +132,7 @@ const fetchAuth = createAsyncThunk<IUser, void>(
   }
 );
 
-const fetchUserInfo = createAsyncThunk<IUserInfo, void>(
+const fetchUserInfo = createAsyncThunk<any, void>(
   'user/fetchUserInfo',
   async (_, { rejectWithValue }) => {
     try {

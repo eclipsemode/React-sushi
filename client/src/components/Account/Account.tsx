@@ -1,8 +1,7 @@
-//@ts-nocheck
 import React from "react";
 import styles from "./Account.module.css";
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchUserInfo, IRegistrationProps } from "../../redux/features/userSlice";
 import { MoonLoader } from "react-spinners";
 import { MdAccountCircle } from "react-icons/md";
@@ -14,17 +13,20 @@ type SelectedType = "profile" | "orders" | "settings";
 
 const Account: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector(state => state.user);
   const [userInfo, setUserInfo] = React.useState<IRegistrationProps | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [selected, setSelected] = React.useState<SelectedType>("profile");
 
-  // React.useEffect(() => {
-  //   (async function getUserInfo() {
-  //     const { payload } = await dispatch(fetchUserInfo() as any);
-  //     setUserInfo(payload);
-  //     setLoading(false);
-  //   })();
-  // }, [dispatch]);
+  React.useEffect(() => {
+    (async function getUserInfo() {
+      if (user) {
+        const { payload } = await dispatch(fetchUserInfo() as any);
+        setUserInfo(payload);
+        setLoading(false);
+      }
+    })();
+  }, [dispatch, user]);
 
   if (loading) return (
     <div className={styles.root__loading}>
