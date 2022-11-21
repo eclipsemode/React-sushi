@@ -1,4 +1,3 @@
-
 import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { $authHost, $host } from "../../http";
 import jwtDecode from "jwt-decode";
@@ -119,7 +118,7 @@ const fetchLogout = createAsyncThunk<void, void>(
   }
 )
 
-const fetchAuth = createAsyncThunk<IUser, void>(
+const fetchAuth = createAsyncThunk<IUser, void, { rejectValue: string }>(
   "user/fetchAuth",
   async (_, { rejectWithValue }) => {
     try {
@@ -132,12 +131,12 @@ const fetchAuth = createAsyncThunk<IUser, void>(
   }
 );
 
-const fetchUserInfo = createAsyncThunk<any, void>(
+const fetchUserInfo = createAsyncThunk<IUserInfo, void, { rejectValue: string }>(
   'user/fetchUserInfo',
   async (_, { rejectWithValue }) => {
     try {
       const response =await $authHost.get('api/user/info');
-      return response.data;
+        return response.data;
     } catch (e: any) {
       return rejectWithValue(e.response.data.message)
     }

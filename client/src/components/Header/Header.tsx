@@ -35,8 +35,8 @@ const Header: React.FC = () => {
   React.useEffect(() => {
     if (user) {
       (async function getUserInfo() {
-        const { payload } = await dispatch(fetchUserInfo() as any);
-        setUserInfo(payload);
+        const { payload } = await dispatch(fetchUserInfo());
+        setUserInfo(payload as IUserInfo);
       })();
     }
   }, [dispatch, user])

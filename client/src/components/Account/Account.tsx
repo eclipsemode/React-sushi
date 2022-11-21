@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Account.module.css";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchUserInfo, IRegistrationProps } from "../../redux/features/userSlice";
+import { fetchUserInfo, IRegistrationProps, IUserInfo } from "../../redux/features/userSlice";
 import { MoonLoader } from "react-spinners";
 import { MdAccountCircle } from "react-icons/md";
 import { AiOutlineStar } from "react-icons/ai";
@@ -21,8 +21,8 @@ const Account: React.FC = () => {
   React.useEffect(() => {
     (async function getUserInfo() {
       if (user) {
-        const { payload } = await dispatch(fetchUserInfo() as any);
-        setUserInfo(payload);
+        const { payload } = await dispatch(fetchUserInfo());
+        setUserInfo(payload as IUserInfo);
         setLoading(false);
       }
     })();

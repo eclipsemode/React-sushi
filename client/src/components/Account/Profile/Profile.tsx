@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { fetchUserInfo, IRegistrationProps } from "../../../redux/features/userSlice";
+import { fetchUserInfo, IRegistrationProps, IUserInfo } from "../../../redux/features/userSlice";
 
 const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ const Profile: React.FC = () => {
     if (user) {
       (async function getUsers() {
         const { payload } = await dispatch(fetchUserInfo());
-        setUserData(payload as IRegistrationProps)
+        setUserData(payload as IUserInfo)
       })()
     }
   }, [dispatch, user])
