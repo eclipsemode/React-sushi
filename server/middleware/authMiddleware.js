@@ -4,7 +4,7 @@ const TokenService = require('../service/TokenService');
 
 module.exports = function (req, res, next) {
   if (req.method === "OPTIONS") {
-    next()
+    next();
   }
   try {
     const token = req.headers.authorization.split(' ').at(1)
@@ -16,7 +16,7 @@ module.exports = function (req, res, next) {
       return next(ApiError.unauthorized());
     }
     req.user = tokenData
-    next()
+    next();
   } catch (e) {
     return next(ApiError.unauthorized());
   }
