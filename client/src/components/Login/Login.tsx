@@ -2,119 +2,105 @@ import React from "react";
 import styles from "./Login.module.css";
 import { ApplyButton } from "../UI";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import ValidationError from "../../error/ValidationError";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { fetchLogin } from "../../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
-import { serverError } from "../../error";
+import { useForm, SubmitHandler } from "react-hook-form";
+import  { ErrorMessage } from "@hookform/error-message";
 
 type LoginProps = {
   setAuth: (value: boolean) => void;
 }
 
+type Inputs = {
+  login: string,
+  password: string,
+};
+
 const Login: React.FC<LoginProps> = ({ setAuth }) => {
-  const { error } = useAppSelector(state => state.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [login, setLogin] = React.useState<string>("");
-  const [loginError, setLoginError] = React.useState<string>("Логин не может быть пустым.");
-  const [password, setPassword] = React.useState<string>("");
-  const [passwordError, setPasswordError] = React.useState<string>("Пароль не может быть пустым.");
   const [passwordHidden, setPasswordHidden] = React.useState<boolean>(true);
   const passwordRef = React.useRef<HTMLInputElement>(null);
-  const [formDirty, setFormDirty] = React.useState<boolean>(false);
+  const [authorisationError, setAuthorisationError] = React.useState<JSX.Element | null>(null);
+  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
 
-  const handlePasswordHidden = () => {
+  const onSubmit: SubmitHandler<Inputs> = async data => {
+    const { payload } = await dispatch(fetchLogin({ login: data.login, password: data.password }));
+    if (typeof payload === "string") return setAuthorisationError(<span className={styles.root__error}>Неправильный логин или пароль.</span>)
+    navigate('/');
+  };
+
+  const handlePasswordHidden = (): void => {
     setPasswordHidden(!passwordHidden);
     passwordRef.current?.focus();
   };
 
-  const handleSubmit = async () => {
-    setFormDirty(true);
-    if (!login) {
-      setLoginError("Логин не может быть пустым.");
-    }
-    if (!password) {
-      setPasswordError("Пароль не может быть пустым.");
-    } else if (password.length < 8) {
-      setPasswordError("Пароль не может иметь меньше 8 символов.");
-    }
-
-    if (loginError || passwordError) {
-      throw new ValidationError("Необходимо заполнить все поля.");
-    }
-
-    const { payload } = await dispatch(fetchLogin({ login, password }));
-
-    if (typeof payload === "string") return;
-
-    navigate('/');
-  };
-
-  React.useEffect(() => {
-    if (error?.match(serverError.USER_NOT_FOUND)) {
-      setLoginError(serverError.USER_NOT_FOUND);
-    } else if (error?.match(serverError.PASSWORD_INCORRECT)) {
-      setPasswordError(serverError.PASSWORD_INCORRECT);
-    }
-  }, [error]);
-
-  const handleLogin = (value: string) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    setLogin(value);
-
-    if (!re.test(String(value).toLowerCase())) {
-      setLoginError("Данный email некорректен.");
-    } else {
-      setLoginError("");
-    }
-
-    if (!value) {
-      setLoginError("Логин не может быть пустым.");
-    }
-  };
-
-  const handlePassword = (value: string) => {
-    const re = /^[0-9a-zA-Z!@#$%^&*]+$/g;
-    setPassword(value);
-    if (!value) {
-      setPasswordError("Пароль не может быть пустым.");
-    } else if (!value.match(re)) {
-      setPasswordError("Пароль должен состоять из латинских букв и цифр.");
-    } else if (value.length < 8) {
-      setPasswordError("Пароль не может иметь меньше 8 символов.");
-    } else {
-      setPasswordError("");
-    }
-  };
-
+  const clearError = (): void => {
+    setAuthorisationError(null);
+  }
 
   const handleAuth = () => {
     setAuth(false);
   };
 
+  const loginError = (): JSX.Element | void => {
+    if (errors.login?.type === 'required') {
+      return <span className={styles.root__error}>Поле не может быть пустым.</span>
+    } else if (errors.login?.type === 'pattern') {
+      return <span className={styles.root__error}>Введите ваш email.</span>
+    }
+  }
+
+  const passwordError = (): JSX.Element | void => {
+    if (errors.password?.type === 'required') {
+      return <span className={styles.root__error}>Поле не может быть пустым.</span>
+    } else if (errors.password?.type === 'pattern') {
+      return <span className={styles.root__error}>Пароль не должен содержать буквы кириллицы.</span>
+    } else if (errors.password?.type === 'minLength') {
+      return <span className={styles.root__error}>Пароль не может иметь меньше 8 символов.</span>
+    }
+  }
+
   return (
+    <form onSubmit={handleSubmit(onSubmit)}>
     <div className={styles.root}>
-      <form className={styles.root__container}>
+      <div className={styles.root__container}>
         <h1>Вход</h1>
-        {(loginError && formDirty) && <span className={styles.root__error}>{loginError}</span>}
-        <input className={styles.root__input} value={login} name="login"
-               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleLogin(e.currentTarget.value)}
-               placeholder="Имя пользователя" type="text" />
-        {(passwordError && formDirty) && <span className={styles.root__error}>{passwordError}</span>}
+        { authorisationError !== null ? authorisationError : '' }
+        <ErrorMessage
+          errors={errors}
+          name="login"
+          render={(): any => loginError()}
+        />
+        <input {...register('login', { required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
+               className={styles.root__input}
+               name="login"
+               placeholder="Имя пользователя" type="text"
+               onFocus={clearError}
+        />
+        <ErrorMessage
+          errors={errors}
+          name="password"
+          render={(): any => passwordError()}
+        />
         <div className={styles.root__password}>
-          <input className={styles.root__input} value={password} name="password" autoComplete="on"
-                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePassword(e.currentTarget.value)}
-                 ref={passwordRef}
-                 placeholder="Пароль" type={passwordHidden ? "password" : "text"} />
+          <input {...register('password', { required: true, pattern: /^[0-9a-zA-Z!@#$%^&*]+$/g, minLength: 8 })}
+                 className={styles.root__input}
+                 name="password"
+                 autoComplete="on"
+                 placeholder="Пароль"
+                 type={passwordHidden ? "password" : "text"}
+                 onFocus={clearError}
+          />
           {passwordHidden ? <HiEye onClick={() => handlePasswordHidden()} /> :
             <HiEyeOff onClick={() => handlePasswordHidden()} />}
         </div>
-
-      </form>
-      <ApplyButton clickEvent={handleSubmit}>Войти</ApplyButton>
+      </div>
+      <ApplyButton>Войти</ApplyButton>
       <p>Впервые у нас? <span onClick={() => handleAuth()}>Зарегистрироваться</span></p>
     </div>
+    </form>
   );
 };
 
