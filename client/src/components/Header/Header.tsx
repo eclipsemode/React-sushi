@@ -20,7 +20,7 @@ interface IUserInfo {
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const { totalPrice, totalAmount } = useAppSelector(selectCart);
-  const { isAuth, user } = useAppSelector(state => state.user);
+  const { isAuth } = useAppSelector(state => state.user);
   const [userInfo, setUserInfo] = React.useState<IUserInfo>();
   const [accModal, setAccModal] = React.useState<boolean>(false);
   const headerRef = React.useRef<HTMLDivElement>(null);
@@ -33,13 +33,13 @@ const Header: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    if (user) {
+    if (isAuth) {
       (async function getUserInfo() {
         const { payload } = await dispatch(fetchUserInfo());
         setUserInfo(payload as IUserInfo);
       })();
     }
-  }, [dispatch, user])
+  }, [dispatch, isAuth])
 
   React.useEffect(() => {
     isHandleClassName();

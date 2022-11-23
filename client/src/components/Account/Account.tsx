@@ -13,20 +13,20 @@ type SelectedType = "profile" | "orders" | "settings";
 
 const Account: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector(state => state.user);
+  const { isAuth } = useAppSelector(state => state.user);
   const [userInfo, setUserInfo] = React.useState<IRegistrationProps | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [selected, setSelected] = React.useState<SelectedType>("profile");
 
   React.useEffect(() => {
     (async function getUserInfo() {
-      if (user) {
+      if (isAuth) {
         const { payload } = await dispatch(fetchUserInfo());
         setUserInfo(payload as IUserInfo);
         setLoading(false);
       }
     })();
-  }, [dispatch, user]);
+  }, [dispatch, isAuth]);
 
   if (loading) return (
     <div className={styles.root__loading}>

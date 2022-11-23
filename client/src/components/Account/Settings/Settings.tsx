@@ -7,7 +7,7 @@ import styles from "./Settings.module.css";
 const Settings: React.FC = () => {
   const [userInfo, setUserInfo] = React.useState<IRegistrationProps>();
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector(state => state.user);
+  const { user, isAuth } = useAppSelector(state => state.user);
   const [name, setName] = React.useState<string>("");
   const [surname, setSurname] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
@@ -46,7 +46,7 @@ const Settings: React.FC = () => {
   };
 
   React.useEffect(() => {
-    if (user) {
+    if (user && isAuth) {
       (async function getUserInfo() {
         const { payload } = await dispatch(fetchUserInfo());
         const payloadData = payload as unknown as IRegistrationProps;
@@ -63,7 +63,7 @@ const Settings: React.FC = () => {
         setRoom(payloadData.room);
       })();
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, isAuth]);
 
   return (
     <section className={styles.root}>

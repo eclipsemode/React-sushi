@@ -15,4 +15,4 @@ const registrationSchema = [
     .trim()
 ]
 
-export default registrationSchema;
+module.exports = registrationSchema;

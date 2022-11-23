@@ -4,7 +4,7 @@ import { fetchUserInfo, IRegistrationProps, IUserInfo } from "../../../redux/fea
 
 const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector(state => state.user);
+  const { isAuth } = useAppSelector(state => state.user);
   const [userData, setUserData] = React.useState<IRegistrationProps | null>(null);
 
   React.useEffect(() => {
@@ -14,13 +14,13 @@ const Profile: React.FC = () => {
   });
 
   React.useEffect(() => {
-    if (user) {
+    if (isAuth) {
       (async function getUsers() {
         const { payload } = await dispatch(fetchUserInfo());
         setUserData(payload as IUserInfo)
       })()
     }
-  }, [dispatch, user])
+  }, [dispatch, isAuth])
 
   return (
     <section>
