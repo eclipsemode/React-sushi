@@ -74,7 +74,7 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
           render={(): any => loginError()}
         />
         <input {...register('login', { required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
-               className={styles.root__input}
+               className={styles.root__input + ' ' + (errors.login && styles.root__input_invalid)}
                name="login"
                placeholder="Имя пользователя" type="text"
                onFocus={clearError}
@@ -86,7 +86,7 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
         />
         <div className={styles.root__password}>
           <input {...register('password', { required: true, pattern: /^[0-9a-zA-Z!@#$%^&*]+$/g, minLength: 8 })}
-                 className={styles.root__input}
+                 className={styles.root__input + ' ' + (errors.password && styles.root__input_invalid)}
                  name="password"
                  autoComplete="on"
                  placeholder="Пароль"

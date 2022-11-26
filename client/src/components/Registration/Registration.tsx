@@ -66,8 +66,6 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
     }
   };
 
-  const dateOfBirthError = (): JSX.Element | void => <span className={styles.root__error}>Введите дату рождения полностью.</span>;
-
   const emailError = (): JSX.Element | void => {
     if (errors.email?.type === "required") {
       return <span className={styles.root__error}>Поле не может быть пустым.</span>;
@@ -114,7 +112,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             errors={errors}
             render={(): any => nameError()} />
           <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input_required}
+            <input className={styles.root__input_required + ' ' + (errors.name && styles.root__input_invalid)}
                    {...register("name", {
                      required: true,
                      validate: (value: string) => !!value.match(/^[a-zа-яё\s]+$/iu)
@@ -127,13 +125,9 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
                  placeholder="Фамилия"
                  {...register("surname")}
                  type="text" />
-          <ErrorMessage
-            name="dateOfBirth"
-            errors={errors}
-            render={(): any => dateOfBirthError()} />
           <InputMask className={styles.root__input}
             //eslint-disable-next-line
-                     {...register("dateOfBirth", { pattern: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/ })}
+                     {...register("dateOfBirth")}
                      placeholder="Дата рождения"
                      type="text"
                      mask="99/99/9999" />
@@ -142,7 +136,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             errors={errors}
             render={(): any => emailError()} />
           <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input}
+            <input className={styles.root__input + ' ' + (errors.email && styles.root__input_invalid)}
                    {...register("email", {
                      required: true,
                      pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -156,7 +150,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             errors={errors}
             render={(): any => passwordError()} />
           <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input}
+            <input className={styles.root__input + ' ' + (errors.password && styles.root__input_invalid)}
                    {...register("password", { required: true, minLength: 8 })}
                    placeholder="Пароль"
                    autoComplete="on"
@@ -168,7 +162,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             errors={errors}
             render={(): any => passwordRepeatError()} />
           <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input}
+            <input className={styles.root__input + ' ' + (errors.passwordRepeat && styles.root__input_invalid)}
                    {...register("passwordRepeat", {
                      required: true,
                      minLength: 8,
@@ -184,7 +178,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             errors={errors}
             render={(): any => telError()} />
           <div className={styles.root__requiredBlock}>
-            <InputMask className={styles.root__input}
+            <InputMask className={styles.root__input + ' ' + (errors.tel && styles.root__input_invalid)}
                        {...register("tel", { required: true, minLength: 18 })}
                        placeholder="+7 (xxx) xxx-xx-xx"
                        type="tel"

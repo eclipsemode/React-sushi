@@ -26,6 +26,9 @@
   border-radius: 6px;
   width: 100%;
 }
+.root__input_invalid {
+  border-color: red;
+}
 .root h1 {
   text-align: center;
   color: #292929;
