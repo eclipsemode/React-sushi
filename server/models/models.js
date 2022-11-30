@@ -15,23 +15,33 @@ const User = sequelize.define("user", {
   floor: { type: DataTypes.STRING },
   entrance: { type: DataTypes.STRING },
   room: { type: DataTypes.STRING },
-  isActivated: {type: DataTypes.BOOLEAN, defaultValue: false},
-  activationLink: {type: DataTypes.STRING},
+  isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
+  activationLink: { type: DataTypes.STRING }
 });
 
-const Token = sequelize.define('token', {
+const Token = sequelize.define("token", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  userId: {type: DataTypes.INTEGER, allowNull: false},
-  refreshToken: {type: DataTypes.STRING, required: true},
-})
-
-const Basket = sequelize.define("basket", {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
+  userId: { type: DataTypes.INTEGER, allowNull: false },
+  refreshToken: { type: DataTypes.STRING, required: true }
 });
 
-const BasketProduct = sequelize.define("basket_product", {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }
-});
+const Order = sequelize.define("order", {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    userId: { type: DataTypes.INTEGER, allowNull: false },
+    productId: { type: DataTypes.INTEGER, allowNull: false, totalAmount: true }
+  },
+  {
+    timestamps: true
+  });
+
+// const OrderProduct = sequelize.define("order_product", {
+//     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+//     orderId: { type: DataTypes.INTEGER, allowNull: false },
+//     productId: { type: DataTypes.INTEGER, allowNull: false, amount: true }
+//   },
+//   {
+//     timestamps: true
+//   });
 
 const Product = sequelize.define("product", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -40,7 +50,7 @@ const Product = sequelize.define("product", {
   rating: { type: DataTypes.INTEGER, defaultValue: 1 },
   description: { type: DataTypes.STRING, allowNull: false },
   image: { type: DataTypes.STRING, allowNull: false },
-  categoryId: { type: DataTypes.INTEGER, allowNull: false },
+  categoryId: { type: DataTypes.INTEGER, allowNull: false }
 });
 
 const Category = sequelize.define("category", {
@@ -48,25 +58,25 @@ const Category = sequelize.define("category", {
   name: { type: DataTypes.STRING, unique: true, allowNull: false }
 });
 
-User.hasOne(Basket);
-Basket.belongsTo(User);
+User.hasMany(Order);
+Order.belongsTo(User);
 
 User.hasOne(Token);
 Token.belongsTo(User);
 
-Basket.hasMany(BasketProduct);
-BasketProduct.belongsTo(Basket);
+Order.hasMany(Product);
+Product.belongsTo(Order);
 
-Product.hasMany(BasketProduct);
-BasketProduct.belongsTo(Product);
+// Product.hasMany(Order);
+// OrderProduct.belongsTo(Product);
 
 Category.hasMany(Product);
 Product.belongsTo(Category);
 
 module.exports = {
   User,
-  Basket,
-  BasketProduct,
+  Order,
+  // OrderProduct,
   Product,
   Category,
   Token
