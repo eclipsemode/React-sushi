@@ -1,8 +1,10 @@
 const ApiError = require('../error/ApiError');
+const OrderService = require('../service/OrderService');
 
 class OrderController {
   async create(req, res, next) {
-    return res.json({message: 'Hello'});
+    const { userId, products  } = req.body;
+    return res.json({userId, products});
   }
 }
 
