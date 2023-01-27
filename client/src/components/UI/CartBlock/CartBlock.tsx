@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './CartBlock.module.css';
 import { Link } from "react-router-dom";
-import cartImg from "../../../assets/img/shopping-cart.png";
+import cartImg from "app/assets/img/shopping-cart.png";
 
 type CartBlockProps = {
   totalPrice: number;

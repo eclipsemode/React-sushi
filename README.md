@@ -5,7 +5,7 @@ SPA application with client-server architecture.
 1. Authorisation / Registration. JWT. **`Done.`**
 2. REST Api with Postgresql (CRUD) **`Done.`**
 3. Advanced authorisation, access tokens, refresh tokens etc... **`Done.`**
-4. User's Personal account with previous orders and personal data. **`In Progress...`**
+4. User's Index account with previous orders and personal data. **`In Progress...`**
 5. Administrator's panel (create / delete / update products, users, categories). **`In Progress...`**
 6. Page with Product categories. **`Done.`**
 7. Product sorting capability. **`Done.`**

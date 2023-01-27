@@ -1,9 +1,9 @@
 import React from "react";
-import { Login } from "../components";
-import { Registration } from "../components";
+import { Login } from "components";
+import { Registration } from "components";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage: React.FC = () => {
+const Index: React.FC = () => {
   const navigate = useNavigate();
   const [auth, setAuth] = React.useState<boolean>(true);
 
@@ -16,4 +16,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default Index;

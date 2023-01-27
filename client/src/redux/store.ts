@@ -1,10 +1,10 @@
 import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit";
 
-import filter from './features/filterSlice';
-import products from './features/productsSlice';
-import cart, { ICartState } from "./features/cartSlice";
-import user, { IUser } from "./features/userSlice";
-import category from './features/categoriesSlice';
+import filter from 'redux/features/filterSlice';
+import products from 'redux/features/productsSlice';
+import cart, { ICartState } from "redux/features/cartSlice";
+import user, { IUser } from "redux/features/userSlice";
+import category from 'redux/features/categoriesSlice';
 import jwtDecode from "jwt-decode";
 
 const persistedStateCart: ICartState = localStorage.getItem('cart') !== null

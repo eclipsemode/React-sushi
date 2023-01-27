@@ -3,8 +3,22 @@ const OrderService = require('../service/OrderService');
 
 class OrderController {
   async create(req, res, next) {
-    const { userId, products  } = req.body;
-    return res.json({userId, products});
+    try {
+      const { userId, orderProducts, totalPrice  } = req.body;
+      const order = await OrderService.create(userId, orderProducts, totalPrice);
+      return res.json(order);
+    } catch (e) {
+      next(ApiError.badRequest('Невозможно создать заказ.'))
+    }
+  }
+
+  async getAll(req, res, next) {
+    try {
+    const orders = await OrderService.getAll();
+    return res.json(orders);
+    } catch (e) {
+      next(ApiError.badRequest('Ошибка.'))
+    }
   }
 }
 

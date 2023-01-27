@@ -1,14 +1,14 @@
 import React from "react";
-import cat1Img from "../../assets/img/1.png";
-import cat2Img from "../../assets/img/2.png";
-import cat3Img from "../../assets/img/3.png";
-import cat4Img from "../../assets/img/4.png";
-import cat5Img from "../../assets/img/5.png";
-import cat6Img from "../../assets/img/6.png";
+import cat1Img from "app/assets/img/1.png";
+import cat2Img from "app/assets/img/2.png";
+import cat3Img from "app/assets/img/3.png";
+import cat4Img from "app/assets/img/4.png";
+import cat5Img from "app/assets/img/5.png";
+import cat6Img from "app/assets/img/6.png";
 
-import { setCategoryNumber, selectFilter } from "../../redux/features/filterSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchCategories } from "../../redux/features/categoriesSlice";
+import { setCategoryNumber, selectFilter } from "redux/features/filterSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { fetchCategories } from "redux/features/categoriesSlice";
 import CategoriesSkeleton from "./CategoriesSkeleton";
 
 const Categories: React.FC = React.memo(() => {

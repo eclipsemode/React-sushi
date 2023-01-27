@@ -1,11 +1,11 @@
 import React from "react";
 import styles from './Footer.module.css';
 import { FaFacebookF, FaGooglePlusG, FaTwitter } from "react-icons/fa";
-import logoImg from '../../assets/img/logo.png';
-import envelopeImg from '../../assets/img/envelope.png';
-import callImg from '../../assets/img/call.png';
-import locationImg from '../../assets/img/location.png';
-import Input from "../UI/Input/Input";
+import logoImg from 'app/assets/img/logo.png';
+import envelopeImg from 'app/assets/img/envelope.png';
+import callImg from 'app/assets/img/call.png';
+import locationImg from 'app/assets/img/location.png';
+import Input from "components/UI/Input/Input";
 
 const Footer: React.FC = () => {
   return (

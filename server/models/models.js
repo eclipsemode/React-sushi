@@ -27,17 +27,9 @@ const Token = sequelize.define("token", {
 
 const Order = sequelize.define("order", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    userId: { type: DataTypes.INTEGER, allowNull: false }
-  },
-  {
-    timestamps: true
-  });
-
-const OrderProduct = sequelize.define("order_product", {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    orderId: { type: DataTypes.INTEGER, allowNull: false },
-    productId: { type: DataTypes.INTEGER, allowNull: false },
-    amount: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 1 }
+    userId: { type: DataTypes.INTEGER, allowNull: false },
+    orderProducts: {type: DataTypes.ARRAY(DataTypes.JSONB), allowNull: false, defaultValue: []},
+    totalPrice: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 }
   },
   {
     timestamps: true
@@ -64,25 +56,18 @@ Order.belongsTo(User);
 User.hasOne(Token);
 Token.belongsTo(User);
 
-Order.hasMany(OrderProduct);
-OrderProduct.belongsTo(Order);
+User.hasMany(Order);
+Order.belongsTo(User);
 
-OrderProduct.hasOne(Product);
-Product.belongsTo(OrderProduct);
-
+// Order.hasMany(Product);
 // Product.hasMany(Order);
-// Order.belongsTo(Product);
-
-// Product.hasMany(Order);
-// OrderProduct.belongsTo(Product);
 
 Category.hasMany(Product);
-Product.belongsTo(Category);
+Product.hasOne(Category);
 
 module.exports = {
   User,
   Order,
-  OrderProduct,
   Product,
   Category,
   Token

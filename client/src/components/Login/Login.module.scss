@@ -1,5 +1,5 @@
-@import '../../assets/styles/variables';
-@import '../../assets/styles/mixins/authorisation';
+@import '../../app/assets/styles/variables';
+@import '../../app/assets/styles/mixins/authorisation';
 
 .root {
   @include Authorisation;

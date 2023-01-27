@@ -1,4 +1,3 @@
-const { Product } = require("../models/models");
 const ApiError = require("../error/ApiError");
 const ProductService = require('../service/ProductService');
 

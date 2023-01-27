@@ -1,5 +1,5 @@
 import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { $authHost, $host } from "../../http";
+import { $authHost, $host } from "processes/http";
 import jwtDecode from "jwt-decode";
 
 export interface IRegistrationProps {

@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Categories, Sort, Products, Banner } from "../components";
-import { useAppSelector } from "../redux/hooks";
-import { selectFilter } from "../redux/features/filterSlice";
+import { Categories, Sort, Products, Banner } from "components";
+import { useAppSelector } from "redux/hooks";
+import { selectFilter } from "redux/features/filterSlice";
 import ContentLoader from "react-content-loader";
 
-const Home: React.FC = () => {
+const Index: React.FC = () => {
   const { categoryNumber } = useAppSelector(selectFilter);
   const { categories } = useAppSelector(state => state.category);
 
@@ -42,4 +42,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Index;

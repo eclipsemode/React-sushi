@@ -1,16 +1,16 @@
-import logoImg from "../../assets/img/logo.png";
-import phoneImg from "../../assets/img/phone.png";
+import logoImg from "app/assets/img/logo.png";
+import phoneImg from "app/assets/img/phone.png";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
 
 import React  from "react";
 
-import { selectCart } from "../../redux/features/cartSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import CartBlock from "../UI/CartBlock/CartBlock";
+import { selectCart } from "redux/features/cartSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import CartBlock from "components/UI/CartBlock/CartBlock";
 import { BsPersonCircle } from "react-icons/bs";
-import { fetchUserInfo } from "../../redux/features/userSlice";
-import { ModalAccount } from "../index";
+import { fetchUserInfo } from "redux/features/userSlice";
+import { ModalAccount } from "components/index";
 
 interface IUserInfo {
   name: string,

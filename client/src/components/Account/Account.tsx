@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Account.module.css";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchUserInfo, IRegistrationProps, IUserInfo } from "../../redux/features/userSlice";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { fetchUserInfo, IRegistrationProps, IUserInfo } from "redux/features/userSlice";
 import { MoonLoader } from "react-spinners";
 import { MdAccountCircle } from "react-icons/md";
 import { AiOutlineStar } from "react-icons/ai";

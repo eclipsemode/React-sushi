@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import emptyCartImg from '../../assets/img/empty-cart.png';
-import Button from "../UI/Button/Button";
+import emptyCartImg from 'app/assets/img/empty-cart.png';
+import Button from "components/UI/Button/Button";
 
 const CartEmpty: React.FC = () => {
     return (
