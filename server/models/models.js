@@ -59,9 +59,6 @@ Token.belongsTo(User);
 User.hasMany(Order);
 Order.belongsTo(User);
 
-// Order.hasMany(Product);
-// Product.hasMany(Order);
-
 Category.hasMany(Product);
 Product.hasOne(Category);
 

@@ -1,4 +1,4 @@
-import { SortOrderType, SortType } from '../../redux/features/filterSlice';
+import { SortOrderType, SortType } from 'entities/filterSlice';
 
 export type SortNameType = {
     id: number;

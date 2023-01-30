@@ -1,10 +1,10 @@
 import React from 'react';
-import { removeItemById } from '../../redux/features/cartSlice';
+import { removeItemById } from 'entities/cartSlice';
 import { CartButtonMinus, CartButtonPlus } from '../UI';
-import { IProducts } from '../../redux/features/productsSlice';
+import { IProducts } from 'entities/productsSlice';
 import styles from './CartItem.module.css';
 import { IoClose } from 'react-icons/io5';
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch } from "app/utils";
 
 export type CartItemProps = {
     obj: IProducts;

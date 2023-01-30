@@ -1,13 +1,15 @@
+// @ts-nocheck
 import React from "react";
 import styles from "./Registration.module.css";
 import { ApplyButton } from "../UI";
-import { useAppDispatch } from "../../redux/hooks";
-import { fetchRegistration } from "../../redux/features/userSlice";
+import { useAppDispatch } from "app/utils";
 import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
 import { BsAsterisk } from "react-icons/bs";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+
+import { fetchUserRegistration } from "features/registration";
 
 type RegistrationProps = {
   setAuth: (value: boolean) => void;
@@ -39,7 +41,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
     try {
-      await dispatch(fetchRegistration({
+      await dispatch(fetchUserRegistration({
         name: data.name,
         surname: data.surname,
         dateOfBirth: data.dateOfBirth,

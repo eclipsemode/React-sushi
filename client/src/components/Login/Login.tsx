@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./Login.module.css";
-import { ApplyButton } from "../UI";
+import { ApplyButton } from "components/UI";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { useAppDispatch } from "../../redux/hooks";
-import { fetchLogin } from "../../redux/features/userSlice";
+import { useAppDispatch } from "app/utils";
+import { fetchUserLogin } from "features/login";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import  { ErrorMessage } from "@hookform/error-message";
@@ -25,10 +25,15 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
   const [authorisationError, setAuthorisationError] = React.useState<JSX.Element | null>(null);
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async data => {
-    const { payload } = await dispatch(fetchLogin({ login: data.login, password: data.password }));
-    if (typeof payload === "string") return setAuthorisationError(<span className={styles.root__error}>Неправильный логин или пароль.</span>)
+  const reloadPage = () => {
     navigate('/');
+    navigate(0);
+  }
+
+  const onSubmit: SubmitHandler<Inputs> = async data => {
+    const { payload } = await dispatch(fetchUserLogin({ login: data.login, password: data.password }));
+    if (typeof payload === "string") return setAuthorisationError(<span className={styles.root__error}>Неправильный логин или пароль.</span>)
+    reloadPage();
   };
 
   const handlePasswordHidden = (): void => {

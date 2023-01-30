@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./AddToCartButton.module.css";
 import { CartButtonMinus, CartButtonPlus } from "../index";
-import { IProducts } from "../../../redux/features/productsSlice";
-import { addItem } from "../../../redux/features/cartSlice";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { IProducts } from "entities/productsSlice";
+import { addItem } from "entities/cartSlice";
+import { useAppDispatch, useAppSelector } from "app/utils";
 
 type AddToCartButtonProps = {
   product: IProducts;

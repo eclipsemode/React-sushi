@@ -1,7 +1,7 @@
 import React from "react";
-import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "../../../redux/features/userSlice";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import TextInput from "../../UI/TextInput/TextInput";
+import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "entities/userSlice";
+import { useAppDispatch, useAppSelector } from "app/utils";
+import TextInput from "components/UI/TextInput/TextInput";
 import styles from "./Settings.module.css";
 
 const Settings: React.FC = () => {

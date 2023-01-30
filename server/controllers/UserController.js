@@ -10,8 +10,7 @@ class UserController {
         return next(ApiError.badRequest('Ошибка валидации.', errors.array()));
       }
       const user = await UserService.registration(req.body, next);
-      res.cookie("refreshToken", user.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
-      return res.json(user);
+      return res.json('Confirm registration.');
     } catch (e) {
       return next(ApiError.badRequest(e.message));
     }
@@ -50,10 +49,12 @@ class UserController {
 
   async refresh(req, res, next) {
     try {
-      const { refreshToken } = req.cookies;
-      const userData = await UserService.refreshToken(refreshToken);
-      res.cookie("refreshToken", userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
-      return res.json(userData);
+        if (req.cookies.refreshToken) {
+          const { refreshToken } = req.cookies;
+          const userData = await UserService.refreshToken(refreshToken);
+          res.cookie("refreshToken", userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+          return res.json(userData);
+        }
     } catch (e) {
       return next(ApiError.badRequest(e.message));
     }

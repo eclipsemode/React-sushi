@@ -2,8 +2,8 @@ import React from 'react';
 
 import Popup from './Popup/Popup';
 import sortNames, { SortNameType } from './SortNames';
-import { selectFilter } from '../../redux/features/filterSlice';
-import { useAppSelector } from "../../redux/hooks";
+import { selectFilter } from 'entities/filterSlice';
+import { useAppSelector } from "app/utils";
 
 const Sort: React.FC = () => {
     const [popupHidden, setPopupHidden] = React.useState<boolean>(true);

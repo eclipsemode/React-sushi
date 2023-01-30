@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { setSortType, setSortId, setSortOrder, selectFilter } from '../../../redux/features/filterSlice';
+import { setSortType, setSortId, setSortOrder, selectFilter } from 'entities/filterSlice';
 import { SortNameType } from '../SortNames';
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "app/utils";
 
 type PopupProps = {
     popupHidden: boolean;

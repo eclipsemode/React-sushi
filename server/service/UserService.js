@@ -1,4 +1,4 @@
-const { User, Basket } = require('../models/models');
+const { User } = require('../models/models');
 const MailService = require('./MailService');
 const ApiError = require("../error/ApiError");
 const bcrypt = require("bcrypt");
@@ -35,7 +35,6 @@ class UserService {
     const hashPassword = await bcrypt.hash(password, 5);
     const activationLink = await uuid.v4();
     const user = await User.create({email, password: hashPassword, role, name, surname, dateOfBirth, tel, street, house, floor, entrance, room, activationLink});
-    const basket = await Basket.create({userId: user.id});
     await MailService.sendActivationMail(email, `${process.env.API_URL}/api/user/activate/${activationLink}`);
     const userDto = new UserDto(user);
     const tokens = TokenService.generateTokens({ ...userDto });

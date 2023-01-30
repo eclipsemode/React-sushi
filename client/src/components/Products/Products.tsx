@@ -1,9 +1,9 @@
 import React from "react";
-import { fetchProducts, ProductsStatus, selectProducts } from "../../redux/features/productsSlice";
-import { selectFilter, IFilterState, setCategoryNumber } from "../../redux/features/filterSlice";
+import { fetchProducts, ProductsStatus, selectProducts } from "entities/productsSlice";
+import { selectFilter, IFilterState, setCategoryNumber } from "entities/filterSlice";
 import qs from "qs";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "app/utils";
 import { Rejected, Pending, Fulfilled } from "./index";
 
 const Products: React.FC = () => {

@@ -5,23 +5,15 @@ import styles from "./Header.module.css";
 
 import React  from "react";
 
-import { selectCart } from "redux/features/cartSlice";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { selectCart } from "entities/cartSlice";
+import { useAppSelector } from "app/utils";
 import CartBlock from "components/UI/CartBlock/CartBlock";
 import { BsPersonCircle } from "react-icons/bs";
-import { fetchUserInfo } from "redux/features/userSlice";
 import { ModalAccount } from "components/index";
 
-interface IUserInfo {
-  name: string,
-  surname: string
-}
-
 const Header: React.FC = () => {
-  const dispatch = useAppDispatch();
   const { totalPrice, totalAmount } = useAppSelector(selectCart);
-  const { isAuth } = useAppSelector(state => state.user);
-  const [userInfo, setUserInfo] = React.useState<IUserInfo>();
+  const { isAuth, user } = useAppSelector(state => state.user);
   const [accModal, setAccModal] = React.useState<boolean>(false);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const modalRef = React.useRef<HTMLDivElement>(null);
@@ -31,15 +23,6 @@ const Header: React.FC = () => {
       ? headerRef.current?.classList.add(styles.root__fixed)
       : headerRef.current?.classList.remove(styles.root__fixed);
   }, []);
-
-  React.useEffect(() => {
-    if (isAuth) {
-      (async function getUserInfo() {
-        const { payload } = await dispatch(fetchUserInfo());
-        setUserInfo(payload as IUserInfo);
-      })();
-    }
-  }, [dispatch, isAuth])
 
   React.useEffect(() => {
     isHandleClassName();
@@ -85,10 +68,14 @@ const Header: React.FC = () => {
               isAuth
                 ? (
                   <div className={styles.root__auth} onClick={(e: React.MouseEvent) => accHandle(e)}>
-                    <div>
-                      <p>Добро пожаловать!</p>
-                      <p>{userInfo?.name} {userInfo?.surname}</p>
-                    </div>
+                    {
+                      user && (
+                        <div>
+                          <p>Добро пожаловать!</p>
+                          <p>{user.name} {user.surname}</p>
+                        </div>
+                      )
+                    }
                     <BsPersonCircle className={styles.root__authSvg} />
                     {accModal && <ModalAccount modalRef={modalRef} />}
                   </div>
@@ -100,7 +87,7 @@ const Header: React.FC = () => {
           <CartBlock totalPrice={totalPrice} totalAmount={totalAmount} />
           <div className={styles.root__phone}>
             <img width="32" height="32" src={phoneImg} alt="phone" />
-            <span onClick={() => console.log(userInfo)}>8 (800) 200-27-92</span>
+            <span>8 (800) 200-27-92</span>
           </div>
         </div>
       </div>

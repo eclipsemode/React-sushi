@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "redux/store";
+import { RootState } from "app/store";
 import { $host } from "processes/http";
 
 export enum ProductsStatus {

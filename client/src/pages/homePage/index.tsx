@@ -1,8 +1,8 @@
 import React from "react";
 
 import { Categories, Sort, Products, Banner } from "components";
-import { useAppSelector } from "redux/hooks";
-import { selectFilter } from "redux/features/filterSlice";
+import { useAppSelector } from "app/utils";
+import { selectFilter } from "entities/filterSlice";
 import ContentLoader from "react-content-loader";
 
 const Index: React.FC = () => {

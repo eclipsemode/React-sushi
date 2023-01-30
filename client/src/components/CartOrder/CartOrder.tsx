@@ -1,10 +1,10 @@
 import React from 'react';
 import { CartItem } from 'components';
-import { removeAll, selectCart } from 'redux/features/cartSlice';
+import { removeAll, selectCart } from 'entities/cartSlice';
 import styles from './CartOrder.module.css';
 import ClearButton from 'components/UI/ClearButton/ClearButton';
 import ApplyButton from 'components/UI/ApplyButton/ApplyButton';
-import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { useAppDispatch, useAppSelector } from "app/utils";
 
 const CartOrder: React.FC = () => {
     const { items, totalPrice, totalAmount } = useAppSelector(selectCart);

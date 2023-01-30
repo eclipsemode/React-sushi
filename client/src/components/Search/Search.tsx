@@ -1,10 +1,10 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
-import { setSearchValue, clearSearchValue } from '../../redux/features/filterSlice';
+import { setSearchValue, clearSearchValue } from 'entities/filterSlice';
 import styles from './search.module.css';
 import { BsSearch } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch } from "app/utils";
 
 const Search: React.FC = () => {
     const [searchValueLocal, setSearchValueLocal] = React.useState<string>('');

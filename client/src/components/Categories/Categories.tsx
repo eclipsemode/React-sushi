@@ -6,9 +6,9 @@ import cat4Img from "app/assets/img/4.png";
 import cat5Img from "app/assets/img/5.png";
 import cat6Img from "app/assets/img/6.png";
 
-import { setCategoryNumber, selectFilter } from "redux/features/filterSlice";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { fetchCategories } from "redux/features/categoriesSlice";
+import { setCategoryNumber, selectFilter } from "entities/filterSlice";
+import { useAppDispatch, useAppSelector } from "app/utils";
+import { fetchCategories } from "entities/categoriesSlice";
 import CategoriesSkeleton from "./CategoriesSkeleton";
 
 const Categories: React.FC = React.memo(() => {

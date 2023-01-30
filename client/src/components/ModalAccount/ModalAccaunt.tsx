@@ -1,9 +1,9 @@
 import React from "react";
 import styles from './ModalAccaunt.module.css'
 import { MdExitToApp, MdManageAccounts } from "react-icons/md";
-import { useAppDispatch } from "../../redux/hooks";
-import { fetchLogout } from "../../redux/features/userSlice";
+import { useAppDispatch } from "app/utils";
 import { useNavigate } from "react-router-dom";
+import { fetchUserLogout } from "features/logout";
 
 interface IModalAccountProps {
   modalRef: React.Ref<HTMLDivElement>
@@ -17,9 +17,14 @@ const ModalAccount: React.FC<IModalAccountProps> = ({ modalRef }) => {
     navigate('/personal')
   }
 
+  const reloadPage = () => {
+    navigate('/');
+    navigate(0);
+  }
+
   const handleExit = async () => {
-    await dispatch(fetchLogout());
-    navigate('')
+    await dispatch(fetchUserLogout());
+    reloadPage();
   }
   return (
     <div className={styles.root} ref={modalRef}>

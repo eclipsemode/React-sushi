@@ -1,6 +1,6 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { fetchUserInfo, IRegistrationProps, IUserInfo } from "../../../redux/features/userSlice";
+import { useAppDispatch, useAppSelector } from "app/utils";
+import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/userSlice";
 
 const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
