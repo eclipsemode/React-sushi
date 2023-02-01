@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "app/store";
-import { $host } from "processes/http";
+import { $api } from "processes/http";
 
 export enum ProductsStatus {
   PENDING,
@@ -34,7 +34,7 @@ export const fetchProducts = createAsyncThunk<IProducts[], IFetchParams>(
   "products/fetchProducts",
   async ({ ...params }) => {
     const { categoryNumber, sortType, sortOrder } = await params;
-    const { data } = await $host.get(`api/product?categoryId=${categoryNumber}&sortBy=${sortType}&sortOrder=${sortOrder}`);
+    const { data } = await $api.get(`api/product?categoryId=${categoryNumber}&sortBy=${sortType}&sortOrder=${sortOrder}`);
     return data;
   }
 );

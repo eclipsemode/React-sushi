@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { $authHost } from "processes/http";
+import { $api } from "processes/http";
 
 const fetchUserLogout = createAsyncThunk<void, void>(
   'logout/fetchUserLogout',
   async (_, { rejectWithValue }) => {
     try {
-      await $authHost.get('api/user/logout');
+      await $api.get('api/user/logout');
       localStorage.removeItem('accessToken');
     } catch (error: any) {
       if (error.response && error.response.data.message) {

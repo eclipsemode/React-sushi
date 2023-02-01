@@ -6,7 +6,9 @@ const withAuth = (component: any) => () => {
 
   const dispatch = useAppDispatch();
   React.useEffect(() => {
-    dispatch(fetchAuth())
+    if (localStorage.getItem('accessToken')) {
+      dispatch(fetchAuth())
+    }
   }, [dispatch])
 
   return component();

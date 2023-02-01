@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { $host } from "processes/http";
+import { $api } from "processes/http";
 
 export const fetchCategories = createAsyncThunk<ICategoriesState, void, { rejectValue: string }>(
   "category/fetchCategories",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await $host.get("api/category");
+      const res = await $api.get("api/category");
       return res.data;
     } catch (e: any) {
       return rejectWithValue(e);

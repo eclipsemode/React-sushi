@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { $host } from "processes/http";
+import { $api } from "processes/http";
 
 interface IRegistrationProps {
   email: string,
@@ -30,7 +30,7 @@ const fetchUserRegistration = createAsyncThunk<any, IRegistrationProps>(
            room
          }, { rejectWithValue }) => {
     try {
-      await $host.post(
+      await $api.post(
         "api/user/registration",
         {
           email,

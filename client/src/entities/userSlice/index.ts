@@ -1,5 +1,5 @@
 import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { $authHost } from "processes/http";
+import { $api } from "processes/http";
 
 export interface IRegistrationProps {
   id?: number
@@ -50,10 +50,10 @@ const fetchUserInfo = createAsyncThunk<IUserInfo, void, { rejectValue: string }>
   'user/fetchUserInfo',
   async (_, { rejectWithValue }) => {
     try {
-      const response =await $authHost.get('api/user/info');
+      const response =await $api.get('api/user/info');
       return response.data;
     } catch (e: any) {
-      return rejectWithValue(e.response.data.message)
+      return rejectWithValue(e.response?.data?.message)
     }
   }
 )
@@ -64,7 +64,7 @@ const fetchPatchUserInfo = createAsyncThunk<any, Omit<IRegistrationProps, "passw
     const { user }  = await getState();
     // @ts-ignore
     if ("user" in user && "id" in user.user) {
-      return await $authHost.patch("api/user/patch", {
+      return await $api.patch("api/user/patch", {
         id: user.user.id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room
       });
     }

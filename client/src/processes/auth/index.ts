@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { $authHost } from "processes/http";
+import {  $api } from "processes/http";
 import { setAuth, setUser } from "entities/userSlice";
 
 interface IInitialState {
@@ -16,7 +16,7 @@ const fetchAuth = createAsyncThunk(
   "auth/fetchAuth",
   async (_, { rejectWithValue, dispatch }) => {
     try {
-      const response = await $authHost.get('api/user/refresh');
+      const response = await $api.get('api/user/refresh');
       localStorage.setItem('accessToken', response.data.accessToken)
       dispatch(setAuth(true));
       dispatch(setUser(response.data.user))

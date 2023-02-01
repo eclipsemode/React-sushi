@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { $host } from "processes/http";
+import { $api } from "processes/http";
 
 interface ILogin {
   login: string,
@@ -10,7 +10,7 @@ const fetchUserLogin = createAsyncThunk<void, ILogin>(
   'login/fetchUserLogin',
   async ({ login, password }, { rejectWithValue }) => {
     try {
-      const response = await $host.post("api/user/login", { email: login, password });
+      const response = await $api.post("api/user/login", { email: login, password });
       localStorage.setItem("accessToken", response.data.user.accessToken);
     } catch (error: any) {
       if (error.response && error.response.data.message) {

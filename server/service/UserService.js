@@ -101,10 +101,10 @@ class UserService {
     }
   }
 
-  async auth({ id, email, role }) {
+  async auth({ id, role, name, surname }) {
     const token = jwt.sign(
-      {id, email, role},
-      process.env.SECRET_KEY,
+      {id, role, name, surname},
+      process.env.SECRET_KEY_ACCESS,
       {expiresIn: '24h'}
     );
     return token;

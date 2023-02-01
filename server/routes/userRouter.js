@@ -9,7 +9,7 @@ router.get("/activate/:link", userController.activate);
 router.get("/refresh", userController.refresh);
 router.post("/login", userController.login);
 router.get("/logout", userController.logout);
-router.get("/auth", authMiddleware, userController.auth);
+router.post("/auth", authMiddleware, userController.auth);
 router.get("/info", authMiddleware, userController.getUserData);
 router.patch("/patch", userController.patchUserData);
 
