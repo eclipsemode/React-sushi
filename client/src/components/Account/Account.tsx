@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Account.module.css";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "app/utils";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/userSlice";
 import { MoonLoader } from "react-spinners";
 import { MdAccountCircle } from "react-icons/md";

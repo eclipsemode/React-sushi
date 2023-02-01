@@ -3,7 +3,7 @@ import React from 'react';
 import Popup from './Popup/Popup';
 import sortNames, { SortNameType } from './SortNames';
 import { selectFilter } from 'entities/filterSlice';
-import { useAppSelector } from "app/utils";
+import { useAppSelector } from "app/hooks";
 
 const Sort: React.FC = () => {
     const [popupHidden, setPopupHidden] = React.useState<boolean>(true);

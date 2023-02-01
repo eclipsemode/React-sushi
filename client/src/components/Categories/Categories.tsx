@@ -7,7 +7,7 @@ import cat5Img from "app/assets/img/5.png";
 import cat6Img from "app/assets/img/6.png";
 
 import { setCategoryNumber, selectFilter } from "entities/filterSlice";
-import { useAppDispatch, useAppSelector } from "app/utils";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { fetchCategories } from "entities/categoriesSlice";
 import CategoriesSkeleton from "./CategoriesSkeleton";
 

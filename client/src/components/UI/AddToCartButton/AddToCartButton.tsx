@@ -3,7 +3,7 @@ import styles from "./AddToCartButton.module.css";
 import { CartButtonMinus, CartButtonPlus } from "../index";
 import { IProducts } from "entities/productsSlice";
 import { addItem } from "entities/cartSlice";
-import { useAppDispatch, useAppSelector } from "app/utils";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 
 type AddToCartButtonProps = {
   product: IProducts;

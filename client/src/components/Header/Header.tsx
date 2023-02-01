@@ -6,7 +6,7 @@ import styles from "./Header.module.css";
 import React  from "react";
 
 import { selectCart } from "entities/cartSlice";
-import { useAppSelector } from "app/utils";
+import { useAppSelector } from "app/hooks";
 import CartBlock from "components/UI/CartBlock/CartBlock";
 import { BsPersonCircle } from "react-icons/bs";
 import { ModalAccount } from "components/index";

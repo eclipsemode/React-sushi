@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Login.module.css";
 import { ApplyButton } from "components/UI";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { useAppDispatch } from "app/utils";
+import { useAppDispatch } from "app/hooks";
 import { fetchUserLogin } from "features/login";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";

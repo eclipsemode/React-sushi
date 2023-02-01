@@ -2,7 +2,7 @@ import React from 'react';
 
 import { setSortType, setSortId, setSortOrder, selectFilter } from 'entities/filterSlice';
 import { SortNameType } from '../SortNames';
-import { useAppDispatch, useAppSelector } from "app/utils";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 
 type PopupProps = {
     popupHidden: boolean;

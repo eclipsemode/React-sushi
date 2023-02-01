@@ -4,7 +4,7 @@ import { CartButtonMinus, CartButtonPlus } from '../UI';
 import { IProducts } from 'entities/productsSlice';
 import styles from './CartItem.module.css';
 import { IoClose } from 'react-icons/io5';
-import { useAppDispatch } from "app/utils";
+import { useAppDispatch } from "app/hooks";
 
 export type CartItemProps = {
     obj: IProducts;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Item from '../Item/Item';
 import { IProducts, selectProducts } from 'entities/productsSlice';
-import { useAppSelector } from "app/utils";
+import { useAppSelector } from "app/hooks";
 
 const Fulfilled: React.FC = () => {
     const { products } = useAppSelector(selectProducts);

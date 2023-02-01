@@ -1,8 +1,7 @@
-// @ts-nocheck
 import React from "react";
 import styles from "./Registration.module.css";
 import { ApplyButton } from "../UI";
-import { useAppDispatch } from "app/utils";
+import { useAppDispatch } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
 import { BsAsterisk } from "react-icons/bs";

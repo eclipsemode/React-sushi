@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "app/utils";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/userSlice";
 
 const Profile: React.FC = () => {

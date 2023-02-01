@@ -3,7 +3,7 @@ import { fetchProducts, ProductsStatus, selectProducts } from "entities/products
 import { selectFilter, IFilterState, setCategoryNumber } from "entities/filterSlice";
 import qs from "qs";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "app/utils";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { Rejected, Pending, Fulfilled } from "./index";
 
 const Products: React.FC = () => {

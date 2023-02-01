@@ -4,7 +4,7 @@ import { setSearchValue, clearSearchValue } from 'entities/filterSlice';
 import styles from './search.module.css';
 import { BsSearch } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
-import { useAppDispatch } from "app/utils";
+import { useAppDispatch } from "app/hooks";
 
 const Search: React.FC = () => {
     const [searchValueLocal, setSearchValueLocal] = React.useState<string>('');

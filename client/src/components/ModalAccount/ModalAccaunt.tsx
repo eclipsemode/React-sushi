@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './ModalAccaunt.module.css'
 import { MdExitToApp, MdManageAccounts } from "react-icons/md";
-import { useAppDispatch } from "app/utils";
+import { useAppDispatch } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import { fetchUserLogout } from "features/logout";
 

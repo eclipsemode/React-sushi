@@ -7,7 +7,7 @@ interface ILogin {
 }
 
 const fetchUserLogin = createAsyncThunk<void, ILogin>(
-  'login/fetchLogin',
+  'login/fetchUserLogin',
   async ({ login, password }, { rejectWithValue }) => {
     try {
       const response = await $host.post("api/user/login", { email: login, password });

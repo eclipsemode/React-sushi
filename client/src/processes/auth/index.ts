@@ -2,10 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { $authHost } from "processes/http";
 import { setAuth, setUser } from "entities/userSlice";
 
-// const accessToken = localStorage.getItem("accessToken")
-//   ? localStorage.getItem("accessToken")
-//   : null;
-
 interface IInitialState {
   loading: boolean,
   error: any,
@@ -16,7 +12,7 @@ const initialState: IInitialState = {
   error: null,
 };
 
-export const fetchAuth = createAsyncThunk(
+const fetchAuth = createAsyncThunk(
   "auth/fetchAuth",
   async (_, { rejectWithValue, dispatch }) => {
     try {
@@ -54,5 +50,7 @@ const userAuthSlice = createSlice({
       })
   }
 });
+
+export { fetchAuth };
 
 export default userAuthSlice.reducer;

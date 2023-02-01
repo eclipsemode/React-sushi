@@ -1,6 +1,6 @@
 import React from "react";
 import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "entities/userSlice";
-import { useAppDispatch, useAppSelector } from "app/utils";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import TextInput from "components/UI/TextInput/TextInput";
 import styles from "./Settings.module.css";
 
