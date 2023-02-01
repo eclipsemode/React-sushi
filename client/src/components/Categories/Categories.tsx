@@ -58,17 +58,6 @@ const Categories: React.FC = React.memo(() => {
               <span>{category.name}</span>
             </li>))
         }
-
-        {/*{*/}
-        {/*  categories.map((category, index) => (<li*/}
-        {/*    key={category.id}*/}
-        {/*    onClick={() => handleClickCategory(category.id)}*/}
-        {/*    className={categoryNumber === category.id ? "categories-item--active" : ""}*/}
-        {/*  >*/}
-        {/*    <img width="42" height="42" src={categoryImg(index)} alt="category" />*/}
-        {/*    <span>{category.name}</span>*/}
-        {/*  </li>))*/}
-        {/*}*/}
       </ul>
     </nav>
   );

@@ -12,6 +12,7 @@ const App: React.FC = () => {
   React.useEffect(() => {
     dispatch(fetchAuth())
   }, [dispatch])
+
   return (
     <div className="App">
       <Routing/>
