@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Categories, Sort, Products, Banner } from "components";
+import { Categories, Sort, Products, Banner } from "widgets";
 import { useAppSelector } from "app/hooks";
 import { selectFilter } from "entities/filterSlice";
 import ContentLoader from "react-content-loader";

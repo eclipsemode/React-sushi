@@ -1,8 +1,8 @@
 import React from 'react';
-import { Header } from 'components';
+import { Header } from 'widgets';
 import { Outlet } from 'react-router-dom';
-import Footer from "components/Footer/Footer";
-import ToTopArrow from "components/ToTopArrow/ToTopArrow";
+import Footer from "widgets/Footer/Footer";
+import ToTopArrow from "widgets/ToTopArrow/ToTopArrow";
 
 const MainLayout: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch } from "app/hooks";
-import { fetchAuth } from "processes/auth";
+import { fetchAuth } from "processes/services";
 
 const withAuth = (component: any) => () => {
 

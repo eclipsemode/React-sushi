@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Item.module.css';
 import { IProducts } from 'entities/productsSlice';
-import { AddToCartButton } from 'components/UI';
+import { AddToCartButton } from 'shared/UI';
 
 const Item: React.FC<IProducts> = ({ ...product }) => {
     const [imgScale, setImgScale] = React.useState<boolean>(false);

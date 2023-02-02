@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { NotFoundBlock } from 'components';
+import { NotFoundBlock } from 'widgets';
 
 const Index: React.FC = () => {
     return <NotFoundBlock />;

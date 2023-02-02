@@ -1,5 +1,5 @@
 import React from "react";
-import { Account } from "components";
+import { Account } from "widgets";
 
 const Index: React.FC = () => {
   return <Account />

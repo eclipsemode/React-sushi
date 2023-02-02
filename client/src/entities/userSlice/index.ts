@@ -1,5 +1,5 @@
 import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { $api } from "processes/http";
+import { $api } from "processes/api";
 
 export interface IRegistrationProps {
   id?: number

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Login.module.css";
-import { ApplyButton } from "components/UI";
+import { ApplyButton } from "shared/UI";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { useAppDispatch } from "app/hooks";
 import { fetchUserLogin } from "features/login";

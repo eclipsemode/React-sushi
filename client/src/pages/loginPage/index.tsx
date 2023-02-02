@@ -1,6 +1,6 @@
 import React from "react";
-import { Login } from "components";
-import { Registration } from "components";
+import { Login } from "widgets";
+import { Registration } from "widgets";
 import { useNavigate } from "react-router-dom";
 
 const Index: React.FC = () => {

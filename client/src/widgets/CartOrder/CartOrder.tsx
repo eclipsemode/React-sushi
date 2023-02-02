@@ -1,9 +1,8 @@
 import React from 'react';
-import { CartItem } from 'components';
+import { CartItem } from 'widgets';
 import { removeAll, selectCart } from 'entities/cartSlice';
 import styles from './CartOrder.module.css';
-import ClearButton from 'components/UI/ClearButton/ClearButton';
-import ApplyButton from 'components/UI/ApplyButton/ApplyButton';
+import { ClearButton, ApplyButton } from 'shared/UI';
 import { useAppDispatch, useAppSelector } from "app/hooks";
 
 const CartOrder: React.FC = () => {

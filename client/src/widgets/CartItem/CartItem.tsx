@@ -1,6 +1,6 @@
 import React from 'react';
 import { removeItemById } from 'entities/cartSlice';
-import { CartButtonMinus, CartButtonPlus } from '../UI';
+import { CartButtonMinus, CartButtonPlus } from 'shared/UI';
 import { IProducts } from 'entities/productsSlice';
 import styles from './CartItem.module.css';
 import { IoClose } from 'react-icons/io5';

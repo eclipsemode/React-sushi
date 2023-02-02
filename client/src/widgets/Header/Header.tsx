@@ -7,9 +7,9 @@ import React  from "react";
 
 import { selectCart } from "entities/cartSlice";
 import { useAppSelector } from "app/hooks";
-import CartBlock from "components/UI/CartBlock/CartBlock";
+import { CartBlock } from "shared/UI";
 import { BsPersonCircle } from "react-icons/bs";
-import { ModalAccount } from "components/index";
+import { ModalAccount } from "widgets/index";
 
 const Header: React.FC = () => {
   const { totalPrice, totalAmount } = useAppSelector(selectCart);

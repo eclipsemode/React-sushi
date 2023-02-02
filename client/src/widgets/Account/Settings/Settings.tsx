@@ -1,7 +1,7 @@
 import React from "react";
 import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "entities/userSlice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import TextInput from "components/UI/TextInput/TextInput";
+import { TextInput } from "shared/UI";
 import styles from "./Settings.module.css";
 
 const Settings: React.FC = () => {

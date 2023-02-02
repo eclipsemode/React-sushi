@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "app/store";
-import { $api } from "processes/http";
+import { $api } from "processes/api";
 
 export enum ProductsStatus {
   PENDING,

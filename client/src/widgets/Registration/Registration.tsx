@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Registration.module.css";
-import { ApplyButton } from "../UI";
+import { ApplyButton } from "shared/UI";
 import { useAppDispatch } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";

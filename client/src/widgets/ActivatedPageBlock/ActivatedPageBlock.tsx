@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './ActivatedPageBlock.module.css';
 import { BsFillCheckCircleFill } from "react-icons/bs";
-import Button from "../UI/Button/Button";
+import { Button } from "shared/UI";
 import { Link } from "react-router-dom";
 
 const ActivatedPageBlock: React.FC = () => {

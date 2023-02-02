@@ -5,7 +5,7 @@ import logoImg from 'app/assets/img/logo.png';
 import envelopeImg from 'app/assets/img/envelope.png';
 import callImg from 'app/assets/img/call.png';
 import locationImg from 'app/assets/img/location.png';
-import Input from "components/UI/Input/Input";
+import { Input } from "shared/UI";
 
 const Footer: React.FC = () => {
   return (

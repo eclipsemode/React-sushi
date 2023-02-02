@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { CartEmpty, CartOrder } from 'components';
+import { CartEmpty, CartOrder } from 'widgets';
 
 const Index: React.FC = () => {
     const { items }: any = useSelector<any>((state) => state.cart);

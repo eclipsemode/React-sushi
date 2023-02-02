@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { $api } from "processes/http";
+import { $api } from "processes/api";
 
 interface IRegistrationProps {
   email: string,
@@ -14,7 +14,7 @@ interface IRegistrationProps {
   entrance: string | number,
   room: string | number
 }
-const fetchUserRegistration = createAsyncThunk<any, IRegistrationProps>(
+const fetchUserRegistration = createAsyncThunk<void, IRegistrationProps>(
   "registration/fetchUserRegistration",
   async ({
            email,
@@ -57,38 +57,3 @@ const fetchUserRegistration = createAsyncThunk<any, IRegistrationProps>(
 );
 
 export { fetchUserRegistration }
-
-// interface IRegistrationState {
-//   loading: boolean,
-//   error: any,
-//   success: boolean
-// }
-//
-// const initialState: IRegistrationState = {
-//   loading: false,
-//   error: null,
-//   success: false
-// }
-//
-// const userRegistrationSlice = createSlice({
-//   name: 'registration',
-//   initialState,
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(fetchUserRegistration.pending, (state) => {
-//       state.loading = true;
-//       state.error = null
-//     })
-//       .addCase(fetchUserRegistration.fulfilled, (state) => {
-//         state.loading = false;
-//         state.success = true;
-//       })
-//       .addCase(fetchUserRegistration.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.payload;
-//       })
-//   }
-// })
-//
-// export default userRegistrationSlice.reducer;

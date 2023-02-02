@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {  $api } from "processes/http";
+import {  $api } from "processes/api";
 import { setAuth, setUser } from "entities/userSlice";
 
 interface IInitialState {

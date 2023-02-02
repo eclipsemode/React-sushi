@@ -1,5 +1,5 @@
 import React from "react";
-import { ActivatedPageBlock } from "components";
+import { ActivatedPageBlock } from "widgets";
 
 const Index: React.FC = () => {
   return <ActivatedPageBlock />
