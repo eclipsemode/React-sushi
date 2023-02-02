@@ -64,10 +64,16 @@ class UserService {
       return next(ApiError.badRequest('Пользователь с таким email не найден.'))
     }
 
-    let comparePassword = bcrypt.compareSync(password, user.password);
+    const comparePassword = bcrypt.compareSync(password, user.password);
 
     if (!comparePassword) {
       return next(ApiError.badRequest('Указан неверный пароль.'))
+    }
+
+    const checkActivated = user.isActivated;
+
+    if (!checkActivated) {
+      return next(ApiError.badRequest('Аккаунт не активирован, проверьте почту.'))
     }
 
     const userDto = new UserDto(user);

@@ -7,6 +7,7 @@ import { fetchUserLogin } from "features/login";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import  { ErrorMessage } from "@hookform/error-message";
+import { ValidationError } from "../../shared/error";
 
 type LoginProps = {
   setAuth: (value: boolean) => void;
@@ -22,8 +23,7 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
   const dispatch = useAppDispatch();
   const [passwordHidden, setPasswordHidden] = React.useState<boolean>(true);
   const passwordRef = React.useRef<HTMLInputElement>(null);
-  const [authorisationError, setAuthorisationError] = React.useState<JSX.Element | null>(null);
-  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+  const { register, handleSubmit, setError, formState: { errors } } = useForm<Inputs>();
 
   const reloadPage = () => {
     navigate('/');
@@ -31,8 +31,10 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
   }
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
-    const { payload } = await dispatch(fetchUserLogin({ login: data.login, password: data.password }));
-    if (typeof payload === "string") return setAuthorisationError(<span className={styles.root__error}>Неправильный логин или пароль.</span>)
+    const response: any = await dispatch(fetchUserLogin({ login: data.login, password: data.password }));
+    if (response.meta.requestStatus === 'rejected') {
+      return new ValidationError(response.payload, setError)
+    }
     reloadPage();
   };
 
@@ -40,10 +42,6 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
     setPasswordHidden(!passwordHidden);
     passwordRef.current?.focus();
   };
-
-  const clearError = (): void => {
-    setAuthorisationError(null);
-  }
 
   const handleAuth = () => {
     setAuth(false);
@@ -54,16 +52,8 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
       return <span className={styles.root__error}>Поле не может быть пустым.</span>
     } else if (errors.login?.type === 'pattern') {
       return <span className={styles.root__error}>Введите ваш email.</span>
-    }
-  }
-
-  const passwordError = (): JSX.Element | void => {
-    if (errors.password?.type === 'required') {
-      return <span className={styles.root__error}>Поле не может быть пустым.</span>
-    } else if (errors.password?.type === 'pattern') {
-      return <span className={styles.root__error}>Пароль не должен содержать буквы кириллицы.</span>
-    } else if (errors.password?.type === 'minLength') {
-      return <span className={styles.root__error}>Пароль не может иметь меньше 8 символов.</span>
+    } else if (errors.login?.type === 'custom') {
+      return <span className={styles.root__error}>{errors.login?.message}</span>
     }
   }
 
@@ -72,7 +62,6 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
     <div className={styles.root}>
       <div className={styles.root__container}>
         <h1>Вход</h1>
-        { authorisationError !== null ? authorisationError : '' }
         <ErrorMessage
           errors={errors}
           name="login"
@@ -82,12 +71,6 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
                className={styles.root__input + ' ' + (errors.login && styles.root__input_invalid)}
                name="login"
                placeholder="Имя пользователя" type="text"
-               onFocus={clearError}
-        />
-        <ErrorMessage
-          errors={errors}
-          name="password"
-          render={(): any => passwordError()}
         />
         <div className={styles.root__password}>
           <input {...register('password', { required: true, pattern: /^[0-9a-zA-Z!@#$%^&*]+$/g, minLength: 8 })}
@@ -96,7 +79,6 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
                  autoComplete="on"
                  placeholder="Пароль"
                  type={passwordHidden ? "password" : "text"}
-                 onFocus={clearError}
           />
           {passwordHidden ? <HiEye onClick={() => handlePasswordHidden()} /> :
             <HiEyeOff onClick={() => handlePasswordHidden()} />}
