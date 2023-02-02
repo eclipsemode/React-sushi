@@ -58,15 +58,6 @@ class UserController {
     }
   }
 
-  async auth(req, res, next) {
-    try {
-      const token = UserService.auth(req.user);
-      return res.json({ token });
-    } catch (e) {
-      return next(ApiError.badRequest(e.message));
-    }
-  }
-
   async getUserData(req, res, next) {
     try {
       const { refreshToken } = req.cookies;

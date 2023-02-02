@@ -2,7 +2,6 @@ const { User } = require('../models/models');
 const MailService = require('./MailService');
 const ApiError = require("../error/ApiError");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const TokenService = require('./TokenService');
 const UserDto = require('../dto/UserDto');
 const uuid = require('uuid');
@@ -99,15 +98,6 @@ class UserService {
       ...tokens,
       user: userDto
     }
-  }
-
-  async auth({ id, role, name, surname }) {
-    const token = jwt.sign(
-      {id, role, name, surname},
-      process.env.SECRET_KEY_ACCESS,
-      {expiresIn: '24h'}
-    );
-    return token;
   }
 
   async getUserData(token) {
