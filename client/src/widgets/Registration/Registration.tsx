@@ -10,6 +10,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
 import { fetchUserRegistration } from "features/registration";
+import { ValidationError } from "../../shared/error";
 
 type RegistrationProps = {
   setAuth: (value: boolean) => void;
@@ -54,8 +55,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
       room: data.room
     }));
     if (response.meta.requestStatus === "rejected") {
-      setError('email', { type: 'custom', message: response.payload });
-      return;
+      return new ValidationError(response.payload, setError);
     }
     navigate("/");
   };
@@ -103,6 +103,8 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
       return <span className={styles.root__error}>Поле не может быть пустым.</span>;
     } else if (errors.tel?.type === "minLength") {
       return <span className={styles.root__error}>Введите номер телефона полностью.</span>;
+    } else if (errors.tel?.type === 'custom') {
+      return <span className={styles.root__error}>{errors.tel?.message}</span>;
     }
 
   };

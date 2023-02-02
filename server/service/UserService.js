@@ -25,10 +25,15 @@ class UserService {
       return next(ApiError.badRequest('Введите телефон.'))
     }
 
-    const candidate = await User.findOne( { where: { email } } );
+    const candidateEmail = await User.findOne( { where: { email } } );
+    const candidateTel = await User.findOne({ where: { tel } });
 
-    if (candidate) {
+    if (candidateEmail) {
       return next(ApiError.badRequest('Пользователь с таким email уже существует.'))
+    }
+
+    if (candidateTel) {
+      return next(ApiError.badRequest('Пользователь с таким номером телефона уже существует.'))
     }
 
     const hashPassword = await bcrypt.hash(password, 5);
