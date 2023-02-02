@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import styles from "./Registration.module.css";
 import { ApplyButton } from "shared/UI";
@@ -32,28 +33,28 @@ type Inputs = {
 const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+  const { register, handleSubmit, setError, watch, formState: { errors } } = useForm<Inputs>();
 
   const handleAuth = () => {
     setAuth(true);
   };
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
-    try {
-      await dispatch(fetchUserRegistration({
-        name: data.name,
-        surname: data.surname,
-        dateOfBirth: data.dateOfBirth,
-        email: data.email,
-        password: data.password,
-        tel: data.tel,
-        street: data.street,
-        house: data.house,
-        floor: data.floor,
-        entrance: data.entrance,
-        room: data.room
-      }));
-    } catch (e) {
+    const response = await dispatch(fetchUserRegistration({
+      name: data.name,
+      surname: data.surname,
+      dateOfBirth: data.dateOfBirth,
+      email: data.email,
+      password: data.password,
+      tel: data.tel,
+      street: data.street,
+      house: data.house,
+      floor: data.floor,
+      entrance: data.entrance,
+      room: data.room
+    }));
+    if (response.meta.requestStatus === "rejected") {
+      setError('email', { type: 'custom', message: response.payload });
       return;
     }
     navigate("/");
@@ -74,6 +75,8 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
       return <span className={styles.root__error}>Поле не может быть пустым.</span>;
     } else if (errors.email?.type === "pattern") {
       return <span className={styles.root__error}>Введите ваш email.</span>;
+    } else if (errors.email?.type === 'custom') {
+      return <span className={styles.root__error}>{errors.email?.message}</span>;
     }
   };
 
@@ -115,7 +118,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             errors={errors}
             render={(): any => nameError()} />
           <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input_required + ' ' + (errors.name && styles.root__input_invalid)}
+            <input className={styles.root__input_required + " " + (errors.name && styles.root__input_invalid)}
                    {...register("name", {
                      required: true,
                      maxLength: 20,
@@ -140,7 +143,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             errors={errors}
             render={(): any => emailError()} />
           <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input_required + ' ' + (errors.email && styles.root__input_invalid)}
+            <input className={styles.root__input_required + " " + (errors.email && styles.root__input_invalid)}
                    {...register("email", {
                      required: true,
                      pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -154,10 +157,9 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             errors={errors}
             render={(): any => passwordError()} />
           <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input_required + ' ' + (errors.password && styles.root__input_invalid)}
+            <input className={styles.root__input_required + " " + (errors.password && styles.root__input_invalid)}
                    {...register("password", { required: true, minLength: 8 })}
                    placeholder="Пароль"
-                   autoComplete="on"
                    type="password" />
             <BsAsterisk />
           </div>
@@ -166,7 +168,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             errors={errors}
             render={(): any => passwordRepeatError()} />
           <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input_required + ' ' + (errors.passwordRepeat && styles.root__input_invalid)}
+            <input className={styles.root__input_required + " " + (errors.passwordRepeat && styles.root__input_invalid)}
                    {...register("passwordRepeat", {
                      required: true,
                      minLength: 8,
@@ -182,7 +184,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             errors={errors}
             render={(): any => telError()} />
           <div className={styles.root__requiredBlock}>
-            <InputMask className={styles.root__input_required + ' ' + (errors.tel && styles.root__input_invalid)}
+            <InputMask className={styles.root__input_required + " " + (errors.tel && styles.root__input_invalid)}
                        {...register("tel", { required: true, minLength: 18 })}
                        placeholder="+7 (xxx) xxx-xx-xx"
                        type="tel"

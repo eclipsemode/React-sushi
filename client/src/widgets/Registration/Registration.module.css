@@ -77,7 +77,6 @@
 .root__requiredBlock {
   display: flex;
   align-items: center;
-  column-gap: 1rem;
   position: relative;
 }
 .root__requiredBlock svg {
