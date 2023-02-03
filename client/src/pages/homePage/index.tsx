@@ -1,13 +1,13 @@
 import React from "react";
 
-import { Categories, Sort, Products, Banner } from "widgets";
+import { Categories, Products, Banner } from "widgets";
 import { useAppSelector } from "app/hooks";
-import { selectFilter } from "entities/filterSlice";
 import ContentLoader from "react-content-loader";
+import { Sort } from "features/filter/ui";
 
 const Index: React.FC = () => {
-  const { categoryNumber } = useAppSelector(selectFilter);
-  const { categories } = useAppSelector(state => state.category);
+  const { categories } = useAppSelector(state => state.categoriesReducer);
+  const { categoryNumber } = useAppSelector(state => state.filterReducer)
 
   return (
     <>

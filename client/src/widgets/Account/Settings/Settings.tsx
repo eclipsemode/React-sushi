@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "entities/userSlice";
+import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "entities/user";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { TextInput } from "shared/UI";
 import styles from "./Settings.module.css";
@@ -7,7 +7,7 @@ import styles from "./Settings.module.css";
 const Settings: React.FC = () => {
   const [userInfo, setUserInfo] = React.useState<IRegistrationProps>();
   const dispatch = useAppDispatch();
-  const { user, isAuth } = useAppSelector(state => state.user);
+  const { user, isAuth } = useAppSelector(state => state.userReducer);
   const [name, setName] = React.useState<string>("");
   const [surname, setSurname] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
@@ -41,6 +41,7 @@ const Settings: React.FC = () => {
   const handleSubmitButton = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     window.confirm('Подтвердить изменение информации?');
+    // @ts-ignore
     await dispatch(fetchPatchUserInfo({email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room}));
     window.location.reload();
   };

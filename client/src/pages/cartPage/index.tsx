@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { CartEmpty, CartOrder } from 'widgets';
+import { useAppSelector } from "app/hooks";
 
 const Index: React.FC = () => {
-    const { items }: any = useSelector<any>((state) => state.cart);
+    const { items }: any = useAppSelector((state) => state.cartReducer);
 
     return <div className="content">{items.length > 0 ? <CartOrder /> : <CartEmpty />}</div>;
 };

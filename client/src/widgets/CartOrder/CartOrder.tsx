@@ -1,9 +1,10 @@
 import React from 'react';
 import { CartItem } from 'widgets';
-import { removeAll, selectCart } from 'entities/cartSlice';
+import { removeAll, selectCart } from 'entities/cart';
 import styles from './CartOrder.module.css';
 import { ClearButton, ApplyButton } from 'shared/UI';
 import { useAppDispatch, useAppSelector } from "app/hooks";
+import { IProducts } from 'entities/products';
 
 const CartOrder: React.FC = () => {
     const { items, totalPrice, totalAmount } = useAppSelector(selectCart);
@@ -11,24 +12,24 @@ const CartOrder: React.FC = () => {
     const deliveryPrice: 0 | 100 = totalPrice > 1200 ? 0 : 100;
 
     const handleRemoveAll = () => {
-        if (window.confirm('Подтвердить удаление товаров?')) {
+        if (window.confirm("Подтвердить удаление товаров?")) {
             dispatch(removeAll());
         }
     };
 
     return (
-        <div className={styles.root}>
-            <table className={styles.root__table}>
-                <thead>
-                    <tr>
-                        <th>Товар</th>
-                        <th>Стоимость</th>
-                        <th>Количество</th>
-                        <th>Общая стоимость</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {items.map((obj) => (
+      <div className={styles.root}>
+          <table className={styles.root__table}>
+              <thead>
+              <tr>
+                  <th>Товар</th>
+                  <th>Стоимость</th>
+                  <th>Количество</th>
+                  <th>Общая стоимость</th>
+              </tr>
+              </thead>
+              <tbody>
+              {items.map((obj: IProducts) => (
                         <CartItem key={obj.id} obj={obj} />
                     ))}
                 </tbody>

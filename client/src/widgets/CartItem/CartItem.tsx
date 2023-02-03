@@ -1,7 +1,7 @@
 import React from 'react';
-import { removeItemById } from 'entities/cartSlice';
+import { removeItemById } from 'entities/cart';
 import { CartButtonMinus, CartButtonPlus } from 'shared/UI';
-import { IProducts } from 'entities/productsSlice';
+import { IProducts } from 'entities/products';
 import styles from './CartItem.module.css';
 import { IoClose } from 'react-icons/io5';
 import { useAppDispatch } from "app/hooks";

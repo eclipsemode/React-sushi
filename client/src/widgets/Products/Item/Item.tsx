@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Item.module.css';
-import { IProducts } from 'entities/productsSlice';
+import { IProducts } from 'entities/products';
 import { AddToCartButton } from 'shared/UI';
 
 const Item: React.FC<IProducts> = ({ ...product }) => {

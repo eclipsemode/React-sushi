@@ -7,7 +7,6 @@ export { default as NotFoundBlock } from './NotFoundBlock/NotFoundBlock';
 export { default as Products } from './Products/Products';
 export { default as Account } from './Account/Account';
 export { default as Banner } from './Banner/Banner';
-export { default as Sort } from './Sort/Sort';
 export { default as Login } from './Login/Login';
 export { default as Registration } from './Registration/Registration';
 export { default as ModalAccount } from './ModalAccount/ModalAccaunt';

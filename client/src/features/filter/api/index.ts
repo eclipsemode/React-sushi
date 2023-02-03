@@ -52,7 +52,7 @@ export const filterSlice = createSlice({
   },
 });
 
-export const selectFilter = (state: RootState) => state.filter;
+export const selectFilter = (state: RootState) => state.filterReducer;
 export const { setSearchValue, clearSearchValue, setSortId, setSortType, setSortOrder, setCategoryNumber } =
   filterSlice.actions;
 export default filterSlice.reducer;

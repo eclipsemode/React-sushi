@@ -1,6 +1,6 @@
 import React from "react";
-import { fetchProducts, ProductsStatus, selectProducts } from "entities/productsSlice";
-import { selectFilter, IFilterState, setCategoryNumber } from "entities/filterSlice";
+import { fetchProducts, ProductsStatus, selectProducts } from "entities/products";
+import { selectFilter, IFilterState, setCategoryNumber } from "features/filter/api";
 import qs from "qs";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "app/hooks";

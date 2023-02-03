@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Account.module.css";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/userSlice";
+import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/user";
 import { MoonLoader } from "react-spinners";
 import { MdAccountCircle } from "react-icons/md";
 import { AiOutlineStar } from "react-icons/ai";
@@ -13,7 +13,7 @@ type SelectedType = "profile" | "orders" | "settings";
 
 const Account: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isAuth } = useAppSelector(state => state.user);
+  const { isAuth } = useAppSelector(state => state.userReducer);
   const [userInfo, setUserInfo] = React.useState<IRegistrationProps | null>(null);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [selected, setSelected] = React.useState<SelectedType>("profile");

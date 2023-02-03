@@ -60,7 +60,7 @@ User.hasMany(Order);
 Order.belongsTo(User);
 
 Category.hasMany(Product);
-Product.hasOne(Category);
+Product.belongsTo(Category);
 
 module.exports = {
   User,

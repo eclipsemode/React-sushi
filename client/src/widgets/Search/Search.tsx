@@ -1,6 +1,6 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
-import { setSearchValue, clearSearchValue } from 'entities/filterSlice';
+import { setSearchValue, clearSearchValue } from 'features/filter/api';
 import styles from './search.module.css';
 import { BsSearch } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';

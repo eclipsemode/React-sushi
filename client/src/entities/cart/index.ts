@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
-import { IProducts } from "entities/productsSlice";
+import { IProducts } from "entities/products";
 
 export interface ICartState {
   items: IProducts[];
@@ -64,6 +64,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const selectCart = (state: RootState) => state.cart;
+export const selectCart = (state: RootState) => state.cartReducer;
 export const { addItem, removeItem, removeAll, removeItemById } = cartSlice.actions;
 export default cartSlice.reducer;

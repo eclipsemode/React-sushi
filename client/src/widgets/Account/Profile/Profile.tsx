@@ -1,10 +1,10 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/userSlice";
+import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/user";
 
 const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isAuth } = useAppSelector(state => state.user);
+  const { isAuth } = useAppSelector(state => state.userReducer);
   const [userData, setUserData] = React.useState<IRegistrationProps | null>(null);
 
   React.useEffect(() => {

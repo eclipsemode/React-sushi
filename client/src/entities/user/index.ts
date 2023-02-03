@@ -65,7 +65,7 @@ const fetchPatchUserInfo = createAsyncThunk<any, Omit<IRegistrationProps, "passw
     // @ts-ignore
     if ("user" in user && "id" in user.user) {
       return await $api.patch("api/user/patch", {
-        id: user.user.id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room
+        id: user.user?.id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room
       });
     }
   }

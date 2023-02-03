@@ -5,7 +5,7 @@ import styles from "./Header.module.css";
 
 import React  from "react";
 
-import { selectCart } from "entities/cartSlice";
+import { selectCart } from "entities/cart";
 import { useAppSelector } from "app/hooks";
 import { CartBlock } from "shared/UI";
 import { BsPersonCircle } from "react-icons/bs";
@@ -13,7 +13,7 @@ import { ModalAccount } from "widgets/index";
 
 const Header: React.FC = () => {
   const { totalPrice, totalAmount } = useAppSelector(selectCart);
-  const { isAuth, user } = useAppSelector(state => state.user);
+  const { isAuth, user } = useAppSelector(state => state.userReducer);
   const [accModal, setAccModal] = React.useState<boolean>(false);
   const headerRef = React.useRef<HTMLDivElement>(null);
   const modalRef = React.useRef<HTMLDivElement>(null);

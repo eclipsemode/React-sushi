@@ -11,18 +11,18 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import filter from 'entities/filterSlice';
-import products from 'entities/productsSlice';
-import cart from "entities/cartSlice";
-import user from "entities/userSlice";
-import category from 'entities/categoriesSlice';
+import filterReducer from 'features/filter/api';
+import productsReducer from 'entities/products';
+import cartReducer from "entities/cart";
+import userReducer from "entities/user";
+import categoriesReducer from "entities/categories";
 
 const rootReducer = combineReducers({
-  filter,
-  products,
-  cart,
-  user,
-  category
+  filterReducer,
+  productsReducer,
+  cartReducer,
+  userReducer,
+  categoriesReducer
 });
 
 const persistConfig = {

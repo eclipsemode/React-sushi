@@ -1,32 +1,36 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { $api } from "processes/api";
 
-export const fetchCategories = createAsyncThunk<ICategoriesState, void, { rejectValue: string }>(
-  "category/fetchCategories",
+type CategoriesStatusType = 'fulfilled' | 'pending' | 'rejected';
+
+export interface ICategoryState {
+  categories: { id: number, name: string }[];
+  categoriesStatus: CategoriesStatusType;
+}
+
+const fetchCategories = createAsyncThunk<ICategoryState, void, { rejectValue: string }>(
+  "categories/fetchCategories",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await $api.get("api/category");
+      const res = await $api.get("api/categories");
       return res.data;
-    } catch (e: any) {
-      return rejectWithValue(e);
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
     }
   }
 );
 
-type CategoriesStatusType = 'fulfilled' | 'pending' | 'rejected';
-
-export interface ICategoriesState {
-  categories: { id: number, name: string }[];
-  categoriesStatus: CategoriesStatusType
-}
-
-const initialState: ICategoriesState = {
+const initialState: ICategoryState = {
   categories: [],
   categoriesStatus: 'pending'
-};
+}
 
-export const categoriesSlice = createSlice({
-  name: "category",
+const categoriesSlice = createSlice({
+  name: 'category',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -42,6 +46,8 @@ export const categoriesSlice = createSlice({
         state.categoriesStatus = 'rejected';
       });
   }
-});
+})
+
+export { fetchCategories };
 
 export default categoriesSlice.reducer;

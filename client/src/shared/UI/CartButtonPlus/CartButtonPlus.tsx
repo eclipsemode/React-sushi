@@ -2,8 +2,8 @@ import React from 'react';
 import styles from '../CartButtonMinus/CartButtonMinus.module.css';
 import { TiPlus } from 'react-icons/ti';
 import { useDispatch } from "react-redux";
-import { addItem } from "entities/cartSlice";
-import { IProducts } from "entities/productsSlice";
+import { addItem } from "entities/cart";
+import { IProducts } from "entities/products";
 
 interface CartButtonPlusType {
     product: IProducts;

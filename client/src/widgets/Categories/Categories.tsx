@@ -6,15 +6,15 @@ import cat4Img from "app/assets/img/4.png";
 import cat5Img from "app/assets/img/5.png";
 import cat6Img from "app/assets/img/6.png";
 
-import { setCategoryNumber, selectFilter } from "entities/filterSlice";
+import { setCategoryNumber } from "features/filter/api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { fetchCategories } from "entities/categoriesSlice";
+import { fetchCategories } from "entities/categories";
 import CategoriesSkeleton from "./CategoriesSkeleton";
 
 const Categories: React.FC = React.memo(() => {
   const dispatch = useAppDispatch();
-  const { categories, categoriesStatus } = useAppSelector(state => state.category);
-  const { categoryNumber } = useAppSelector(selectFilter);
+  const { categoriesStatus, categories } = useAppSelector(state => state.categoriesReducer);
+  const { categoryNumber } = useAppSelector(state => state.filterReducer)
 
   React.useEffect(() => {
     dispatch(fetchCategories());
