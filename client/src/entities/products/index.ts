@@ -24,18 +24,20 @@ export interface IProductsState {
   productsStatus: ProductsStatus;
 }
 
-interface IFetchParams {
-  categoryNumber: number;
-  sortType: string;
-  sortOrder: string;
-}
-
-export const fetchProducts = createAsyncThunk<IProducts[], IFetchParams>(
+export const fetchProducts = createAsyncThunk<IProducts[], void, { state: RootState }>(
   "products/fetchProducts",
-  async ({ ...params }) => {
-    const { categoryNumber, sortType, sortOrder } = await params;
-    const { data } = await $api.get(`api/product?categoryId=${categoryNumber}&sortBy=${sortType}&sortOrder=${sortOrder}`);
-    return data;
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const { filterReducer } = getState();
+      const { data } = await $api.get(`api/product?categoryId=${filterReducer.categoryNumber}&sortBy=${filterReducer.sortType}&sortOrder=${filterReducer.sortOrder}`);
+      return data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
   }
 );
 

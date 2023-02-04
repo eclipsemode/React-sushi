@@ -1,0 +1,49 @@
+.root {
+  background: #fff;
+  height: 179px;
+}
+.root:not(:last-of-type) {
+  border-bottom: 1px solid rgba(41, 41, 41, 0.1);
+}
+.root__product {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  column-gap: 3rem;
+  height: inherit;
+}
+.root__product svg {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: fill ease-in-out 0.2s;
+  margin-left: 1rem;
+}
+.root__product svg:hover {
+  fill: rgb(206, 40, 41);
+}
+.root__price {
+  font-size: 20px;
+  font-weight: 600;
+  color: #212529;
+  width: 142px;
+  text-align: center;
+}
+.root__amount {
+  width: 270px;
+}
+.root__amount div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1rem;
+}
+.root__total {
+  font-size: 20px;
+  font-weight: 600;
+  color: #212529;
+  width: 204px;
+  text-align: center;
+}
+
+/*# sourceMappingURL=index.module.css.map */

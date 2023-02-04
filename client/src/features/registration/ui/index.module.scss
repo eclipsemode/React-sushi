@@ -1,0 +1,64 @@
+@import '../../../app/assets/styles/mixins/authorisation';
+
+.root {
+  @include Authorisation;
+
+  &__topInfo {
+    font-size: 14px;
+
+   & > svg {
+     width: 9px;
+     height: 9px;
+     color: red;
+    }
+  }
+
+  &__address {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    column-gap: 1rem;
+
+    & input {
+      flex: 1 2 40%;
+    }
+
+    & input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    & input[type=number] {
+      -moz-appearance: textfield;
+    }
+  }
+
+  & p {
+    margin-top: 1rem;
+
+    & span {
+      cursor: pointer;
+      color: blue;
+
+      &:hover {
+        color: darkslateblue;
+      }
+    }
+  }
+
+  &__requiredBlock {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    & svg {
+      margin-right: 1rem;
+      width: 9px;
+      height: 9px;
+      color: red;
+      position: absolute;
+      right: 0;
+    }
+  }
+}

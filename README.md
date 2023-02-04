@@ -2,7 +2,7 @@
 
 SPA application with client-server architecture.
 
-1. Authorisation / Registration. JWT. **`Done.`**
+1. Authorisation / Index. JWT. **`Done.`**
 2. REST Api with Postgresql (CRUD) **`Done.`**
 3. Advanced authorisation, access tokens, refresh tokens etc... **`Done.`**
 4. User's Index account with previous orders and personal data. **`In Progress...`**

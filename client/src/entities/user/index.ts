@@ -58,14 +58,13 @@ const fetchUserInfo = createAsyncThunk<IUserInfo, void, { rejectValue: string }>
   }
 )
 
-const fetchPatchUserInfo = createAsyncThunk<any, Omit<IRegistrationProps, "password">, { state: { user: IUserState } }>(
+const fetchPatchUserInfo = createAsyncThunk<any, Omit<IRegistrationProps, "password">, { state: RootState }>(
   "user/fetchPatchUserInfo",
   async ({ email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room }, { getState }) => {
-    const { user }  = await getState();
-    // @ts-ignore
-    if ("user" in user && "id" in user.user) {
+    const { userReducer } = await getState();
+    if ("user" in userReducer && "id" in userReducer.user) {
       return await $api.patch("api/user/patch", {
-        id: user.user?.id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room
+        id: userReducer.user?.id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room
       });
     }
   }

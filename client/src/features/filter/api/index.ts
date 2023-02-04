@@ -13,7 +13,6 @@ export enum SortOrderType {
 
 export interface IFilterState {
   sortId: number;
-  searchValue?: string;
   sortType: SortType;
   sortOrder: SortOrderType;
   categoryNumber: number;
@@ -21,7 +20,6 @@ export interface IFilterState {
 
 const initialState: IFilterState = {
   sortId: 0,
-  searchValue: '',
   sortType: SortType.RATING,
   sortOrder: SortOrderType.ASC,
   categoryNumber: 1,
@@ -31,12 +29,6 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setSearchValue: (state, action: PayloadAction<string>) => {
-      state.searchValue = action.payload;
-    },
-    clearSearchValue: (state) => {
-      state.searchValue = '';
-    },
     setSortId: (state, action: PayloadAction<number>) => {
       state.sortId = action.payload;
     },
@@ -53,6 +45,6 @@ export const filterSlice = createSlice({
 });
 
 export const selectFilter = (state: RootState) => state.filterReducer;
-export const { setSearchValue, clearSearchValue, setSortId, setSortType, setSortOrder, setCategoryNumber } =
+export const { setSortId, setSortType, setSortOrder, setCategoryNumber } =
   filterSlice.actions;
 export default filterSlice.reducer;

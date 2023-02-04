@@ -1,6 +1,6 @@
 import React from "react";
 import { fetchProducts, ProductsStatus, selectProducts } from "entities/products";
-import { selectFilter, IFilterState, setCategoryNumber } from "features/filter/api";
+import { selectFilter, setCategoryNumber } from "features/filter/api";
 import qs from "qs";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "app/hooks";
@@ -8,7 +8,7 @@ import { Rejected, Pending, Fulfilled } from "./index";
 
 const Products: React.FC = () => {
   const location = useLocation();
-  const { searchValue, categoryNumber, sortType, sortOrder } = useAppSelector(selectFilter);
+  const { categoryNumber, sortType, sortOrder } = useAppSelector(selectFilter);
   const { productsStatus } = useAppSelector(selectProducts);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -28,16 +28,15 @@ const Products: React.FC = () => {
 
   React.useEffect(() => {
       if (location.search) {
-        const queryStr = qs.parse(window.location.search.substring(1)) as unknown as IFilterState;
-        dispatch(setCategoryNumber(queryStr.categoryNumber));
+        const queryStr = qs.parse(location.search.substring(1)) as { categoryNumber: string };
+        dispatch(setCategoryNumber(Number(queryStr.categoryNumber)));
       }
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch, location]);
 
   React.useEffect(() => {
-      dispatch(fetchProducts({ categoryNumber, sortType, sortOrder }));
+    dispatch(fetchProducts());
 
-  }, [categoryNumber, dispatch, searchValue, sortOrder, sortType]);
+  }, [categoryNumber, dispatch, sortOrder, sortType]);
 
   return productsStatus === ProductsStatus.PENDING ? (
     <Pending />

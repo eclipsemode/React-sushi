@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { fetchCategories } from "entities/categories";
 import CategoriesSkeleton from "./CategoriesSkeleton";
 
-const Categories: React.FC = React.memo(() => {
+const Categories: React.FC = () => {
   const dispatch = useAppDispatch();
   const { categoriesStatus, categories } = useAppSelector(state => state.categoriesReducer);
   const { categoryNumber } = useAppSelector(state => state.filterReducer)
@@ -61,6 +61,6 @@ const Categories: React.FC = React.memo(() => {
       </ul>
     </nav>
   );
-});
+};
 
 export default Categories;

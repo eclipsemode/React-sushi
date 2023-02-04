@@ -1,0 +1,33 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2rem;
+  min-height: 10rem;
+}
+.root__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1rem;
+  text-align: center;
+}
+.root__title > svg {
+  fill: limegreen;
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 563px) {
+  .root__title h2 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 341px) {
+  .root__title h2 {
+    font-size: 16px;
+  }
+}
+
+/*# sourceMappingURL=index.module.css.map */
