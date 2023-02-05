@@ -1,7 +1,9 @@
+const path = require('path');
 const nodemailer = require("nodemailer");
+const hbs = require('nodemailer-express-handlebars');
 
 class MailService {
-
+  transporter;
   constructor() {
     this.transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -10,24 +12,42 @@ class MailService {
       service: 'gmail',
       auth: {
         user: process.env.SMTP_USER,
-        pass: 'cipypsyrotuosekc'
+        pass: process.env.SMTP_PASSWORD
       }
     });
+
+    this.transporter.use('compile', hbs({
+      viewEngine: {
+        extname: '.hbs',
+        layoutsDir: 'views/',
+        defaultLayout: false,
+        partialsDir: 'views/',
+      },
+      viewPath: 'views/',
+      extName: '.hbs'
+    }));
   }
 
   async sendActivationMail(to, link) {
     await this.transporter.sendMail({
-      from: process.env.SMTP_USER,
+      from: 'Суши-бар <sushi@company.com>',
       to,
-      subject: "Активаация аккаунта на " + process.env.API_URL,
+      subject: 'Суши-бар. Активация аккаунта.',
       text: "",
-      html:
-        `
-        <div>
-          <h1>Для активации перейдите по ссылке</h1>
-          <a href="${link}">${link}</a>
-        </div>
-      `
+      attachments: [{
+        filename: 'register.png',
+        path: 'views/assets/register.png',
+        cid: 'registerImg'
+      }],
+      template: 'post-activation',
+      context: {
+        link
+      }
+    }, (error) => {
+      if (error) {
+        return console.error(error.message);
+      }
+      return console.log('Email sent!!!');
     });
   }
 }

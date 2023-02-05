@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      font-family: arial, 'helvetica neue', helvetica, sans-serif;
+    }
+    .wrapper {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      justify-content: center;
+    }
+    .main {
+      background: white;
+      width: 600px;
+      height: 605px;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      row-gap: 15px;
+    }
+    .main__top {
+      border-radius: 5px;
+      border: 1px solid #fdc913;
+      width: fit-content;
+      height: fit-content;
+      background: #FAF7F2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    .main__img {
+      margin-top: 15px;
+    }
+    .main__bottom {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center
+    }
+
+    .button {
+      padding: 15px;
+      background: #FAF7F2;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      color: #111111;
+    }
+    .button:hover {
+      background: #fdc913;
+    }
+    h1 {
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+<div class="main">
+  <div class="main__top">
+    <img class="main__img" width="100px" src="cid:registerImg"  alt="post image" />
+    <h1>Подтвердите ваш аккаунт</h1>
+    <p>Пожалуйста, нажмите на кнопку ниже, для подтверждения того, что вы действительно являетесь владельцем аккаунта.</p>
+    <p>Если это не так, игнорируйте это письмо.</p>
+  </div>
+  <div class="main__bottom">
+    <a class="button" href={{link}} target="_blank">Подтвердить аккаунт</a>
+    <p>Данная ссылка исчезнет через 24 часа.<br/>
+      Если у вас есть вопросы, <a href="#" target="_blank">обратитесь к оператору.</a></p>
+    <p>Спасибо,<br/>
+      Ваш суши-бар!</p>
+  </div>
+</div>
+</div>
+</body>
+</html>
