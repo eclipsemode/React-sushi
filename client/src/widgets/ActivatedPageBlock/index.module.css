@@ -18,6 +18,10 @@
   width: 20px;
   height: 20px;
 }
+.root > h3 {
+  font-weight: 400;
+  color: gray;
+}
 
 @media (max-width: 563px) {
   .root__title h2 {

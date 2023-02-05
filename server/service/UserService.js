@@ -1,4 +1,4 @@
-const { User } = require('../models/models');
+const { User, Token } = require('../models/models');
 const MailService = require('./MailService');
 const ApiError = require("../error/ApiError");
 const bcrypt = require("bcrypt");
