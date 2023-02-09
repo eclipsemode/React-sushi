@@ -9,7 +9,7 @@ class OrderDto {
     this.order = {
           userId: user.isAuth ? Number(user.user?.id) : null,
           orderProducts: cart.items.map((e: IProducts) => ({ amount: +e.amount, productId: +e.id, productPrice: +e.price })),
-          totalPrice: cart.totalPrice,
+          totalPrice: cart.totalPrice + cart.deliveryPrice,
           totalAmount: cart.totalAmount
     }
   }

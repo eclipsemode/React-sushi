@@ -229,7 +229,7 @@ a {
   fill: #212529;
 }
 .button--outline:hover {
-  background-color: rgb(206, 40, 41);
+  background-color: #da0002;
   border-color: transparent;
 }
 .button--outline:hover,
@@ -412,8 +412,8 @@ a {
   color: #212529;
 }
 .sort__label span {
-  color: rgb(206, 40, 41);
-  border-bottom: 1px dashed rgb(206, 40, 41);
+  color: #da0002;
+  border-bottom: 1px dashed #da0002;
   cursor: pointer;
 }
 .sort__popup {
@@ -438,7 +438,7 @@ a {
 }
 .sort__popup ul li.active {
   font-weight: bold;
-  color: rgb(206, 40, 41);
+  color: #da0002;
 }
 
 body {

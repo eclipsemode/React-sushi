@@ -19,7 +19,7 @@
 }
 .root__info span:nth-child(2) {
   font-size: 100px;
-  color: rgb(206, 40, 41);
+  color: #da0002;
   font-weight: 900;
 }
 .root__info span:last-child {

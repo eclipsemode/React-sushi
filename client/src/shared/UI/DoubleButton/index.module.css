@@ -1,29 +1,8 @@
-.root__infoContainer {
-  display: flex;
-  flex-direction: column;
-  max-width: 420px;
-}
-.root__info {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
-  width: 100%;
-  padding: 1rem;
-  background: #F6F1E7;
-  border-radius: 8px 8px 0 0;
-}
-.root__info > div {
-  display: flex;
-  align-items: center;
-  column-gap: 1rem;
-}
-.root__info > div > p {
-  min-width: 118px;
-}
-.root__buttons {
+.root {
   display: flex;
 }
-.root__btn_reset {
+
+.root__left {
   flex: 1 0;
   width: fit-content;
   height: 56px;
@@ -41,12 +20,12 @@
   overflow: hidden;
   position: relative;
 }
-.root__btn_reset span {
+.root__left span {
   z-index: 1;
   color: #fff;
   text-transform: uppercase;
 }
-.root__btn_reset::after {
+.root__left::after {
   content: "";
   background: rgb(255, 255, 255);
   position: absolute;
@@ -63,16 +42,17 @@
   transform-origin: top left;
   width: 0;
 }
-.root__btn_reset:hover::after {
+.root__left:hover::after {
   height: 100%;
   width: 135%;
   background: #da0002;
 }
-.root__btn_reset:hover {
-  box-shadow: -2px 2px 5px 2px rgba(0, 0, 0, 0.2);
+.root__left:hover {
+  box-shadow: -2px 2px 5px 1px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-.root__btn_submit {
+
+.root__right {
   flex: 1 0;
   width: 100%;
   height: 56px;
@@ -90,11 +70,11 @@
   overflow: hidden;
   position: relative;
 }
-.root__btn_submit span {
+.root__right span {
   z-index: 1;
   text-transform: uppercase;
 }
-.root__btn_submit::after {
+.root__right::after {
   content: "";
   background: #fff;
   position: absolute;
@@ -111,14 +91,14 @@
   transform-origin: top left;
   width: 0;
 }
-.root__btn_submit:hover::after {
+.root__right:hover::after {
   height: 100%;
   width: 135%;
   background: #fdc913;
 }
-.root__btn_submit:hover {
+.root__right:hover {
   box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
-/*# sourceMappingURL=Settings.module.css.map */
+/*# sourceMappingURL=index.module.css.map */

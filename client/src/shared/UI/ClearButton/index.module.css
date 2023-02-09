@@ -1,12 +1,13 @@
 .root {
-  width: fit-content;
-  height: 56px;
+  height: 48px;
+  padding-left: 22px;
+  padding-right: 22px;
   appearance: none;
-  background: rgb(206, 40, 41);
+  background: #da0002;
   border: none;
   cursor: pointer;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 50px;
+  font-size: 14px;
   font-weight: 500;
   display: flex;
   justify-content: center;
@@ -14,7 +15,9 @@
   column-gap: 8px;
   overflow: hidden;
   position: relative;
-  padding: 15px 35px;
+  min-width: 230px;
+  line-height: 46px;
+  text-align: center;
 }
 .root span {
   z-index: 1;
@@ -41,7 +44,7 @@
 .root:hover::after {
   height: 100%;
   width: 135%;
-  background: rgb(206, 40, 41);
+  background: #da0002;
 }
 
 /*# sourceMappingURL=index.module.css.map */

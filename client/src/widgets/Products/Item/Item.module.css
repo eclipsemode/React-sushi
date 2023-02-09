@@ -79,7 +79,7 @@ a {
   transition: color ease-in-out 0.2s;
 }
 .title:hover {
-  color: rgb(206, 40, 41);
+  color: #da0002;
 }
 
 .selector {

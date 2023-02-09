@@ -1,4 +1,9 @@
-import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  ThunkAction,
+  Action,
+  combineReducers,
+} from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
@@ -16,6 +21,8 @@ import productsReducer from 'entities/products';
 import cartReducer from "entities/cart";
 import userReducer from "entities/user";
 import categoriesReducer from "entities/categories";
+
+import { cartListenerMiddleware } from "entities/cart/middleware";
 
 const rootReducer = combineReducers({
   filterReducer,
@@ -40,7 +47,7 @@ export const store = configureStore({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     }
-  })
+  }).prepend(cartListenerMiddleware.middleware)
 });
 
 export const persistor = persistStore(store)

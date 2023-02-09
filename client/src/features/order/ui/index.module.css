@@ -1,0 +1,133 @@
+.root {
+  border-radius: 6px;
+  overflow: hidden;
+}
+.root th:not(:last-of-type), .root td:not(:last-of-type) {
+  border-right: 1px solid rgba(41, 41, 41, 0.1);
+}
+.root__warning {
+  padding: 22px 70px 20px;
+  box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 400;
+  color: #da0002;
+  width: fit-content;
+  box-sizing: border-box;
+  margin: 0 auto 2em;
+}
+.root__table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.root thead {
+  background: #F6F1E7;
+  height: 59px;
+}
+.root tfoot {
+  height: fit-content;
+  background: #F6F1E7;
+}
+.root tfoot td {
+  padding: 1rem;
+}
+.root__order {
+  width: 416px;
+  background: #fff;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.1);
+}
+.root__footer {
+  display: flex;
+  justify-content: space-between;
+}
+.root__total {
+  margin: 1rem;
+}
+.root__total h4 {
+  font-size: 22px;
+  color: #212529;
+  margin-bottom: 22px;
+}
+.root__total div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 500;
+}
+.root__total div:first-of-type {
+  color: rgba(27, 27, 27, 0.7);
+}
+.root__total div:nth-of-type(2) {
+  color: rgba(27, 27, 27, 0.7);
+}
+.root__total div:last-of-type {
+  color: #da0002;
+  border-top: 1px dashed black;
+  margin-top: 1em;
+  padding-top: 1em;
+}
+.root__type {
+  padding-top: 2px;
+  border-radius: 10px;
+  box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 2em auto;
+}
+.root__type_title {
+  padding: 30px 0 15px;
+  text-align: center;
+}
+.root__type_title h3 {
+  opacity: 0.9;
+  font-size: 30px;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #3a3a3a;
+  margin: 0;
+}
+.root__type_buttons {
+  padding: 15px 0 30px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  column-gap: 2em;
+}
+.root__type_buttons button {
+  background: none;
+  cursor: pointer;
+  position: relative;
+  height: 48px;
+  padding-left: 22px;
+  padding-right: 22px;
+  line-height: 46px;
+  text-align: center;
+  color: #da0002;
+  border: 2px solid #da0002;
+  border-radius: 50px;
+  text-transform: uppercase;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  box-sizing: border-box;
+  opacity: 1;
+  transition: opacity ease 0.5s;
+  white-space: nowrap;
+  min-width: 230px;
+  text-decoration: none;
+}
+.root__type_buttons button:hover {
+  background: #da0002;
+  border-color: #da0002;
+  color: #fff;
+}
+
+/*# sourceMappingURL=index.module.css.map */

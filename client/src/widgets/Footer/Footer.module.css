@@ -48,7 +48,7 @@
   transition: fill ease-in-out 0.2s;
 }
 .root__social svg:hover {
-  fill: rgb(206, 40, 41);
+  fill: #da0002;
 }
 
 .about {

@@ -1,12 +1,13 @@
 .root {
-  width: 139px;
   height: 42px;
+  padding-left: 22px;
+  padding-right: 22px;
   appearance: none;
   background: rgba(253, 201, 19, 0.2);
   border: none;
   cursor: pointer;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 50px;
+  font-size: 14px;
   font-weight: 500;
   display: flex;
   justify-content: center;
@@ -14,12 +15,14 @@
   column-gap: 8px;
   overflow: hidden;
   position: relative;
+  line-height: 46px;
+  text-align: center;
 }
 .root span {
   z-index: 1;
 }
 .root span:last-child {
-  color: rgb(206, 40, 41);
+  color: #da0002;
 }
 .root::after {
   content: "";

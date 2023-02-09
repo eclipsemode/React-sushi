@@ -20,7 +20,7 @@
   margin-left: 1rem;
 }
 .root__product svg:hover {
-  fill: rgb(206, 40, 41);
+  fill: #da0002;
 }
 .root__price {
   font-size: 20px;

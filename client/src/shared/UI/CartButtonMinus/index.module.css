@@ -91,7 +91,7 @@ a {
   fill: #212529;
 }
 .root:hover {
-  background-color: rgb(206, 40, 41);
+  background-color: #da0002;
   border-color: transparent;
 }
 .root:hover,
