@@ -17,11 +17,12 @@ const User = sequelize.define("user", {
   room: { type: DataTypes.STRING },
   isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
   activationLink: { type: DataTypes.STRING }
+}, {
+  timestamps: true
 });
 
 const Token = sequelize.define("token", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  userId: { type: DataTypes.INTEGER, allowNull: false },
   refreshToken: { type: DataTypes.STRING, required: true }
 });
 
@@ -51,10 +52,13 @@ const Category = sequelize.define("category", {
   name: { type: DataTypes.STRING, unique: true, allowNull: false }
 });
 
-User.hasMany(Order);
-
 User.hasOne(Token);
-Token.belongsTo(User);
+Token.belongsTo(User, {
+  foreignKey: {
+    name: 'userId',
+    allowNull: false
+  }
+});
 
 User.hasMany(Order);
 
