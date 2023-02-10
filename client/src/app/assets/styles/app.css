@@ -383,6 +383,7 @@ a {
   font-weight: 500;
   width: 206px;
   height: 70px;
+  font-size: 1.5em;
 }
 .categories ul li:hover {
   background-color: #f7f2eb;
@@ -397,6 +398,7 @@ a {
 
 .sort {
   position: relative;
+  font-size: 1.7em;
 }
 .sort__label {
   display: flex;
@@ -443,6 +445,7 @@ a {
 
 body {
   background-color: #fff;
+  font-size: 10px;
 }
 
 .App {

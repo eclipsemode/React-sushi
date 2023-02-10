@@ -22,6 +22,7 @@
   &__description {
     & p {
       color: $paragraph-color;
+      font-size: 1.3em;
     }
   }
 
@@ -46,6 +47,7 @@
   white-space: nowrap;
   cursor: pointer;
   transition: color ease-in-out 0.2s;
+  font-size: 1.7em;
 
   &:hover {
     color: $main-color;

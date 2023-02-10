@@ -16,12 +16,13 @@
     box-shadow: 0 0 30px -10px rgb(0 0 0 / 20%);
     border-radius: 10px;
     text-align: center;
-    font-size: 20px;
+    font-size: 1.7em;
     font-weight: 400;
     color: #da0002;
-    width: fit-content;
     box-sizing: border-box;
     margin: 0 auto 2em;
+    max-width: 800px;
+    width: 100%;
   }
 
   &__table {
@@ -32,6 +33,7 @@
   & thead {
     background: $body-background;
     height: 59px;
+    font-size: 1.5em;
   }
 
   & tfoot {

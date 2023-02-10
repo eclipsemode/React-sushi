@@ -57,6 +57,7 @@ a {
 }
 .root__description p {
   color: rgba(27, 27, 27, 0.7);
+  font-size: 1.3em;
 }
 
 .image {
@@ -77,6 +78,7 @@ a {
   white-space: nowrap;
   cursor: pointer;
   transition: color ease-in-out 0.2s;
+  font-size: 1.7em;
 }
 .title:hover {
   color: #da0002;

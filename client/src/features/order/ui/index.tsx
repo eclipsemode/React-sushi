@@ -8,6 +8,7 @@ import { IProducts } from 'entities/products';
 import { fetchOrderCreate } from "features/order/api";
 import { useNavigate } from "react-router-dom";
 import { DeliveryPrice } from "features/order/utils";
+import AddressForm from "./addressForm";
 
 const CartOrder: React.FC = () => {
     const { items, totalPrice, totalAmount, deliveryPrice } = useAppSelector(selectCart);
@@ -97,6 +98,7 @@ const CartOrder: React.FC = () => {
                     </tr>
                 </tfoot>
             </table>
+
           <div className={styles.root__type}>
               <div className={styles.root__type_title}>
                   <h3>ОФОРМИТЬ ЗАКАЗ</h3>
@@ -106,9 +108,13 @@ const CartOrder: React.FC = () => {
                   <button onClick={onSubmit}>Самовывоз</button>
               </div>
           </div>
+
+          <AddressForm/>
+
           {
               popup && <OrderDelivered popupRef={popupRef} onClosePopup={onClosePopup}/>
           }
+
         </div>
     );
 };

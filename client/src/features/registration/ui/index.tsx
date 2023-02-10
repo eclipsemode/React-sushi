@@ -15,7 +15,7 @@ type RegistrationProps = {
   setAuth: (value: boolean) => void;
 }
 
-type Inputs = {
+type FormInputs = {
   email: string,
   password: string,
   passwordRepeat: string,
@@ -33,13 +33,13 @@ type Inputs = {
 const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, setError, watch, formState: { errors } } = useForm<Inputs>();
+  const { register, handleSubmit, setError, watch, formState: { errors } } = useForm<FormInputs>();
 
   const handleAuth = () => {
     setAuth(true);
   };
 
-  const onSubmit: SubmitHandler<Inputs> = async data => {
+  const onSubmit: SubmitHandler<FormInputs> = async data => {
     const response = await dispatch(fetchUserRegistration({
       name: data.name,
       surname: data.surname,

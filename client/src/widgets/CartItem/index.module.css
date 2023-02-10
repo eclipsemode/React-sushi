@@ -31,6 +31,7 @@
 }
 .root__amount {
   width: 270px;
+  font-size: 1.5em;
 }
 .root__amount div {
   display: flex;
