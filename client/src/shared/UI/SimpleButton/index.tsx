@@ -2,17 +2,14 @@ import React from "react";
 import styles from './index.module.css';
 
 interface ISimpleButton {
-  children: React.ReactNode,
-  clickEvent: () => void;
+  children: string,
+  clickEvent?: () => void;
+  type: React.HTMLInputTypeAttribute;
 }
 
 const SimpleButton: React.FC<ISimpleButton> = (props) => {
   return (
-    <button className={styles.root} onClick={props.clickEvent}>
-      {
-        props.children
-      }
-    </button>
+    <input type={props.type} className={styles.root} onClick={props.clickEvent} defaultValue={props.children} />
   );
 };
 
