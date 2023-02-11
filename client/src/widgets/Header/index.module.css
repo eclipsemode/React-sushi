@@ -32,12 +32,14 @@
   cursor: pointer;
 }
 .root__link a {
-  font-size: 16px;
+  font-size: 1.7em;
   color: #292929;
   transition: color ease-in-out 0.2s;
+  font-weight: 600;
 }
 .root__link a:hover {
   color: #fdc913;
+  border-bottom: 0.2em solid #fdc913;
 }
 .root__info {
   display: flex;
@@ -47,7 +49,7 @@
 }
 .root__info span {
   color: #292929;
-  font-weight: 500;
+  font-weight: 400;
 }
 .root__info a {
   all: unset;

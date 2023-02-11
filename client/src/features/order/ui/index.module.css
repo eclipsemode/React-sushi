@@ -10,7 +10,7 @@
   box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   text-align: center;
-  font-size: 1.7em;
+  font-size: 1.9em;
   font-weight: 400;
   color: #da0002;
   box-sizing: border-box;
@@ -99,37 +99,37 @@
   justify-content: center;
   column-gap: 2em;
 }
-.root__type_buttons button {
-  background: none;
-  cursor: pointer;
-  position: relative;
-  height: 48px;
-  padding-left: 22px;
-  padding-right: 22px;
-  line-height: 46px;
-  text-align: center;
-  color: #da0002;
-  border: 2px solid #da0002;
-  border-radius: 50px;
-  text-transform: uppercase;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  box-sizing: border-box;
-  opacity: 1;
-  transition: opacity ease 0.5s;
-  white-space: nowrap;
-  min-width: 230px;
-  text-decoration: none;
+.root__final {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
 }
-.root__type_buttons button:hover {
-  background: #da0002;
-  border-color: #da0002;
-  color: #fff;
+.root__final_price {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+.root__final_price p {
+  font-size: 2.5em;
+}
+.root__agreement {
+  display: flex;
+  align-items: center;
+  column-gap: 1em;
+}
+.root__agreement p {
+  font-size: 1.3em;
+  text-align: left;
+  line-height: 1.3;
+  font-weight: 300;
+  color: #898989;
+}
+.root__agreement a {
+  color: #da0002;
+  text-decoration: none;
+  opacity: 0.9;
+  border-bottom: 1px dashed #da0002;
+  padding-bottom: 0.1em;
 }
 
 /*# sourceMappingURL=index.module.css.map */

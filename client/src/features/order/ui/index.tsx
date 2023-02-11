@@ -8,7 +8,9 @@ import { IProducts } from 'entities/products';
 import { fetchOrderCreate } from "features/order/api";
 import { useNavigate } from "react-router-dom";
 import { DeliveryPrice } from "features/order/utils";
-import AddressForm from "./addressForm";
+import BlockForm from "./BlockForm";
+import PickupForm from "./PickupForm";
+import SimpleButton from "../../../shared/UI/SimpleButton";
 
 const CartOrder: React.FC = () => {
     const { items, totalPrice, totalAmount, deliveryPrice } = useAppSelector(selectCart);
@@ -104,12 +106,35 @@ const CartOrder: React.FC = () => {
                   <h3>ОФОРМИТЬ ЗАКАЗ</h3>
               </div>
               <div className={styles.root__type_buttons}>
-                  <button onClick={onSubmit}>Доставка</button>
-                  <button onClick={onSubmit}>Самовывоз</button>
+                  <SimpleButton clickEvent={onSubmit}>Доставка</SimpleButton>
+                  <SimpleButton clickEvent={onSubmit}>Самовывоз</SimpleButton>
               </div>
           </div>
 
-          <AddressForm/>
+          <BlockForm>
+              <PickupForm/>
+          </BlockForm>
+
+          <BlockForm>
+              <div className={styles.root__final}>
+                  <div className={styles.root__final_price}>
+                      <p>Итого</p>
+                      <p>{ totalPrice + deliveryPrice } ₽</p>
+                  </div>
+                  <div className={styles.root__agreement}>
+                      <div className={styles.root__agreement_checkbox}><input checked={true} type="checkbox" /></div>
+                      <p>Осуществляя заказ на <a href="/">сайте</a>&nbsp;я подтверждаю, что ознакомился с правилами продажи товаров, а также cо всеми документами, размещенными на сайте по&nbsp;<a href="/">адресу</a>,&nbsp;и подтверждаю принятие правил продажи товаров на сайте в полном объеме без ограничений.</p>
+                  </div>
+                  <div className={styles.root__agreement}>
+                      <div className={styles.root__agreement_checkbox}><input checked={true} type="checkbox" /></div>
+                      <p>Осуществляя заказ на <a href="/">сайте</a>&nbsp;я даю свое согласие на сбор и обработку моих персональных данных в соответствии с политикой <a href="/">конфиденциальности</a>.</p>
+                  </div>
+                  <div className={styles.root__agreement}>
+                      <div className={styles.root__agreement_checkbox}><input checked={true} type="checkbox" /></div>
+                      <p>Осуществляя заказ на <a href="/">сайте</a>&nbsp;я даю свое согласие на получение направляемых мне смс-сообщений и электронных писем рекламного и информационного характера.</p>
+                  </div>
+              </div>
+          </BlockForm>
 
           {
               popup && <OrderDelivered popupRef={popupRef} onClosePopup={onClosePopup}/>

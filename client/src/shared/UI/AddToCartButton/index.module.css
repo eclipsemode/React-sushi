@@ -55,5 +55,8 @@
   align-items: center;
   height: 42px;
 }
+.root__amountBlock span {
+  font-size: 1.5em;
+}
 
 /*# sourceMappingURL=index.module.css.map */

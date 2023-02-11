@@ -3,7 +3,7 @@
   margin: 0;
   list-style: none;
   outline: none;
-  font-family: "Barlow", sans-serif;
+  font-family: "PF DinDisplay Pro", sans-serif;
   box-sizing: border-box;
 }
 
@@ -54,10 +54,11 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 14em;
 }
 .root__description p {
   color: rgba(27, 27, 27, 0.7);
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
 
 .image {
