@@ -1,13 +1,18 @@
-// @ts-nocheck
 import React from "react";
 import styles from './index.module.css'
 import SimpleButton from "shared/UI/SimpleButton";
 import { useForm } from "react-hook-form";
-import { CartButtonMinus, CartButtonPlus } from "../../../../shared/UI";
+import FormInput from "shared/UI/FormInput";
+import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
-const PickupForm: React.FC = () => {
-  const { register, handleSubmit, watch } = useForm();
+interface IPickupProps {
+  clickEvent: () => void;
+}
+
+const PickupForm: React.FC<IPickupProps> = (props) => {
+  const { handleSubmit, watch } = useForm();
   const [timeStamps] = React.useState<string[]>(getTime())
+  const [utensils, setUtensils] = React.useState<number>(0);
 
   function getTime() {
     let current: Date = new Date();
@@ -15,7 +20,7 @@ const PickupForm: React.FC = () => {
     do {
       current = new Date(current.getTime() + 15*60000);
       timeArr.push(current.toLocaleTimeString().slice(0, 5));
-    } while (current.toLocaleTimeString().slice(0, 2) < 23)
+    } while (Number(current.toLocaleTimeString().slice(0, 2)) < 23)
 
     return timeArr;
   }
@@ -23,12 +28,13 @@ const PickupForm: React.FC = () => {
     console.log(watch())
   }
 
+  // @ts-ignore
   return (
     <div className={styles.root}>
       <div className={styles.root__title}>
         <h3>Оформление самовывоза</h3>
         <h4>По адресу: г. Армавир, ул. Кропоткина 194</h4>
-        <SimpleButton clickEvent={() => console.log(1)}>Изменить тип доставки</SimpleButton>
+        <SimpleButton clickEvent={props.clickEvent}>Изменить тип доставки</SimpleButton>
       </div>
       <div className={styles.root__content}>
         <form onSubmit={handleSubmit(onSubmit)} name="pickup-form">
@@ -40,10 +46,11 @@ const PickupForm: React.FC = () => {
             <label htmlFor='phone'>Телефон</label>
             <input type="text" name='phone' placeholder='+7 (***) *** ** **' />
           </fieldset>
-          <fieldset>
-            <label htmlFor='email'>E-MAIL</label>
-            <input type="email" name='email' placeholder='@' />
-          </fieldset>
+          <FormInput type='email' name='email' placeholder='@'>E-MAIL</FormInput>
+          {/*<fieldset>*/}
+          {/*  <label htmlFor='email'>E-MAIL</label>*/}
+          {/*  <input type="email" name='email' placeholder='@' />*/}
+          {/*</fieldset>*/}
           <fieldset>
             <label htmlFor='day'>Заберу</label>
             <select name='day'>
@@ -61,9 +68,9 @@ const PickupForm: React.FC = () => {
           <fieldset>
             <label>Количество приборов</label>
             <div>
-              <CartButtonMinus product={1} amount={1}/>
-              1
-              <CartButtonPlus product={1} amount={1}/>
+              <CiCircleMinus className={utensils === 0 ? styles.root__btn_disabled : null} size={35} cursor='pointer' onClick={() => setUtensils((prevState) => prevState > 0 ? prevState - 1 : 0)}/>
+              <span>{ utensils }</span>
+              <CiCirclePlus size={35} cursor='pointer' onClick={() => setUtensils((prevState) => prevState + 1)}/>
             </div>
           </fieldset>
           <fieldset>

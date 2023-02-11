@@ -1,0 +1,25 @@
+@import '../../../app/assets/styles/variables';
+
+.root {
+  padding: 22px 70px 20px;
+  box-shadow: 0 0 30px -10px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.9em;
+  font-weight: 400;
+  box-sizing: border-box;
+  max-width: 800px;
+  width: 100%;
+
+  &__error {
+    color: $main-color;
+  }
+
+  &__success {
+    color: $green;
+  }
+
+  &__warning {
+    color: $warning;
+  }
+}

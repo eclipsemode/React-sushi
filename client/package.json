@@ -12,6 +12,7 @@
     "@types/jest": "^27.5.2",
     "@types/lodash.debounce": "^4.0.7",
     "@types/node": "^17.0.45",
+    "antd": "^5.2.0",
     "axios": "^0.27.2",
     "compose-function": "^3.0.3",
     "dotenv": "^16.0.2",

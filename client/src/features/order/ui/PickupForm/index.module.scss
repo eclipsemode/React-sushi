@@ -2,6 +2,10 @@
 
 .root {
 
+  & svg {
+    font-weight: 300;
+  }
+
   &__title {
     display: flex;
     flex-direction: column;
@@ -116,20 +120,35 @@
       justify-content: flex-start;
       column-gap: 1em;
     }
+
+    & span {
+      font-size: 1.5em;
+      pointer-events: none;
+
+      &::selection {
+        background: none;
+      }
+      &::-moz-selection {
+        background: none;
+      }
+    }
+
+    & svg:hover {
+      color: $main-color;
+    }
+  }
+
+  &__btn_disabled {
+    color: $gray;
+
+    &:hover {
+      color: $gray !important;
+      cursor: not-allowed;
+    }
   }
 
   & form > fieldset:nth-of-type(7) {
     width: 100%;
-    //display: flex;
-    //justify-content: space-between;
-    //align-items: center;
-    //
-    //& select {
-    //  width: calc(50% - 1em);
-    //  display: flex;
-    //  align-items: center;
-    //  justify-content: flex-start;
-    //}
   }
 
   & form > fieldset:nth-of-type(8) {

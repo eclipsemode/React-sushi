@@ -1,3 +1,6 @@
+.root svg {
+  font-weight: 300;
+}
 .root__title {
   display: flex;
   flex-direction: column;
@@ -97,6 +100,26 @@
   align-items: center;
   justify-content: flex-start;
   column-gap: 1em;
+}
+.root form > fieldset:nth-of-type(6) span {
+  font-size: 1.5em;
+  pointer-events: none;
+}
+.root form > fieldset:nth-of-type(6) span::selection {
+  background: none;
+}
+.root form > fieldset:nth-of-type(6) span::-moz-selection {
+  background: none;
+}
+.root form > fieldset:nth-of-type(6) svg:hover {
+  color: #da0002;
+}
+.root__btn_disabled {
+  color: rgba(31, 32, 65, 0.2);
+}
+.root__btn_disabled:hover {
+  color: rgba(31, 32, 65, 0.2) !important;
+  cursor: not-allowed;
 }
 .root form > fieldset:nth-of-type(7) {
   width: 100%;
