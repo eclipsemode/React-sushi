@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ToTopArrow.module.css";
 import { BsFillArrowUpSquareFill } from "react-icons/bs";
+import { Affix } from "antd";
 
 const ToTopArrow: React.FC = () => {
   const [arrowHidden, setArrowHidden] = React.useState<boolean>(true);
@@ -8,7 +9,7 @@ const ToTopArrow: React.FC = () => {
   const isCheckOffset = React.useCallback(() => {
     window.scrollY > 100
       ? setArrowHidden(false)
-      : setArrowHidden(true)
+      : setArrowHidden(true);
   }, []);
 
   React.useEffect(() => {
@@ -19,7 +20,9 @@ const ToTopArrow: React.FC = () => {
   }, [isCheckOffset]);
 
   return (
-    arrowHidden ? null : <a href="#top"><BsFillArrowUpSquareFill className={styles.root} /></a>
+    arrowHidden ? null : <Affix style={{ position: "absolute", bottom: "7em", right: "8em" }} offsetBottom={120}
+                                onChange={(affixed) => console.log(affixed)}><a href="#top"><BsFillArrowUpSquareFill
+      className={styles.root} /></a></Affix>
   );
 };
 

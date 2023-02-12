@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import BlockForm from "../BlockForm";
 import Checkbox from "antd/es/checkbox/Checkbox";
 import { IoIosAddCircleOutline, IoIosRemoveCircleOutline } from "react-icons/io";
+import { InputRef } from "antd";
 
 interface IPickupProps {
   clickEvent: () => void;
@@ -30,7 +31,7 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
   const [timeStamps] = React.useState<string[]>(getTime());
   const [utensils, setUtensils] = React.useState<number>(0);
-  const agRef = React.useRef<HTMLInputElement>(null);
+  const agRef = React.useRef<InputRef>(null);
 
   function getTime() {
     let current: Date = new Date();
@@ -44,7 +45,8 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
   }
 
   const onSubmit: SubmitHandler<FormInputs> = data => {
-    console.log(agRef.current?.checked)
+    // @ts-ignore
+    console.log(agRef.current?.state.checked)
     console.log(data);
   };
 

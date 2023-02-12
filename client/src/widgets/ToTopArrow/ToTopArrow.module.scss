@@ -1,24 +1,16 @@
 @import "../../app/assets/styles/variables";
 
 .root {
-  position: fixed;
-  bottom: 7rem;
-  right: 3rem;
   width: 44px;
   height: 44px;
   fill: $main-color;
   cursor: pointer;
   background: white;
-  border-radius: 6px;
+  border-radius: 50%;
   animation: .5s infinite alternate arrow;
-}
+  box-shadow: 0 0 18px 10px rgb(0 0 0 / 20%);
 
-@keyframes arrow {
-  from {
-    bottom: 7rem;
-  }
-
-  to {
-    bottom: 7.3rem;
+  &:hover {
+    fill: $orange;
   }
 }

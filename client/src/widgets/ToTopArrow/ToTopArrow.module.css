@@ -1,23 +1,15 @@
 .root {
-  position: fixed;
-  bottom: 7rem;
-  right: 3rem;
   width: 44px;
   height: 44px;
   fill: #da0002;
   cursor: pointer;
   background: white;
-  border-radius: 6px;
+  border-radius: 50%;
   animation: 0.5s infinite alternate arrow;
+  box-shadow: 0 0 18px 10px rgba(0, 0, 0, 0.2);
 }
-
-@keyframes arrow {
-  from {
-    bottom: 7rem;
-  }
-  to {
-    bottom: 7.3rem;
-  }
+.root:hover {
+  fill: #fe5f1e;
 }
 
 /*# sourceMappingURL=ToTopArrow.module.css.map */
