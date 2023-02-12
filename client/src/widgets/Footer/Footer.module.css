@@ -36,10 +36,12 @@
 }
 .root__additional span {
   color: rgba(27, 27, 27, 0.7);
+  font-size: 1.5em;
 }
 .root__social {
   display: flex;
   column-gap: 10px;
+  font-size: 2em;
 }
 .root__social svg {
   cursor: pointer;

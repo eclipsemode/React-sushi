@@ -1,6 +1,10 @@
 @import '../../../../app/assets/styles/variables';
 
 .root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   & svg {
     font-weight: 300;
@@ -231,6 +235,13 @@
   &__input_invalid {
     background: rgba(214,15,19,.04);
     box-shadow: inset 0 -2px 0 0 #d60f14;
+  }
+
+  &__required::after {
+    content: '*';
+    font-size: 1.5em;
+    position: absolute;
+    right: -10px;
   }
 
 }

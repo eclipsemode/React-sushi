@@ -30,6 +30,7 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
   const [timeStamps] = React.useState<string[]>(getTime());
   const [utensils, setUtensils] = React.useState<number>(0);
+  const agRef = React.useRef<HTMLInputElement>(null);
 
   function getTime() {
     let current: Date = new Date();
@@ -43,6 +44,7 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
   }
 
   const onSubmit: SubmitHandler<FormInputs> = data => {
+    console.log(agRef.current?.checked)
     console.log(data);
   };
 
@@ -57,11 +59,11 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
         </div>
         <div className={styles.root__content}>
           <fieldset>
-            <label>Имя</label>
+            <label className={styles.root__required}>Имя</label>
             <input className={styles.root__input + ' ' + (errors.name && styles.root__input_invalid)} {...register('name', { required: true, maxLength: 16 })} />
           </fieldset>
           <fieldset>
-            <label>Телефон</label>
+            <label className={styles.root__required}>Телефон</label>
             <InputMask
               className={styles.root__input + ' ' + (errors.tel && styles.root__input_invalid)}
               {...register("tel", {
@@ -122,7 +124,7 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
             <p>{props.totalPrice + props.deliveryPrice} ₽</p>
           </div>
           <div className={styles.root__agreement}>
-            <Checkbox defaultChecked={true} className={styles.root__checkbox}>Осуществляя заказ на <a
+            <Checkbox ref={agRef} defaultChecked={true} className={styles.root__checkbox}>Осуществляя заказ на <a
               href="/">сайте</a>&nbsp;я подтверждаю, что ознакомился с правилами
               продажи товаров, а также cо всеми документами, размещенными на сайте по&nbsp;<a
                 href="/">адресу</a>,&nbsp;и подтверждаю принятие правил продажи товаров на сайте в полном

@@ -40,12 +40,14 @@
 
     & span {
       color: $paragraph-color;
+      font-size: 1.5em;
     }
   }
 
   &__social {
     display: flex;
     column-gap: 10px;
+    font-size: 2em;
     & svg {
       cursor: pointer;
       fill: $dark;
