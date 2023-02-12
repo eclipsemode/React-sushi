@@ -20,9 +20,8 @@ const ToTopArrow: React.FC = () => {
   }, [isCheckOffset]);
 
   return (
-    arrowHidden ? null : <Affix style={{ position: "absolute", bottom: "7em", right: "8em" }} offsetBottom={120}
-                                onChange={(affixed) => console.log(affixed)}><a href="#top"><BsFillArrowUpSquareFill
-      className={styles.root} /></a></Affix>
+    arrowHidden ? null : <Affix style={{ position: "absolute", bottom: "7em", right: "8em" }} offsetBottom={120}><a
+      href="#top"><BsFillArrowUpSquareFill className={styles.root} /></a></Affix>
   );
 };
 

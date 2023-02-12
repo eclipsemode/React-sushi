@@ -8,11 +8,9 @@ import { IProducts } from "entities/products";
 // import { fetchOrderCreate } from "features/order/api";
 import { useNavigate } from "react-router-dom";
 import { DeliveryPrice } from "features/order/utils";
-// import BlockForm from "./BlockForm";
 import PickupForm from "./PickupForm";
 import SimpleButton from "shared/UI/SimpleButton";
 import Alert from "shared/UI/Alert";
-// import Checkbox from "antd/es/checkbox/Checkbox";
 
 type OrderType = "delivery" | "pickup" | null;
 
@@ -125,7 +123,7 @@ const CartOrder: React.FC = () => {
 
       {
         (orderType === "pickup" || orderType === 'delivery') &&
-            <PickupForm clickEvent={() => setOrderType(null)} totalPrice={totalPrice} deliveryPrice={deliveryPrice} />
+            <PickupForm clickEvent={() => setOrderType(null)} />
       }
 
 

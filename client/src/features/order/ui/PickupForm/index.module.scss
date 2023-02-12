@@ -176,43 +176,6 @@
     }
   }
 
-  &__final {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1em;
-  }
-
-  &__final_price {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2em;
-
-    & p {
-      font-size: 2.5em;
-    }
-  }
-
-  &__agreement {
-    display: flex;
-    align-items: center;
-    column-gap: 1em;
-
-    & a {
-      color: $main-color;
-      text-decoration: none;
-      opacity: .9;
-      border-bottom: 1px dashed $main-color;
-      padding-bottom: 0.1em;
-    }
-  }
-
-  &__checkbox {
-    display: flex;
-    align-items: center;
-    color: #898989;
-    font-size: 1.3em;
-  }
-
   &__input {
     width: 100%;
     font-size: 22px;

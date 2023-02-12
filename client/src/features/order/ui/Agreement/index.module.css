@@ -1,0 +1,33 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+}
+.root__price {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+.root__price p {
+  font-size: 2.5em;
+}
+.root__agreement {
+  display: flex;
+  align-items: center;
+  column-gap: 1em;
+}
+.root__agreement a {
+  color: #da0002;
+  text-decoration: none;
+  opacity: 0.9;
+  border-bottom: 1px dashed #da0002;
+  padding-bottom: 0.1em;
+}
+.root__checkbox {
+  display: flex;
+  align-items: center;
+  color: #898989;
+  font-size: 1.3em;
+}
+
+/*# sourceMappingURL=index.module.css.map */

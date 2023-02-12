@@ -4,14 +4,11 @@ import InputMask from "react-input-mask";
 import SimpleButton from "shared/UI/SimpleButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import BlockForm from "../BlockForm";
-import Checkbox from "antd/es/checkbox/Checkbox";
 import { IoIosAddCircleOutline, IoIosRemoveCircleOutline } from "react-icons/io";
-import { InputRef } from "antd";
+import Agreement from "../Agreement";
 
 interface IPickupProps {
   clickEvent: () => void;
-  totalPrice: number;
-  deliveryPrice: number;
 }
 
 interface FormInputs {
@@ -31,7 +28,7 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
   const [timeStamps] = React.useState<string[]>(getTime());
   const [utensils, setUtensils] = React.useState<number>(0);
-  const agRef = React.useRef<InputRef>(null);
+  const [agreement, setAgreement] = React.useState<boolean>(true);
 
   function getTime() {
     let current: Date = new Date();
@@ -45,13 +42,11 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
   }
 
   const onSubmit: SubmitHandler<FormInputs> = data => {
-    // @ts-ignore
-    console.log(agRef.current?.state.checked)
     console.log(data);
+    console.log(agreement);
   };
 
   return (
-
     <form className={styles.root} onSubmit={handleSubmit(onSubmit)} name="pickup-form">
       <BlockForm>
         <div className={styles.root__title}>
@@ -119,31 +114,7 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
         </div>
       </BlockForm>
 
-      <BlockForm>
-        <div className={styles.root__final}>
-          <div className={styles.root__final_price}>
-            <p>Итого</p>
-            <p>{props.totalPrice + props.deliveryPrice} ₽</p>
-          </div>
-          <div className={styles.root__agreement}>
-            <Checkbox ref={agRef} defaultChecked={true} className={styles.root__checkbox}>Осуществляя заказ на <a
-              href="/">сайте</a>&nbsp;я подтверждаю, что ознакомился с правилами
-              продажи товаров, а также cо всеми документами, размещенными на сайте по&nbsp;<a
-                href="/">адресу</a>,&nbsp;и подтверждаю принятие правил продажи товаров на сайте в полном
-              объеме без ограничений.</Checkbox>
-          </div>
-          <div className={styles.root__agreement}>
-            <Checkbox defaultChecked={true} className={styles.root__checkbox}>Осуществляя заказ на <a
-              href="/">сайте</a>&nbsp;я даю свое согласие на сбор и обработку моих
-              персональных данных в соответствии с политикой <a href="/">конфиденциальности</a>.</Checkbox>
-          </div>
-          <div className={styles.root__agreement}>
-            <Checkbox defaultChecked={true} className={styles.root__checkbox}>Осуществляя заказ на <a
-              href="/">сайте</a>&nbsp;я даю свое согласие на получение направляемых
-              мне смс-сообщений и электронных писем рекламного и информационного характера.</Checkbox>
-          </div>
-        </div>
-      </BlockForm>
+      <Agreement setAgreement={setAgreement} />
 
       <SimpleButton type="submit">Отправить заказ</SimpleButton>
     </form>
