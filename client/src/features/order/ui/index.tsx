@@ -11,6 +11,7 @@ import { DeliveryPrice } from "features/order/utils";
 import PickupForm from "./PickupForm";
 import SimpleButton from "shared/UI/SimpleButton";
 import Alert from "shared/UI/Alert";
+import DeliveryForm from "./DeliveryForm";
 
 type OrderType = "delivery" | "pickup" | null;
 
@@ -122,8 +123,7 @@ const CartOrder: React.FC = () => {
       }
 
       {
-        (orderType === "pickup" || orderType === 'delivery') &&
-            <PickupForm clickEvent={() => setOrderType(null)} />
+        orderType === "pickup" ? <PickupForm clickEvent={() => setOrderType(null)} /> : orderType === 'delivery' ? <DeliveryForm clickEvent={() => setOrderType(null)} /> : null
       }
 
 

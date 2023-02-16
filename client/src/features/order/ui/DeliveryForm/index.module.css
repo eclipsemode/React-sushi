@@ -1,3 +1,200 @@
-
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.root svg {
+  font-weight: 300;
+}
+.root__title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1em;
+  margin-bottom: 5em;
+}
+.root__title h3 {
+  opacity: 0.9;
+  font-size: 3em;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #3a3a3a;
+  margin: 0;
+}
+.root__title h4 {
+  color: rgba(27, 27, 27, 0.7);
+  font-size: 2em;
+  font-weight: 300;
+}
+.root__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.root__content > fieldset {
+  width: 100%;
+  border: 0;
+  padding: 0;
+  margin: 0 0 40px;
+  position: relative;
+}
+.root__content > fieldset > label {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1.3em;
+  font-weight: 500;
+  margin-bottom: 0.2em;
+  color: #898989;
+  border-bottom: 0.1em solid transparent;
+  position: relative;
+}
+.root__content > fieldset > select {
+  display: flex;
+  width: 100%;
+  height: 34px;
+  border: none;
+  border-bottom: 1px solid #dbdbdb;
+  font-size: 22px;
+  font-weight: 300;
+  color: #000;
+}
+.root__content > fieldset > select:focus {
+  box-shadow: inset 0 -2px 0 0 #da0000;
+}
+.root__content > fieldset:nth-of-type(1) > input {
+  text-transform: capitalize;
+}
+.root__width_50 {
+  width: calc(50% - 1em) !important;
+}
+.root__width_33 {
+  width: calc(33.3% - 1em) !important;
+}
+.root__radio input {
+  display: none;
+}
+.root__radio_outer {
+  border: 2px solid rgba(31, 32, 65, 0.2);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -3px;
+  left: 0;
+}
+.root__radio_outer_checked {
+  border: 2px solid #da0002;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  top: -3px;
+  left: 0;
+}
+.root__radio_inner_checked {
+  width: 12px;
+  height: 12px;
+  background: #da0002;
+  border-radius: 50%;
+}
+.root__radio label {
+  padding-left: 2em;
+  cursor: pointer;
+}
+.root__counter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.root__counter > div {
+  width: calc(50% - 1em);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 1em;
+}
+.root__counter input {
+  font-size: 1.5em;
+  pointer-events: none;
+  outline: none;
+  border: none;
+  background-image: none;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  width: 1em;
+  text-align: center;
+}
+.root__counter input::selection {
+  background: none;
+}
+.root__counter input::-moz-selection {
+  background: none;
+}
+.root__counter svg:hover {
+  color: #da0002;
+}
+.root__btn_disabled {
+  color: rgba(31, 32, 65, 0.2);
+}
+.root__btn_disabled:hover {
+  color: rgba(31, 32, 65, 0.2) !important;
+  cursor: not-allowed;
+}
+.root__content textarea {
+  display: block;
+  width: 100%;
+  min-height: 75px;
+  margin-top: 7px;
+  padding: 10px;
+  border: none;
+  box-shadow: inset 0 0 0 1px #dbdbdb;
+  font-size: 16px;
+  font-weight: 300;
+  color: #000;
+  background: transparent;
+  resize: none;
+  overflow: hidden;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.root__content textarea:focus {
+  box-shadow: inset 0 0 0 2px #da0002;
+}
+.root__input {
+  width: 100%;
+  font-size: 22px;
+  font-weight: 300;
+  color: #000;
+  padding: 4px 4px 5px 0;
+  border: none;
+  box-shadow: inset 0 -1px 0 0 #dbdbdb;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  outline: none;
+}
+.root__input:focus {
+  box-shadow: inset 0 -2px 0 0 #da0000;
+}
+.root__input_invalid {
+  background: rgba(214, 15, 19, 0.04);
+  box-shadow: inset 0 -2px 0 0 #d60f14;
+}
+.root__required::after {
+  content: "*";
+  font-size: 1.5em;
+  position: absolute;
+  right: -10px;
+}
 
 /*# sourceMappingURL=index.module.css.map */

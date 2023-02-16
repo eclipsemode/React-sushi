@@ -1,0 +1,52 @@
+@import '../../../app/assets/styles/variables';
+
+.root {
+  & input {
+    display: none;
+  }
+
+
+  &__outer {
+    border: 2px solid $gray;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -3px;
+    left: 0;
+  }
+
+  &__outer_checked {
+    border: 2px solid $main-color;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    top: -3px;
+    left: 0;
+  }
+
+  &__inner_checked {
+    width: 12px;
+    height: 12px;
+    background: $main-color;
+    border-radius: 50%;
+  }
+
+  & label {
+    padding-left: 2em;
+    cursor: pointer;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 1.3em;
+    font-weight: 500;
+    margin-bottom: 0.2em;
+    color: #898989;
+    border-bottom: 0.1em solid transparent;
+    position: relative;
+  }
+}

@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import BlockForm from "../BlockForm";
 import { IoIosAddCircleOutline, IoIosRemoveCircleOutline } from "react-icons/io";
 import Agreement from "../Agreement";
+import { calcTime } from "../../utils/calcTime";
 
 interface IPickupProps {
   clickEvent: () => void;
@@ -26,20 +27,9 @@ interface FormInputs {
 
 const PickupForm: React.FC<IPickupProps> = (props) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
-  const [timeStamps] = React.useState<string[]>(getTime());
+  const [timeStamps] = React.useState<string[]>(calcTime(15));
   const [utensils, setUtensils] = React.useState<number>(0);
   const [agreement, setAgreement] = React.useState<boolean>(true);
-
-  function getTime() {
-    let current: Date = new Date();
-    let timeArr: string[] = [];
-    do {
-      current = new Date(current.getTime() + 15 * 60000);
-      timeArr.push(current.toLocaleTimeString().slice(0, 5));
-    } while (Number(current.toLocaleTimeString().slice(0, 2)) < 23);
-
-    return timeArr;
-  }
 
   const onSubmit: SubmitHandler<FormInputs> = data => {
     console.log(data);
@@ -59,7 +49,7 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
             <label className={styles.root__required}>Имя</label>
             <input className={styles.root__input + ' ' + (errors.name && styles.root__input_invalid)} {...register('name', { required: true, maxLength: 16 })} />
           </fieldset>
-          <fieldset>
+          <fieldset className={styles.root__width_50}>
             <label className={styles.root__required}>Телефон</label>
             <InputMask
               className={styles.root__input + ' ' + (errors.tel && styles.root__input_invalid)}
@@ -71,20 +61,20 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
               mask="+7 (999) 999-99-99"
               maskChar="" />
           </fieldset>
-          <fieldset>
+          <fieldset className={styles.root__width_50}>
             <label>E-MAIL</label>
             <input
               className={styles.root__input + ' ' + (errors.email && styles.root__input_invalid)}
               {...register("email", { pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
               placeholder="@" />
           </fieldset>
-          <fieldset>
+          <fieldset className={styles.root__width_50}>
             <label>Заберу</label>
             <select {...register('day', { required: true })}>
               <option value="today" defaultChecked={true}>сегодня</option>
             </select>
           </fieldset>
-          <fieldset>
+          <fieldset className={styles.root__width_50}>
             <label>в</label>
             <select {...register('time', { required: true })}>
               {
