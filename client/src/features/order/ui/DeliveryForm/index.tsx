@@ -13,19 +13,40 @@ interface IDeliveryFormProps {
   clickEvent: () => void;
 }
 
+type PaymentType = 'cash' | 'card';
+type TelType = `+${number} (${number}${number}${number}) ${number}${number}${number}-${number}${number}-${number}${number}`;
+type DeliveryTimeType = 1 | 2;
+
+interface IFormInputs {
+  name: string,
+  address: string,
+  entrance: number,
+  floor: number,
+  room: number,
+  tel: TelType,
+  email: string,
+  day: 'today',
+  time: string[],
+  utensils: number,
+  payment: PaymentType,
+  commentary: string,
+  deliveryTime: DeliveryTimeType
+}
+
 const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<IFormInputs>();
   const [utensils, setUtensils] = React.useState<number>(0);
   const [agreement, setAgreement] = React.useState<boolean>(true);
   const [timeStamps] = React.useState<string[]>(calcTime(15));
 
   React.useEffect(() => {
-    setValue('delivery-type', '1')
+    setValue('deliveryTime', 1);
   }, [setValue])
 
-  const onSubmit: SubmitHandler<any> = data => {
-    console.log(data);
-    console.log(agreement);
+  const onSubmit: SubmitHandler<IFormInputs> = data => {
+    if (agreement) {
+      console.log(data);
+    }
   };
 
   return (
@@ -46,15 +67,15 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Подъезд</label>
-            <input className={styles.root__input + ' ' + (errors.name && styles.root__input_invalid)} {...register('address', {  maxLength: 2 })} />
+            <input className={styles.root__input + ' ' + (errors.name && styles.root__input_invalid)} {...register('entrance', {  maxLength: 2 })} />
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Этаж</label>
-            <input className={styles.root__input + ' ' + (errors.name && styles.root__input_invalid)} {...register('address', {  maxLength: 2 })} />
+            <input className={styles.root__input + ' ' + (errors.name && styles.root__input_invalid)} {...register('floor', {  maxLength: 2 })} />
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Квартира</label>
-            <input className={styles.root__input + ' ' + (errors.name && styles.root__input_invalid)} {...register('address', {  maxLength: 4 })} />
+            <input className={styles.root__input + ' ' + (errors.name && styles.root__input_invalid)} {...register('room', {  maxLength: 4 })} />
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label className={styles.root__required}>Телефон</label>
@@ -117,7 +138,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
         </div>
       </BlockForm>
 
-      <Agreement setAgreement={setAgreement} />
+      <Agreement delivery={true} setAgreement={setAgreement} />
 
       <SimpleButton type="submit">Отправить заказ</SimpleButton>
     </form>

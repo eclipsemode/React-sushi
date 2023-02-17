@@ -5,7 +5,6 @@ import styles from "./index.module.css";
 import { ClearButton } from "shared/UI";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { IProducts } from "entities/products";
-// import { fetchOrderCreate } from "features/order/api";
 import { useNavigate } from "react-router-dom";
 import { DeliveryPrice } from "features/order/utils";
 import PickupForm from "./PickupForm";
@@ -16,7 +15,7 @@ import DeliveryForm from "./DeliveryForm";
 type OrderType = "delivery" | "pickup" | null;
 
 const CartOrder: React.FC = () => {
-  const { items, totalPrice, totalAmount, deliveryPrice } = useAppSelector(selectCart);
+  const { items, totalPrice, deliveryPrice } = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [popup, setPopup] = React.useState<boolean>(false);
@@ -28,11 +27,6 @@ const CartOrder: React.FC = () => {
       dispatch(removeAll());
     }
   };
-
-  // const onSubmit = () => {
-  //     dispatch(fetchOrderCreate());
-  //     setPopup(true);
-  // }
 
   const onClosePopup = React.useCallback(() => {
     setPopup(false);
@@ -57,7 +51,7 @@ const CartOrder: React.FC = () => {
   return (
     <div className={styles.root}>
       {
-        deliveryPrice !== 0 && <Alert type="error">Внимание! Для бесплатной доставки сумма заказа должны быть не
+        (deliveryPrice !== 0 && orderType !== 'pickup') && <Alert type="error">Внимание! Для бесплатной доставки сумма заказа должны быть не
           менее {DeliveryPrice.MIN} ₽.</Alert>
       }
       <br />
@@ -80,27 +74,7 @@ const CartOrder: React.FC = () => {
           <td colSpan={4}>
             <div className={styles.root__footer}>
               <ClearButton handleClick={handleRemoveAll}>Очистить корзину</ClearButton>
-              <div className={styles.root__order}>
-                <div className={styles.root__total}>
-                  <h4>Заказ</h4>
-                  <div>
-                    <span>Количество</span>
-                    <span>{totalAmount} шт.</span>
-                  </div>
-                  <div>
-                    <span>Стоимость</span>
-                    <span>{totalPrice} ₽</span>
-                  </div>
-                  <div>
-                    <span>Доставка</span>
-                    <span>{deliveryPrice} ₽</span>
-                  </div>
-                  <div>
-                    <span>Итого</span>
-                    <span>{totalPrice + deliveryPrice} ₽</span>
-                  </div>
-                </div>
-              </div>
+              <h4 className={styles.root__footer_price}>Сумма заказа: { totalPrice } ₽</h4>
             </div>
           </td>
         </tr>

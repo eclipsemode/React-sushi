@@ -26,44 +26,12 @@
 .root tfoot td {
   padding: 1rem;
 }
-.root__order {
-  width: 416px;
-  background: #fff;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.1);
-}
 .root__footer {
   display: flex;
   justify-content: space-between;
 }
-.root__total {
-  margin: 1rem;
-}
-.root__total h4 {
-  font-size: 22px;
-  color: #212529;
-  margin-bottom: 22px;
-}
-.root__total div {
-  display: flex;
-  justify-content: space-between;
-  font-size: 20px;
-  font-weight: 500;
-}
-.root__total div:first-of-type {
-  color: rgba(27, 27, 27, 0.7);
-}
-.root__total div:nth-of-type(2) {
-  color: rgba(27, 27, 27, 0.7);
-}
-.root__total div:last-of-type {
-  color: #da0002;
-  border-top: 1px dashed black;
-  margin-top: 1em;
-  padding-top: 1em;
+.root__footer_price {
+  font-size: 24px;
 }
 .root__type {
   padding-top: 2px;
