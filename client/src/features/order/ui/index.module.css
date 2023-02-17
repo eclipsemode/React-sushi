@@ -28,7 +28,7 @@
 }
 .root__footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .root__footer_price {
   font-size: 24px;
