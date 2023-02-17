@@ -26,10 +26,14 @@ interface FormInputs {
 
 
 const PickupForm: React.FC<IPickupProps> = (props) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormInputs>();
   const [timeStamps] = React.useState<string[]>(calcTime(15));
   const [utensils, setUtensils] = React.useState<number>(0);
   const [agreement, setAgreement] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    setValue('utensils', utensils);
+  }, [utensils, setValue])
 
   const onSubmit: SubmitHandler<FormInputs> = data => {
     console.log(data);

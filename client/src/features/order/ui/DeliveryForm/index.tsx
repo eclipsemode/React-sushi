@@ -8,6 +8,8 @@ import Agreement from "../Agreement";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Radio from "shared/UI/Radio";
 import { calcTime } from "../../utils/calcTime";
+import { useAppDispatch } from "../../../../app/hooks";
+import { fetchOrderCreate } from "../../api";
 
 interface IDeliveryFormProps {
   clickEvent: () => void;
@@ -17,7 +19,7 @@ type PaymentType = "cash" | "card";
 type TelType = `+${number} (${number}${number}${number}) ${number}${number}${number}-${number}${number}-${number}${number}`;
 type DeliveryTimeType = 1 | 2;
 
-interface IFormInputs {
+export interface IFormInputs {
   name: string,
   address: string,
   entrance: number,
@@ -25,15 +27,16 @@ interface IFormInputs {
   room: number,
   tel: TelType,
   email: string,
-  day: "today",
-  time: string[],
+  day: "today" | null,
+  time: string | null,
   utensils: number,
   payment: PaymentType,
   commentary: string,
-  deliveryTime: DeliveryTimeType
+  deliveryTime?: DeliveryTimeType
 }
 
 const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
+  const dispatch = useAppDispatch();
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<IFormInputs>();
   const [utensils, setUtensils] = React.useState<number>(0);
   const [agreement, setAgreement] = React.useState<boolean>(true);
@@ -43,9 +46,12 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
     setValue("deliveryTime", 1);
   }, [setValue]);
 
+  React.useEffect(() => {
+    setValue('utensils', utensils)
+  }, [utensils, setValue]);
   const onSubmit: SubmitHandler<IFormInputs> = data => {
     if (agreement) {
-      console.log(data);
+      dispatch(fetchOrderCreate(data));
     }
   };
 
@@ -115,7 +121,8 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
           </fieldset>
 
           {
-            +watch("deliveryTime") === 2 &&
+            Number(watch("deliveryTime")) === 2
+              &&
             <>
               <fieldset className={styles.root__width_50}>
                 <label>Доставить</label>
