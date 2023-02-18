@@ -31,7 +31,19 @@ const Order = sequelize.define("order", {
     userId: { type: DataTypes.INTEGER },
     orderProducts: {type: DataTypes.ARRAY(DataTypes.JSONB), allowNull: false, defaultValue: []},
     totalPrice: { type: DataTypes.INTEGER, allowNull: false },
-    totalAmount: { type: DataTypes.INTEGER, allowNull: false }
+    totalAmount: { type: DataTypes.INTEGER, allowNull: false },
+    name: { type: DataTypes.STRING, allowNull: false },
+    address: { type: DataTypes.STRING, allowNull: false },
+    entrance: { type: DataTypes.INTEGER },
+    floor: { type: DataTypes.INTEGER },
+    room: { type: DataTypes.INTEGER },
+    tel: { type: DataTypes.STRING, allowNull: false },
+    email: { type: DataTypes.STRING },
+    day: { type: DataTypes.STRING },
+    time: { type: DataTypes.STRING },
+    utensils: { type: DataTypes.INTEGER, allowNull: false },
+    payment: { type: DataTypes.STRING, allowNull: false },
+    commentary: { type: DataTypes.TEXT }
   },
   {
     timestamps: true

@@ -2,8 +2,8 @@ const { User, Order, Product } = require('../models/models');
 const ApiError = require("../error/ApiError");
 
 class OrderService {
-  async create(userId, orderProducts, totalPrice, totalAmount) {
-    const order = await Order.create({userId, orderProducts, totalPrice, totalAmount})
+  async create(data) {
+    const order = await Order.create({...data})
     return order;
   }
 
