@@ -1,4 +1,3 @@
-// @ts-nocheck
 import axios, {
   AxiosError, AxiosRequestConfig,
 } from "axios";

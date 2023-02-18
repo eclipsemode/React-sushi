@@ -56,7 +56,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
     if (response.meta.requestStatus === "rejected") {
       return new ValidationError(response.payload as any, setError);
     }
-    navigate("/");
+    navigate("/registered");
   };
 
   const nameError = (): JSX.Element | void => {
@@ -134,7 +134,6 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
                  {...register("surname")}
                  type="text" />
           <InputMask className={styles.root__input}
-            //eslint-disable-next-line
                      {...register("dateOfBirth")}
                      placeholder="Дата рождения"
                      type="text"

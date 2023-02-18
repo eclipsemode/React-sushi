@@ -1,8 +1,6 @@
 import React from "react";
-import styles from './index.module.css';
-import { BsFillCheckCircleFill } from "react-icons/bs";
-import { Button } from "shared/UI";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Button, Result } from "antd";
 
 const ActivatedPageBlock: React.FC = () => {
   const [ timer, setTimer ] = React.useState<number>(5);
@@ -22,13 +20,14 @@ const ActivatedPageBlock: React.FC = () => {
   }, [timer, navigate]);
 
   return (
-    <section className={styles.root}>
-      <div className={styles.root__title}><BsFillCheckCircleFill/><h2>Аккаунт успешно активирован.</h2></div>
-      <Link to={"/login"}>
-      <Button>Войти в аккаунт</Button>
-      </Link>
-      <h3>Автоматическая переадресация через: {timer} секунд</h3>
-    </section>
+    <Result
+      status="success"
+      title="Аккаунт успешно активирован."
+      subTitle={`Автоматическая переадресация через: ${timer} секунд`}
+      extra={[
+        <Button onClick={() => navigate('/login')} type="primary" key="entry">Войти</Button>
+      ]}
+    />
   );
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "app/layouts";
 import Home from "pages/homePage";
+import SuccessfullyRegisteredPage from "./SuccessfullyRegisteredPage";
 
 const CartPage = React.lazy(() => import(/* webpackChunkName: "Index" */ "pages/cartPage"));
 const NotFoundPage = React.lazy(() => import(/* webpackChunkName: "Index" */ "pages/notFoundPage"));
@@ -18,6 +19,7 @@ export const Routing: React.FC = () => {
           <Route path="login" element={<LoginPage />} />
           <Route path="registration" element={<LoginPage />} />
           <Route path="personal" element={<PersonalPage />} />
+          <Route path="registered" element={<SuccessfullyRegisteredPage />} />
           <Route path="activate/:link" element={<ActivatedPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
