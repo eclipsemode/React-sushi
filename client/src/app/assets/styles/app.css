@@ -404,7 +404,6 @@ a {
   background-color: #FAF7F2;
   padding: 13px 30px;
   cursor: pointer;
-  transition: background-color 0.1s ease-in-out;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Old versions of Firefox */
@@ -423,9 +422,6 @@ a {
 }
 .categories ul li:hover {
   background-color: #f7f2eb;
-}
-.categories ul li:active {
-  background-color: #f3ece0;
 }
 .categories ul li.categories-item--active {
   background-color: #292929;

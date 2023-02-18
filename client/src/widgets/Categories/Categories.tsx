@@ -23,7 +23,6 @@ const Categories: React.FC = () => {
   const handleClickCategory = (id: number) => {
     dispatch(setCategoryNumber(id));
   };
-
   const categoryImg = (i: number) => {
     switch (i) {
       case 0:

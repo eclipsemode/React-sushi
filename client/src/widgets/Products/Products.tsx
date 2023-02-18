@@ -27,15 +27,14 @@ const Products: React.FC = () => {
   }, [categoryNumber, sortType, sortOrder, navigate]);
 
   React.useEffect(() => {
-      if (location.search) {
-        const queryStr = qs.parse(location.search.substring(1)) as { categoryNumber: string };
-        dispatch(setCategoryNumber(Number(queryStr.categoryNumber)));
-      }
+    if (location.search) {
+      const queryStr = qs.parse(location.search.substring(1)) as { categoryNumber: string };
+      dispatch(setCategoryNumber(Number(queryStr.categoryNumber)));
+    }
   }, [dispatch, location]);
 
   React.useEffect(() => {
-    dispatch(fetchProducts());
-
+      dispatch(fetchProducts());
   }, [categoryNumber, dispatch, sortOrder, sortType]);
 
   return productsStatus === ProductsStatus.PENDING ? (

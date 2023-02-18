@@ -16,7 +16,7 @@ export interface IFilterState {
   sortType: SortType;
   sortOrder: SortOrderType;
   categoryNumber: number;
-};
+}
 
 const initialState: IFilterState = {
   sortId: 0,
