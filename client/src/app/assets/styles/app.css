@@ -455,7 +455,7 @@ a {
   right: 0;
   margin-top: 15px;
   background: #ffffff;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
+  box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   overflow: hidden;
   padding: 10px 0;
