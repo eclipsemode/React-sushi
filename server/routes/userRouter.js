@@ -6,7 +6,7 @@ const registrationSchema = require("../validation/registration-schema");
 
 router.post("/registration", registrationSchema, userController.registration);
 router.get("/activate/:link", userController.activate);
-router.get("/refresh", authMiddleware, userController.refresh);
+router.get("/refresh", userController.refresh);
 router.post("/login", userController.login);
 router.get("/logout", userController.logout);
 router.get("/info", authMiddleware, userController.getUserData);

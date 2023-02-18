@@ -3,6 +3,7 @@ import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "entities/
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { TextInput } from "shared/UI";
 import styles from "./Settings.module.css";
+import BlockForm from "../../../shared/UI/BlockForm";
 
 const Settings: React.FC = () => {
   const [userInfo, setUserInfo] = React.useState<IRegistrationProps>();
@@ -67,6 +68,7 @@ const Settings: React.FC = () => {
   }, [dispatch, user, isAuth]);
 
   return (
+    <BlockForm>
     <section className={styles.root}>
       <form className={styles.root__infoContainer}>
         <div className={styles.root__info}>
@@ -127,6 +129,7 @@ const Settings: React.FC = () => {
         </div>
       </form>
     </section>
+    </BlockForm>
   );
 };
 

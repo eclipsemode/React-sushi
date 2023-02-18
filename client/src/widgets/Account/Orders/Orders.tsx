@@ -1,10 +1,11 @@
 import React from "react";
+import BlockForm from "../../../shared/UI/BlockForm";
 
 const Orders: React.FC = () => {
   return (
-    <section>
+    <BlockForm>
 Orders
-    </section>
+    </BlockForm>
   );
 };
 

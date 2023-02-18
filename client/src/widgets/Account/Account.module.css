@@ -78,11 +78,13 @@
   background: #d8a802;
 }
 .root__body section {
-  flex: 2 auto;
-  border: 1px solid white;
-  border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
-  padding: 1rem;
+  max-width: none;
+  margin: 0;
+  flex: 2 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1.6em;
 }
 
 /*# sourceMappingURL=Account.module.css.map */

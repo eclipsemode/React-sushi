@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.module.css";
-import BlockForm from "../BlockForm";
+import BlockForm from "shared/UI/BlockForm";
 import SimpleButton from "shared/UI/SimpleButton";
 import InputMask from "react-input-mask";
 import { IoIosAddCircleOutline, IoIosRemoveCircleOutline } from "react-icons/io";

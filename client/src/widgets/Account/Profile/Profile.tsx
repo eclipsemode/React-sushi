@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/user";
+import BlockForm from "shared/UI/BlockForm";
 
 const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,14 +24,14 @@ const Profile: React.FC = () => {
   }, [dispatch, isAuth])
 
   return (
-    <section>
+    <BlockForm>
       <p>Имя: { userData?.name }</p>
       <p>Фамилия: { userData?.surname }</p>
       <p>Дата рождения: { userData?.dateOfBirth }</p>
       <p>Email: { userData?.email }</p>
       <p>Телефон: { userData?.tel }</p>
       <p>Адресс: { userData?.street + ' ' + userData?.house }, подьезд { userData?.entrance }, этаж { userData?.floor }, кв. { userData?.room }</p>
-    </section>
+    </BlockForm>
   );
 };
 

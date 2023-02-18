@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.module.css";
-import BlockForm from "../BlockForm";
+import BlockForm from "shared/UI/BlockForm";
 import Checkbox from "antd/es/checkbox/Checkbox";
 import { useAppSelector } from "app/hooks";
 

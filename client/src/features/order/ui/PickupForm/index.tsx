@@ -3,7 +3,7 @@ import styles from "./index.module.css";
 import InputMask from "react-input-mask";
 import SimpleButton from "shared/UI/SimpleButton";
 import { SubmitHandler, useForm } from "react-hook-form";
-import BlockForm from "../BlockForm";
+import BlockForm from "shared/UI/BlockForm";
 import { IoIosAddCircleOutline, IoIosRemoveCircleOutline } from "react-icons/io";
 import Agreement from "../Agreement";
 import { calcTime } from "../../utils/calcTime";
