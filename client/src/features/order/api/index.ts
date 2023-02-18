@@ -10,7 +10,6 @@ const fetchOrderCreate = createAsyncThunk<void, IFormInputs, { rejectValue: any,
   async (formData, { rejectWithValue, getState }) => {
     try {
       const { userReducer, cartReducer } = getState();
-      // @ts-ignore
       const orderDto = new OrderDto(cartReducer, userReducer, formData)
       console.log(orderDto)
       // await $api.post('api/order/create', orderDto.order);

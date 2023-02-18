@@ -26,8 +26,6 @@ class OrderDto {
       email: formData.email,
       day: formData.day,
       time: formData.time,
-      // day: Number(formData.deliveryTime) === 1 ? null : formData.day,
-      // time: Number(formData.deliveryTime) === 1 ? null : formData.time,
       utensils: formData.utensils,
       payment: formData.payment,
       commentary: formData.commentary

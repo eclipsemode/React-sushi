@@ -51,6 +51,11 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
   }, [utensils, setValue]);
   const onSubmit: SubmitHandler<IFormInputs> = data => {
     if (agreement) {
+
+      if (Number(data.deliveryTime) === 1) {
+        data.day = null;
+        data.time = null;
+      }
       dispatch(fetchOrderCreate(data));
     }
   };
@@ -122,7 +127,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
 
           {
             Number(watch("deliveryTime")) === 2
-              &&
+            &&
             <>
               <fieldset className={styles.root__width_50}>
                 <label>Доставить</label>
