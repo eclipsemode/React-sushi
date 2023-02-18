@@ -28,12 +28,11 @@ const Token = sequelize.define("token", {
 
 const Order = sequelize.define("order", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    userId: { type: DataTypes.INTEGER },
     orderProducts: {type: DataTypes.ARRAY(DataTypes.JSONB), allowNull: false, defaultValue: []},
     totalPrice: { type: DataTypes.INTEGER, allowNull: false },
     totalAmount: { type: DataTypes.INTEGER, allowNull: false },
     name: { type: DataTypes.STRING, allowNull: false },
-    address: { type: DataTypes.STRING, allowNull: false },
+    address: { type: DataTypes.STRING },
     entrance: { type: DataTypes.INTEGER },
     floor: { type: DataTypes.INTEGER },
     room: { type: DataTypes.INTEGER },
@@ -55,8 +54,7 @@ const Product = sequelize.define("product", {
   price: { type: DataTypes.INTEGER, allowNull: false },
   rating: { type: DataTypes.INTEGER, defaultValue: 1 },
   description: { type: DataTypes.STRING, allowNull: false },
-  image: { type: DataTypes.STRING, allowNull: false },
-  categoryId: { type: DataTypes.INTEGER, allowNull: false }
+  image: { type: DataTypes.STRING, allowNull: false }
 });
 
 const Category = sequelize.define("category", {
@@ -73,9 +71,20 @@ Token.belongsTo(User, {
 });
 
 User.hasMany(Order);
+Order.belongsTo(User, {
+  foreignKey: {
+    name: 'userId',
+    allowNull: true
+  }
+})
 
 Category.hasMany(Product);
-Product.belongsTo(Category);
+Product.belongsTo(Category, {
+  foreignKey: {
+    name: 'categoryId',
+    allowNull: false
+  }
+});
 
 module.exports = {
   User,

@@ -7,6 +7,11 @@ import BlockForm from "../BlockForm";
 import { IoIosAddCircleOutline, IoIosRemoveCircleOutline } from "react-icons/io";
 import Agreement from "../Agreement";
 import { calcTime } from "../../utils/calcTime";
+import { Modal } from "antd";
+import { removeAll } from "entities/cart";
+import { useAppDispatch } from "app/hooks";
+import { fetchOrderCreate } from "../../api";
+import { PaymentType, TelType } from "../DeliveryForm";
 
 interface IPickupProps {
   clickEvent: () => void;
@@ -14,18 +19,19 @@ interface IPickupProps {
 
 interface FormInputs {
   name: string,
-  tel: string,
+  tel: TelType,
   email: string,
   day: 'today',
   time: string,
   utensils: number,
-  payment: 'cash' | 'card',
+  payment: PaymentType,
   commentary: string
 }
 
 
 
 const PickupForm: React.FC<IPickupProps> = (props) => {
+  const dispatch = useAppDispatch();
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormInputs>();
   const [timeStamps] = React.useState<string[]>(calcTime(15));
   const [utensils, setUtensils] = React.useState<number>(0);
@@ -36,8 +42,18 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
   }, [utensils, setValue])
 
   const onSubmit: SubmitHandler<FormInputs> = data => {
-    console.log(data);
-    console.log(agreement);
+    if (agreement) {
+      dispatch(fetchOrderCreate(data));
+      success();
+    }
+  };
+
+  const success = () => {
+    Modal.success({
+      title: 'Ваш заказ отправлен.',
+      content: 'Оператор перезвонит для подтверждения в течении 5 минут.'
+    });
+    dispatch(removeAll());
   };
 
   return (

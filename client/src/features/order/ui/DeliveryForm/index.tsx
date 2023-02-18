@@ -17,16 +17,16 @@ interface IDeliveryFormProps {
   clickEvent: () => void;
 }
 
-type PaymentType = "cash" | "card";
-type TelType = `+${number} (${number}${number}${number}) ${number}${number}${number}-${number}${number}-${number}${number}`;
+export type PaymentType = "cash" | "card";
+export type TelType = `+${number} (${number}${number}${number}) ${number}${number}${number}-${number}${number}-${number}${number}`;
 type DeliveryTimeType = 1 | 2;
 
 export interface IFormInputs {
   name: string,
-  address: string,
-  entrance: number,
-  floor: number,
-  room: number,
+  address?: string | null,
+  entrance?: number | null,
+  floor?: number | null,
+  room?: number | null,
   tel: TelType,
   email: string,
   day: "today" | null,
@@ -46,6 +46,9 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
 
   React.useEffect(() => {
     setValue("deliveryTime", 1);
+    setValue('entrance', null);
+    setValue('floor', null);
+    setValue('room', null);
   }, [setValue]);
 
   React.useEffect(() => {
