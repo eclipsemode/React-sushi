@@ -10,6 +10,8 @@ import Radio from "shared/UI/Radio";
 import { calcTime } from "../../utils/calcTime";
 import { useAppDispatch } from "../../../../app/hooks";
 import { fetchOrderCreate } from "../../api";
+import { removeAll } from "entities/cart";
+import { Modal } from "antd";
 
 interface IDeliveryFormProps {
   clickEvent: () => void;
@@ -57,7 +59,16 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
         data.time = null;
       }
       dispatch(fetchOrderCreate(data));
+      success();
     }
+  };
+
+  const success = () => {
+    Modal.success({
+      title: 'Ваш заказ отправлен.',
+      content: 'Оператор перезвонит для подтверждения в течении 5 минут.'
+    });
+    dispatch(removeAll());
   };
 
   return (
