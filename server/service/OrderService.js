@@ -11,6 +11,11 @@ class OrderService {
     const orders = await Order.findAll()
     return orders;
   }
+
+  async getAllByUserId(id) {
+    const orders = await Order.findAll({where: { userId: id }})
+    return orders;
+  }
 }
 
 module.exports = new OrderService();
