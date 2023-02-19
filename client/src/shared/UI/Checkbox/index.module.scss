@@ -1,0 +1,62 @@
+@import '../../../app/assets/styles/variables';
+
+.root {
+  position: relative;
+}
+
+.root__input {
+  display: none;
+}
+
+.root__input+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  font-size: 1.4em;
+  color: rgba(31, 32, 65, 0.5);
+}
+
+.root__input+label a {
+    color: $main-color;
+    text-decoration: none;
+    opacity: .9;
+    border-bottom: 1px dashed $main-color;
+    padding-bottom: 0.1em;
+}
+.root__input+label::before {
+  content: '';
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid rgba(31, 32, 65, 0.2);
+  border-radius: 0.25em;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+.root__input:checked+label::before {
+  border-color: $main-color;
+}
+
+.root svg {
+  position: absolute;
+  left: 0;
+  top: calc(50% - 11.5px);
+  font-size: 23px;
+  color: $main-color;
+  display: none;
+  pointer-events: none;
+}
+
+.root__input:checked~svg {
+  display: block;
+}
+
+.root__input_invalid {
+  background: rgba(214, 15, 19, 0.04);
+  box-shadow: inset 0 -2px 0 0 #d60f14;
+}

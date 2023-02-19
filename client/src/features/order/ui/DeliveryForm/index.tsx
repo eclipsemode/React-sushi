@@ -8,8 +8,8 @@ import Agreement from "../Agreement";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Radio from "shared/UI/Radio";
 import { calcTime } from "../../utils/calcTime";
-import { useAppDispatch } from "../../../../app/hooks";
-import { fetchOrderCreate } from "../../api";
+import { useAppDispatch } from "app/hooks";
+import { fetchOrderCreate } from "features/order/api";
 import { removeAll } from "entities/cart";
 import { Modal } from "antd";
 
@@ -34,42 +34,41 @@ export interface IFormInputs {
   utensils: number,
   payment: PaymentType,
   commentary: string,
-  deliveryTime?: DeliveryTimeType
+  deliveryTime?: DeliveryTimeType,
+  agreement_1?: boolean,
+  agreement_2?: boolean,
+  agreement_3?: boolean
 }
 
 const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
   const dispatch = useAppDispatch();
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<IFormInputs>();
   const [utensils, setUtensils] = React.useState<number>(0);
-  const [agreement, setAgreement] = React.useState<boolean>(true);
   const [timeStamps] = React.useState<string[]>(calcTime(15));
 
   React.useEffect(() => {
     setValue("deliveryTime", 1);
-    setValue('entrance', null);
-    setValue('floor', null);
-    setValue('room', null);
+    setValue("entrance", null);
+    setValue("floor", null);
+    setValue("room", null);
   }, [setValue]);
 
   React.useEffect(() => {
-    setValue('utensils', utensils)
+    setValue("utensils", utensils);
   }, [utensils, setValue]);
   const onSubmit: SubmitHandler<IFormInputs> = data => {
-    if (agreement) {
-
-      if (Number(data.deliveryTime) === 1) {
-        data.day = null;
-        data.time = null;
-      }
-      dispatch(fetchOrderCreate(data));
-      success();
+    if (Number(data.deliveryTime) === 1) {
+      data.day = null;
+      data.time = null;
     }
+    dispatch(fetchOrderCreate(data));
+    success();
   };
 
   const success = () => {
     Modal.success({
-      title: 'Ваш заказ отправлен.',
-      content: 'Оператор перезвонит для подтверждения в течении 5 минут.'
+      title: "Ваш заказ отправлен.",
+      content: "Оператор перезвонит для подтверждения в течении 5 минут."
     });
     dispatch(removeAll());
   };
@@ -101,17 +100,17 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
           <fieldset className={styles.root__width_33}>
             <label>Подъезд</label>
             <input
-              className={styles.root__input + " " + (errors.name && styles.root__input_invalid)} {...register("entrance", { maxLength: 2 })} />
+              className={styles.root__input} {...register("entrance", { maxLength: 2 })} />
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Этаж</label>
             <input
-              className={styles.root__input + " " + (errors.name && styles.root__input_invalid)} {...register("floor", { maxLength: 2 })} />
+              className={styles.root__input} {...register("floor", { maxLength: 2 })} />
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Квартира</label>
             <input
-              className={styles.root__input + " " + (errors.name && styles.root__input_invalid)} {...register("room", { maxLength: 4 })} />
+              className={styles.root__input} {...register("room", { maxLength: 4 })} />
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label className={styles.root__required}>Телефон</label>
@@ -188,7 +187,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
         </div>
       </BlockForm>
 
-      <Agreement delivery={true} setAgreement={setAgreement} />
+      <Agreement delivery={true} register={register} errors={errors} />
 
       <SimpleButton type="submit">Отправить заказ</SimpleButton>
     </form>

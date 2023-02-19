@@ -17,23 +17,11 @@
 
   &__agreement {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    row-gap: 1.5em;
     column-gap: 1em;
-
-    & a {
-      color: $main-color;
-      text-decoration: none;
-      opacity: .9;
-      border-bottom: 1px dashed $main-color;
-      padding-bottom: 0.1em;
-    }
-  }
-
-  &__checkbox {
-    display: flex;
-    align-items: center;
-    color: #898989;
-    font-size: 1.3em;
   }
 
   &__order {

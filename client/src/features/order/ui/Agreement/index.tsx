@@ -1,27 +1,18 @@
 import React from "react";
 import styles from "./index.module.css";
 import BlockForm from "shared/UI/BlockForm";
-import Checkbox from "antd/es/checkbox/Checkbox";
 import { useAppSelector } from "app/hooks";
+import Checkbox from "../../../../shared/UI/Checkbox";
+import { IFormInputs } from "../DeliveryForm";
 
 interface IAgreementProps {
-  setAgreement: (value: boolean) => void;
   delivery?: boolean;
+  register?: any;
+  errors?: IFormInputs | any;
 }
 
 const Agreement: React.FC<IAgreementProps> = (props) => {
   const { totalPrice, deliveryPrice, totalAmount } = useAppSelector(state => state.cartReducer);
-  const [first, setFirst] = React.useState<boolean>(true);
-  const [second, setSecond] = React.useState<boolean>(true);
-  const [third, setThird] = React.useState<boolean>(true);
-
-  React.useEffect(() => {
-    if (first && second && third) {
-      props.setAgreement(true);
-    } else {
-      props.setAgreement(false);
-    }
-  }, [first, second, third, props]);
 
   return (
     <BlockForm>
@@ -55,23 +46,18 @@ const Agreement: React.FC<IAgreementProps> = (props) => {
           </div>
         </div>
         <div className={styles.root__agreement}>
-          <Checkbox checked={first} onChange={() => setFirst(prevState => !prevState)}
-                    className={styles.root__checkbox}>Осуществляя заказ на <a
-            href="/">сайте</a>&nbsp;я подтверждаю, что ознакомился с правилами
-            продажи товаров, а также cо всеми документами, размещенными на сайте по&nbsp;<a
-              href="/">адресу</a>,&nbsp;и подтверждаю принятие правил продажи товаров на сайте в полном
+          <Checkbox name='agreement_1' register={props.register} errors={props.errors} checked={true}>Осуществляя заказ на <a
+            href="/">сайте</a> я подтверждаю, что ознакомился с правилами
+            продажи товаров, а также cо всеми документами, размещенными на сайте по <a
+              href="/">адресу</a>, и подтверждаю принятие правил продажи товаров на сайте в полном
             объеме без ограничений.</Checkbox>
-        </div>
-        <div className={styles.root__agreement}>
-          <Checkbox checked={second} onChange={() => setSecond(prevState => !prevState)}
-                    className={styles.root__checkbox}>Осуществляя заказ на <a
-            href="/">сайте</a>&nbsp;я даю свое согласие на сбор и обработку моих
+
+          <Checkbox name='agreement_2' register={props.register} errors={props.errors} checked={true}>Осуществляя заказ на <a
+            href="/">сайте</a> я даю свое согласие на сбор и обработку моих
             персональных данных в соответствии с политикой <a href="/">конфиденциальности</a>.</Checkbox>
-        </div>
-        <div className={styles.root__agreement}>
-          <Checkbox checked={third} onChange={() => setThird(prevState => !prevState)}
-                    className={styles.root__checkbox}>Осуществляя заказ на <a
-            href="/">сайте</a>&nbsp;я даю свое согласие на получение направляемых
+
+          <Checkbox name='agreement_3' register={props.register} errors={props.errors} checked={true}>Осуществляя заказ на <a
+            href="/">сайте</a> я даю свое согласие на получение направляемых
             мне смс-сообщений и электронных писем рекламного и информационного характера.</Checkbox>
         </div>
       </div>

@@ -35,17 +35,14 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormInputs>();
   const [timeStamps] = React.useState<string[]>(calcTime(15));
   const [utensils, setUtensils] = React.useState<number>(0);
-  const [agreement, setAgreement] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     setValue('utensils', utensils);
   }, [utensils, setValue])
 
   const onSubmit: SubmitHandler<FormInputs> = data => {
-    if (agreement) {
       dispatch(fetchOrderCreate(data));
       success();
-    }
   };
 
   const success = () => {
@@ -124,7 +121,7 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
         </div>
       </BlockForm>
 
-      <Agreement setAgreement={setAgreement} />
+      <Agreement register={register} errors={errors} />
 
       <SimpleButton type="submit">Отправить заказ</SimpleButton>
     </form>
