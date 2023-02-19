@@ -6,6 +6,7 @@
 .root__head {
   display: flex;
   column-gap: 0.5rem;
+  font-size: 2em;
 }
 .root__head > p {
   color: #292929;
