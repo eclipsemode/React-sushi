@@ -10,29 +10,15 @@ import { calcTime } from "../../utils/calcTime";
 import { Modal } from "antd";
 import { removeAll } from "entities/cart";
 import { useAppDispatch } from "app/hooks";
-import { fetchOrderCreate } from "../../api";
-import { PaymentType, TelType } from "../DeliveryForm";
+import { fetchOrderCreate } from "features/order/api";
+import { IFormInputs } from "../DeliveryForm";
 
 interface IPickupProps {
   clickEvent: () => void;
 }
-
-interface FormInputs {
-  name: string,
-  tel: TelType,
-  email: string,
-  day: 'today',
-  time: string,
-  utensils: number,
-  payment: PaymentType,
-  commentary: string
-}
-
-
-
 const PickupForm: React.FC<IPickupProps> = (props) => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormInputs>();
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<IFormInputs>();
   const [timeStamps] = React.useState<string[]>(calcTime(15));
   const [utensils, setUtensils] = React.useState<number>(0);
 
@@ -40,8 +26,8 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
     setValue('utensils', utensils);
   }, [utensils, setValue])
 
-  const onSubmit: SubmitHandler<FormInputs> = data => {
-      dispatch(fetchOrderCreate(data));
+  const onSubmit: SubmitHandler<IFormInputs> = data => {
+      dispatch(fetchOrderCreate({ ...data, type: 'pickup' }));
       success();
   };
 

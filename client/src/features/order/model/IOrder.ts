@@ -1,5 +1,5 @@
 import { IFormInputs } from "../ui/DeliveryForm";
-
+import { OrderType } from "../ui";
 interface IOrderProducts {
     amount: number,
     productId: number,
@@ -12,6 +12,7 @@ interface IOrder extends IFormInputs{
   orderProducts: IOrderProducts[],
   totalPrice: number,
   totalAmount: number,
+  type: OrderType
 }
 
 export type { IOrderProducts, IOrder };

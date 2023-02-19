@@ -11,7 +11,7 @@ import SimpleButton from "shared/UI/SimpleButton";
 import Alert from "shared/UI/Alert";
 import DeliveryForm from "./DeliveryForm";
 
-type OrderType = "delivery" | "pickup" | null;
+export type OrderType = "delivery" | "pickup" | null;
 
 const CartOrder: React.FC = () => {
   const { items, totalPrice, deliveryPrice } = useAppSelector(selectCart);

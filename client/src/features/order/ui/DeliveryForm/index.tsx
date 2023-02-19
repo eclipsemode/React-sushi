@@ -61,7 +61,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
       data.day = null;
       data.time = null;
     }
-    dispatch(fetchOrderCreate(data));
+    dispatch(fetchOrderCreate({...data, type: 'delivery'}));
     success();
   };
 

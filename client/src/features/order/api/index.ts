@@ -3,9 +3,9 @@ import { IUserState } from "entities/user";
 import { ICartState } from "entities/cart";
 import OrderDto from "features/order/model/OrderDto";
 import { $api } from "processes/api";
-import { IFormInputs } from "../ui/DeliveryForm";
+import { IOrder } from "../model";
 
-const fetchOrderCreate = createAsyncThunk<void, IFormInputs, { rejectValue: any, state: { userReducer: IUserState, cartReducer: ICartState } }>(
+const fetchOrderCreate = createAsyncThunk<void, Partial<IOrder>, { rejectValue: any, state: { userReducer: IUserState, cartReducer: ICartState } }>(
   'order/fetchOrderCreate',
   async (formData, { rejectWithValue, getState }) => {
     try {
