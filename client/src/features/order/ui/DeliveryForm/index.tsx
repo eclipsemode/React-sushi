@@ -133,10 +133,10 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
               placeholder="@" />
           </fieldset>
           <fieldset className={styles.root__radio + " " + styles.root__width_50}>
-            <Radio register={register} watch={watch} value={1} defaultChecked={true} />
+            <Radio register={register} watch={watch} value={1} defaultChecked={true}>Как можно скорее</Radio>
           </fieldset>
           <fieldset className={styles.root__radio + " " + styles.root__width_50}>
-            <Radio register={register} watch={watch} value={2} />
+            <Radio register={register} watch={watch} value={2}>К определенному времени</Radio>
           </fieldset>
 
           {
