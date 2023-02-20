@@ -3,7 +3,13 @@ import { $api } from "processes/api";
 import { IUserState } from "entities/user";
 import { IOrder } from "features/order/model";
 
-const fetchOrdersByUserId = createAsyncThunk<IOrder, void, { state: { userReducer: IUserState } }>(
+export interface IOrdersFetched extends IOrder{
+  id: number,
+  createdAt: string,
+  updatedAt: string,
+}
+
+const fetchOrdersByUserId = createAsyncThunk<IOrdersFetched[], void, { state: { userReducer: IUserState } }>(
   "account/fetchOrdersByUserId",
   async (_, { rejectWithValue, getState }) => {
     try {

@@ -1,0 +1,11 @@
+.root__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.root__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+/*# sourceMappingURL=index.module.css.map */
