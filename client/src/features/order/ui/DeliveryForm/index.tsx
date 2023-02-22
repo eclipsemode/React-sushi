@@ -3,7 +3,6 @@ import styles from "./index.module.css";
 import BlockForm from "shared/UI/BlockForm";
 import SimpleButton from "shared/UI/SimpleButton";
 import InputMask from "react-input-mask";
-import { IoIosAddCircleOutline, IoIosRemoveCircleOutline } from "react-icons/io";
 import Agreement from "../Agreement";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Radio from "shared/UI/Radio";
@@ -12,6 +11,7 @@ import { useAppDispatch } from "app/hooks";
 import { fetchOrderCreate } from "features/order/api";
 import { removeAll } from "entities/cart";
 import { Modal } from "antd";
+import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
 interface IDeliveryFormProps {
   clickEvent: () => void;
@@ -164,12 +164,9 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
           <fieldset className={styles.root__counter}>
             <label>Количество приборов</label>
             <div>
-              <IoIosRemoveCircleOutline className={utensils === 0 ? styles.root__btn_disabled : null} size={35}
-                                        cursor="pointer"
-                                        onClick={() => setUtensils((prevState) => prevState > 0 ? prevState - 1 : 0)} />
+              <MinusCircleOutlined style={{fontSize: '24px'}} className={utensils === 0 ? styles.root__btn_disabled : null} onClick={() => setUtensils((prevState) => prevState > 0 ? prevState - 1 : 0)} />
               <input {...register("utensils", { valueAsNumber: true, min: 0, max: 20 })} value={utensils} />
-              <IoIosAddCircleOutline size={35} cursor="pointer"
-                                     onClick={() => setUtensils((prevState) => prevState + 1)} />
+              <PlusCircleOutlined style={{fontSize: '24px'}} onClick={() => setUtensils((prevState) => prevState + 1)} />
             </div>
           </fieldset>
           <fieldset>

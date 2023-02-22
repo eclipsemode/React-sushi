@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./index.module.css";
-import { BsArrowRightShort } from "react-icons/bs";
+import { ArrowRightOutlined } from "@ant-design/icons";
 
 const Input: React.FC = () => {
   return (
     <form className={styles.root}>
       <input type="email" placeholder="Введите email..."/>
-      <BsArrowRightShort />
+      <ArrowRightOutlined />
     </form>
   );
 };

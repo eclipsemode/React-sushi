@@ -4,7 +4,6 @@ import InputMask from "react-input-mask";
 import SimpleButton from "shared/UI/SimpleButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import BlockForm from "shared/UI/BlockForm";
-import { IoIosAddCircleOutline, IoIosRemoveCircleOutline } from "react-icons/io";
 import Agreement from "../Agreement";
 import { calcTime } from "../../utils/calcTime";
 import { Modal } from "antd";
@@ -12,6 +11,7 @@ import { removeAll } from "entities/cart";
 import { useAppDispatch } from "app/hooks";
 import { fetchOrderCreate } from "features/order/api";
 import { IFormInputs } from "../DeliveryForm";
+import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
 interface IPickupProps {
   clickEvent: () => void;
@@ -88,9 +88,9 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
           <fieldset>
             <label>Количество приборов</label>
             <div>
-              <IoIosRemoveCircleOutline className={utensils === 0 ? styles.root__btn_disabled : null} size={35} cursor="pointer" onClick={() => setUtensils((prevState) => prevState > 0 ? prevState - 1 : 0)}/>
+              <MinusCircleOutlined style={{fontSize: '24px'}} onClick={() => setUtensils((prevState) => prevState > 0 ? prevState - 1 : 0)} />
               <input {...register('utensils', { valueAsNumber: true, min: 0, max: 20 })} value={utensils} />
-              <IoIosAddCircleOutline size={35} cursor="pointer" onClick={() => setUtensils((prevState) => prevState + 1)}/>
+              <PlusCircleOutlined style={{fontSize: '24px'}} onClick={() => setUtensils((prevState) => prevState + 1)} />
             </div>
           </fieldset>
           <fieldset>

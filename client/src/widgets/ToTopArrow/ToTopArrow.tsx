@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ToTopArrow.module.css";
-import { BsFillArrowUpSquareFill } from "react-icons/bs";
 import { Affix } from "antd";
+import { ArrowUpOutlined } from "@ant-design/icons";
 
 const ToTopArrow: React.FC = () => {
   const [arrowHidden, setArrowHidden] = React.useState<boolean>(true);
@@ -21,7 +21,7 @@ const ToTopArrow: React.FC = () => {
 
   return (
     arrowHidden ? null : <Affix style={{ position: "absolute", bottom: "7em", right: "8em" }} offsetBottom={120}><a
-      href="#top"><BsFillArrowUpSquareFill className={styles.root} /></a></Affix>
+      href="#top"><ArrowUpOutlined className={styles.root} /></a></Affix>
   );
 };
 

@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./index.module.css";
 import { ApplyButton } from "shared/UI";
-import { HiEye, HiEyeOff } from "react-icons/hi";
 import { useAppDispatch } from "app/hooks";
 import { fetchUserLogin } from "features/login/api";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import  { ErrorMessage } from "@hookform/error-message";
 import { ValidationError } from "shared/error";
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 
 type LoginProps = {
   setAuth: (value: boolean) => void;
@@ -80,8 +80,8 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
                  placeholder="Пароль"
                  type={passwordHidden ? "password" : "text"}
           />
-          {passwordHidden ? <HiEye onClick={() => handlePasswordHidden()} /> :
-            <HiEyeOff onClick={() => handlePasswordHidden()} />}
+          {passwordHidden ? <EyeOutlined onClick={() => handlePasswordHidden()} /> :
+            <EyeInvisibleOutlined onClick={() => handlePasswordHidden()} />}
         </div>
       </div>
       <ApplyButton>Войти</ApplyButton>

@@ -4,7 +4,7 @@ import { ApplyButton } from "shared/UI";
 import { useAppDispatch } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
-import { BsAsterisk } from "react-icons/bs";
+// import { BsAsterisk } from "react-icons/bs";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
@@ -113,7 +113,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
       <div className={styles.root}>
         <div className={styles.root__container}>
           <h1>Регистрация</h1>
-          <p className={styles.root__topInfo}><BsAsterisk /> - Обязательные поля.</p>
+          <p className={styles.root__topInfo}>* - Обязательные поля.</p>
           <ErrorMessage
             name="name"
             errors={errors}
@@ -127,7 +127,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
                    })}
                    placeholder="Имя"
                    type="text" />
-            <BsAsterisk />
+            *
           </div>
           <input className={styles.root__input}
                  placeholder="Фамилия"
@@ -150,7 +150,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
                    })}
                    placeholder="Email"
                    type="text" />
-            <BsAsterisk />
+            *
           </div>
           <ErrorMessage
             name="password"
@@ -161,7 +161,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
                    {...register("password", { required: true, minLength: 8 })}
                    placeholder="Пароль"
                    type="password" />
-            <BsAsterisk />
+            *
           </div>
           <ErrorMessage
             name="passwordRepeat"
@@ -177,7 +177,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
                    placeholder="Повторите пароль"
                    type="password"
                    autoComplete="on" />
-            <BsAsterisk />
+            *
           </div>
           <ErrorMessage
             name="tel"
@@ -190,7 +190,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
                        type="tel"
                        mask="+7 (999) 999-99-99"
                        maskChar="" />
-            <BsAsterisk />
+            *
           </div>
           <input className={styles.root__input}
                  {...register("street")}

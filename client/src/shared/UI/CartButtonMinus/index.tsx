@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.module.css";
-import { TiMinus } from "react-icons/ti";
+// import { TiMinus } from "react-icons/ti";
 import { IProducts } from "entities/products";
 import { useDispatch } from "react-redux";
 import { removeItem } from "entities/cart";
@@ -22,7 +22,7 @@ const CartButtonMinus: React.FC<CartButtonMinusType> = React.memo(({ product, am
 
   return (
     <button disabled={ disabled && amount === 1} onClick={() => handleRemoveItem()} className={styles.root}>
-      <TiMinus />
+      {/*<TiMinus />*/}
     </button>
   );
 });
