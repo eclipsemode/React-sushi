@@ -1,9 +1,9 @@
 import React from "react";
 import { Collapse, theme } from "antd";
-import { AiOutlineCaretRight } from "react-icons/ai";
 import { IOrdersFetched } from "../Account/api";
 import Moment from 'react-moment';
 import styles from './index.module.css'
+import { CaretRightOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
 
@@ -22,7 +22,7 @@ const OrdersList:React.FC<IOrdersList> = ({orders}) => {
   return (
     <Collapse
       bordered={false}
-      expandIcon={({ isActive }) => <AiOutlineCaretRight rotate={isActive ? 90 : 0} />}
+      expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
       style={{ background: token.colorBgContainer, width: '100%' }}
     >
       {

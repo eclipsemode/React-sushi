@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './index.module.css';
 
 import { setSortType, setSortId, setSortOrder, selectFilter } from 'features/filter/api';
 import { SortNameType } from 'features/filter/model';
@@ -28,12 +29,12 @@ const Popup: React.FC<PopupProps> = ({ popupHidden, sortNames, handlePopup, popu
   };
 
   return (
-    <div ref={popupRef} hidden={popupHidden} className="sort__popup">
+    <div ref={popupRef} hidden={popupHidden} className={styles.root__popup}>
       <ul>
         {sortNames.map((obj: SortNameType) => (
           <li
             key={obj.id}
-            className={sortId === obj.id ? 'active' : ''}
+            className={sortId === obj.id ? styles.root__popup_active : ''}
             onClick={() => handleSortType(obj.id)}
           >
             {obj.text}

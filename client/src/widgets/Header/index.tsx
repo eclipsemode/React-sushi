@@ -1,5 +1,4 @@
 import logoImg from "app/assets/img/logo.png";
-import phoneImg from "app/assets/img/phone.png";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./index.module.css";
 
@@ -8,8 +7,8 @@ import React  from "react";
 import { selectCart } from "entities/cart";
 import { useAppSelector } from "app/hooks";
 import { CartBlock } from "shared/UI";
-import { BsPersonCircle } from "react-icons/bs";
 import { ModalAccount } from "widgets/index";
+import { PhoneOutlined, UserOutlined } from "@ant-design/icons";
 
 const Header: React.FC = () => {
   const { totalPrice, totalAmount } = useAppSelector(selectCart);
@@ -76,17 +75,17 @@ const Header: React.FC = () => {
                         </div>
                       )
                     }
-                    <BsPersonCircle className={styles.root__authSvg} />
+                    <UserOutlined width={32} height={32} />
                     {accModal && <ModalAccount modalRef={modalRef} />}
                   </div>
                 )
-                : <BsPersonCircle />
+                : <UserOutlined width={32} height={32} />
             }
           </NavLink>
 
           <CartBlock totalPrice={totalPrice} totalAmount={totalAmount} />
           <div className={styles.root__phone}>
-            <img width="32" height="32" src={phoneImg} alt="phone" />
+            <PhoneOutlined width={32} height={32} />
             <span>8 (800) 200-27-92</span>
           </div>
         </div>

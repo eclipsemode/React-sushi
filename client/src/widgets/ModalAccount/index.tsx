@@ -1,9 +1,9 @@
 import React from "react";
-import { MdExitToApp, MdManageAccounts } from "react-icons/md";
 import { useAppDispatch } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import { fetchUserLogout } from "features/logout/api";
 import ModalWindow from "../../shared/UI/ModalWindow";
+import { CloseCircleOutlined, SettingOutlined } from "@ant-design/icons";
 
 interface IModalAccountProps {
   modalRef: React.Ref<HTMLDivElement>
@@ -30,12 +30,12 @@ const ModalAccount: React.FC<IModalAccountProps> = ({ modalRef }) => {
     <ModalWindow refModal={modalRef} listArray={[
       {
         text: 'Профиль',
-        icon: <MdManageAccounts/>,
+        icon: <SettingOutlined />,
         clickEvent: () => handleAccount
       },
       {
         text: 'Выйти',
-        icon: <MdExitToApp/>,
+        icon: <CloseCircleOutlined />,
         clickEvent: () => handleExit
       }
     ]}/>

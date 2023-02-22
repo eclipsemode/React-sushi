@@ -4,10 +4,8 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/user";
 import { MoonLoader } from "react-spinners";
-import { MdAccountCircle } from "react-icons/md";
-import { AiOutlineStar } from "react-icons/ai";
-import { FiSettings } from "react-icons/fi";
 import { Orders, Profile, Settings } from "./index";
+import { HistoryOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons";
 
 type SelectedType = "profile" | "orders" | "settings";
 
@@ -48,11 +46,11 @@ const Account: React.FC = () => {
         <aside>
           <ul>
             <li className={selected === "profile" ? styles.root__selected : null} onClick={() => setSelected("profile")}>
-              <MdAccountCircle /><span>Мой профиль</span></li>
+              <UserOutlined /><span>Мой профиль</span></li>
             <li className={selected === "orders" ? styles.root__selected : null} onClick={() => setSelected("orders")}>
-              <AiOutlineStar /><span>История заказов</span></li>
+              <HistoryOutlined /><span>История заказов</span></li>
             <li className={selected === "settings" ? styles.root__selected : null} onClick={() => setSelected("settings")}>
-              <FiSettings /><span>Редактировать профиль</span></li>
+              <SettingOutlined /><span>Редактировать профиль</span></li>
           </ul>
         </aside>
         {selected === "profile" && <Profile />}

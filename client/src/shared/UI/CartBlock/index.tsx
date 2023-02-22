@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './index.module.css';
 import { Link } from "react-router-dom";
-import cartImg from "app/assets/img/shopping-cart.png";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 type CartBlockProps = {
   totalPrice: number;
@@ -12,7 +12,7 @@ const CartBlock: React.FC<CartBlockProps> = ({totalPrice, totalAmount}) => {
   return (
     <div className={styles.root}>
       <Link to={'/cart'}>
-        <img width="32" height="32" src={cartImg} alt="cart"/>
+        <ShoppingCartOutlined width={32} height={32} />
         <div>{totalAmount}</div>
       </Link>
       <span>{totalPrice} ₽</span>

@@ -1,11 +1,11 @@
 import React from "react";
 import styles from './Footer.module.css';
-import { FaFacebookF, FaGooglePlusG, FaTwitter } from "react-icons/fa";
 import logoImg from 'app/assets/img/logo.png';
 import envelopeImg from 'app/assets/img/envelope.png';
 import callImg from 'app/assets/img/call.png';
 import locationImg from 'app/assets/img/location.png';
 import { Input } from "shared/UI";
+import { FacebookOutlined, GooglePlusOutlined, TwitterOutlined } from "@ant-design/icons";
 
 const Footer: React.FC = () => {
   return (
@@ -51,9 +51,9 @@ const Footer: React.FC = () => {
         <div className={styles.root__container}>
           <span>© 2022 Lime. All Rights Reserved by Lime</span>
           <div className={styles.root__social}>
-            <FaFacebookF/>
-            <FaTwitter/>
-            <FaGooglePlusG/>
+            <FacebookOutlined />
+            <TwitterOutlined />
+            <GooglePlusOutlined />
           </div>
         </div>
       </div>
