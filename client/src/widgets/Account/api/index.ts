@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { $api } from "processes/api";
 import { IUserState } from "entities/user";
 import { IOrder } from "features/order/model";
@@ -7,6 +7,12 @@ export interface IOrdersFetched extends IOrder{
   id: number,
   createdAt: string,
   updatedAt: string,
+}
+
+type statusType = 'PENDING' | 'FULFILLED' | 'REJECTED';
+
+export interface IOrdersReducer {
+  status: statusType;
 }
 
 const fetchOrdersByUserId = createAsyncThunk<IOrdersFetched[], void, { state: { userReducer: IUserState } }>(
@@ -26,4 +32,27 @@ const fetchOrdersByUserId = createAsyncThunk<IOrdersFetched[], void, { state: { 
   }
 );
 
+const initialState: IOrdersReducer = {
+  status: "PENDING"
+}
+
+export const ordersSlice = createSlice({
+  name: 'orders',
+  initialState,
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(fetchOrdersByUserId.pending, (state: IOrdersReducer) => {
+      state.status = "PENDING"
+    })
+      .addCase(fetchOrdersByUserId.fulfilled, (state: IOrdersReducer) => {
+        state.status = "FULFILLED"
+      })
+      .addCase(fetchOrdersByUserId.rejected, (state: IOrdersReducer) => {
+        state.status = "REJECTED"
+      })
+  }
+})
+
 export { fetchOrdersByUserId };
+
+export default ordersSlice.reducer;

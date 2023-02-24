@@ -21,6 +21,7 @@ import productsReducer from 'entities/products';
 import cartReducer from "entities/cart";
 import userReducer from "entities/user";
 import categoriesReducer from "entities/categories";
+import ordersReducer from "widgets/Account/api";
 
 import { cartListenerMiddleware } from "entities/cart/middleware";
 
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
   productsReducer,
   cartReducer,
   userReducer,
-  categoriesReducer
+  categoriesReducer,
+  ordersReducer
 });
 
 const persistConfig = {
