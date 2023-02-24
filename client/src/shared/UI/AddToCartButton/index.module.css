@@ -58,10 +58,8 @@
 .root__amountBlock span {
   font-size: 1.5em;
 }
-.root__amount {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  user-select: none;
+.root__amountBlock svg:hover {
+  color: #da0002;
 }
 
 /*# sourceMappingURL=index.module.css.map */

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Item.module.css';
 import { IProducts } from 'entities/products';
 import { AddToCartButton } from 'shared/UI';
+import { Link } from "react-router-dom";
 
 const Item: React.FC<IProducts> = ({ ...product }) => {
     const [imgScale, setImgScale] = React.useState<boolean>(false);
@@ -10,7 +11,8 @@ const Item: React.FC<IProducts> = ({ ...product }) => {
     const handleOnMouseLeave = () => setImgScale(false);
 
     return (
-        <div className={styles.root} onMouseEnter={() => handleOnMouseOver()} onMouseLeave={() => handleOnMouseLeave()}>
+        <div onMouseEnter={() => handleOnMouseOver()} onMouseLeave={() => handleOnMouseLeave()}>
+          <Link className={styles.root} to="">
             <img
                 className={styles.image + ' ' + (imgScale ? styles.image__resize : null)}
                 src={process.env.REACT_APP_API_URL + product.image}
@@ -26,6 +28,7 @@ const Item: React.FC<IProducts> = ({ ...product }) => {
                     <AddToCartButton product={product} />
                 </div>
             </div>
+          </Link>
         </div>
     );
 };
