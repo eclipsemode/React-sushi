@@ -3,14 +3,22 @@
 .root {
   width: 44px;
   height: 44px;
-  fill: $main-color;
   cursor: pointer;
-  background: white;
+  color: white;
+  background: $main-color;
   border-radius: 50%;
   animation: .5s infinite alternate arrow;
   box-shadow: 0 0 18px 10px rgb(0 0 0 / 20%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & svg {
+    width: 1.5em;
+    height: 1.5em;
+  }
 
   &:hover {
-    fill: $orange;
+    background: $orange;
   }
 }

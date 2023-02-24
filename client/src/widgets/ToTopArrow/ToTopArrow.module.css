@@ -1,15 +1,22 @@
 .root {
   width: 44px;
   height: 44px;
-  fill: #da0002;
   cursor: pointer;
-  background: white;
+  color: white;
+  background: #da0002;
   border-radius: 50%;
   animation: 0.5s infinite alternate arrow;
   box-shadow: 0 0 18px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.root svg {
+  width: 1.5em;
+  height: 1.5em;
 }
 .root:hover {
-  fill: #fe5f1e;
+  background: #fe5f1e;
 }
 
 /*# sourceMappingURL=ToTopArrow.module.css.map */
