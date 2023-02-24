@@ -30,7 +30,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
     amount > 0 ? (
       <div className={styles.root__amountBlock}>
         <MinusCircleOutlined style={amount <= 0 ? {color: 'rgba(31, 32, 65, 0.2)', pointerEvents: "none", fontSize: '24px'} : {fontSize: '24px'}} className={styles.root__minus} onClick={() => handleRemoveItem()} />
-        <span>{amount}</span>
+        <span className={styles.root__amount}>{amount}</span>
         <PlusCircleOutlined style={amount >= 9 ? {color: 'rgba(31, 32, 65, 0.2)', pointerEvents: "none", fontSize: '24px'} : {fontSize: '24px'}} className={styles.root__plus} onClick={() => handleAddItem()} />
       </div>
     ) : (

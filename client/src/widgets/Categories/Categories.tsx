@@ -10,6 +10,7 @@ import { setCategoryNumber } from "features/filter/api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { fetchCategories } from "entities/categories";
 import CategoriesSkeleton from "./CategoriesSkeleton";
+import { Link } from "react-router-dom";
 
 const Categories: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -48,14 +49,17 @@ const Categories: React.FC = () => {
             ? [...new Array(6)].map((_, index) => (
               <CategoriesSkeleton key={index}/>
             ))
-            : categories.map((category, index) => (<li
-              key={category.id}
-              onClick={() => handleClickCategory(category.id)}
+            : categories.map((category, index) => (
+              <Link to={`/?categoryNumber=${category.id}`} key={category.id} onClick={() => handleClickCategory(category.id)}>
+              <li
+
               className={categoryNumber === category.id ? "categories-item--active" : ""}
             >
               <img width="42" height="42" src={categoryImg(index)} alt="category" />
               <span>{category.name}</span>
-            </li>))
+            </li>
+          </Link>
+            ))
         }
       </ul>
     </nav>

@@ -39,6 +39,9 @@
   justify-content: center;
   column-gap: 1rem;
 }
+.root__amount svg:hover {
+  color: #da0002;
+}
 .root__total {
   font-size: 20px;
   font-weight: 600;

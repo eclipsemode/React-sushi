@@ -58,5 +58,10 @@
 .root__amountBlock span {
   font-size: 1.5em;
 }
+.root__amount {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
 
 /*# sourceMappingURL=index.module.css.map */

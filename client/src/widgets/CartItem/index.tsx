@@ -33,9 +33,9 @@ const CartItem: React.FC<CartItemProps> = ({ obj }) => {
             <td className={styles.root__price}>{obj.price} ₽</td>
             <td className={styles.root__amount}>
                 <div>
-                  <MinusCircleOutlined style={obj.amount <= 0 ? {color: 'rgba(31, 32, 65, 0.2)', pointerEvents: "none", fontSize: '24px'} : {fontSize: '24px'}} className={styles.root__minus} onClick={() => handleRemoveItem()} />
+                  <MinusCircleOutlined style={{fontSize: '24px'}} className={styles.root__minus} onClick={() => handleRemoveItem()} />
                     {obj.amount}
-                  <PlusCircleOutlined style={obj.amount >= 9 ? {color: 'rgba(31, 32, 65, 0.2)', pointerEvents: "none", fontSize: '24px'} : {fontSize: '24px'}} className={styles.root__plus} onClick={() => handleAddItem()} />
+                  <PlusCircleOutlined style={{fontSize: '24px'}} className={styles.root__plus} onClick={() => handleAddItem()} />
                 </div>
             </td>
             <td className={styles.root__total}>{obj.price * obj.amount} ₽</td>
