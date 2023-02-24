@@ -36,6 +36,7 @@ h5 {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 .root {
