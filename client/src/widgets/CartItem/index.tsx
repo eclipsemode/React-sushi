@@ -34,7 +34,7 @@ const CartItem: React.FC<CartItemProps> = ({ obj }) => {
             <td className={styles.root__amount}>
                 <div>
                   <MinusCircleOutlined style={{fontSize: '24px'}} className={styles.root__minus} onClick={() => handleRemoveItem()} />
-                    {obj.amount}
+                  <span>{obj.amount}</span>
                   <PlusCircleOutlined style={{fontSize: '24px'}} className={styles.root__plus} onClick={() => handleAddItem()} />
                 </div>
             </td>

@@ -3,7 +3,7 @@ import { Collapse, theme } from "antd";
 import { IOrdersFetched } from "../Account/api";
 import Moment from 'react-moment';
 import styles from './index.module.css'
-import { CaretRightOutlined } from "@ant-design/icons";
+import { BorderlessTableOutlined, CalendarOutlined, CaretRightOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
 
@@ -29,8 +29,8 @@ const OrdersList:React.FC<IOrdersList> = ({orders}) => {
         orders.map((item) => (
           <Panel header={
             <div className={styles.root__info}>
-              <div className={styles.root__top}><span>Заказ: #{item.id}</span><span>Сумма заказа: {item.totalPrice} ₽</span></div>
-              <div className={styles.root__middle}><span><Moment format='DD-MM-YYYY'>{item.createdAt}</Moment> в <Moment format='hh:mm'>{item.createdAt}</Moment></span></div>
+              <div className={styles.root__top}><span><BorderlessTableOutlined /> Заказ: #{item.id}</span><span>Сумма заказа: {item.totalPrice} ₽</span></div>
+              <div className={styles.root__middle}><span><CalendarOutlined /> <Moment format='DD-MM-YYYY'>{item.createdAt}</Moment> в <Moment format='hh:mm'>{item.createdAt}</Moment></span></div>
               <div className={styles.root_bottom}><span>{item.type === 'delivery' ? `Доставка: улица ${item.address}, кв. ${item.room}` : 'Самовывоз: г. Армавир, ул. Кропоткина 194'}</span></div>
             </div>
           } key={item.id} style={panelStyle}>

@@ -47,7 +47,6 @@
   top: calc(50% - 11.5px);
   font-size: 23px;
   color: #da0002;
-  display: none;
   pointer-events: none;
 }
 
