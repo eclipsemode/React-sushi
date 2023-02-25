@@ -1,5 +1,5 @@
 import React from "react";
-import { Collapse, theme } from "antd";
+import { Avatar, Collapse, List, theme } from "antd";
 import { IOrdersFetched } from "../Account/api";
 import Moment from 'react-moment';
 import styles from './index.module.css'
@@ -19,6 +19,9 @@ const OrdersList:React.FC<IOrdersList> = ({orders}) => {
     borderRadius: token.borderRadiusLG,
     border: 'none',
   };
+
+  console.log(orders.map(item => item))
+
   return (
     <Collapse
       bordered={false}
@@ -34,7 +37,22 @@ const OrdersList:React.FC<IOrdersList> = ({orders}) => {
               <div className={styles.root_bottom}><span><EnvironmentOutlined /> {item.type === 'delivery' ? `Доставка: улица ${item.address}, кв. ${item.room}` : 'Самовывоз: г. Армавир, ул. Кропоткина 194'}</span></div>
             </div>
           } key={item.id} style={panelStyle}>
-            <p>ddsadafasfasfasfadas</p>
+            {
+                <List
+                  key={item.id + item.totalPrice}
+                  itemLayout="horizontal"
+                  dataSource={item.orderProducts}
+                  renderItem={() => (
+                      <List.Item>
+                        <List.Item.Meta
+                          avatar={<Avatar src="https://joesch.moe/api/v1/random" />}
+                          title={'Ant Design Title' }
+                          description='Ant Design, a design language for background applications, is refined by Ant UED'
+                        />
+                      </List.Item>
+                  )}
+                />
+            }
           </Panel>
         ))
       }
