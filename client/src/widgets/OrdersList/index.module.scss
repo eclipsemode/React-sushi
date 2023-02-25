@@ -10,3 +10,9 @@
   display: flex;
   justify-content: space-between;
 }
+
+.root__avatar {
+  & img {
+    object-fit: contain;
+  }
+}

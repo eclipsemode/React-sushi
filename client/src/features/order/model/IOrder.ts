@@ -1,9 +1,14 @@
 import { IFormInputs } from "../ui/DeliveryForm";
 import { OrderType } from "../ui";
 interface IOrderProducts {
-    amount: number,
-    productId: number,
-    productPrice: number
+  id: number,
+  name: string,
+  price: number,
+  rating: number,
+  description: string,
+  image: string,
+  categoryId: number,
+  amount: number
   }
 
 

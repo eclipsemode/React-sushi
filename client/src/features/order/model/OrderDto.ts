@@ -11,8 +11,13 @@ class OrderDto {
       userId: user.isAuth ? Number(user.user?.id) : null,
       orderProducts: cart.items.map((e: IProducts) => ({
         amount: +e.amount,
-        productId: +e.id,
-        productPrice: +e.price
+        id: +e.id,
+        price: +e.price,
+        name: e.name,
+        rating: +e.rating,
+        description: e.description,
+        image: e.image,
+        categoryId: +e.category
       })),
       totalPrice: cart.totalPrice + cart.deliveryPrice,
       totalAmount: cart.totalAmount,

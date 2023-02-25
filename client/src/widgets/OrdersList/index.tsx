@@ -42,13 +42,14 @@ const OrdersList:React.FC<IOrdersList> = ({orders}) => {
                   key={item.id + item.totalPrice}
                   itemLayout="horizontal"
                   dataSource={item.orderProducts}
-                  renderItem={() => (
+                  renderItem={(product) => (
                       <List.Item>
                         <List.Item.Meta
-                          avatar={<Avatar src="https://joesch.moe/api/v1/random" />}
-                          title={'Ant Design Title' }
-                          description='Ant Design, a design language for background applications, is refined by Ant UED'
+                          avatar={<Avatar className={styles.root__avatar} shape="square" style={{border: '1px solid rgba(31, 32, 65, 0.1)'}} size={64} src={process.env.REACT_APP_API_URL + product.image} />}
+                          title={product.name}
+                          description={product.description}
                         />
+                        <div>{product.price} ₽</div>
                       </List.Item>
                   )}
                 />
