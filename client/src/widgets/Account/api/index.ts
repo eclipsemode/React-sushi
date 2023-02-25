@@ -44,8 +44,12 @@ export const ordersSlice = createSlice({
     builder.addCase(fetchOrdersByUserId.pending, (state: IOrdersReducer) => {
       state.status = "PENDING"
     })
-      .addCase(fetchOrdersByUserId.fulfilled, (state: IOrdersReducer) => {
-        state.status = "FULFILLED"
+      .addCase(fetchOrdersByUserId.fulfilled, (state: IOrdersReducer, action) => {
+        if (action.payload.length > 0) {
+          state.status = "FULFILLED"
+        } else {
+          state.status = "REJECTED"
+        }
       })
       .addCase(fetchOrdersByUserId.rejected, (state: IOrdersReducer) => {
         state.status = "REJECTED"

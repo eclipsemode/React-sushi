@@ -28,7 +28,7 @@ const Token = sequelize.define("token", {
 
 const Order = sequelize.define("order", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    orderProducts: {type: DataTypes.ARRAY(DataTypes.JSONB), allowNull: false, defaultValue: []},
+    orderProducts: {type: DataTypes.ARRAY(DataTypes.JSONB), allowNull: false},
     totalPrice: { type: DataTypes.INTEGER, allowNull: false },
     totalAmount: { type: DataTypes.INTEGER, allowNull: false },
     type: { type: DataTypes.STRING, allowNull: false },
