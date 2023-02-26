@@ -1,5 +1,3 @@
-export { default as CartButtonMinus } from './CartButtonMinus';
-export { default as CartButtonPlus } from './CartButtonPlus';
 export { default as AddToCartButton } from './AddToCartButton';
 export { default as ApplyButton } from './ApplyButton';
 export { default as Button } from './Button';
