@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Collapse, List, theme } from "antd";
+import { Avatar, Collapse, Divider, List, theme } from "antd";
 import { IOrdersFetched } from "../Account/api";
 import Moment from 'react-moment';
 import styles from './index.module.css'
@@ -20,16 +20,15 @@ const OrdersList:React.FC<IOrdersList> = ({orders}) => {
     border: 'none',
   };
 
-  console.log(orders.map(item => item))
-
   return (
     <Collapse
       bordered={false}
+      accordion={true}
       expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
       style={{ background: token.colorBgContainer, width: '100%' }}
     >
       {
-        orders.map((item) => (
+        orders.reverse().map((item) => (
           <Panel header={
             <div className={styles.root__info}>
               <div className={styles.root__top}><span><BorderlessTableOutlined /> Заказ: #{item.id}</span><span>Сумма заказа: {item.totalPrice} ₽</span></div>
@@ -37,7 +36,29 @@ const OrdersList:React.FC<IOrdersList> = ({orders}) => {
               <div className={styles.root_bottom}><span><EnvironmentOutlined /> {item.type === 'delivery' ? `Доставка: улица ${item.address}, кв. ${item.room}` : 'Самовывоз: г. Армавир, ул. Кропоткина 194'}</span></div>
             </div>
           } key={item.id} style={panelStyle}>
+            <Divider orientation="left">Имя</Divider>
+            <p className={styles.root__data}>{item.name}</p>
+            <Divider orientation="left">Телефон</Divider>
+            <p className={styles.root__data}>{item.tel}</p>
             {
+              item.type === 'delivery' &&
+              (
+                <>
+                <Divider orientation="left">Адресс</Divider>
+              <p className={styles.root__data}>{item.address}, подъезд {item.entrance}, этаж {item.floor}, кв. {item.room}</p>
+                </>
+              )
+            }
+            <Divider orientation="left">Время</Divider>
+            <p className={styles.root__data}>{item.day === 'today' && 'Сегодня'} {item.time && 'в ' + item.time}</p>
+
+            <Divider orientation="left">Способ оплаты</Divider>
+            <p className={styles.root__data}>{item.payment === 'cash' ? 'Наличными' : 'Картой'}</p>
+
+            <Divider orientation="left">Количество приборов</Divider>
+            <p className={styles.root__data}>{item.utensils}</p>
+
+            <br/>
                 <List
                   key={item.id + item.totalPrice}
                   itemLayout="horizontal"
@@ -53,7 +74,6 @@ const OrdersList:React.FC<IOrdersList> = ({orders}) => {
                       </List.Item>
                   )}
                 />
-            }
           </Panel>
         ))
       }
