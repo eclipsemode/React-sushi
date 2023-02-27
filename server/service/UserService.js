@@ -123,16 +123,16 @@ class UserService {
       const userData = {
         id: user.id,
         password: user.password,
-        email: email || user.email,
-        name: name || user.name,
-        surname: surname || user.surname,
-        dateOfBirth: dateOfBirth || user.dateOfBirth,
-        tel: tel || user.tel,
-        street: street || user.street,
-        house: house || user.house,
-        floor: floor || user.floor,
-        entrance: entrance || user.entrance,
-        room: room || user.room
+        email: email,
+        name: name,
+        surname: surname,
+        dateOfBirth: dateOfBirth,
+        tel: tel,
+        street: street,
+        house: house,
+        floor: floor,
+        entrance: entrance,
+        room: room
       };
 
       await User.update(userData, { where: { id } })

@@ -3,18 +3,18 @@ const { DataTypes } = require("sequelize");
 
 const User = sequelize.define("user", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  email: { type: DataTypes.STRING, unique: true },
+  email: { type: DataTypes.STRING, unique: true, allowNull: false, validate: { notEmpty: true, isEmail: true } },
   dateOfBirth: { type: DataTypes.STRING },
   password: { type: DataTypes.STRING, allowNull: false },
   role: { type: DataTypes.STRING, defaultValue: "USER" },
-  name: { type: DataTypes.STRING, allowNull: false },
+  name: { type: DataTypes.STRING, allowNull: false, validate: { notEmpty: true, isAlpha: true } },
   surname: { type: DataTypes.STRING },
-  tel: { type: DataTypes.STRING, allowNull: false },
+  tel: { type: DataTypes.STRING, allowNull: false, unique: true },
   street: { type: DataTypes.STRING },
   house: { type: DataTypes.STRING },
-  floor: { type: DataTypes.STRING },
-  entrance: { type: DataTypes.STRING },
-  room: { type: DataTypes.STRING },
+  floor: { type: DataTypes.STRING, validate: { isNumeric: true } },
+  entrance: { type: DataTypes.STRING, validate: { isNumeric: true } },
+  room: { type: DataTypes.STRING, validate: { isNumeric: true } },
   isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
   activationLink: { type: DataTypes.STRING }
 }, {

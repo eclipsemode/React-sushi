@@ -12,6 +12,7 @@ interface IFormInput {
   value?: string | number;
   // register?: (name: string, options?: RegisterOptions) => UseFormRegisterReturn;
   inputEvent?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean
 }
 
 const FormInput: React.FC<IFormInput> = (props) => {
@@ -20,6 +21,7 @@ const FormInput: React.FC<IFormInput> = (props) => {
       <label>{props.children}</label>
       <InputMask onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.inputEvent ? props.inputEvent(e) : null}
                  value={props.value ?? ""} mask={props.mask} maskChar={props.maskChar} type={props.type}
+                 required={props.required}
                  name={props.name} placeholder={props.placeholder} />
     </fieldset>
   );
