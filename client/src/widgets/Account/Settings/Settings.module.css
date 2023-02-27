@@ -23,6 +23,10 @@
 .root__buttons {
   display: flex;
 }
+.root__buttons input {
+  text-transform: uppercase;
+  color: #fff;
+}
 .root__btn_reset {
   flex: 1 0;
   width: fit-content;
@@ -119,6 +123,24 @@
 .root__btn_submit:hover {
   box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
   z-index: 1;
+}
+
+.root__street {
+  width: 100%;
+  display: flex;
+  column-gap: 1em;
+}
+.root__street fieldset:first-child {
+  flex: 3 1;
+}
+.root__street fieldset:last-child {
+  flex: 1 3;
+}
+
+.root__additional {
+  width: 100%;
+  display: flex;
+  column-gap: 1em;
 }
 
 /*# sourceMappingURL=Settings.module.css.map */

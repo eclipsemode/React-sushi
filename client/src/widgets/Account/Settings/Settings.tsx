@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "entities/user";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { TextInput } from "shared/UI";
 import styles from "./Settings.module.css";
-import BlockForm from "../../../shared/UI/BlockForm";
+import FormInput from "shared/UI/FormInput";
+import { Modal } from "antd";
 
 const Settings: React.FC = () => {
   const [userInfo, setUserInfo] = React.useState<IRegistrationProps>();
@@ -20,8 +20,7 @@ const Settings: React.FC = () => {
   const [floor, setFloor] = React.useState<number | string>(0);
   const [room, setRoom] = React.useState<number | string>(0);
 
-  const handleResetButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleResetButton = () => {
     window.scrollTo({
       top: 0
     });
@@ -39,12 +38,27 @@ const Settings: React.FC = () => {
     }
   };
 
-  const handleSubmitButton = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    window.confirm('Подтвердить изменение информации?');
-    // @ts-ignore
-    await dispatch(fetchPatchUserInfo({email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room}));
-    window.location.reload();
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    confirm(event);
+  }
+
+  const confirm = (event: FormEvent<HTMLFormElement>) => {
+    Modal.confirm({
+      title: 'Подтвердите изменение данных.',
+      onCancel: () => event.preventDefault(),
+      onOk: async () => {
+        await dispatch(fetchPatchUserInfo({email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room}));
+        success();
+      }
+    })
+  }
+
+  const success = () => {
+    Modal.success({
+      title: "Ваш профиль изменен.",
+      onOk: () => window.location.reload()
+    });
   };
 
   React.useEffect(() => {
@@ -68,68 +82,32 @@ const Settings: React.FC = () => {
   }, [dispatch, user, isAuth]);
 
   return (
-    <BlockForm>
     <section className={styles.root}>
-      <form className={styles.root__infoContainer}>
-        <div className={styles.root__info}>
-          <div>
-            <p>Имя: </p>
-            <TextInput value={name} onInput={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />
-          </div>
-          <div>
-            <p>Фамилия: </p>
-            <TextInput value={surname}
-                       onInput={(e: React.ChangeEvent<HTMLInputElement>) => setSurname(e.target.value)} />
-          </div>
-          <div>
-            <p>Email: </p>
-            <TextInput value={email} onInput={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} />
-          </div>
-          <div>
-            <p>Дата рождения: </p>
-            <TextInput value={dateOfBirth}
-                       onInput={(e: React.ChangeEvent<HTMLInputElement>) => setDateOfBirth(e.target.value)} />
-          </div>
-          <div>
-            <p>Телефон: </p>
-            <TextInput value={tel} onInput={(e: React.ChangeEvent<HTMLInputElement>) => setTel(e.target.value)} />
-          </div>
-          <div>
-            <p>Улица: </p>
-            <TextInput value={street} onInput={(e: React.ChangeEvent<HTMLInputElement>) => setStreet(e.target.value)} />
-          </div>
-          <div>
-            <p>Дом: </p>
-            <TextInput value={house} type="number"
-                       onInput={(e: React.ChangeEvent<HTMLInputElement>) => setHouse(e.target.value)} />
-          </div>
-          <div>
-            <p>Подьезд: </p>
-            <TextInput value={entrance} type="number"
-                       onInput={(e: React.ChangeEvent<HTMLInputElement>) => setEntrance(e.target.value)} />
-          </div>
-          <div>
-            <p>Этаж: </p>
-            <TextInput value={floor} type="number"
-                       onInput={(e: React.ChangeEvent<HTMLInputElement>) => setFloor(e.target.value)} />
-          </div>
-          <div>
-            <p>Квартира: </p>
-            <TextInput value={room} type="number"
-                       onInput={(e: React.ChangeEvent<HTMLInputElement>) => setRoom(e.target.value)} />
-          </div>
+      <form onReset={handleResetButton} onSubmit={(event) => onSubmit(event)} name='settings'>
+        <FormInput type='text' name='name' value={userInfo?.name} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}>Имя</FormInput>
+        <FormInput type='text' name='surname' value={surname} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setSurname(e.target.value)}>Фамилия</FormInput>
+        <FormInput type='email' name='email' value={email} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}>Email</FormInput>
+        <FormInput type='text' name='dateOfBirth' mask="99/99/9999" maskChar="_" value={dateOfBirth} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setDateOfBirth(e.target.value)}>Дата Рождения</FormInput>
+        <FormInput type='text' name='tel' mask="+7 (999) 999-99-99" maskChar="" placeholder="+7 (xxx) xxx-xx-xx" value={tel} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setTel(e.target.value)}>Телефон</FormInput>
+        <div className={styles.root__street}>
+          <FormInput type='text' name='street' value={street} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setStreet(e.target.value)}>Улица</FormInput>
+          <FormInput type='number' name='house' value={house} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setHouse(e.target.value)}>Дом</FormInput>
         </div>
+        <div className={styles.root__additional}>
+          <FormInput type='number' name='entrance' value={entrance} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setEntrance(e.target.value)}>Подъезд</FormInput>
+          <FormInput type='number' name='floor' value={floor} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setFloor(e.target.value)}>Этаж</FormInput>
+          <FormInput type='number' name='room' value={room} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setRoom(e.target.value)}>Квартира</FormInput>
+        </div>
+
         <div className={styles.root__buttons}>
-          <button className={styles.root__btn_reset}
-                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleResetButton(e)}><span>Вернуть</span>
-          </button>
-          <button className={styles.root__btn_submit}
-                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmitButton(e)}><span>Отправить</span>
-          </button>
+          <input type='reset'
+                 className={styles.root__btn_reset}
+                 />
+          <input type='submit'
+                 className={styles.root__btn_submit} />
         </div>
       </form>
     </section>
-    </BlockForm>
   );
 };
 

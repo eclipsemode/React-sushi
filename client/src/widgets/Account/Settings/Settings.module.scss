@@ -30,6 +30,11 @@
 
   &__buttons {
     display: flex;
+
+    & input {
+      text-transform: uppercase;
+      color: $background;
+    }
   }
 
   &__btn_reset {
@@ -138,4 +143,25 @@
       z-index: 1;
     }
   }
+}
+
+.root__street {
+  width: 100%;
+  display: flex;
+  column-gap: 1em;
+
+  & fieldset:first-child {
+    flex: 3 1;
+
+  }
+
+  & fieldset:last-child {
+    flex: 1 3;
+  }
+}
+
+.root__additional {
+  width: 100%;
+  display: flex;
+  column-gap: 1em;
 }

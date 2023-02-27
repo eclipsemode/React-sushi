@@ -4,7 +4,6 @@ import { ApplyButton } from "shared/UI";
 import { useAppDispatch } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
-// import { BsAsterisk } from "react-icons/bs";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
