@@ -7,7 +7,7 @@ const User = sequelize.define("user", {
   dateOfBirth: { type: DataTypes.STRING },
   password: { type: DataTypes.STRING, allowNull: false },
   role: { type: DataTypes.STRING, defaultValue: "USER" },
-  name: { type: DataTypes.STRING, allowNull: false, validate: { notEmpty: true, isAlpha: true } },
+  name: { type: DataTypes.STRING, allowNull: false, validate: { notEmpty: true } },
   surname: { type: DataTypes.STRING },
   tel: { type: DataTypes.STRING, allowNull: false, unique: true },
   street: { type: DataTypes.STRING },
