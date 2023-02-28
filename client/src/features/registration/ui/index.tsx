@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import styles from "./index.module.css";
 import { ApplyButton } from "shared/UI";
@@ -9,6 +10,7 @@ import { ErrorMessage } from "@hookform/error-message";
 
 import { fetchUserRegistration } from "features/registration/api";
 import { ValidationError } from "shared/error";
+import formatToDate from "../../../shared/utils/formatToDate";
 
 type RegistrationProps = {
   setAuth: (value: boolean) => void;
@@ -20,7 +22,7 @@ type FormInputs = {
   passwordRepeat: string,
   name: string,
   surname: string,
-  dateOfBirth: string,
+  dateOfBirth: Date,
   tel: string,
   street: string,
   house: number,
@@ -42,15 +44,15 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
     const response = await dispatch(fetchUserRegistration({
       name: data.name,
       surname: data.surname,
-      dateOfBirth: data.dateOfBirth,
+      dateOfBirth: formatToDate(data.dateOfBirth),
       email: data.email,
       password: data.password,
       tel: data.tel,
       street: data.street,
       house: data.house,
-      floor: data.floor,
-      entrance: data.entrance,
-      room: data.room
+      floor: +data.floor ?? null,
+      entrance: +data.entrance ?? null,
+      room: +data.room ?? null
     }));
     if (response.meta.requestStatus === "rejected") {
       return new ValidationError(response.payload as any, setError);

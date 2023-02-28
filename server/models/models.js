@@ -4,7 +4,7 @@ const { DataTypes } = require("sequelize");
 const User = sequelize.define("user", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   email: { type: DataTypes.STRING, unique: true, allowNull: false, validate: { notEmpty: true, isEmail: true } },
-  dateOfBirth: { type: DataTypes.STRING },
+  dateOfBirth: { type: DataTypes.DATE },
   password: { type: DataTypes.STRING, allowNull: false },
   role: { type: DataTypes.STRING, defaultValue: "USER" },
   name: { type: DataTypes.STRING, allowNull: false, validate: { notEmpty: true } },

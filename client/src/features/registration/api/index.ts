@@ -3,7 +3,7 @@ import { $api } from "processes/api";
 
 interface IRegistrationProps {
   email: string,
-  dateOfBirth: string,
+  dateOfBirth: Date,
   password: string,
   name: string,
   surname: string,
