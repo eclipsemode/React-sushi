@@ -4,7 +4,7 @@ import { $api } from "processes/api";
 export interface IRegistrationProps {
   id?: number
   email: string,
-  dateOfBirth: string,
+  dateOfBirth: Date,
   password: string,
   name: string,
   surname: string,
@@ -18,7 +18,7 @@ export interface IRegistrationProps {
 
 export interface IUserInfo {
   activationLink: string,
-  dateOfBirth: string,
+  dateOfBirth: Date,
   id: number,
   email: string,
   isActivated: boolean,

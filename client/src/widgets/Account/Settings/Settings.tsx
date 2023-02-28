@@ -4,9 +4,12 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import styles from "./Settings.module.css";
 import FormInput from "shared/UI/FormInput";
 import { Modal } from "antd";
+import formatToDate from "shared/utils/formatToDate";
+import { IUserData } from "../Profile/Profile";
+import formatDateToString from "../../../shared/utils/formatDateToString";
 
 const Settings: React.FC = () => {
-  const [userInfo, setUserInfo] = React.useState<IRegistrationProps>();
+  const [userInfo, setUserInfo] = React.useState<IUserData>();
   const dispatch = useAppDispatch();
   const { user, isAuth } = useAppSelector(state => state.userReducer);
   const [name, setName] = React.useState<string>("");
@@ -45,11 +48,12 @@ const Settings: React.FC = () => {
   }
 
   const confirm = (event: FormEvent<HTMLFormElement>) => {
+
     Modal.confirm({
       title: 'Подтвердите изменение данных.',
       onCancel: () => event.preventDefault(),
       onOk: async () => {
-        await dispatch(fetchPatchUserInfo({email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room}));
+        await dispatch(fetchPatchUserInfo({email, name, surname, dateOfBirth: formatToDate(dateOfBirth), tel, street, house, floor, entrance, room}));
         success();
       }
     })
@@ -65,19 +69,31 @@ const Settings: React.FC = () => {
   React.useEffect(() => {
     if (user && isAuth) {
       (async function getUserInfo() {
-        const { payload } = await dispatch(fetchUserInfo());
-        const payloadData = payload as unknown as IRegistrationProps;
-        setUserInfo(payload as IRegistrationProps);
-        setName(payloadData.name);
-        setSurname(payloadData.surname);
-        setEmail(payloadData.email);
-        setDateOfBirth(payloadData.dateOfBirth);
-        setTel(payloadData.tel);
-        setStreet(payloadData.street);
-        setHouse(payloadData.house);
-        setEntrance(payloadData.entrance);
-        setFloor(payloadData.floor);
-        setRoom(payloadData.room);
+        const { payload }: IRegistrationProps | any = await dispatch(fetchUserInfo());
+
+        setUserInfo({
+          id: payload.id,
+          email: payload.email,
+          name: payload.name,
+          surname: payload.surname,
+          tel: payload.tel,
+          street: payload.street,
+          house: payload.house,
+          floor: payload.floor ,
+          entrance: payload.entrance,
+          room: payload.room,
+          dateOfBirth: formatDateToString(payload.dateOfBirth)
+        });
+        setName(payload.name);
+        setSurname(payload.surname);
+        setEmail(payload.email);
+        setDateOfBirth(formatDateToString(payload.dateOfBirth));
+        setTel(payload.tel);
+        setStreet(payload.street);
+        setHouse(payload.house);
+        setEntrance(payload.entrance);
+        setFloor(payload.floor);
+        setRoom(payload.room);
       })();
     }
   }, [dispatch, user, isAuth]);

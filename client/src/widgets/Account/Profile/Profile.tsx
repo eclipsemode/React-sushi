@@ -1,12 +1,27 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/user";
+import { fetchUserInfo, IRegistrationProps } from "entities/user";
 import styles from './index.module.css'
 import Field from "shared/UI/Field";
+import formatDateToString from "shared/utils/formatDateToString";
+
+export interface IUserData {
+  dateOfBirth: string,
+  id: number,
+  email: string,
+  name: string,
+  surname: string,
+  tel: string,
+  street: string,
+  house: string,
+  floor: string ,
+  entrance: string,
+  room: string
+}
 const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
   const { isAuth } = useAppSelector(state => state.userReducer);
-  const [userData, setUserData] = React.useState<IRegistrationProps | null>(null);
+  const [userData, setUserData] = React.useState<IUserData | null>(null);
 
   React.useEffect(() => {
     window.scrollTo({
@@ -17,11 +32,25 @@ const Profile: React.FC = () => {
   React.useEffect(() => {
     if (isAuth) {
       (async function getUsers() {
-        const { payload } = await dispatch(fetchUserInfo());
-        setUserData(payload as IUserInfo)
+        const { payload }: IRegistrationProps | any = await dispatch(fetchUserInfo());
+
+        setUserData({
+          id: payload.id,
+          email: payload.email,
+          name: payload.name,
+          surname: payload.surname,
+          tel: payload.tel,
+          street: payload.street,
+          house: payload.house,
+          floor: payload.floor ,
+          entrance: payload.entrance,
+          room: payload.room,
+          dateOfBirth: formatDateToString(payload.dateOfBirth)
+        })
       })()
     }
   }, [dispatch, isAuth])
+
 
   return (
     <div className={styles.root}>
