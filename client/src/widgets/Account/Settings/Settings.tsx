@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { FormEvent } from "react";
 import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "entities/user";
 import { useAppDispatch, useAppSelector } from "app/hooks";
@@ -41,10 +40,6 @@ const Settings: React.FC = () => {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    // if (!name) {
-    //   return
-    // }
 
     confirm(event);
   }
@@ -90,11 +85,11 @@ const Settings: React.FC = () => {
   return (
     <section className={styles.root}>
       <form onReset={handleResetButton} onSubmit={(event) => onSubmit(event)} name='settings'>
-        <FormInput type='text' name='name' value={name} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}>Имя</FormInput>
+        <FormInput type='text' name='name' value={name} required={true} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}>Имя</FormInput>
         <FormInput type='text' name='surname' value={surname} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setSurname(e.target.value)}>Фамилия</FormInput>
-        <FormInput type='email' name='email' value={email} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}>Email</FormInput>
-        <FormInput type='text' name='dateOfBirth' mask="99/99/9999" maskChar="_" value={dateOfBirth} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setDateOfBirth(e.target.value)}>Дата Рождения</FormInput>
-        <FormInput type='text' name='tel' mask="+7 (999) 999-99-99" maskChar="" placeholder="+7 (xxx) xxx-xx-xx" value={tel} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setTel(e.target.value)}>Телефон</FormInput>
+        <FormInput type='email' name='email' value={email} required={true} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}>Email</FormInput>
+        <FormInput type='text' name='dateOfBirth' mask="99-99-9999" placeholder="xx-xx-xx" maskChar="_" value={dateOfBirth} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setDateOfBirth(e.target.value)}>Дата Рождения</FormInput>
+        <FormInput type='text' name='tel' mask="+7 (999) 999-99-99" required={true} maskChar="" placeholder="+7 (xxx) xxx-xx-xx" value={tel} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setTel(e.target.value)}>Телефон</FormInput>
         <div className={styles.root__street}>
           <FormInput type='text' name='street' value={street} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setStreet(e.target.value)}>Улица</FormInput>
           <FormInput type='number' name='house' value={house} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setHouse(e.target.value)}>Дом</FormInput>

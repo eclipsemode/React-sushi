@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/user";
 import styles from './index.module.css'
 import Field from "shared/UI/Field";
-
 const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
   const { isAuth } = useAppSelector(state => state.userReducer);
@@ -46,7 +45,6 @@ const Profile: React.FC = () => {
           <Field title='Квартира' text={userData?.room ? userData?.room : ''}/>
           </div>
         ) }
-
     </div>
   );
 };

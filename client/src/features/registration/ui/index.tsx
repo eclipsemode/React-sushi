@@ -136,7 +136,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
                      {...register("dateOfBirth")}
                      placeholder="Дата рождения"
                      type="text"
-                     mask="99/99/9999" />
+                     mask="99-99-9999" />
           <ErrorMessage
             name="email"
             errors={errors}
