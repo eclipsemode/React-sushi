@@ -46,11 +46,11 @@ class UserService {
   }
 
   async activate(activationLink, next) {
-    const user = User.findOne({ where: { activationLink } });
+    const user = await User.findOne({ where: { activationLink } });
     if (!user) {
       return next(ApiError.badRequest('Неккоректная ссылка активации.'));
     }
-    await User.update({ isActivated: true }, { where: { activationLink } });
+    await User.update({ isActivated: true, activationLink: null }, { where: { activationLink } });
   }
 
   async login({ email, password }, next) {
