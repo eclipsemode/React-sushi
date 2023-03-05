@@ -17,10 +17,6 @@ class UserService {
       return next(ApiError.badRequest('Введите имя.'))
     }
 
-    // if (!dateOfBirth.match(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/)) {
-    //   return next(ApiError.badRequest('Неверный формат даты.'))
-    // }
-
     if (!tel) {
       return next(ApiError.badRequest('Введите телефон.'))
     }
@@ -138,6 +134,28 @@ class UserService {
       await User.update(userData, { where: { id } })
 
       return userData;
+  }
+
+  async changeUsersEmail( {email, id}, next ) {
+    const candidateEmail = await User.findOne( { where: { email } } );
+    const user = await User.findOne({ where: { id } })
+
+    if (candidateEmail) {
+      return next(ApiError.badRequest('Пользователь с таким email уже существует.'))
+    }
+
+    const activationLink = await uuid.v4();
+
+    const userData = {
+      email,
+      activationLink,
+      isActivated: false
+    }
+
+    await User.update(userData, { where: { id } });
+
+    await MailService.sendActivationMail(email, `${process.env.API_URL}/api/user/activate/${activationLink}`);
+
   }
 }
 

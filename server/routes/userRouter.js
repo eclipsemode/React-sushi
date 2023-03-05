@@ -11,5 +11,6 @@ router.post("/login", userController.login);
 router.get("/logout", userController.logout);
 router.get("/info", authMiddleware, userController.getUserData);
 router.patch("/patch", userController.patchUserData);
+router.patch('/change-email', authMiddleware, userController.changeUsersEmail)
 
 module.exports = router;

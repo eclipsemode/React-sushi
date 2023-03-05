@@ -76,6 +76,15 @@ class UserController {
       return next(ApiError.badRequest(e.message));
     }
   }
+
+  async changeUsersEmail(req, res, next) {
+    try {
+        await UserService.changeUsersEmail(req.body, next);
+        return res.status(200).send('Successfully changed.');
+    } catch (e) {
+      return next(ApiError.badRequest(e.message));
+    }
+  }
 }
 
 module.exports = new UserController();
