@@ -34,7 +34,7 @@ body {
     margin-bottom: 60px;
     font-weight: 800;
     font-size: 36px;
-    color: $dark;
+    color: $root-text;
   }
 
   &__items {
@@ -76,6 +76,13 @@ body {
       flex-direction: column-reverse;
       row-gap: 1.5rem;
     }
+  }
+}
+
+@media (max-width: $smallSize) {
+  .content__head {
+    margin-top: 20px;
+    flex-direction: column-reverse;
   }
 }
 

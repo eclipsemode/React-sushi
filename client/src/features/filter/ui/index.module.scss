@@ -7,23 +7,25 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
+    padding-top: 6px;
 
     svg {
       margin-right: 8px;
-      color: $dark;
+      color: $root-text;
     }
 
     b {
       margin-right: 8px;
-      color: $dark;
+      color: $root-text;
     }
   }
 
   &__link {
-    color: $main-color;
-    border-bottom: 1px dashed $main-color;
+    color: $root-textActive;
+    border-bottom: 1px dashed $root-textActive;
     cursor: pointer;
   }
+
 
   &__popup {
     position: absolute;
@@ -42,7 +44,7 @@
         cursor: pointer;
 
         &:hover {
-          background: rgba(254, 95, 30, 0.05);
+          background: $root-textHover;
         }
       }
     }
@@ -50,7 +52,7 @@
     &_active {
       background: rgba(254, 95, 30, 0.05);
       font-weight: bold;
-      color: $main-color;
+      color: $root-textActive;
     }
   }
 }
