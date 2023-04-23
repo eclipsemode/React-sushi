@@ -6,8 +6,9 @@
 @import 'components/all';
 
 body {
-  background-color: $background;
+  background-color: $root-background;
   font-size: 10px;
+  overflow-x: hidden;
 }
 
 .App {
@@ -17,19 +18,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.wrapper {
-  width: calc(100vw - 100px);
-  height: 100%;
-  margin: 0 auto;
-  border-radius: 10px;
-  max-width: 1320px;
-
-  @media (max-width: 465px) {
-    width: 100%;
-    margin: auto;
-  }
 }
 
 .content {
@@ -88,6 +76,15 @@ body {
       flex-direction: column-reverse;
       row-gap: 1.5rem;
     }
+  }
+}
+
+@media (max-width: $mediumSize) {
+  .content {
+    padding: 25px 0;
+  }
+  .App {
+    padding-bottom: 56px;
   }
 }
 

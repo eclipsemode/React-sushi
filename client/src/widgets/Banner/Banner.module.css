@@ -35,4 +35,10 @@
   transform: scale(110%);
 }
 
+.image {
+  border-radius: 15px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 /*# sourceMappingURL=Banner.module.css.map */

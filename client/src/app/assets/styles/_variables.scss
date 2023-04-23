@@ -1,4 +1,12 @@
+// colors
 $black: #232323;
+$root-background: #252525;
+$root-header--08: rgba(19, 19, 19, 0.8);
+$root-header--1: #1a1a1a;
+$root-text: #fff;
+$root-card-background: #1a1a1a;
+$root-textActive: #4caf50;
+$root-mainColor: #4caf50;
 $background: #fff;
 $gray-line: #f6f6f6;
 $orange: #fe5f1e;
@@ -17,6 +25,14 @@ $lite-gray: rgba(31, 32, 65, 0.1);
 $paragraph-color: rgba(27, 27, 27, 0.7);
 $info-color: #898989;
 
+// width
 $container-width: 1320px;
+$padding-inner: 0 20px;
 
+// other
 $duration: 0.15s;
+
+// adaptive
+$largeSize: 1440px;
+$mediumSize: 880px;
+$smallSize: 500px;

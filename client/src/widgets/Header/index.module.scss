@@ -8,8 +8,12 @@
   transition: background-color ease-in-out 0.2s;
   z-index: 2;
 
+  &__logo {
+    width: 150px;
+  }
+
   &__fixed {
-    background-color: rgba(250, 247, 242, 0.9);
+    background-color: $root-header--08;
     -webkit-box-shadow: 0 4px 6px 0 rgba(12, 0, 46, 0.05);
     box-shadow: 0 4px 6px 0 rgba(12, 0, 46, 0.05);
     backdrop-filter: blur(8px);
@@ -36,15 +40,15 @@
 
     & a {
       font-size: 1.7em;
-      color: $header-color;
+      color: $root-text;
       transition: color ease-in-out 0.2s;
       font-weight: 600;
 
     }
 
     & a:hover {
-      color: $secondary-color;
-      border-bottom: .2em solid $secondary-color;
+      color: $root-textActive;
+      border-bottom: .2em solid $root-textActive;
     }
   }
 
@@ -55,7 +59,7 @@
     font-size: 1.6em;
 
     & span {
-      color: $header-color;
+      color: $root-text;
       font-weight: 400;
     }
 
@@ -102,4 +106,27 @@
   &__authSvg:hover {
     fill: $main-color;
   }
+}
+
+.mobileHeader {
+  width: 100%;
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+
+  & > div {
+    background-color: $root-header--1;
+  }
+
+  & button {
+    color: $root-text;
+  }
+
+  & button:active, button:focus {
+    color: $root-textActive;
+  }
+}
+
+.mobileButtonActive {
+  color: $root-textActive !important;
 }
