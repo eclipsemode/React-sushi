@@ -9,6 +9,7 @@ import userReducer from 'entities/user';
 import categoriesReducer from 'entities/categories';
 import ordersReducer from 'widgets/Account/api';
 import adaptiveServiceReducer from 'processes/services/adaptiveService/adaptiveService';
+import cityReducer from 'entities/city';
 
 import { cartListenerMiddleware } from 'entities/cart/middleware';
 import adaptiveServiceListenerMiddleware from '../../processes/services/adaptiveService/adaptiveServiceListenerMiddleware';
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     categoriesReducer,
     ordersReducer,
     adaptiveServiceReducer,
+    cityReducer,
 });
 
 const persistConfig = {

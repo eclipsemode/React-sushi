@@ -9,6 +9,7 @@ body {
   background-color: $root-background;
   font-size: 10px;
   overflow-x: hidden;
+  color: $root-text;
 }
 
 .App {
@@ -46,7 +47,6 @@ body {
 
     & a {
       background: $root-header--1;
-      box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.5);
     }
 
     @media (max-width: 1400px) {

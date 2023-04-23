@@ -1,64 +1,64 @@
-import React from "react";
-import styles from './Footer.module.css';
-import logoImg from 'app/assets/img/logo.png';
-import envelopeImg from 'app/assets/img/envelope.png';
-import callImg from 'app/assets/img/call.png';
-import locationImg from 'app/assets/img/location.png';
-import { Input } from "shared/UI";
-import { FacebookOutlined, GooglePlusOutlined, TwitterOutlined } from "@ant-design/icons";
+import React from 'react';
+import styles from './Footer.module.scss';
+import { Stack } from '@mui/material';
+import GooglePlayImg from 'app/assets/img/stores/android.png';
+import AppleStoreImg from 'app/assets/img/stores/apple.png';
+import LogoImg from 'app/assets/img/logo.png';
+import { Link } from 'react-router-dom';
+import RouterPath from '../../app/utils/menuPath';
+import { useAppSelector } from '../../app/hooks';
+import { selectCity } from '../../entities/city';
 
 const Footer: React.FC = () => {
-  return (
-    <footer id="footer" className={styles.root}>
-      <div className={styles.root__container}>
-        <div className={styles.root__block}>
-          <img src={logoImg} height="50" alt="logo"/>
-          <div className={styles.about}>
-            <img src={locationImg} height="28" width="28" alt="location"/>
-            <span>г. Армавир, ул. Кропоткина 194</span>
-          </div>
-          <div className={styles.about}>
-            <img src={envelopeImg} height="28" width="28" alt="envelope"/>
-            <span>eclipsemod555@gmail.com</span>
-          </div>
-          <div className={styles.about}>
-            <img src={callImg} height="28" width="28" alt="call"/>
-            <span>8 (800) 200-27-92</span>
-          </div>
-
-
-        </div>
-        <div className={styles.root__block}>
-          <h2>Меню</h2>
-          <span>Lorem ipsum dolor sit.</span>
-          <span>Lorem ipsum dolor.</span>
-          <span>Lorem ipsum dolor sit amet.</span>
-          <span>Lorem ipsum dolor sit.</span>
-          <span>Lorem ipsum.</span>
-          <span></span>
-        </div>
-        <div className={styles.root__block}>
-          <h2>Часы работы</h2>
-          <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aut blanditiis expedita.</span>
-        </div>
-        <div className={styles.root__block}>
-          <h2>Написать письмо</h2>
-          <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem deleniti in incidunt maxime possimus quia sequi!</span>
-          <Input/>
-        </div>
-      </div>
-      <div className={styles.root__additional}>
-        <div className={styles.root__container}>
-          <span>© 2022 Lime. All Rights Reserved by Lime</span>
-          <div className={styles.root__social}>
-            <FacebookOutlined />
-            <TwitterOutlined />
-            <GooglePlusOutlined />
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
+    // @ts-ignore
+    const { categories, categoriesStatus } = useAppSelector((state) => state.categoriesReducer);
+    const { city } = useAppSelector(selectCity);
+    return (
+        <footer id="footer" className={styles.root}>
+            <div className="container">
+                <Stack textAlign="center" justifyContent="space-between" spacing={2}>
+                    <Stack direction="row" justifyContent="space-between">
+                        <Stack textAlign="left" spacing={2}>
+                            <span className={styles.tel}>8 (800) 200-27-92</span>
+                            <Stack className={styles.stores} direction="row" spacing={1}>
+                                <a
+                                    href="https://apps.apple.com/us/app/%D0%BB%D0%B0%D0%B9%D0%BC-%D0%B4%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B0-%D1%81%D1%83%D1%88%D0%B8-%D0%B8-%D0%BF%D0%B8%D1%86%D1%86%D1%8B/id1570970073?uo=4"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <img src={AppleStoreImg} width="120px" alt="app_store" />
+                                </a>
+                                <a
+                                    href="https://play.google.com/store/apps/details?id=ru.FoodSoul.StavropolLaym"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <img src={GooglePlayImg} width="120px" alt="google_play" />
+                                </a>
+                            </Stack>
+                            <Stack direction="row" className={styles.links} spacing={2}>
+                                <Link to={RouterPath.HOME}>Главная</Link>
+                                <Link to={RouterPath.HOME}>Контакты</Link>
+                            </Stack>
+                        </Stack>
+                        <Stack className={styles.center} spacing={1} alignItems="center">
+                            <img src={LogoImg} width={150} alt="logo" />
+                            <span>
+                                город - <span style={{ fontWeight: 'bold' }}>{city}</span>
+                            </span>
+                            <span>Доставка с 10:00–23:30</span>
+                        </Stack>
+                        <Stack className={styles.categories}>
+                            {categories.map((category) => (
+                                <span key={category.id}>{category.name}</span>
+                            ))}
+                        </Stack>
+                    </Stack>
+                    <span className={styles.about}>© 2010 - 2023 Ресторан японской кухни "Lime"</span>
+                </Stack>
+            </div>
+        </footer>
+    );
 };
 
 export default Footer;

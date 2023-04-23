@@ -5,7 +5,7 @@
   height: 44px;
   cursor: pointer;
   color: white;
-  background: $main-color;
+  background: $root-textActive;
   border-radius: 50%;
   animation: .5s infinite alternate arrow;
   box-shadow: 0 0 18px 10px rgb(0 0 0 / 20%);
@@ -19,6 +19,6 @@
   }
 
   &:hover {
-    background: $orange;
+    background: $root-mainColor;
   }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
-import styles from './Banner.module.css';
-// import BannerImg from 'app/assets/img/banner.png';
+import styles from './Banner.module.scss';
 import BannerImg2 from 'app/assets/img/banner/eaa2c0509a822d5dea2200f7db69bbda.jpg';
 import BannerImg3 from 'app/assets/img/banner/293716a10f62adafe4ff2d8e570981fa.jpg';
 import BannerImg4 from 'app/assets/img/banner/8a7825b38e363c2cb8521c0acd235cee.jpg';

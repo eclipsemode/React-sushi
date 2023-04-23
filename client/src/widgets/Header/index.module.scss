@@ -113,6 +113,7 @@
   z-index: 100;
   position: fixed;
   bottom: 0;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.5);
 
   & > div {
     background-color: $root-header--1;
