@@ -22,7 +22,7 @@
 
   &__description {
     & p {
-      color: $paragraph-color;
+      color: $root-text;
       font-size: 1.5em;
     }
   }
@@ -44,14 +44,14 @@
 
 .title {
   font-weight: 600;
-  color: $dark;
+  color: $root-text;
   white-space: nowrap;
   cursor: pointer;
   transition: color ease-in-out 0.2s;
   font-size: 1.7em;
 
   &:hover {
-    color: $main-color;
+    color: $root-textActive;
   }
 }
 
@@ -93,6 +93,7 @@
   font-size: 20px;
   line-height: 27px;
   letter-spacing: 0.015em;
+  color: $root-text;
 }
 
 .active_btn {
