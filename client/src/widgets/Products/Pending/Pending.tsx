@@ -1,11 +1,18 @@
 import React from 'react';
-import Skeleton from '../Item/Skeleton';
+import { Skeleton } from '@mui/material';
 
 const Pending: React.FC = () => {
     return (
         <section className="content__items">
-            {[...new Array(12)].map((_, index) => (
-                <Skeleton key={index} />
+            {[...new Array(4)].map((_, index) => (
+                <Skeleton
+                    variant="rectangular"
+                    width={306}
+                    height={386.83}
+                    animation="wave"
+                    sx={{ borderRadius: '12px' }}
+                    key={index}
+                />
             ))}
         </section>
     );

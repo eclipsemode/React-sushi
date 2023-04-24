@@ -6,46 +6,28 @@ import BannerImg4 from 'app/assets/img/banner/8a7825b38e363c2cb8521c0acd235cee.j
 import BannerImg5 from 'app/assets/img/banner/fea739416d652eec0ac42e81270c0a75.jpg';
 import BannerImg from 'app/assets/img/banner/promo_60436d1c910f9504434024.1192.png';
 import { Box } from '@mui/material';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation, Autoplay } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import { Carousel } from 'antd';
 
 const Banner: React.FC = () => {
     return (
         <Box sx={{ marginBottom: '50px' }}>
-            <Swiper
-                navigation={true}
-                slidesPerView={1}
-                watchSlidesProgress={true}
-                watchOverflow={true}
-                autoplay={true}
-                spaceBetween={30}
-                centeredSlides={true}
-                loop={true}
-                pagination={{
-                    clickable: true,
-                }}
-                modules={[Pagination, Navigation, Autoplay]}
-                className="mySwiper"
-            >
-                <SwiperSlide style={{ textAlign: 'center' }}>
+            <Carousel autoplay>
+                <div>
                     <img className={styles.image} alt="banner" src={BannerImg} loading="lazy" />
-                </SwiperSlide>
-                <SwiperSlide style={{ textAlign: 'center' }}>
+                </div>
+                <div>
                     <img className={styles.image} alt="banner" src={BannerImg2} loading="lazy" />
-                </SwiperSlide>
-                <SwiperSlide style={{ textAlign: 'center' }}>
+                </div>
+                <div>
                     <img className={styles.image} alt="banner" src={BannerImg3} loading="lazy" />
-                </SwiperSlide>
-                <SwiperSlide style={{ textAlign: 'center' }}>
+                </div>
+                <div>
                     <img className={styles.image} alt="banner" src={BannerImg4} loading="lazy" />
-                </SwiperSlide>
-                <SwiperSlide style={{ textAlign: 'center' }}>
+                </div>
+                <div>
                     <img className={styles.image} alt="banner" src={BannerImg5} loading="lazy" />
-                </SwiperSlide>
-            </Swiper>
+                </div>
+            </Carousel>
         </Box>
     );
 };

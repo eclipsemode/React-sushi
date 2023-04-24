@@ -31,6 +31,18 @@
   }
 }
 
-.categories > span {
+.categories > a {
   font-size: 18px;
+}
+
+.categories > a:hover {
+  color: $root-textActive
+}
+
+.categories {
+  max-height: 145px;
+  flex-wrap: wrap;
+  text-align: left;
+  column-gap: 50px;
+  row-gap: 10px;
 }

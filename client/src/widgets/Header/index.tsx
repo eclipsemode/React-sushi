@@ -3,22 +3,24 @@ import logoImg from 'app/assets/img/logo.png';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import LogoShortImg from 'app/assets/img/logo_short.png';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
+import PhoneIcon from '@mui/icons-material/Phone';
+import HomeIcon from '@mui/icons-material/Home';
 
 import { selectCart } from 'entities/cart';
 import { useAppSelector } from 'app/hooks';
 import { CartBlock } from 'shared/UI';
 import { ModalAccount } from 'widgets/index';
-import { PhoneOutlined, UserOutlined } from '@ant-design/icons';
 import { DeviceType, selectAdaptiveServiceSlice } from '../../processes/services/adaptiveService/adaptiveService';
-import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
+import { Badge, BottomNavigation, BottomNavigationAction, Box, Stack } from '@mui/material';
 import RouterPath from '../../app/utils/menuPath';
+import { selectCity } from '../../entities/city';
 
 const Header: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { city } = useAppSelector(selectCity);
     const [activeMenu, setActiveMenu] = React.useState<number>(0);
     const { totalPrice, totalAmount } = useAppSelector(selectCart);
     const { isAuth, user } = useAppSelector((state) => state.userReducer);
@@ -83,9 +85,16 @@ const Header: React.FC = () => {
     const renderDesktopMenu = () => (
         <header ref={headerRef} className={styles.root}>
             <div className={styles.root__container}>
-                <Link to={'/'}>
+                <Link to={RouterPath.HOME}>
                     <img className={styles.root__logo} src={logoImg} alt="Item logo" />
                 </Link>
+                <Stack spacing={0.5}>
+                    <span className={styles.city}>
+                        город: <span>{city}</span>
+                    </span>
+                    <span className={styles.phoneAdditional}>тел: 8 (800) 200-27-92</span>
+                    <span className={styles.time}>Доставка 10:00-23:30</span>
+                </Stack>
                 <ul className={styles.root__menu}>
                     <li className={styles.root__link}>
                         <Link to={'/'}>Главная</Link>
@@ -106,17 +115,17 @@ const Header: React.FC = () => {
                                         </p>
                                     </div>
                                 )}
-                                <UserOutlined width={32} height={32} />
+                                <PersonIcon width={32} height={32} />
                                 {accModal && <ModalAccount modalRef={modalRef} />}
                             </div>
                         ) : (
-                            <UserOutlined width={32} height={32} />
+                            <PersonIcon width={32} height={32} />
                         )}
                     </NavLink>
 
                     <CartBlock totalPrice={totalPrice} totalAmount={totalAmount} />
                     <div className={styles.root__phone}>
-                        <PhoneOutlined width={32} height={32} />
+                        <PhoneIcon width={32} height={32} />
                         <span>8 (800) 200-27-92</span>
                     </div>
                 </div>
@@ -126,6 +135,25 @@ const Header: React.FC = () => {
 
     const renderMobileMenu = () => (
         <header>
+            <div className="container">
+                <Stack
+                    className={styles.mobileTopMenu}
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
+                    <Link to={RouterPath.HOME}>
+                        <img className={styles.root__logo} src={logoImg} alt="Item logo" />
+                    </Link>
+
+                    <Stack spacing={0.5} textAlign="right">
+                        <span className={styles.city}>
+                            город: <span>{city}</span>
+                        </span>
+                        <span className={styles.time}>Доставка 10:00-23:30</span>
+                    </Stack>
+                </Stack>
+            </div>
             <Box className={styles.mobileHeader}>
                 <BottomNavigation
                     showLabels
@@ -152,7 +180,8 @@ const Header: React.FC = () => {
                 >
                     <BottomNavigationAction
                         className={activeMenu === 0 ? styles.mobileButtonActive : null}
-                        icon={<img src={LogoShortImg} width={30} height={30} alt="logo" />}
+                        label="Главная"
+                        icon={<HomeIcon />}
                     />
                     <BottomNavigationAction
                         className={activeMenu === 1 ? styles.mobileButtonActive : null}
@@ -162,7 +191,11 @@ const Header: React.FC = () => {
                     <BottomNavigationAction
                         className={activeMenu === 2 ? styles.mobileButtonActive : null}
                         label="Корзина"
-                        icon={<ShoppingCartIcon />}
+                        icon={
+                            <Badge badgeContent={4} color="success">
+                                <ShoppingCartIcon />
+                            </Badge>
+                        }
                     />
                     <BottomNavigationAction
                         className={activeMenu === 3 ? styles.mobileButtonActive : null}

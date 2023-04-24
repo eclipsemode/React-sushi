@@ -3,6 +3,8 @@ enum RouterPath {
     LOGIN = '/login',
     CART = '/cart',
     CONTACT = '/contact',
+
+    CATEGORY = '/?categoryNumber=',
 }
 
 export default RouterPath;

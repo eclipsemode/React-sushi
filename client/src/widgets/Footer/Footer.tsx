@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Footer.module.scss';
-import { Stack } from '@mui/material';
+import { Skeleton, Stack } from '@mui/material';
 import GooglePlayImg from 'app/assets/img/stores/android.png';
 import AppleStoreImg from 'app/assets/img/stores/apple.png';
 import LogoImg from 'app/assets/img/logo.png';
@@ -13,6 +13,7 @@ const Footer: React.FC = () => {
     // @ts-ignore
     const { categories, categoriesStatus } = useAppSelector((state) => state.categoriesReducer);
     const { city } = useAppSelector(selectCity);
+
     return (
         <footer id="footer" className={styles.root}>
             <div className="container">
@@ -49,9 +50,15 @@ const Footer: React.FC = () => {
                             <span>Доставка с 10:00–23:30</span>
                         </Stack>
                         <Stack className={styles.categories}>
-                            {categories.map((category) => (
-                                <span key={category.id}>{category.name}</span>
-                            ))}
+                            {categoriesStatus === 'fulfilled'
+                                ? categories.map((category) => (
+                                      <Link to={`${RouterPath.CATEGORY}` + category.id} key={category.id}>
+                                          {category.name}
+                                      </Link>
+                                  ))
+                                : Array(10).map((_, index) => (
+                                      <Skeleton key={index} width={120} height={21} animation="wave" />
+                                  ))}
                         </Stack>
                     </Stack>
                     <span className={styles.about}>© 2010 - 2023 Ресторан японской кухни "Lime"</span>
