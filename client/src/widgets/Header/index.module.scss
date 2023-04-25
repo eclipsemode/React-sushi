@@ -55,7 +55,7 @@
   &__info {
     display: flex;
     align-items: center;
-    column-gap: 2rem;
+    column-gap: 1rem;
     font-size: 1.6em;
 
     & span {
@@ -86,7 +86,6 @@
     column-gap: 1rem;
     align-items: center;
     border-right: 1px solid rgba(31, 32, 65, .2);;
-    padding-right: 2rem;
     position: relative;
 
     p {
@@ -95,12 +94,12 @@
   }
 
   &__auth p:first-child {
-    color: rgba(31, 32, 65, .5);
     font-size: 12px;
   }
 
   &__auth p:last-child {
     font-size: 18px;
+    white-space: nowrap;
   }
 
   &__authSvg:hover {
@@ -159,6 +158,7 @@
 .phoneAdditional {
   font-size: 16px;
   display: none;
+  white-space: nowrap;
 }
 
 @media (max-width: 1000px) {

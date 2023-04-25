@@ -22,7 +22,7 @@ const Header: React.FC = () => {
     const location = useLocation();
     const { city } = useAppSelector(selectCity);
     const [activeMenu, setActiveMenu] = React.useState<number>(0);
-    const { totalPrice, totalAmount } = useAppSelector(selectCart);
+    const { totalPrice, totalAmount, deliveryPrice } = useAppSelector(selectCart);
     const { isAuth, user } = useAppSelector((state) => state.userReducer);
     const { deviceType } = useAppSelector(selectAdaptiveServiceSlice);
     const [accModal, setAccModal] = React.useState<boolean>(false);
@@ -192,7 +192,12 @@ const Header: React.FC = () => {
                         className={activeMenu === 2 ? styles.mobileButtonActive : null}
                         label="Корзина"
                         icon={
-                            <Badge badgeContent={4} color="success">
+                            <Badge
+                                badgeContent={totalPrice + deliveryPrice > 0 ? totalPrice + deliveryPrice + '₽' : null}
+                                sx={{ '&>span': { right: '-8px' } }}
+                                max={10000}
+                                color="success"
+                            >
                                 <ShoppingCartIcon />
                             </Badge>
                         }
