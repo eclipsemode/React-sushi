@@ -4,10 +4,6 @@
   background: $background;
   height: 179px;
 
-  &:not(:last-of-type) {
-    border-bottom: 1px solid rgba(41, 41, 41, 0.1);
-  }
-
   &__product {
     display: flex;
     align-items: center;
@@ -24,14 +20,14 @@
     }
 
     & svg:hover {
-      fill: $main-color;
+      fill: $root-textActive;
     }
   }
 
   &__price {
     font-size: 20px;
     font-weight: 600;
-    color: $dark;
+    color: $root-text;
     width: 142px;
     text-align: center;
   }
@@ -48,14 +44,14 @@
     }
 
     & svg:hover {
-      color: $main-color;
+      color: $root-textActive;
     }
   }
 
   &__total {
     font-size: 20px;
     font-weight: 600;
-    color: $dark;
+    color: $root-text;
     width: 204px;
     text-align: center;
   }

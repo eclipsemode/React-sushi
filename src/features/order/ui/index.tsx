@@ -2,7 +2,6 @@ import React from 'react';
 import { CartItem } from 'widgets';
 import { removeAll, selectCart } from 'entities/cart';
 import styles from './index.module.scss';
-import { ClearButton } from 'shared/UI';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { IProducts } from 'entities/products';
 import { DeliveryPrice } from 'features/order/utils';
@@ -10,6 +9,7 @@ import PickupForm from './PickupForm';
 import SimpleButton from 'shared/UI/SimpleButton';
 import Alert from 'shared/UI/Alert';
 import DeliveryForm from './DeliveryForm';
+import Colors from "../../../app/utils/Colors";
 
 export type OrderType = 'delivery' | 'pickup' | null;
 
@@ -50,7 +50,7 @@ const CartOrder: React.FC = () => {
                     <tr>
                         <td colSpan={4}>
                             <div className={styles.root__footer}>
-                                <ClearButton handleClick={handleRemoveAll}>Очистить корзину</ClearButton>
+                                <SimpleButton color={Colors.$mainColor} type='reset' variant='contained' clickEvent={handleRemoveAll}>Очистить корзину</SimpleButton>
                                 <h4 className={styles.root__footer_price}>Сумма заказа: {totalPrice} ₽</h4>
                             </div>
                         </td>

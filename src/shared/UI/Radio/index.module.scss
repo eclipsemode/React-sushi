@@ -7,7 +7,7 @@
 
 
   &__outer {
-    border: 2px solid $gray;
+    border: 2px solid $root-text;
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -17,7 +17,7 @@
   }
 
   &__outer_checked {
-    border: 2px solid $main-color;
+    border: 2px solid $root-textActive;
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -33,7 +33,7 @@
   &__inner_checked {
     width: 12px;
     height: 12px;
-    background: $main-color;
+    background: $root-textActive;
     border-radius: 50%;
   }
 

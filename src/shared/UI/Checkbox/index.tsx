@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./index.module.css";
+import styles from "./index.module.scss";
 import { IFormInputs } from "features/order/ui/DeliveryForm";
 import { CheckOutlined } from "@ant-design/icons";
 

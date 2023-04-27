@@ -37,6 +37,7 @@
   &__total {
     margin: 1rem;
 
+
     & h4 {
       font-size: 22px;
       color: $dark;
@@ -64,4 +65,9 @@
       padding-top: 1em;
     }
   }
+}
+
+
+.delivery {
+  color: #000
 }

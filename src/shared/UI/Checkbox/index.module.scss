@@ -13,14 +13,14 @@
   align-items: center;
   user-select: none;
   font-size: 1.4em;
-  color: rgba(31, 32, 65, 0.5);
+  color: $root-text;
 }
 
 .root__input+label a {
-    color: $main-color;
+    color: $root-textActive;
     text-decoration: none;
     opacity: .9;
-    border-bottom: 1px dashed $main-color;
+    border-bottom: 1px dashed $root-textActive;
     padding-bottom: 0.1em;
 }
 .root__input+label::before {
@@ -30,7 +30,7 @@
   height: 1.5em;
   flex-shrink: 0;
   flex-grow: 0;
-  border: 1px solid rgba(31, 32, 65, 0.2);
+  border: 1px solid $root-text;
   border-radius: 0.25em;
   margin-right: 0.5em;
   background-repeat: no-repeat;
@@ -39,7 +39,7 @@
 }
 
 .root__input:checked+label::before {
-  border-color: $main-color;
+  border-color: $root-textActive;
 }
 
 .root svg {
@@ -47,8 +47,7 @@
   left: 0;
   top: calc(50% - 11.5px);
   font-size: 23px;
-  color: $main-color;
-  //display: none;
+  color: $root-textActive;
   pointer-events: none;
 }
 
@@ -58,5 +57,6 @@
 
 .root__input_invalid {
   background: rgba(214, 15, 19, 0.04);
+  padding-bottom: 7px;
   box-shadow: inset 0 -2px 0 0 #d60f14;
 }

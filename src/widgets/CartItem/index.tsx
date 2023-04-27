@@ -1,7 +1,7 @@
 import React from 'react';
 import { addItem, removeItem, removeItemById } from "entities/cart";
 import { IProducts } from 'entities/products';
-import styles from './index.module.css';
+import styles from './index.module.scss';
 import { useAppDispatch } from "app/hooks";
 import { CloseOutlined, MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 

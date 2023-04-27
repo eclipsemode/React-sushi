@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./index.module.css";
+import styles from "./index.module.scss";
 import InputMask from "react-input-mask";
 import SimpleButton from "shared/UI/SimpleButton";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -73,15 +73,15 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label>Заберу</label>
-            <select {...register('day', { required: true })}>
-              <option value="today" defaultChecked={true}>сегодня</option>
+            <select className={styles.select} {...register('day', { required: true })}>
+              <option className={styles.option} value="today" defaultChecked={true}>сегодня</option>
             </select>
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label>в</label>
-            <select {...register('time', { required: true })}>
+            <select className={styles.select} {...register('time', { required: true })}>
               {
-                timeStamps.map((value, index) => <option key={index + "-" + value} value={value} defaultChecked={true}>{value}</option>)
+                timeStamps.map((value, index) => <option className={styles.option} key={index + "-" + value} value={value} defaultChecked={true}>{value}</option>)
               }
             </select>
           </fieldset>
@@ -95,9 +95,9 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
           </fieldset>
           <fieldset>
             <label>Оплата</label>
-            <select {...register('payment', { required: true })}>
-              <option value="cash">Наличными</option>
-              <option value="card">Картой</option>
+            <select className={styles.select} {...register('payment', { required: true })}>
+              <option className={styles.option} value="cash">Наличными</option>
+              <option className={styles.option} value="card">Картой</option>
             </select>
           </fieldset>
           <fieldset>

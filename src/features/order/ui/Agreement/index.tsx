@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./index.module.css";
+import styles from "./index.module.scss";
 import BlockForm from "shared/UI/BlockForm";
 import { useAppSelector } from "app/hooks";
 import Checkbox from "../../../../shared/UI/Checkbox";
@@ -21,23 +21,27 @@ const Agreement: React.FC<IAgreementProps> = (props) => {
           <div className={styles.root__order}>
             <div className={styles.root__total}>
               <h4>Заказ</h4>
+
               <div>
                 <span>Количество</span>
                 <span>{totalAmount} шт.</span>
               </div>
+
               <div>
                 <span>Стоимость</span>
                 <span>{totalPrice} ₽</span>
               </div>
+
               {
                 props.delivery &&
                 (
-                  <div>
+                  <div className={styles.delivery}>
                     <span>Доставка</span>
                     <span>{deliveryPrice} ₽</span>
                   </div>
                 )
               }
+
               <div>
                 <span>Итого</span>
                 <span>{props.delivery ? totalPrice + deliveryPrice : totalPrice} ₽</span>
