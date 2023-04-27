@@ -1,0 +1,30 @@
+@import '../../../app/assets/styles/variables';
+
+.root {
+  background: $root-card-background;
+  width: 100%;
+  height: fit-content;
+  padding: 10px 0;
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  border-radius: 10px;
+  box-shadow: 0 0 30px -10px rgb(0 0 0 / 20%);
+
+  & li {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+  }
+
+  & li:hover {
+    background: $root-textHover;;
+  }
+
+  & li svg {
+    width: 20px;
+    height: 20px;
+  }
+}
