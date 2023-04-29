@@ -4,7 +4,7 @@
   width: 100%;
   height: 56px;
   appearance: none;
-  background: $secondary-color;
+  background: $root-textActive;
   border: none;
   cursor: pointer;
   border-radius: 0 0 8px 8px;
@@ -44,6 +44,6 @@
   &:hover::after {
     height: 100%;
     width: 135%;
-    background: $secondary-color;
+    background: $root-textActive;
   }
 }

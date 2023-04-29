@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./index.module.css";
+import styles from "./index.module.scss";
 import { ApplyButton } from "shared/UI";
 import { useAppDispatch } from "app/hooks";
 import { fetchUserLogin } from "features/login/api";
@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import  { ErrorMessage } from "@hookform/error-message";
 import { ValidationError } from "shared/error";
-import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
+import Input from "../../../shared/UI/input";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 type LoginProps = {
   setAuth: (value: boolean) => void;
@@ -67,22 +69,16 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
           name="login"
           render={(): any => loginError()}
         />
-        <input {...register('login', { required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
-               className={styles.root__input + ' ' + (errors.login && styles.root__input_invalid)}
-               name="login"
-               placeholder="Имя пользователя" type="text"
+        <Input label='Имя пользователя' name='login' error={!!errors.login} required={true} register={register}
+        pattern={/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/}
         />
-        <div className={styles.root__password}>
-          <input {...register('password', { required: true, pattern: /^[0-9a-zA-Z!@#$%^&*]+$/g, minLength: 8 })}
-                 className={styles.root__input + ' ' + (errors.password && styles.root__input_invalid)}
-                 name="password"
-                 autoComplete="on"
-                 placeholder="Пароль"
+          <Input label='Пароль' name='password' autoComplete='on' error={!!errors.password} required={true} register={register}
+                 pattern={/^[0-9a-zA-Z!@#$%^&*]+$/g}
+                 minLength={8}
+                 endAdornment={passwordHidden ? <VisibilityIcon onClick={() => handlePasswordHidden()} /> :
+                     <VisibilityOffIcon onClick={() => handlePasswordHidden()} />}
                  type={passwordHidden ? "password" : "text"}
           />
-          {passwordHidden ? <EyeOutlined onClick={() => handlePasswordHidden()} /> :
-            <EyeInvisibleOutlined onClick={() => handlePasswordHidden()} />}
-        </div>
       </div>
       <ApplyButton>Войти</ApplyButton>
       <p>Впервые у нас? <span onClick={() => handleAuth()}>Зарегистрироваться</span></p>

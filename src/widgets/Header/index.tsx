@@ -1,6 +1,6 @@
 import React from 'react';
 import logoImg from 'app/assets/img/logo.png';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import {Link, NavLink, useLocation, useNavigate} from 'react-router-dom';
 import styles from './index.module.scss';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -8,14 +8,13 @@ import PersonIcon from '@mui/icons-material/Person';
 import PhoneIcon from '@mui/icons-material/Phone';
 import HomeIcon from '@mui/icons-material/Home';
 
-import { selectCart } from 'entities/cart';
-import { useAppSelector } from 'app/hooks';
-// import { CartBlock } from 'shared/UI';
-import { ModalAccount } from 'widgets/index';
-import { DeviceType, selectAdaptiveServiceSlice } from '../../processes/services/adaptiveService/adaptiveService';
-import { Badge, BottomNavigation, BottomNavigationAction, Box, Stack } from '@mui/material';
+import {selectCart} from 'entities/cart';
+import {useAppSelector} from 'app/hooks';
+import {ModalAccount} from 'widgets/index';
+import {DeviceType, selectAdaptiveServiceSlice} from '../../processes/services/adaptiveService/adaptiveService';
+import {Badge, BottomNavigation, BottomNavigationAction, Box, Stack} from '@mui/material';
 import RouterPath from '../../app/utils/menuPath';
-import { selectCity } from '../../entities/city';
+import {selectCity} from '../../entities/city';
 
 const Header: React.FC = () => {
     const navigate = useNavigate();
@@ -85,7 +84,7 @@ const Header: React.FC = () => {
     const renderDesktopMenu = () => (
         <header ref={headerRef} className={styles.root}>
             <div className={styles.root__container}>
-                <Link to={RouterPath.HOME}>
+                <Link to={RouterPath.HOME} onClick={() => window.scrollTo(0, 0)}>
                     <img className={styles.root__logo} src={logoImg} alt="Item logo" />
                 </Link>
                 <Stack spacing={0.5}>
@@ -97,7 +96,7 @@ const Header: React.FC = () => {
                 </Stack>
                 <ul className={styles.root__menu}>
                     <li className={styles.root__link}>
-                        <Link to={'/'}>Главная</Link>
+                        <Link to={RouterPath.HOME} onClick={() => window.scrollTo(0, 0)}>Главная</Link>
                     </li>
                     <li className={styles.root__link}>
                         <a href="#footer">Контакты</a>
@@ -119,7 +118,11 @@ const Header: React.FC = () => {
                                 {accModal && <ModalAccount modalRef={modalRef} />}
                             </div>
                         ) : (
-                            <PersonIcon width={32} height={32} />
+                            <div className={styles.root__auth}>
+                                <span>Войти в аккаунт</span>
+                                <PersonIcon width={32} height={32} />
+                            </div>
+
                         )}
                     </NavLink>
 
@@ -132,7 +135,6 @@ const Header: React.FC = () => {
                     >
                         <ShoppingCartIcon />
                     </Badge>
-                    {/*<CartBlock totalPrice={totalPrice} totalAmount={totalAmount} />*/}
                     <div className={styles.root__phone}>
                         <PhoneIcon width={32} height={32} />
                         <span>8 (800) 200-27-92</span>
@@ -214,6 +216,7 @@ const Header: React.FC = () => {
                     <BottomNavigationAction
                         className={activeMenu === 3 ? styles.mobileButtonActive : null}
                         label="Профиль"
+                        onClick={() => isAuth ? navigate(RouterPath.PERSONAL) : navigate(RouterPath.LOGIN)}
                         icon={<PersonIcon />}
                     />
                 </BottomNavigation>

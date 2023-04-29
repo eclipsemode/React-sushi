@@ -1,0 +1,19 @@
+@import "../../../app/assets/styles/variables";
+
+.inputMask {
+  background: none;
+  border: none;
+  border-bottom: 2px solid $root-text;
+  color: $root-text;
+  font-size: 16px;
+  padding-bottom: 5px;
+  padding-top: 22px;
+
+  &:focus {
+    border-color: $root-textActive;
+  }
+
+  &:invalid {
+    background: red;
+  }
+}

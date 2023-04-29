@@ -1,6 +1,5 @@
-// @ts-nocheck
 import React from "react";
-import styles from "./index.module.css";
+import styles from "./index.module.scss";
 import { ApplyButton } from "shared/UI";
 import { useAppDispatch } from "app/hooks";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +10,10 @@ import { ErrorMessage } from "@hookform/error-message";
 import { fetchUserRegistration } from "features/registration/api";
 import { ValidationError } from "shared/error";
 import formatToDate from "../../../shared/utils/formatToDate";
+import Input from "../../../shared/UI/input";
+import {Stack} from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 type RegistrationProps = {
   setAuth: (value: boolean) => void;
@@ -35,7 +38,11 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { register, handleSubmit, setError, watch, formState: { errors } } = useForm<FormInputs>();
+  const [passwordHidden, setPasswordHidden] = React.useState<boolean>(true);
 
+  const handlePasswordHidden = (): void => {
+    setPasswordHidden(!passwordHidden);
+  };
   const handleAuth = () => {
     setAuth(true);
   };
@@ -44,6 +51,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
     const response = await dispatch(fetchUserRegistration({
       name: data.name,
       surname: data.surname,
+      // @ts-ignore
       dateOfBirth: formatToDate(data.dateOfBirth),
       email: data.email,
       password: data.password,
@@ -119,21 +127,8 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             name="name"
             errors={errors}
             render={(): any => nameError()} />
-          <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input_required + " " + (errors.name && styles.root__input_invalid)}
-                   {...register("name", {
-                     required: true,
-                     maxLength: 20,
-                     validate: (value: string) => !!value.match(/^[a-zа-яё\s]+$/iu)
-                   })}
-                   placeholder="Имя"
-                   type="text" />
-            *
-          </div>
-          <input className={styles.root__input}
-                 placeholder="Фамилия"
-                 {...register("surname")}
-                 type="text" />
+            <Input error={!!errors.name} register={register} name='name' label='Имя' required={true} maxLength={20} validate={(value: string) => !!value.match(/^[a-zа-яё\s]+$/iu)}/>
+          <Input register={register} name='surname' label='Фамилия' maxLength={20}/>
           <InputMask className={styles.root__input}
                      {...register("dateOfBirth")}
                      placeholder="Дата рождения"
@@ -143,82 +138,47 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             name="email"
             errors={errors}
             render={(): any => emailError()} />
-          <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input_required + " " + (errors.email && styles.root__input_invalid)}
-                   {...register("email", {
-                     required: true,
-                     pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                   })}
-                   placeholder="Email"
-                   type="text" />
-            *
-          </div>
+          <Input error={!!errors.email} register={register} name='email' label='Email' required={true} pattern={/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/}/>
           <ErrorMessage
             name="password"
             errors={errors}
             render={(): any => passwordError()} />
-          <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input_required + " " + (errors.password && styles.root__input_invalid)}
-                   {...register("password", { required: true, minLength: 8 })}
-                   placeholder="Пароль"
-                   type="password" />
-            *
-          </div>
+          <Input autoComplete='on' error={!!errors.password} register={register}
+                 endAdornment={passwordHidden ? <VisibilityIcon onClick={() => handlePasswordHidden()} /> :
+                     <VisibilityOffIcon onClick={() => handlePasswordHidden()} />}
+                 type={passwordHidden ? "password" : "text"}
+                 name='password' label='Пароль' required={true} minLength={8}/>
           <ErrorMessage
             name="passwordRepeat"
             errors={errors}
             render={(): any => passwordRepeatError()} />
-          <div className={styles.root__requiredBlock}>
-            <input className={styles.root__input_required + " " + (errors.passwordRepeat && styles.root__input_invalid)}
-                   {...register("passwordRepeat", {
-                     required: true,
-                     minLength: 8,
-                     validate: (value: string): any => value !== watch("password") ? "Пароли не совпадают." : null
-                   })}
-                   placeholder="Повторите пароль"
-                   type="password"
-                   autoComplete="on" />
-            *
-          </div>
+          <Input autoComplete='on' error={!!errors.passwordRepeat} register={register}
+                 endAdornment={passwordHidden ? <VisibilityIcon onClick={() => handlePasswordHidden()} /> :
+                     <VisibilityOffIcon onClick={() => handlePasswordHidden()} />}
+                 type={passwordHidden ? "password" : "text"}
+                 name='passwordRepeat' label='Повторите пароль' required={true} minLength={8} validate={(value: string): any => value !== watch("password") ? "Пароли не совпадают." : null}/>
           <ErrorMessage
             name="tel"
             errors={errors}
             render={(): any => telError()} />
-          <div className={styles.root__requiredBlock}>
-            <InputMask className={styles.root__input_required + " " + (errors.tel && styles.root__input_invalid)}
-                       {...register("tel", { required: true, minLength: 18 })}
-                       placeholder="+7 (xxx) xxx-xx-xx"
-                       type="tel"
-                       mask="+7 (999) 999-99-99"
-                       maskChar="" />
-            *
-          </div>
-          <input className={styles.root__input}
-                 {...register("street")}
-                 placeholder="Улица"
-                 type="text" />
-          <div className={styles.root__address}>
-            <input className={styles.root__input}
-                   {...register("house")}
-                   placeholder="Дом"
-                   max="9999"
-                   type="number" />
-            <input className={styles.root__input}
-                   {...register("entrance")}
-                   placeholder="Подьезд"
-                   max="99"
-                   type="number" />
-            <input className={styles.root__input}
-                   {...register("floor")}
-                   placeholder="Этаж"
-                   max="99"
-                   type="number" />
-            <input className={styles.root__input}
-                   {...register("room")}
-                   placeholder="Квартира"
-                   max="9999"
-                   type="number" />
-          </div>
+          <Input inputMask={true} error={!!errors.tel} register={register} name='tel' mask='+7 (999) 999-99-99' maskChar='' label='+7 (xxx) xxx-xx-xx' type='tel' required={true} minLength={18} />
+            {/*<InputMask className={styles.root__input_required + " " + (errors.tel && styles.root__input_invalid)}*/}
+            {/*           {...register("tel", { required: true, minLength: 18 })}*/}
+            {/*           placeholder="+7 (xxx) xxx-xx-xx"*/}
+            {/*           type="tel"*/}
+            {/*           mask="+7 (999) 999-99-99"*/}
+            {/*           maskChar="" />*/}
+          <Input register={register} name='street' label='Улица'/>
+          <Stack spacing={2}>
+            <Stack direction='row' spacing={2}>
+            <Input register={register} name='house' label='Дом' type='number'/>
+            <Input register={register} name='entrance' label='Подьезд' type='number'/>
+            </Stack>
+            <Stack direction='row' spacing={2}>
+            <Input register={register} name='floor' label='Этаж' type='number'/>
+            <Input register={register} name='room' label='Квартира' type='number'/>
+            </Stack>
+          </Stack>
         </div>
         <ApplyButton>Регистрация</ApplyButton>
         <p>Есть аккаунт? <span onClick={() => handleAuth()}>Войти</span></p>

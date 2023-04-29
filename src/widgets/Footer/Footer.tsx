@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
                                 justifyContent={deviceType === DeviceType.DESKTOP ? 'flex-start' : 'center'}
                                 spacing={2}
                             >
-                                <Link to={RouterPath.HOME}>Главная</Link>
+                                <Link to={RouterPath.HOME} onClick={() => window.scrollTo(0, 0)}>Главная</Link>
                                 <Link to={RouterPath.HOME}>Контакты</Link>
                             </Stack>
                         </Stack>

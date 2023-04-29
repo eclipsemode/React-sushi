@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import emptyCartImg from 'app/assets/img/empty-cart.png';
-import { Button } from "shared/UI";
+import SimpleButton from "../../shared/UI/SimpleButton";
 
 const CartEmpty: React.FC = () => {
     return (
@@ -16,7 +16,7 @@ const CartEmpty: React.FC = () => {
             </p>
             <img src={emptyCartImg} alt="Empty cart" />
           <Link to={'/'}>
-          <Button>Вернуться на главную</Button>
+          <SimpleButton>Вернуться на главную</SimpleButton>
           </Link>
         </div>
     );

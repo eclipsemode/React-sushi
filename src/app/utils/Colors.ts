@@ -6,6 +6,7 @@ enum Colors {
   $rootText = "#fff",
   $rootCardBackground = "#1a1a1a",
   $rootTextActive = "#4caf50",
+  $rootErrorBackground = "rgba(214, 15, 19, .04)",
   $rootMainColor = "#80b337",
   $rootTextHover = "rgba(128,179,55, 0.2)",
   $background = "#fff",

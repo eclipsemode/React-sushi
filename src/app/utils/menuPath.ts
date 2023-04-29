@@ -1,6 +1,7 @@
 enum RouterPath {
     HOME = '/',
     LOGIN = '/login',
+    PERSONAL = '/personal',
     CART = '/cart',
     CONTACT = '/contact',
 
