@@ -13,7 +13,6 @@ import ZakuskiImg from 'app/assets/img/menu/snack.png';
 
 import { setCategoryNumber } from 'features/filter/api';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { fetchCategories } from 'entities/categories';
 import { Link } from 'react-router-dom';
 import MenuButton from '../../shared/UI/MenuButton';
 import { Skeleton } from '@mui/material';
@@ -22,10 +21,6 @@ const Categories: React.FC = () => {
     const dispatch = useAppDispatch();
     const { categoriesStatus, categories } = useAppSelector((state) => state.categoriesReducer);
     const { categoryNumber } = useAppSelector((state) => state.filterReducer);
-
-    React.useEffect(() => {
-        dispatch(fetchCategories());
-    }, [dispatch]);
 
     const handleClickCategory = (id: number) => {
         dispatch(setCategoryNumber(id));

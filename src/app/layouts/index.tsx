@@ -5,10 +5,17 @@ import Footer from 'widgets/Footer/Footer';
 import ToTopArrow from 'widgets/ToTopArrow/ToTopArrow';
 import { useLocation } from 'react-router';
 import RouterPath from "../utils/menuPath";
+import {useAppDispatch} from "../hooks";
+import {fetchCategories} from "../../entities/categories";
 
 const MainLayout: React.FC = () => {
     const [currentLocation, setCurrentLocation] = React.useState<string>(RouterPath.HOME);
+    const dispatch = useAppDispatch();
     const location = useLocation();
+
+    React.useEffect(() => {
+        dispatch(fetchCategories());
+    }, [dispatch]);
 
     React.useEffect(() => {
         if (currentLocation !== location.pathname) {
