@@ -3,7 +3,6 @@ import Colors from "../../../app/utils/Colors";
 import {ValidationRule} from "react-hook-form";
 import InputMask from "react-input-mask";
 import React from "react";
-import styles from './index.module.scss'
 
 interface IProps {
 		variant?: 'outlined' | 'filled' | 'standard',
@@ -49,7 +48,7 @@ const Input = ({
 				</InputAdornment>
 		)
 
-		return !inputMask ? (
+		const renderInput = () => (
 				<TextField
 						sx={{
 								width: '100%',
@@ -102,16 +101,9 @@ const Input = ({
 								endAdornment: renderEndAdornment()
 						}}
 						variant={variant}/>
-		) : <InputMask
-        className={styles.inputMask}
-				error={true}
-				placeholder={label}
-				type={type}
-				mask={mask}
-				maskChar={maskChar}
-				{...(!!register && register(name, {required, pattern, minLength, maxLength, validate}))}
+		)
 
-		/>
+		return !inputMask ? renderInput() : <InputMask mask={mask} maskChar={maskChar}>{() => renderInput()}</InputMask>
 };
 
 export default Input;

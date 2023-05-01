@@ -3,7 +3,6 @@ import styles from "./index.module.scss";
 import { ApplyButton } from "shared/UI";
 import { useAppDispatch } from "app/hooks";
 import { useNavigate } from "react-router-dom";
-import InputMask from "react-input-mask";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
@@ -122,18 +121,13 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
       <div className={styles.root}>
         <div className={styles.root__container}>
           <h1>Регистрация</h1>
-          <p className={styles.root__topInfo}>* - Обязательные поля.</p>
           <ErrorMessage
             name="name"
             errors={errors}
             render={(): any => nameError()} />
             <Input error={!!errors.name} register={register} name='name' label='Имя' required={true} maxLength={20} validate={(value: string) => !!value.match(/^[a-zа-яё\s]+$/iu)}/>
           <Input register={register} name='surname' label='Фамилия' maxLength={20}/>
-          <InputMask className={styles.root__input}
-                     {...register("dateOfBirth")}
-                     placeholder="Дата рождения"
-                     type="text"
-                     mask="99-99-9999" />
+          <Input inputMask={true} error={!!errors.dateOfBirth} register={register} name='dateOfBirth' mask='99-99-9999' maskChar='' label='Дата рождения' type='text' />
           <ErrorMessage
             name="email"
             errors={errors}
@@ -162,12 +156,6 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             errors={errors}
             render={(): any => telError()} />
           <Input inputMask={true} error={!!errors.tel} register={register} name='tel' mask='+7 (999) 999-99-99' maskChar='' label='+7 (xxx) xxx-xx-xx' type='tel' required={true} minLength={18} />
-            {/*<InputMask className={styles.root__input_required + " " + (errors.tel && styles.root__input_invalid)}*/}
-            {/*           {...register("tel", { required: true, minLength: 18 })}*/}
-            {/*           placeholder="+7 (xxx) xxx-xx-xx"*/}
-            {/*           type="tel"*/}
-            {/*           mask="+7 (999) 999-99-99"*/}
-            {/*           maskChar="" />*/}
           <Input register={register} name='street' label='Улица'/>
           <Stack spacing={2}>
             <Stack direction='row' spacing={2}>
