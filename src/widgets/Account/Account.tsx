@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./Account.module.css";
+import styles from "./Account.module.scss";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/user";
-import { MoonLoader } from "react-spinners";
 import { Orders, Profile, Settings } from "./index";
 import { HistoryOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons";
+import {CircularProgress} from "@mui/material";
 
 type SelectedType = "profile" | "orders" | "settings";
 
@@ -28,7 +28,7 @@ const Account: React.FC = () => {
 
   if (loading) return (
     <div className={styles.root__loading}>
-      <MoonLoader color="#8ba4f9" />
+      <CircularProgress size={100} disableShrink />
     </div>
   );
 

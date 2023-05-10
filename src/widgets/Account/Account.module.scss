@@ -28,9 +28,10 @@
   }
 
   &__loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   &__body {
@@ -40,7 +41,7 @@
     & aside {
       min-height: 500px;
       height: auto;
-      background: #f5f5f5;
+      background: $root-card-background;
       border-right: 3px solid rgba(31,32,65,.1);
       padding: 8px 0;
       border-radius: 4px;
@@ -57,7 +58,7 @@
     }
 
     & aside li:hover:not(.root__selected) {
-      background: $secondary-color--0_5;
+      background: $root-textHover;
       position: relative;
       &::after {
         content: '';
@@ -66,7 +67,7 @@
         top: 0;
         height: 100%;
         width: 3px;
-        background: #d8a802;
+        background: $root-textActive;
       }
     }
 
@@ -76,7 +77,7 @@
     }
 
     & aside .root__selected {
-      background: $secondary-color;
+      background: $root-textActive;
       position: relative;
 
       &::after {
@@ -86,7 +87,7 @@
         top: 0;
         height: 100%;
         width: 3px;
-        background: #d8a802;
+        background: $root-textHover;
       }
     }
 

@@ -72,7 +72,7 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
         <Input label='Имя пользователя' name='login' error={!!errors.login} required={true} register={register}
         pattern={/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/}
         />
-          <Input label='Пароль' name='password' autoComplete='on' error={!!errors.password} required={true} register={register}
+          <Input label='Пароль' name='password' autoComplete='on' error={!!errors.login} required={true} register={register}
                  pattern={/^[0-9a-zA-Z!@#$%^&*]+$/g}
                  minLength={8}
                  endAdornment={passwordHidden ? <VisibilityIcon onClick={() => handlePasswordHidden()} /> :
