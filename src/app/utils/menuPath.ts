@@ -3,7 +3,7 @@ enum RouterPath {
     LOGIN = '/login',
     PERSONAL = '/personal',
     CART = '/cart',
-    CONTACT = '/contact',
+    CONTACTS = '/contacts',
 
     CATEGORY = '/?categoryNumber=',
 }

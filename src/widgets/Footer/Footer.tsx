@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
                                 spacing={2}
                             >
                                 <Link to={RouterPath.HOME} onClick={() => window.scrollTo(0, 0)}>Главная</Link>
-                                <Link to={RouterPath.HOME}>Контакты</Link>
+                                <Link to={RouterPath.CONTACTS}>Контакты</Link>
                             </Stack>
                         </Stack>
                         <Stack className={styles.center} spacing={1} alignItems="center">

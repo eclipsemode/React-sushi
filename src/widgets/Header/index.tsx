@@ -39,7 +39,7 @@ const Header: React.FC = () => {
             case RouterPath.LOGIN:
                 setActiveMenu(3);
                 break;
-            case RouterPath.CONTACT:
+            case RouterPath.CONTACTS:
                 setActiveMenu(1);
                 break;
             default:
@@ -99,7 +99,7 @@ const Header: React.FC = () => {
                         <Link to={RouterPath.HOME} onClick={() => window.scrollTo(0, 0)}>Главная</Link>
                     </li>
                     <li className={styles.root__link}>
-                        <a href="#footer">Контакты</a>
+                        <Link to={RouterPath.CONTACTS}>Контакты</Link>
                     </li>
                 </ul>
                 <div className={styles.root__info}>
@@ -175,7 +175,7 @@ const Header: React.FC = () => {
                                 navigate(RouterPath.HOME);
                                 break;
                             case 1:
-                                navigate(RouterPath.CONTACT);
+                                navigate(RouterPath.CONTACTS);
                                 break;
                             case 2:
                                 navigate(RouterPath.CART);

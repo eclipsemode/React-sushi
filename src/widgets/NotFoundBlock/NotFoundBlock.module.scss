@@ -1,3 +1,25 @@
+@import "../../app/assets/styles/variables";
+
 .root {
-  text-align: center;
+  &__title, &__subtitle {
+    color: $root-text
+  }
+
+  &__title {
+    font-size: 32px;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+  }
+
+  @media (max-width: $mediumSize) {
+    &__title {
+      font-size: 24px;
+    }
+
+    &__subtitle {
+      font-size: 14px;
+    }
+  }
 }
