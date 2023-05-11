@@ -21,7 +21,8 @@ interface IProps {
 
 		inputMask?: boolean,
 		mask?: string | undefined,
-		maskChar?: string
+		maskChar?: string,
+		placeholder?: string
 }
 
 const Input = ({
@@ -40,7 +41,8 @@ const Input = ({
 									 endAdornment = <></>,
 									 inputMask = false,
 									 mask = undefined,
-									 maskChar = ''
+									 maskChar = '',
+									 placeholder
 							 }: IProps) => {
 		const renderEndAdornment = () => (
 				<InputAdornment sx={{cursor: 'pointer'}} position="end">
@@ -70,7 +72,7 @@ const Input = ({
 										borderColor: Colors.$mainColor
 								},
 
-								'& >.Mui-error > input': {
+								'& >.Mui-error': {
 										background: Colors.$rootErrorBackground
 								},
 
@@ -95,6 +97,7 @@ const Input = ({
 								name,
 								type,
 								autoComplete,
+								placeholder,
 								...(!!register && register(name, {required, pattern, minLength, maxLength, validate}))
 						}}
 						InputProps={{

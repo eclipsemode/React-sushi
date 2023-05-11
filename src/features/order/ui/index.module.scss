@@ -70,10 +70,21 @@
   }
 
   &__type_buttons {
-    padding: 15px 0 30px;
+    padding: 15px 5px 30px;
     text-align: center;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     column-gap: 2em;
+    row-gap: 20px;
+  }
+}
+
+@media (max-width: $mediumSize) {
+  .root__footer_price {
+    font-size: 18px;
+  }
+  .root__type_buttons {
+    flex-direction: column;
   }
 }

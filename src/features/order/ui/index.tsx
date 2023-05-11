@@ -9,8 +9,9 @@ import PickupForm from './PickupForm';
 import SimpleButton from 'shared/UI/SimpleButton';
 import Alert from 'shared/UI/Alert';
 import DeliveryForm from './DeliveryForm';
-import Colors from "../../../app/utils/Colors";
 import {DeviceType, selectAdaptiveServiceSlice} from "../../../processes/services/adaptiveService/adaptiveService";
+import DeleteIcon from '@mui/icons-material/Delete';
+import Colors from "../../../app/utils/Colors";
 
 export type OrderType = 'delivery' | 'pickup' | null;
 
@@ -26,6 +27,21 @@ const CartOrder: React.FC = () => {
 				}
 		};
 
+		const renderDesktopTableHeader = () => (
+				<tr>
+						<th>Товар</th>
+						<th>Стоимость</th>
+						<th>Количество</th>
+						<th>Общая стоимость</th>
+				</tr>
+		)
+
+		const renderMobileTableHeader = () => (
+				<tr>
+						<th>Корзина</th>
+				</tr>
+		)
+
 		return (
 				<div className={styles.root}>
 						{deliveryPrice !== 0 && orderType !== 'pickup' && (
@@ -37,17 +53,7 @@ const CartOrder: React.FC = () => {
 						<table className={styles.root__table}>
 								<thead>
 								{
-										deviceType === DeviceType.DESKTOP ?
-												<tr>
-														<th>Товар</th>
-														<th>Стоимость</th>
-														<th>Количество</th>
-														<th>Общая стоимость</th>
-												</tr>
-												:
-												<tr>
-														<th>Корзина</th>
-												</tr>
+										deviceType === DeviceType.DESKTOP ? renderDesktopTableHeader() : renderMobileTableHeader()
 								}
 								</thead>
 								<tbody>
@@ -59,8 +65,13 @@ const CartOrder: React.FC = () => {
 								<tr>
 										<td colSpan={4}>
 												<div className={styles.root__footer}>
-														<SimpleButton color={Colors.$mainColor} type='reset' variant='contained'
-																					clickEvent={handleRemoveAll}>Очистить корзину</SimpleButton>
+														{
+																deviceType === DeviceType.DESKTOP ?
+																		<SimpleButton color={Colors.$mainColor} type='reset' variant='contained'
+																									clickEvent={handleRemoveAll}>Очистить корзину</SimpleButton>
+																		: <DeleteIcon sx={{color: Colors.$rootTextActive, cursor: 'pointer'}}
+																									onClick={handleRemoveAll}/>
+														}
 														<h4 className={styles.root__footer_price}>Сумма заказа: {totalPrice} ₽</h4>
 												</div>
 										</td>

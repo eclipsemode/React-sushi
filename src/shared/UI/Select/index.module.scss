@@ -1,0 +1,10 @@
+@import '../../../app/assets/styles/variables';
+
+.root {
+  background: none;
+  color: $root-text !important;
+
+  & > option {
+    background: $root-card-background;
+  }
+}

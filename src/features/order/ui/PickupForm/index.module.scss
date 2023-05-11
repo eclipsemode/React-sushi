@@ -158,44 +158,10 @@
     }
   }
 
-  &__input {
-    width: 100%;
-    font-size: 22px;
-    font-weight: 300;
-    color: $root-text;
-    padding: 4px 4px 5px 0;
-    border: none;
-    box-shadow: inset 0 -2px 0 0 #dbdbdb;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0;
-    outline: none;
-    background: none;
-
-    &:focus {
-      box-shadow: inset 0 -2px 0 0 $root-textActive;
-    }
-  }
-
-  &__input_invalid {
-    background: rgba(214,15,19,.04);
-    box-shadow: inset 0 -2px 0 0 #d60f14;
-  }
-
   &__required::after {
     content: '*';
     font-size: 1.5em;
     position: absolute;
     right: -10px;
   }
-}
-
-.select {
-  background: none;
-  color: $root-text !important;
-}
-
-.option {
-  background: $root-card-background;
 }

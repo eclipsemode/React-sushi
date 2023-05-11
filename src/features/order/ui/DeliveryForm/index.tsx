@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./index.module.scss";
 import BlockForm from "shared/UI/BlockForm";
 import SimpleButton from "shared/UI/SimpleButton";
-import InputMask from "react-input-mask";
 import Agreement from "../Agreement";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Radio from "shared/UI/Radio";
@@ -12,6 +11,8 @@ import { fetchOrderCreate } from "features/order/api";
 import { removeAll } from "entities/cart";
 import { Modal } from "antd";
 import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
+import Input from "../../../../shared/UI/input";
+import Select from "../../../../shared/UI/Select";
 
 interface IDeliveryFormProps {
   clickEvent: () => void;
@@ -83,53 +84,31 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
         <div className={styles.root__content}>
           <fieldset>
             <label className={styles.root__required}>Имя</label>
-            <input
-              className={styles.root__input + " " + (errors.name && styles.root__input_invalid)} {...register("name", {
-              required: true,
-              maxLength: 16
-            })} />
+            <Input register={register} name='name' error={!!errors.name} required={true} maxLength={16} />
           </fieldset>
           <fieldset>
             <label className={styles.root__required}>Адрес</label>
-            <input
-              className={styles.root__input + " " + (errors.name && styles.root__input_invalid)} {...register("address", {
-              required: true,
-              maxLength: 24
-            })} />
+            <Input register={register} name='address' error={!!errors.address} required={true} maxLength={24} />
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Подъезд</label>
-            <input
-              className={styles.root__input} {...register("entrance", { maxLength: 2 })} />
+            <Input register={register} name='entrance' error={!!errors.entrance} maxLength={2} />
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Этаж</label>
-            <input
-              className={styles.root__input} {...register("floor", { maxLength: 2 })} />
+            <Input register={register} name='floor' error={!!errors.floor} required={true} maxLength={2} />
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Квартира</label>
-            <input
-              className={styles.root__input} {...register("room", { maxLength: 4 })} />
+            <Input register={register} name='room' error={!!errors.room} maxLength={4} />
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label className={styles.root__required}>Телефон</label>
-            <InputMask
-              className={styles.root__input + " " + (errors.tel && styles.root__input_invalid)}
-              {...register("tel", {
-                required: true,
-                pattern: /^(\+7|7|8)?[\s-]?\(?[89][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/gm
-              })}
-              placeholder="+7 (***) *** ** **"
-              mask="+7 (999) 999-99-99"
-              maskChar="" />
+            <Input register={register} name='tel' error={!!errors.tel} required={true} pattern={/^(\+7|7|8)?[\s-]?\(?[89][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/gm} placeholder='+7 (***) *** ** **' mask='+7 (999) 999-99-99' maskChar='' />
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label>E-MAIL</label>
-            <input
-              className={styles.root__input + " " + (errors.email && styles.root__input_invalid)}
-              {...register("email", { pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
-              placeholder="@" />
+            <Input register={register} name='email' error={!!errors.email} pattern={/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/} placeholder='@' />
           </fieldset>
           <fieldset className={styles.root__radio + " " + styles.root__width_50}>
             <Radio register={register} watch={watch} value={1} defaultChecked={true}>Как можно скорее</Radio>
@@ -144,18 +123,18 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
             <>
               <fieldset className={styles.root__width_50}>
                 <label>Доставить</label>
-                <select {...register("day", { required: true })}>
+                <Select register={register} name='day' required={true}>
                   <option value="today" defaultChecked={true}>сегодня</option>
-                </select>
+                </Select>
               </fieldset>
               <fieldset className={styles.root__width_50}>
                 <label>в</label>
-                <select {...register("time", { required: true })}>
+                <Select register={register} name='time' required={true}>
                   {
                     timeStamps.map((value, index) => <option key={index + "-" + value} value={value}
                                                              defaultChecked={true}>{value}</option>)
                   }
-                </select>
+                </Select>
               </fieldset>
             </>
           }
@@ -171,10 +150,10 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
           </fieldset>
           <fieldset>
             <label>Оплата</label>
-            <select {...register("payment", { required: true })}>
+            <Select register={register} name='payment' required={true}>
               <option value="cash">Наличными</option>
               <option value="card">Картой</option>
-            </select>
+            </Select>
           </fieldset>
           <fieldset>
             <label>Коментарий к заказу</label>
