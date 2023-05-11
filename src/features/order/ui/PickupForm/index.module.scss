@@ -24,12 +24,14 @@
       text-transform: uppercase;
       color: $root-text;
       margin: 0;
+      text-align: center;
     }
 
     & h4 {
       color: $root-text;
       font-size: 2em;
       font-weight: 300;
+      text-align: center;
     }
   }
 
@@ -163,5 +165,17 @@
     font-size: 1.5em;
     position: absolute;
     right: -10px;
+  }
+}
+
+@media (max-width: $mediumSize) {
+  .root__title {
+    & > h3 {
+      font-size: 24px;
+    }
+
+    & > h4 {
+      font-size: 16px;
+    }
   }
 }

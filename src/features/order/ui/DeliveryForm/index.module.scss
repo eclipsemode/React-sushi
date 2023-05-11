@@ -242,3 +242,11 @@
     right: -10px;
   }
 }
+
+@media (max-width: $mediumSize) {
+  .root__title {
+    & > h3 {
+      font-size: 24px;
+    }
+  }
+}

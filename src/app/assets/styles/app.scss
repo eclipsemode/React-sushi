@@ -235,7 +235,6 @@ body {
 
   &--empty {
     margin: 0 auto;
-    width: 560px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -253,9 +252,20 @@ body {
       color: $root-text;
     }
 
+    @media (max-width: $mediumSize) {
+      h2 {
+        font-size: 24px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+
     img {
       display: block;
-      width: 300px;
+      max-width: 300px;
+      width: 100%;
       margin: 45px auto 60px;
     }
 

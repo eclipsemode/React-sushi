@@ -3,6 +3,7 @@
 .root {
   background: none;
   color: $root-text !important;
+  font-size: 19px !important;
 
   & > option {
     background: $root-card-background;

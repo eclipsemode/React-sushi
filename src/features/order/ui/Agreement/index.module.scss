@@ -25,7 +25,8 @@
   }
 
   &__order {
-    width: 416px;
+    max-width: 416px;
+    width: 100%;
     background: $background;
     border-radius: 10px;
     display: flex;
