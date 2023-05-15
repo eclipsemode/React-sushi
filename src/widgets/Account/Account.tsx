@@ -1,64 +1,100 @@
 import React from "react";
 import styles from "./Account.module.scss";
-import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { fetchUserInfo, IRegistrationProps, IUserInfo } from "entities/user";
-import { Orders, Profile, Settings } from "./index";
-import { HistoryOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons";
-import {CircularProgress} from "@mui/material";
+import {Link, useNavigate} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "app/hooks";
+import {Orders, Profile, Settings} from "./index";
+import {Backdrop, Breadcrumbs, CircularProgress, Skeleton, Typography} from "@mui/material";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import RouterPath from "../../app/utils/menuPath";
+import PersonIcon from '@mui/icons-material/Person';
+import SettingsIcon from '@mui/icons-material/Settings';
+import HistoryIcon from '@mui/icons-material/History';
+import {selectAuth} from "../../processes/services";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import {setOpened} from "../../features/materialDialog/api";
+import {MaterialDialogTypes} from "../../features/materialDialog/model";
 
 type SelectedType = "profile" | "orders" | "settings";
 
 const Account: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const { isAuth } = useAppSelector(state => state.userReducer);
-  const [userInfo, setUserInfo] = React.useState<IRegistrationProps | null>(null);
-  const [loading, setLoading] = React.useState<boolean>(true);
-  const [selected, setSelected] = React.useState<SelectedType>("profile");
+    const [openBackdrop, setOpenBackdrop] = React.useState(true);
+    const {isAuth} = useAppSelector(state => state.userReducer);
+    const {loading} = useAppSelector(selectAuth);
+    const [selected, setSelected] = React.useState<SelectedType>("profile");
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
-  React.useEffect(() => {
-    (async function getUserInfo() {
-      if (isAuth) {
-        const { payload } = await dispatch(fetchUserInfo());
-        setUserInfo(payload as IUserInfo);
-        setLoading(false);
-      }
-    })();
-  }, [dispatch, isAuth]);
+    React.useEffect(() => {
+        if (!loading && !isAuth) {
+            navigate(RouterPath.HOME)
+        }
+    }, [isAuth, navigate, loading])
 
-  if (loading) return (
-    <div className={styles.root__loading}>
-      <CircularProgress size={100} disableShrink />
-    </div>
-  );
+    const breadcrumbs = [
+        <Link key={1} to={RouterPath.HOME}>
+            Главная
+        </Link>,
+        <Link key={2} to={RouterPath.PERSONAL}>
+            Аккаунт
+        </Link>,
+        <Typography key={3}>
+            {
+                loading ? <Skeleton animation='wave' height={24} width={100}/> :
+                    selected === 'profile' ? 'Мой профиль' : selected === 'orders' ? 'История заказов' : 'Редактировать профиль'
+            }
+        </Typography>,
+    ];
 
-  return (
-    <div className={styles.root}>
-      <div className={styles.root__head}>
-        <Link className={styles.root__link} to={"/"}>Главная</Link>
-        <p>/</p>
-        <Link className={styles.root__link} to={""}>Профиль</Link>
-        <p>/</p>
-        <p
-          className={styles.root__link2}>{selected === "profile" ? userInfo?.name + " " + userInfo?.surname : (selected === "orders") ? "История заказов" : "Редактировать профиль"}</p>
-      </div>
-      <div className={styles.root__body}>
-        <aside>
-          <ul>
-            <li className={selected === "profile" ? styles.root__selected : null} onClick={() => setSelected("profile")}>
-              <UserOutlined /><span>Мой профиль</span></li>
-            <li className={selected === "orders" ? styles.root__selected : null} onClick={() => setSelected("orders")}>
-              <HistoryOutlined /><span>История заказов</span></li>
-            <li className={selected === "settings" ? styles.root__selected : null} onClick={() => setSelected("settings")}>
-              <SettingOutlined /><span>Редактировать профиль</span></li>
-          </ul>
-        </aside>
-        {selected === "profile" && <Profile />}
-        {selected === "orders" && <Orders />}
-        {selected === "settings" && <Settings />}
-      </div>
-    </div>
-  );
+    const handleClose = () => {
+        setOpenBackdrop(false);
+    };
+
+    return (
+        <div className={styles.root}>
+            <div className={styles.root__head}>
+                <Breadcrumbs className={styles.breadcrumbs}
+                             separator={<NavigateNextIcon fontSize="small"/>}
+                             aria-label="breadcrumb"
+                >
+                    {breadcrumbs}
+                </Breadcrumbs>
+            </div>
+            {
+                loading ? <Backdrop
+                        sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                        open={openBackdrop}
+                        onClick={handleClose}
+                    >
+                        <CircularProgress color="inherit"/>
+                    </Backdrop> :
+                    (
+                        <div className={styles.root__body}>
+                            <aside>
+                                <ul>
+                                    <li className={selected === "profile" ? styles.root__selected : null}
+                                        onClick={() => setSelected("profile")}>
+                                        <PersonIcon/><span>Мой профиль</span></li>
+                                    <li className={selected === "orders" ? styles.root__selected : null}
+                                        onClick={() => setSelected("orders")}>
+                                        <HistoryIcon/><span>История заказов</span></li>
+                                    <li className={selected === "settings" ? styles.root__selected : null}
+                                        onClick={() => setSelected("settings")}>
+                                        <SettingsIcon/><span>Редактировать профиль</span></li>
+                                    <li onClick={() => dispatch(setOpened({
+                                        opened: true,
+                                        dialogType: MaterialDialogTypes.LOGOUT
+                                    }))}>
+                                        <ExitToAppIcon/><span>Выйти</span></li>
+                                </ul>
+                            </aside>
+                            {selected === "profile" && <Profile/>}
+                            {selected === "orders" && <Orders/>}
+                            {selected === "settings" && <Settings/>}
+                        </div>
+                    )
+            }
+        </div>
+    );
 };
 
 export default Account;

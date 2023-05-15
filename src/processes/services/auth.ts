@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {  $api } from "processes/api";
 import { setAuth, setUser } from "entities/user";
 
-interface IInitialState {
+export interface IInitialState {
   loading: boolean,
   error: any,
 }
 
 const initialState: IInitialState = {
-  loading: false,
+  loading: true,
   error: null,
 };
 
@@ -52,5 +52,7 @@ const userAuthSlice = createSlice({
 });
 
 export { fetchAuth };
+
+export const selectAuth = (state: RootState) => state.authReducer;
 
 export default userAuthSlice.reducer;

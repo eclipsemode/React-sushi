@@ -36,7 +36,9 @@ const SimpleButton: React.FC<ISimpleButton> = ({children, clickEvent, type, vari
     opacity: "1",
     transition: "opacity ease .5s",
     whiteSpace: "nowrap",
-    minWidth: "230px",
+    minWidth: "140px",
+    maxWidth: '230px',
+    width: '100%',
     textDecoration: "none",
     "&:hover": {
       color: Colors.$rootText,

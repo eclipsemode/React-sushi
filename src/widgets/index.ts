@@ -8,4 +8,3 @@ export { default as Account } from './Account/Account';
 export { default as Banner } from './Banner/Banner';
 export { default as ModalAccount } from './ModalAccount';
 export { default as ActivatedPageBlock } from './ActivatedPageBlock';
-export { default as OrderDelivered } from './OrderDelivered';

@@ -1,13 +1,13 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { fetchUserInfo, IRegistrationProps } from "entities/user";
+import {fetchUserInfo, IUserInfo, selectUser} from "entities/user";
 import styles from './index.module.css'
 import Field from "shared/UI/Field";
 import formatDateToString from "shared/utils/formatDateToString";
+import {Skeleton} from "@mui/material";
 
-export interface IUserData {
-  dateOfBirth: string,
-  id: number,
+export interface IUserDataFetched {
+  dateOfBirth: any,
   email: string,
   name: string,
   surname: string,
@@ -21,7 +21,8 @@ export interface IUserData {
 const Profile: React.FC = () => {
   const dispatch = useAppDispatch();
   const { isAuth } = useAppSelector(state => state.userReducer);
-  const [userData, setUserData] = React.useState<IUserData | null>(null);
+  const { status } = useAppSelector(selectUser);
+  const [userData, setUserData] = React.useState<IUserDataFetched>();
 
   React.useEffect(() => {
     window.scrollTo({
@@ -30,31 +31,36 @@ const Profile: React.FC = () => {
   });
 
   React.useEffect(() => {
-    if (isAuth) {
-      (async function getUsers() {
-        const { payload }: IRegistrationProps | any = await dispatch(fetchUserInfo());
+    dispatch(fetchUserInfo()).then(data => {
+      if (data.type.match('fulfilled')) {
 
-        setUserData({
-          id: payload.id,
-          email: payload.email,
-          name: payload.name,
-          surname: payload.surname,
-          tel: payload.tel,
-          street: payload.street,
-          house: payload.house,
-          floor: payload.floor ,
-          entrance: payload.entrance,
-          room: payload.room,
-          dateOfBirth: formatDateToString(payload.dateOfBirth)
+        const result: IUserInfo = data.payload as IUserInfo;
+
+        !!data.type.match('fulfilled') && setUserData({
+          email: result.email,
+          entrance: result.entrance,
+          floor: result.floor,
+          house: result.house,
+          name: result.name,
+          room: result.room,
+          street: result.street,
+          surname: result.surname,
+          tel: result.tel,
+          dateOfBirth: formatDateToString(result.dateOfBirth)
         })
-      })()
-    }
-  }, [dispatch, isAuth])
+
+      }
+        }
+    )
+  }, [isAuth, dispatch])
 
 
   return (
     <div className={styles.root}>
-      <Field title='Имя' text={userData?.name ? userData?.name : ''}/>
+      {
+        status === 'fulfilled' ? <Field title='Имя' text={userData?.name ? userData?.name : ''}/> : <Skeleton animation='wave' height={55} width='100%' />
+      }
+
 
       { userData?.surname && <Field title='Фамилия' text={userData.surname}/> }
 
@@ -62,7 +68,9 @@ const Profile: React.FC = () => {
 
       { userData?.email && <Field title='Email' text={userData.email}/> }
 
-      <Field title='Телефон' text={userData?.tel ? userData?.tel : ''}/>
+      {
+        status === 'fulfilled' ? <Field title='Телефон' text={userData?.tel ? userData?.tel : ''}/> : <Skeleton animation='wave' height={55} width='100%' />
+      }
 
       { userData?.street  && <Field title='Улица' text={userData.street + (userData.house ? `, кв. ${userData.house}` : '')}/> }
 

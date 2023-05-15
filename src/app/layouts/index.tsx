@@ -7,6 +7,7 @@ import { useLocation } from 'react-router';
 import RouterPath from "../utils/menuPath";
 import {useAppDispatch} from "../hooks";
 import {fetchCategories} from "../../entities/categories";
+import MaterialDialog from "../../features/materialDialog/ui";
 
 const MainLayout: React.FC = () => {
     const [currentLocation, setCurrentLocation] = React.useState<string>(RouterPath.HOME);
@@ -24,10 +25,6 @@ const MainLayout: React.FC = () => {
         }
     }, [location, currentLocation]);
 
-    React.useEffect(() => {
-
-    }, [])
-
     return (
         <>
             <Header />
@@ -38,6 +35,7 @@ const MainLayout: React.FC = () => {
             </main>
             <Footer />
             <ToTopArrow />
+            <MaterialDialog />
         </>
     );
 };

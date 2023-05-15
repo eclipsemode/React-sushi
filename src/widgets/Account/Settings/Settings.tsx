@@ -5,11 +5,11 @@ import styles from "./Settings.module.css";
 import FormInput from "shared/UI/FormInput";
 import { Modal } from "antd";
 import formatToDate from "shared/utils/formatToDate";
-import { IUserData } from "../Profile/Profile";
+import { IUserDataFetched } from "../Profile/Profile";
 import formatDateToString from "../../../shared/utils/formatDateToString";
 
 const Settings: React.FC = () => {
-  const [userInfo, setUserInfo] = React.useState<IUserData>();
+  const [userInfo, setUserInfo] = React.useState<IUserDataFetched>();
   const dispatch = useAppDispatch();
   const { user, isAuth } = useAppSelector(state => state.userReducer);
   const [name, setName] = React.useState<string>("");
@@ -72,7 +72,6 @@ const Settings: React.FC = () => {
         const { payload }: IRegistrationProps | any = await dispatch(fetchUserInfo());
 
         setUserInfo({
-          id: payload.id,
           email: payload.email,
           name: payload.name,
           surname: payload.surname,
