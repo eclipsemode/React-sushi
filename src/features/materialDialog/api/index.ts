@@ -17,7 +17,7 @@ export const materialDialogSlice = createSlice({
     name: 'materialDialog',
     initialState,
     reducers: {
-        setOpened: (state, action: PayloadAction<IMaterialDialog>) => {
+        setMaterialDialog: (state, action: PayloadAction<IMaterialDialog>) => {
             state.dialogType = action.payload.dialogType;
             state.opened = action.payload.opened;
         }
@@ -26,6 +26,6 @@ export const materialDialogSlice = createSlice({
 
 export const selectMaterialDialog = (state: RootState) => state.materialDialogReducer;
 
-export const {setOpened} = materialDialogSlice.actions;
+export const {setMaterialDialog} = materialDialogSlice.actions;
 
 export default materialDialogSlice.reducer;

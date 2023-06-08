@@ -3,16 +3,17 @@ import styles from "./index.module.scss";
 import BlockForm from "shared/UI/BlockForm";
 import SimpleButton from "shared/UI/SimpleButton";
 import Agreement from "../Agreement";
-import { SubmitHandler, useForm } from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import Radio from "shared/UI/Radio";
-import { calcTime } from "../../utils/calcTime";
-import { useAppDispatch } from "app/hooks";
-import { fetchOrderCreate } from "features/order/api";
-import { removeAll } from "entities/cart";
-import { Modal } from "antd";
-import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
+import {calcTime} from "../../utils/calcTime";
+import {useAppDispatch} from "app/hooks";
+import {MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import Input from "../../../../shared/UI/input";
 import Select from "../../../../shared/UI/Select";
+import {setMaterialDialog} from "../../../materialDialog/api";
+import {MaterialDialogTypes} from "../../../materialDialog/model";
+import {IFormData} from "../../model";
+import {setFormData} from "../../api";
 
 interface IDeliveryFormProps {
   clickEvent: () => void;
@@ -20,30 +21,10 @@ interface IDeliveryFormProps {
 
 export type PaymentType = "cash" | "card";
 export type TelType = `+${number} (${number}${number}${number}) ${number}${number}${number}-${number}${number}-${number}${number}`;
-type DeliveryTimeType = 1 | 2;
-
-export interface IFormInputs {
-  name: string,
-  address?: string | null,
-  entrance?: number | null,
-  floor?: number | null,
-  room?: number | null,
-  tel: TelType,
-  email: string,
-  day: "today" | null,
-  time: string | null,
-  utensils: number,
-  payment: PaymentType,
-  commentary: string,
-  deliveryTime?: DeliveryTimeType,
-  agreement_1?: boolean,
-  agreement_2?: boolean,
-  agreement_3?: boolean
-}
 
 const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<IFormInputs>();
+  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<IFormData>();
   const [utensils, setUtensils] = React.useState<number>(0);
   const [timeStamps] = React.useState<string[]>(calcTime(15));
 
@@ -57,21 +38,16 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
   React.useEffect(() => {
     setValue("utensils", utensils);
   }, [utensils, setValue]);
-  const onSubmit: SubmitHandler<IFormInputs> = data => {
+  const onSubmit: SubmitHandler<IFormData> = data => {
     if (Number(data.deliveryTime) === 1) {
       data.day = null;
       data.time = null;
     }
-    dispatch(fetchOrderCreate({...data, type: 'delivery'}));
-    success();
-  };
-
-  const success = () => {
-    Modal.success({
-      title: "Ваш заказ отправлен.",
-      content: "Оператор перезвонит для подтверждения в течении 5 минут."
-    });
-    dispatch(removeAll());
+    dispatch(setFormData(data));
+    dispatch(setMaterialDialog({
+      opened: true,
+      dialogType: MaterialDialogTypes.SEND_ORDER_DELIVERY
+    }))
   };
 
   return (
@@ -96,7 +72,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Этаж</label>
-            <Input register={register} name='floor' error={!!errors.floor} required={true} maxLength={2} />
+            <Input register={register} name='floor' error={!!errors.floor} maxLength={2} />
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Квартира</label>

@@ -1,15 +1,16 @@
 import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
-import Colors from "app/utils/Colors";
-import SimpleButton from "shared/UI/SimpleButton";
+import SimpleButton from "../../../../shared/UI/SimpleButton";
+import Colors from "../../../../app/utils/Colors";
+import {useAppDispatch} from "../../../../app/hooks";
 import {setMaterialDialog} from "../../api";
-import {useAppDispatch} from "app/hooks";
-import {fetchUserLogout} from "../../../logout/api";
+import {removeAll} from "../../../../entities/cart";
+import {setFormData} from "../../../order/api";
 
-const LogoutMaterialDialog = () => {
+const ClearCartMaterialDialog = () => {
     const dispatch = useAppDispatch();
 
     const callback = () => {
-        dispatch(fetchUserLogout());
+        dispatch(removeAll());
     }
 
     const handleAgree = () => {
@@ -19,6 +20,7 @@ const LogoutMaterialDialog = () => {
         }));
 
         callback();
+        dispatch(setFormData(null));
     }
 
     const handleDisagree = () => {
@@ -31,11 +33,11 @@ const LogoutMaterialDialog = () => {
     return (
         <>
             <DialogTitle id="responsive-dialog-title">
-                Вы уверены что хотите выйти?
+                Вы уверены что хотите очистить корзину?
             </DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Подтвердите выход из аккаунта нажав на соответствующую кнопку ниже.
+                    Подтвердите удаление всех товаров из корзины.
                 </DialogContentText>
             </DialogContent>
             <DialogActions sx={{justifyContent: 'center'}}>
@@ -47,4 +49,4 @@ const LogoutMaterialDialog = () => {
     );
 };
 
-export default LogoutMaterialDialog;
+export default ClearCartMaterialDialog;

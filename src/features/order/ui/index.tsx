@@ -1,6 +1,6 @@
 import React from 'react';
 import {CartItem} from 'widgets';
-import {removeAll, selectCart} from 'entities/cart';
+import {selectCart} from 'entities/cart';
 import styles from './index.module.scss';
 import {useAppDispatch, useAppSelector} from 'app/hooks';
 import {IProducts} from 'entities/products';
@@ -12,6 +12,8 @@ import DeliveryForm from './DeliveryForm';
 import {DeviceType, selectAdaptiveServiceSlice} from "../../../processes/services/adaptiveService/adaptiveService";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Colors from "../../../app/utils/Colors";
+import {setMaterialDialog} from "../../materialDialog/api";
+import {MaterialDialogTypes} from "../../materialDialog/model";
 
 export type OrderType = 'delivery' | 'pickup' | null;
 
@@ -22,9 +24,10 @@ const CartOrder: React.FC = () => {
 		const [orderType, setOrderType] = React.useState<OrderType>(null);
 
 		const handleRemoveAll = () => {
-				if (window.confirm('Подтвердить удаление товаров?')) {
-						dispatch(removeAll());
-				}
+			dispatch(setMaterialDialog({
+				opened: true,
+				dialogType: MaterialDialogTypes.CLEAR_CART
+			}))
 		};
 
 		const renderDesktopTableHeader = () => (

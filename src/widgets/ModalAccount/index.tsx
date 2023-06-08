@@ -4,8 +4,8 @@ import {useNavigate} from 'react-router-dom';
 import ModalWindow from '../../shared/UI/ModalWindow';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import LoginIcon from '@mui/icons-material/Login';
-import {setOpened} from "../../features/materialDialog/api";
-import {MaterialDialogTypes} from "../../features/materialDialog/model";
+import {setMaterialDialog} from "features/materialDialog/api";
+import {MaterialDialogTypes} from "features/materialDialog/model";
 
 interface IModalAccountProps {
     modalRef: React.Ref<HTMLDivElement>;
@@ -20,7 +20,7 @@ const ModalAccount: React.FC<IModalAccountProps> = ({ modalRef }) => {
     };
 
     const handleExit = () => {
-        dispatch(setOpened({
+        dispatch(setMaterialDialog({
             opened: true,
             dialogType: MaterialDialogTypes.LOGOUT
         }))

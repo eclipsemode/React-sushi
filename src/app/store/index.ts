@@ -12,6 +12,7 @@ import adaptiveServiceReducer from 'processes/services/adaptiveService/adaptiveS
 import authReducer from 'processes/services/auth'
 import cityReducer from 'entities/city';
 import materialDialogReducer from 'features/materialDialog/api'
+import orderCreateReducer from 'features/order/api'
 
 import { cartListenerMiddleware } from 'entities/cart/middleware';
 import adaptiveServiceListenerMiddleware from '../../processes/services/adaptiveService/adaptiveServiceListenerMiddleware';
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     adaptiveServiceReducer,
     cityReducer,
     authReducer,
-    materialDialogReducer
+    materialDialogReducer,
+    orderCreateReducer
 });
 
 const persistConfig = {

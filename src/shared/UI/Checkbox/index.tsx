@@ -1,14 +1,14 @@
 import React from "react";
 import styles from "./index.module.scss";
-import { IFormInputs } from "features/order/ui/DeliveryForm";
 import { CheckOutlined } from "@ant-design/icons";
+import {IFormData} from "../../../features/order/model";
 
 interface ICheckbox {
   children: React.ReactNode;
   name: string;
   register?: any;
   checked?: boolean;
-  errors?: IFormInputs | any;
+  errors?: IFormData | any;
 }
 
 const Checkbox: React.FC<ICheckbox> = (props) => {

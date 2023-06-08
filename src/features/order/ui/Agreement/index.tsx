@@ -3,12 +3,12 @@ import styles from "./index.module.scss";
 import BlockForm from "shared/UI/BlockForm";
 import { useAppSelector } from "app/hooks";
 import Checkbox from "../../../../shared/UI/Checkbox";
-import { IFormInputs } from "../DeliveryForm";
+import {IFormData} from "../../model";
 
 interface IAgreementProps {
   delivery?: boolean;
   register?: any;
-  errors?: IFormInputs | any;
+  errors?: IFormData | any;
 }
 
 const Agreement: React.FC<IAgreementProps> = (props) => {

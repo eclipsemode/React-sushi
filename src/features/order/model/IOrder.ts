@@ -1,4 +1,4 @@
-import { IFormInputs } from "../ui/DeliveryForm";
+import {PaymentType, TelType} from "../ui/DeliveryForm";
 import { OrderType } from "../ui";
 interface IOrderProducts {
   id: number,
@@ -12,7 +12,7 @@ interface IOrderProducts {
   }
 
 
-interface IOrder extends IFormInputs{
+interface IOrder extends IFormData{
   userId: number | null,
   orderProducts: IOrderProducts[],
   totalPrice: number,
@@ -20,4 +20,25 @@ interface IOrder extends IFormInputs{
   type: OrderType
 }
 
-export type { IOrderProducts, IOrder };
+type DeliveryTimeType = 1 | 2;
+
+interface IFormData {
+  name: string,
+  address?: string | null,
+  entrance?: number | null,
+  floor?: number | null,
+  room?: number | null,
+  tel: TelType,
+  email: string,
+  day: "today" | null,
+  time: string | null,
+  utensils: number,
+  payment: PaymentType,
+  commentary: string,
+  deliveryTime?: DeliveryTimeType,
+  agreement_1?: boolean,
+  agreement_2?: boolean,
+  agreement_3?: boolean
+}
+
+export type { IOrderProducts, IOrder, IFormData };

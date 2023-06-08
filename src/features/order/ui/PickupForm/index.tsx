@@ -5,14 +5,14 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import BlockForm from "shared/UI/BlockForm";
 import Agreement from "../Agreement";
 import {calcTime} from "../../utils/calcTime";
-import {Modal} from "antd";
-import {removeAll} from "entities/cart";
 import {useAppDispatch} from "app/hooks";
-import {fetchOrderCreate} from "features/order/api";
-import {IFormInputs} from "../DeliveryForm";
+import {setFormData} from "features/order/api";
 import {MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import Input from "../../../../shared/UI/input";
 import Select from "../../../../shared/UI/Select";
+import {IFormData} from "../../model";
+import {setMaterialDialog} from "../../../materialDialog/api";
+import {MaterialDialogTypes} from "../../../materialDialog/model";
 
 interface IPickupProps {
 		clickEvent: () => void;
@@ -20,7 +20,7 @@ interface IPickupProps {
 
 const PickupForm: React.FC<IPickupProps> = (props) => {
 		const dispatch = useAppDispatch();
-		const {register, handleSubmit, setValue, formState: {errors}} = useForm<IFormInputs>();
+		const {register, handleSubmit, setValue, formState: {errors}} = useForm<IFormData>();
 		const [timeStamps] = React.useState<string[]>(calcTime(15));
 		const [utensils, setUtensils] = React.useState<number>(0);
 
@@ -28,17 +28,12 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
 				setValue('utensils', utensils);
 		}, [utensils, setValue])
 
-		const onSubmit: SubmitHandler<IFormInputs> = data => {
-				dispatch(fetchOrderCreate({...data, type: 'pickup'}));
-				success();
-		};
-
-		const success = () => {
-				Modal.success({
-						title: 'Ваш заказ отправлен.',
-						content: 'Оператор перезвонит для подтверждения в течении 5 минут.'
-				});
-				dispatch(removeAll());
+		const onSubmit: SubmitHandler<IFormData> = data => {
+			dispatch(setFormData(data));
+			dispatch(setMaterialDialog({
+				opened: true,
+				dialogType: MaterialDialogTypes.SEND_ORDER_PICKUP
+			}))
 		};
 
 		return (

@@ -5,14 +5,14 @@ import {useAppDispatch, useAppSelector} from "app/hooks";
 import {Orders, Profile, Settings} from "./index";
 import {Backdrop, Breadcrumbs, CircularProgress, Skeleton, Typography} from "@mui/material";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import RouterPath from "../../app/utils/menuPath";
+import RouterPath from "app/utils/menuPath";
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HistoryIcon from '@mui/icons-material/History';
 import {selectAuth} from "../../processes/services";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import {setOpened} from "../../features/materialDialog/api";
-import {MaterialDialogTypes} from "../../features/materialDialog/model";
+import {setMaterialDialog} from "features/materialDialog/api";
+import {MaterialDialogTypes} from "features/materialDialog/model";
 
 type SelectedType = "profile" | "orders" | "settings";
 
@@ -80,7 +80,7 @@ const Account: React.FC = () => {
                                     <li className={selected === "settings" ? styles.root__selected : null}
                                         onClick={() => setSelected("settings")}>
                                         <SettingsIcon/><span>Редактировать профиль</span></li>
-                                    <li onClick={() => dispatch(setOpened({
+                                    <li onClick={() => dispatch(setMaterialDialog({
                                         opened: true,
                                         dialogType: MaterialDialogTypes.LOGOUT
                                     }))}>
