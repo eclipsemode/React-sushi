@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./index.module.scss";
 import BlockForm from "shared/UI/BlockForm";
-import { useAppSelector } from "app/hooks";
+import {useAppDispatch, useAppSelector} from "app/hooks";
 import Checkbox from "../../../../shared/UI/Checkbox";
 import {IFormData} from "../../model";
+import {setFinalPrice} from "../../../../entities/cart";
 
 interface IAgreementProps {
   delivery?: boolean;
@@ -13,6 +14,82 @@ interface IAgreementProps {
 
 const Agreement: React.FC<IAgreementProps> = (props) => {
   const { totalPrice, deliveryPrice, totalAmount } = useAppSelector(state => state.cartReducer);
+  const { promocode } = useAppSelector(state => state.orderCreateReducer)
+  const dispatch = useAppDispatch();
+  
+  const calculateTotalPrice = React.useCallback(() => {
+    let newPrice: number;
+    if (!!promocode) {
+      if (!!props.delivery) {
+        newPrice = promocode.type === 'RUB' ? (totalPrice - promocode.discount)  + deliveryPrice : (totalPrice - (totalPrice / 100 * promocode.discount)) + deliveryPrice;
+      } else {
+        newPrice = promocode.type === 'RUB' ? totalPrice - promocode.discount : totalPrice - (totalPrice / 100 * promocode.discount);
+      }
+    } else {
+      if (!!props.delivery) {
+        newPrice = totalPrice + deliveryPrice;
+      } else {
+        newPrice = totalPrice;
+      }
+    }
+
+    return newPrice;
+  }, [deliveryPrice, promocode, props.delivery, totalPrice])
+
+  const calculateTotalWithPromocode = React.useCallback((price: number) => {
+    let newPrice: number;
+
+    if (!!props.delivery && promocode?.type !== 'percent') {
+      if (price < (totalPrice / 2) + deliveryPrice) {
+        newPrice = (totalPrice / 2) + deliveryPrice;
+      } else {
+        newPrice = price;
+      }
+    } else {
+      if (price < totalPrice / 2 && promocode?.type !== 'percent') {
+        newPrice = totalPrice / 2;
+      } else {
+        newPrice = price;
+      }
+    }
+
+    return Math.trunc(newPrice);
+  }, [deliveryPrice, promocode?.type, props.delivery, totalPrice])
+
+  const calculatePromocode = React.useCallback((price: number) => {
+    let newPrice: number;
+
+    if (promocode?.type !== 'percent') {
+
+      if (!!props.delivery) {
+
+        if (price < (totalPrice / 2) + deliveryPrice) {
+          newPrice = totalPrice / 2
+        } else {
+          newPrice = promocode?.discount ?? 0
+        }
+
+      } else {
+
+        if (price < totalPrice / 2) {
+          newPrice = totalPrice / 2
+        } else {
+          newPrice = promocode?.discount ?? 0
+        }
+
+      }
+
+    } else {
+      newPrice = price;
+    }
+
+    return newPrice;
+
+  }, [deliveryPrice, promocode?.discount, promocode?.type, props.delivery, totalPrice])
+
+  React.useEffect(() => {
+    dispatch(setFinalPrice(calculateTotalWithPromocode(calculateTotalPrice())))
+  }, [props.delivery, promocode, totalPrice, deliveryPrice, calculateTotalWithPromocode, calculateTotalPrice, dispatch])
 
   return (
     <BlockForm>
@@ -33,18 +110,28 @@ const Agreement: React.FC<IAgreementProps> = (props) => {
               </div>
 
               {
-                props.delivery &&
-                (
-                  <div className={styles.delivery}>
-                    <span>Доставка</span>
-                    <span>{deliveryPrice} ₽</span>
-                  </div>
-                )
+                  !!promocode &&
+                  (
+                      <div className={styles.delivery}>
+                        <span>Промокод</span>
+                        <span>-{promocode.type === 'RUB' ? calculatePromocode(calculateTotalPrice()) + '₽' : promocode.discount + '%'}</span>
+                      </div>
+                  )
+              }
+
+              {
+                  props.delivery &&
+                  (
+                      <div className={styles.delivery}>
+                        <span>Доставка</span>
+                        <span>{deliveryPrice} ₽</span>
+                      </div>
+                  )
               }
 
               <div>
                 <span>Итого</span>
-                <span>{props.delivery ? totalPrice + deliveryPrice : totalPrice} ₽</span>
+                <span>{calculateTotalWithPromocode(calculateTotalPrice())} ₽</span>
               </div>
             </div>
           </div>

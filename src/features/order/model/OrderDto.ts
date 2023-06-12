@@ -2,11 +2,12 @@ import { IOrder } from "./IOrder";
 import { ICartState } from "entities/cart";
 import { IUserState } from "entities/user";
 import { IProducts } from "entities/products";
+import {IOrderCreate} from "../api";
 
 class OrderDto {
   public order: Partial<IOrder>;
 
-  constructor(cart: ICartState, user: IUserState, formData: Partial<IOrder>) {
+  constructor(cart: ICartState, user: IUserState, formData: Partial<IOrder>, orderCreateReducer: IOrderCreate) {
     this.order = {
       userId: user.isAuth ? Number(user.user?.id) : null,
       orderProducts: cart.items.map((e: IProducts) => ({
@@ -19,7 +20,7 @@ class OrderDto {
         image: e.image,
         categoryId: +e.category
       })),
-      totalPrice: cart.totalPrice + cart.deliveryPrice,
+      totalPrice: cart.finalPrice,
       totalAmount: cart.totalAmount,
       type: formData.type,
       name: formData.name,
@@ -33,7 +34,8 @@ class OrderDto {
       time: formData.time,
       utensils: formData.utensils,
       payment: formData.payment,
-      commentary: formData.commentary
+      commentary: formData.commentary,
+      promocode: orderCreateReducer.promocode?.code
     };
   }
 }

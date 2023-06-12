@@ -5,15 +5,19 @@ import { IProducts } from "entities/products";
 export interface ICartState {
   items: IProducts[];
   totalPrice: number;
+  finalPrice: number;
   deliveryPrice: number;
   totalAmount: number;
+  orderType: 'delivery' | 'pickup' | null
 }
 
 const initialState: ICartState = {
   items: [],
   totalPrice: 0,
+  finalPrice: 0,
   deliveryPrice: 0,
   totalAmount: 0,
+  orderType: null
 };
 
 export const cartSlice = createSlice({
@@ -52,6 +56,7 @@ export const cartSlice = createSlice({
       state.items = [];
       state.totalAmount = 0;
       state.totalPrice = 0;
+      state.finalPrice = 0;
     },
 
     removeItemById: (state, action: PayloadAction<string>) => {
@@ -69,10 +74,16 @@ export const cartSlice = createSlice({
       } else {
         state.deliveryPrice = 100
       }
+    },
+    setFinalPrice: (state, action: PayloadAction<number>) => {
+      state.finalPrice = action.payload;
+    },
+    setOrderType: (state, action: PayloadAction<'delivery' | 'pickup' | null>) => {
+      state.orderType = action.payload
     }
   },
 });
 
 export const selectCart = (state: RootState) => state.cartReducer;
-export const { addItem, removeItem, removeAll, removeItemById, updateDeliveryPrice } = cartSlice.actions;
+export const { addItem, removeItem, removeAll, removeItemById, updateDeliveryPrice, setOrderType, setFinalPrice } = cartSlice.actions;
 export default cartSlice.reducer;

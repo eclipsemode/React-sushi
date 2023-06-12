@@ -127,7 +127,7 @@ const Header: React.FC = () => {
                     </NavLink>
 
                     <Badge
-                        badgeContent={totalPrice + deliveryPrice > 0 ? totalPrice + deliveryPrice + '₽' : null}
+                        badgeContent={totalPrice > 0 ? totalPrice + '₽' : null}
                         max={10000}
                         color="success"
                         sx={{ cursor: 'pointer' }}

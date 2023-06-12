@@ -21,6 +21,14 @@ const $api = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
 });
 
+const $api_guest = axios.create({
+    withCredentials: true,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    baseURL: process.env.REACT_APP_API_URL,
+});
+
 const authInterceptor = async (config: any) => {
     if (config.headers) {
         config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
@@ -50,4 +58,4 @@ const authInterceptorResError = async (error: any) => {
 $api.interceptors.request.use(authInterceptor, authInterceptorReqError);
 $api.interceptors.response.use(authInterceptor, authInterceptorResError);
 
-export { $api };
+export { $api, $api_guest };

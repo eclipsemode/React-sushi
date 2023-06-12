@@ -15,6 +15,7 @@ import materialDialogReducer from 'features/materialDialog/api'
 import orderCreateReducer from 'features/order/api'
 
 import { cartListenerMiddleware } from 'entities/cart/middleware';
+import { promoCodeMiddleware } from "../../features/order/middleware";
 import adaptiveServiceListenerMiddleware from '../../processes/services/adaptiveService/adaptiveServiceListenerMiddleware';
 
 const rootReducer = combineReducers({
@@ -47,7 +48,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).prepend(cartListenerMiddleware.middleware, adaptiveServiceListenerMiddleware.middleware),
+        }).prepend(cartListenerMiddleware.middleware, promoCodeMiddleware.middleware, adaptiveServiceListenerMiddleware.middleware),
 });
 
 export const persistor = persistStore(store);

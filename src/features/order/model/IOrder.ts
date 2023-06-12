@@ -17,7 +17,8 @@ interface IOrder extends IFormData{
   orderProducts: IOrderProducts[],
   totalPrice: number,
   totalAmount: number,
-  type: OrderType
+  type: OrderType,
+  promocode: string
 }
 
 type DeliveryTimeType = 1 | 2;
@@ -38,7 +39,7 @@ interface IFormData {
   deliveryTime?: DeliveryTimeType,
   agreement_1?: boolean,
   agreement_2?: boolean,
-  agreement_3?: boolean
+  agreement_3?: boolean,
 }
 
 export type { IOrderProducts, IOrder, IFormData };

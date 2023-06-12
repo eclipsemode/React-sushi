@@ -4,13 +4,14 @@ import Colors from "../../../../app/utils/Colors";
 import {useAppDispatch} from "../../../../app/hooks";
 import {setMaterialDialog} from "../../api";
 import {removeAll} from "../../../../entities/cart";
-import {setFormData} from "../../../order/api";
+import {clearOrderData, setFormData} from "../../../order/api";
 
 const ClearCartMaterialDialog = () => {
     const dispatch = useAppDispatch();
 
     const callback = () => {
         dispatch(removeAll());
+        dispatch(clearOrderData());
     }
 
     const handleAgree = () => {

@@ -7,6 +7,8 @@ import {MaterialDialogTypes} from "../model";
 import LogoutMaterialDialog from "./materialDialogs/LogoutMaterialDialog";
 import ClearCartMaterialDialog from "./materialDialogs/ClearCartMaterialDialog";
 import SendOrderMaterialDialog from "./materialDialogs/SendOrderMaterialDialog";
+import PromocodeSuccess from "./materialDialogs/PromocodeSuccess";
+import PromocodeInvalid from "./materialDialogs/PromocodeInvalid";
 
 const MaterialDialog = () => {
     const { opened, dialogType } = useAppSelector(selectMaterialDialog);
@@ -27,6 +29,9 @@ const MaterialDialog = () => {
             case MaterialDialogTypes.CLEAR_CART: return <ClearCartMaterialDialog />;
             case MaterialDialogTypes.SEND_ORDER_DELIVERY: return <SendOrderMaterialDialog />
             case MaterialDialogTypes.SEND_ORDER_PICKUP: return <SendOrderMaterialDialog />
+            case MaterialDialogTypes.PROMOCODE_INVALID: return <PromocodeInvalid />
+            case MaterialDialogTypes.PROMOCODE_SUCCESS: return <PromocodeSuccess />
+
             default: return <></>
         }
     }
