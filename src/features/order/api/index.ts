@@ -82,6 +82,10 @@ const orderCreateSlice = createSlice({
             state.formData = null;
             state.promocode = null;
             state.promocodeError = false;
+        },
+        clearPromocodeData: (state) => {
+            state.promocodeError = false;
+            state.promocode = null;
         }
     },
     extraReducers: (builder) => {
@@ -103,7 +107,7 @@ const orderCreateSlice = createSlice({
     }
 })
 
-export const { setFormData, setPromocodeError, setPromocode, clearOrderData } = orderCreateSlice.actions;
+export const { setFormData, setPromocodeError, setPromocode, clearOrderData, clearPromocodeData } = orderCreateSlice.actions;
 
 export { fetchOrderCreate, fetchPromocodeCheck }
 

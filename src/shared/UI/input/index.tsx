@@ -1,8 +1,8 @@
-import {InputAdornment, TextField, TextFieldProps} from "@mui/material";
+import {InputAdornment, SxProps, TextField} from "@mui/material";
 import Colors from "../../../app/utils/Colors";
 import {ValidationRule} from "react-hook-form";
 import InputMask from "react-input-mask";
-import React from "react";
+import React, {PropsWithChildren} from "react";
 
 interface IProps {
     variant?: 'outlined' | 'filled' | 'standard',
@@ -47,7 +47,7 @@ const Input = ({
                    maskChar = '',
                    placeholder,
                    onChangeEvent,
-                   value = '',
+                   value,
                    disabled = false
                }: IProps) => {
     const renderEndAdornment = () => (
@@ -56,57 +56,83 @@ const Input = ({
         </InputAdornment>
     )
 
-    const renderInput = (props?: TextFieldProps) => (
+    const stylesInput: SxProps = {
+        width: '100%',
+        '& input': {
+            color: Colors.$rootText
+        },
+        '& > .MuiInput-underline::before': {
+            borderColor: Colors.$rootText,
+            borderWidth: '2px',
+        },
+        '& > .MuiInput-underline:hover::before': {
+            borderColor: Colors.$rootText + ' !important',
+        },
+        '& > .MuiInput-underline::after': {
+            borderColor: Colors.$rootTextActive,
+        },
+
+        '& > .MuiInput-underline.Mui-error::before': {
+            borderColor: Colors.$mainColor
+        },
+
+        '& >.Mui-error': {
+            background: Colors.$rootErrorBackground
+        },
+
+        '& > label': {
+            color: Colors.$infoColor
+        },
+        '& > label.Mui-focused': {
+            color: Colors.$rootText,
+
+            '& ~ div > input': {
+                background: 'none'
+            }
+        },
+        '& input.Mui-disabled': {
+            WebkitTextFillColor: Colors.$infoColor,
+            color: Colors.$infoColor,
+
+        },
+        '& div.Mui-disabled': {
+            '&::before': {
+                borderColor: Colors.$infoColor
+            }
+        },
+        '& svg': {
+            fill: Colors.$rootText,
+        }
+    }
+
+    const renderInput = () => (
         <TextField
-            {...props}
-            sx={{
-                width: '100%',
-                '& input': {
-                    color: Colors.$rootText
-                },
-                '& > .MuiInput-underline::before': {
-                    borderColor: Colors.$rootText,
-                    borderWidth: '2px',
-                },
-                '& > .MuiInput-underline:hover::before': {
-                    borderColor: Colors.$rootText + ' !important',
-                },
-                '& > .MuiInput-underline::after': {
-                    borderColor: Colors.$rootTextActive,
-                },
-
-                '& > .MuiInput-underline.Mui-error::before': {
-                    borderColor: Colors.$mainColor
-                },
-
-                '& >.Mui-error': {
-                    background: Colors.$rootErrorBackground
-                },
-
-                '& > label': {
-                    color: Colors.$infoColor
-                },
-                '& > label.Mui-focused': {
-                    color: Colors.$rootText,
-
-                    '& ~ div > input': {
-                        background: 'none'
-                    }
-                },
-                '& input.Mui-disabled': {
-                    WebkitTextFillColor: Colors.$infoColor,
-                    color: Colors.$infoColor,
-
-                },
-                '& div.Mui-disabled': {
-                    '&::before': {
-                        borderColor: Colors.$infoColor
-                    }
-                },
-                '& svg': {
-                    fill: Colors.$rootText,
-                }
+            sx={stylesInput}
+            value={value}
+            label={label}
+            error={error}
+            onChange={event => !!onChangeEvent && onChangeEvent(event.target.value)}
+            inputProps={{
+                name,
+                type,
+                autoComplete,
+                placeholder,
+                ...(!!register && register(name, {required, pattern, minLength, maxLength, validate}))
             }}
+            InputProps={{
+                endAdornment: renderEndAdornment()
+            }}
+            variant={variant}
+        />
+    )
+
+    const renderMaskInput = () => (
+        <InputMask
+            value={value}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => !!onChangeEvent && onChangeEvent(event.target.value)}
+            mask={mask} maskChar={maskChar} disabled={disabled}>{(inputProps: PropsWithChildren) => <TextField
+            {...inputProps}
+            sx={stylesInput}
             label={label}
             error={error}
             inputProps={{
@@ -119,19 +145,11 @@ const Input = ({
             InputProps={{
                 endAdornment: renderEndAdornment()
             }}
-            variant={variant}/>
+            variant={variant}
+        />}</InputMask>
     )
 
-    return !inputMask ? renderInput(
-        {
-            onChange: (event) => !!onChangeEvent && onChangeEvent(event.target.value),
-            ...(!!value ? {value} : null),
-            disabled
-        }
-    ) : <InputMask
-        value={!!value ? value : undefined}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => !!onChangeEvent && onChangeEvent(event.target.value)}
-        mask={mask} maskChar={maskChar} disabled={disabled}>{() => renderInput()}</InputMask>
+    return !inputMask ? renderInput() : renderMaskInput();
 };
 
 export default Input;

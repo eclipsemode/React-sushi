@@ -16,7 +16,7 @@ import {setMaterialDialog} from "../../materialDialog/api";
 import {MaterialDialogTypes} from "../../materialDialog/model";
 import Input from "../../../shared/UI/input";
 import {Box, CircularProgress, Stack} from "@mui/material";
-import {fetchPromocodeCheck, setPromocode, setPromocodeError} from "../api";
+import {clearPromocodeData, fetchPromocodeCheck, setPromocodeError} from "../api";
 import InfoIcon from '@mui/icons-material/Info';
 import Divider from '@mui/material/Divider';
 
@@ -103,10 +103,11 @@ const CartOrder: React.FC = () => {
                 </div>
                 <div className={styles.root__type_buttons}>
                     <Box sx={{maxWidth: '300px'}}><Input error={promocodeError}
-                                                         value={''}
+                                                         value={promoCodeValue || ''}
                                                          disabled={promoCodeAccepted}
                                                          endAdornment={promocodeCreateLoadProcess ? <CircularProgress size={20} /> : <Box width={20}></Box>}
                                                          onChangeEvent={(value) => {
+                                                             console.log(value)
                                                              if (!!promocodeError) {
                                                                  dispatch(setPromocodeError(false));
                                                              }
@@ -117,9 +118,9 @@ const CartOrder: React.FC = () => {
                             ? (
                                 <SimpleButton type="button" color={Colors.$mainColor}
                                               clickEvent={() => {
+                                                  dispatch(clearPromocodeData());
                                                   setPromoCodeAccepted(false);
                                                   setPromoCodeValue('');
-                                                  dispatch(setPromocode(null));
                                               }
                                               }>
                                     Отменить

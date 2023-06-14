@@ -68,19 +68,21 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Подъезд</label>
-            <Input register={register} name='entrance' error={!!errors.entrance} maxLength={2} />
+            <Input register={register} name='entrance' type='number' error={!!errors.entrance} maxLength={2} />
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Этаж</label>
-            <Input register={register} name='floor' error={!!errors.floor} maxLength={2} />
+            <Input register={register} name='floor' type='number' error={!!errors.floor} maxLength={2} />
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Квартира</label>
-            <Input register={register} name='room' error={!!errors.room} maxLength={4} />
+            <Input register={register} name='room' type='number' error={!!errors.room} maxLength={4} />
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label className={styles.root__required}>Телефон</label>
-            <Input register={register} name='tel' error={!!errors.tel} required={true} pattern={/^(\+7|7|8)?[\s-]?\(?[89][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/gm} placeholder='+7 (***) *** ** **' mask='+7 (999) 999-99-99' maskChar='' />
+            <Input inputMask={true} name='tel' required={true} register={register} error={!!errors.tel}
+                   pattern={/^(\+7|7|8)?[\s-]?\(?[89][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/gm}
+                   mask='+7 (999) 999-99-99' maskChar='' placeholder='+7 (***) *** ** **'/>
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label>E-MAIL</label>
