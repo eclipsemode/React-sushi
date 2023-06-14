@@ -1,12 +1,14 @@
-import React, { FormEvent } from "react";
-import { fetchPatchUserInfo, fetchUserInfo, IRegistrationProps } from "entities/user";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import styles from "./Settings.module.css";
+import React, {FormEvent} from "react";
+import {fetchUserInfo, IRegistrationProps} from "entities/user";
+import {useAppDispatch, useAppSelector} from "app/hooks";
+import styles from "./Settings.module.scss";
 import FormInput from "shared/UI/FormInput";
-import { Modal } from "antd";
-import formatToDate from "shared/utils/formatToDate";
-import { IUserDataFetched } from "../Profile/Profile";
+import {IUserDataFetched} from "../Profile/Profile";
 import formatDateToString from "../../../shared/utils/formatDateToString";
+import {enqueueSnackbar} from 'notistack';
+import {setMaterialDialog} from "../../../features/materialDialog/api";
+import {MaterialDialogTypes} from "../../../features/materialDialog/model";
+import formatToDate from "../../../shared/utils/formatToDate";
 
 const Settings: React.FC = () => {
   const [userInfo, setUserInfo] = React.useState<IUserDataFetched>();
@@ -39,32 +41,22 @@ const Settings: React.FC = () => {
       setFloor(userInfo.floor);
       setRoom(userInfo.room);
     }
+    enqueueSnackbar('Данные успешно сброшены!', { variant: 'success' });
   };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    confirm(event);
+    confirm();
   }
 
-  const confirm = (event: FormEvent<HTMLFormElement>) => {
-
-    Modal.confirm({
-      title: 'Подтвердите изменение данных.',
-      onCancel: () => event.preventDefault(),
-      onOk: async () => {
-        await dispatch(fetchPatchUserInfo({email, name, surname, dateOfBirth: formatToDate(dateOfBirth), tel, street, house, floor, entrance, room}));
-        success();
-      }
-    })
+  const confirm = () => {
+    const formattedDate: Date = formatToDate(dateOfBirth);
+    dispatch(setMaterialDialog({
+      opened: true,
+      dialogType: MaterialDialogTypes.PROFILE_SETTINGS_SEND,
+      data: {email, name, surname, dateOfBirth: formattedDate, tel, street, house, floor, entrance, room}
+    }))
   }
-
-  const success = () => {
-    Modal.success({
-      title: "Ваш профиль изменен.",
-      onOk: () => window.location.reload()
-    });
-  };
 
   React.useEffect(() => {
     if (user && isAuth) {

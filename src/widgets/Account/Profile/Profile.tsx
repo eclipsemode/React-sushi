@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import {fetchUserInfo, IUserInfo, selectUser} from "entities/user";
-import styles from './index.module.css'
+import styles from './index.module.scss'
 import Field from "shared/UI/Field";
 import formatDateToString from "shared/utils/formatDateToString";
 import {Skeleton} from "@mui/material";

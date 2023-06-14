@@ -2,7 +2,7 @@ import React from "react";
 import { fetchOrdersByUserId, IOrdersFetched, IOrdersReducer } from "../api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import OrdersList from "../../OrdersList";
-import styles from "./index.module.css";
+import styles from "./index.module.scss";
 import { Empty, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
