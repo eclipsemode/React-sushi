@@ -107,7 +107,6 @@ const CartOrder: React.FC = () => {
                                                          disabled={promoCodeAccepted}
                                                          endAdornment={promocodeCreateLoadProcess ? <CircularProgress size={20} /> : <Box width={20}></Box>}
                                                          onChangeEvent={(value) => {
-                                                             console.log(value)
                                                              if (!!promocodeError) {
                                                                  dispatch(setPromocodeError(false));
                                                              }

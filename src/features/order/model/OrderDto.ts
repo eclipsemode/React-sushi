@@ -35,7 +35,7 @@ class OrderDto {
       utensils: formData.utensils,
       payment: formData.payment,
       commentary: formData.commentary,
-      promocode: orderCreateReducer.promocode?.code
+      promocode: orderCreateReducer.promocode?.code ?? null
     };
   }
 }

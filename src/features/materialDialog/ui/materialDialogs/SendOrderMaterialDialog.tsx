@@ -3,10 +3,10 @@ import {selectMaterialDialog, setMaterialDialog} from "../../api";
 import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import SimpleButton from "shared/UI/SimpleButton";
 import Colors from "app/utils/Colors";
-import {Modal} from "antd";
 import {removeAll} from "entities/cart";
-import {fetchOrderCreate, setFormData} from "features/order/api";
+import {clearOrderData, fetchOrderCreate} from "features/order/api";
 import {MaterialDialogTypes} from "../../model";
+import {enqueueSnackbar} from "notistack";
 
 const SendOrderMaterialDialog = () => {
     const dispatch = useAppDispatch();
@@ -14,29 +14,31 @@ const SendOrderMaterialDialog = () => {
     const { dialogType } = useAppSelector(selectMaterialDialog)
 
     const success = () => {
-        Modal.success({
-            title: "Ваш заказ отправлен.",
-            content: "Оператор перезвонит для подтверждения в течении 5 минут."
-        });
         dispatch(removeAll());
-        dispatch(setFormData(null));
+        dispatch(clearOrderData());
     };
 
-    const callback = () => {
-        if (dialogType === MaterialDialogTypes.SEND_ORDER_DELIVERY) {
-            dispatch(fetchOrderCreate({...formData, type: 'delivery'}));
-        } else {
-            dispatch(fetchOrderCreate({...formData, type: 'pickup'}));
+    const callback = async () => {
+        try {
+            if (dialogType === MaterialDialogTypes.SEND_ORDER_DELIVERY) {
+                await dispatch(fetchOrderCreate({...formData, type: 'delivery'})).unwrap();
+            } else {
+                await dispatch(fetchOrderCreate({...formData, type: 'pickup'})).unwrap();
+            }
+            enqueueSnackbar('Заказ отправлен, оператор перезвонит для подтверждения в течении 5 минут!', { variant: 'success' });
+        } catch (e) {
+            console.error(e);
+            enqueueSnackbar('Ошибка создания заказа, попробуйте позднее', { variant: 'error' });
         }
         success();
     }
 
-    const handleAgree = () => {
+    const handleAgree = async () => {
         dispatch(setMaterialDialog({
             opened: false,
             dialogType: null
         }));
-        callback();
+        await callback();
     }
 
     const handleDisagree = () => {

@@ -13,14 +13,15 @@ export interface IPromocode {
     limit: 'infinite' | number
 }
 
+
 const fetchOrderCreate = createAsyncThunk<void, Partial<IOrder>, { rejectValue: any, state: { userReducer: IUserState, cartReducer: ICartState, orderCreateReducer: IOrderCreate } }>(
   'order/fetchOrderCreate',
-  async (formData, { rejectWithValue, getState, dispatch }) => {
+  async (formData, { rejectWithValue, getState }) => {
     try {
       const { userReducer, cartReducer, orderCreateReducer } = getState();
-      const orderDto = new OrderDto(cartReducer, userReducer, formData, orderCreateReducer)
-      await $api.post('api/order/create', orderDto.order);
-      dispatch(clearOrderData());
+      const orderDto = new OrderDto(cartReducer, userReducer, formData, orderCreateReducer);
+      const response = await $api.post('api/order/create', orderDto.order);
+      return response.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
@@ -52,7 +53,8 @@ export interface IOrderCreate {
     promocodeCreateLoadProcess: boolean
     formData: IFormData | null,
     promocode: IPromocode | null,
-    promocodeError: boolean
+    promocodeError: boolean,
+    orderError: boolean,
 }
 
 const initialState: IOrderCreate = {
@@ -60,7 +62,8 @@ const initialState: IOrderCreate = {
     promocodeCreateLoadProcess: false,
     formData: null,
     promocode: null,
-    promocodeError: false
+    promocodeError: false,
+    orderError: false
 }
 
 const orderCreateSlice = createSlice({
@@ -79,9 +82,11 @@ const orderCreateSlice = createSlice({
             state.promocode = action.payload
         },
         clearOrderData: (state) => {
+            state.orderCreateLoadProcess = true;
             state.formData = null;
             state.promocode = null;
             state.promocodeError = false;
+            state.orderCreateLoadProcess = false;
         },
         clearPromocodeData: (state) => {
             state.promocodeError = false;
@@ -103,6 +108,21 @@ const orderCreateSlice = createSlice({
                 state.promocodeError = true
                 state.promocode = null
                 state.promocodeCreateLoadProcess = false
+            })
+
+        builder
+            .addCase(fetchOrderCreate.pending, (state) => {
+                state.orderError = false;
+                state.orderCreateLoadProcess = true;
+
+            })
+            .addCase(fetchOrderCreate.fulfilled, (state) => {
+                state.orderError = false;
+                state.orderCreateLoadProcess = false;
+            })
+            .addCase(fetchOrderCreate.rejected, (state) => {
+                state.orderError = true;
+                state.orderCreateLoadProcess = false;
             })
     }
 })
