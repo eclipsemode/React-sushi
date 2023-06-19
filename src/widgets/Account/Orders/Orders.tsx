@@ -3,15 +3,14 @@ import { fetchOrdersByUserId, IOrdersFetched, IOrdersReducer } from "../api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import OrdersList from "../../OrdersList";
 import styles from "./index.module.scss";
-import { Empty, Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import { Empty } from "antd";
+import {Skeleton} from "@mui/material";
 
 const Orders: React.FC = () => {
   const dispatch = useAppDispatch();
   const { status } = useAppSelector((state): IOrdersReducer => state.ordersReducer)
   const [orders, setOrders] = React.useState<IOrdersFetched[]>();
 
-  const antIcon = <LoadingOutlined style={{ fontSize: 44 }} spin />;
 
   React.useEffect(() => {
     (async function fn() {
@@ -21,7 +20,7 @@ const Orders: React.FC = () => {
   }, [dispatch]);
 
   return (
-    status === "PENDING" ? <Spin indicator={antIcon} style={{flex: "1 2", marginTop: "5em"}} />
+    status === "PENDING" ? <Skeleton animation='wave' height={500} sx={{transform: 'none', width: '100%'}} />
       : status === "FULFILLED" && orders ? <OrdersList orders={orders} />
       :
         (
