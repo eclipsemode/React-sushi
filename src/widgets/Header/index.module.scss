@@ -132,6 +132,12 @@
   padding-top: 10px;
 }
 
+.mobileButton {
+  &:focus {
+    color: $root-text !important;
+  }
+}
+
 .mobileButtonActive {
   color: $root-textActive !important;
 }

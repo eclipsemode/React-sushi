@@ -3,7 +3,13 @@ import styles from "./Account.module.scss";
 import {Link, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "app/hooks";
 import {Orders, Profile, Settings} from "./index";
-import {Backdrop, Breadcrumbs, CircularProgress, Skeleton, Typography} from "@mui/material";
+import {
+    Backdrop,
+    Breadcrumbs,
+    CircularProgress,
+    Skeleton,
+    Typography
+} from "@mui/material";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import RouterPath from "app/utils/menuPath";
 import PersonIcon from '@mui/icons-material/Person';
@@ -13,16 +19,23 @@ import {selectAuth} from "../../processes/services";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {setMaterialDialog} from "features/materialDialog/api";
 import {MaterialDialogTypes} from "features/materialDialog/model";
+import {DeviceType, selectAdaptiveServiceSlice} from "../../processes/services/adaptiveService/adaptiveService";
 
 type SelectedType = "profile" | "orders" | "settings";
 
 const Account: React.FC = () => {
     const [openBackdrop, setOpenBackdrop] = React.useState(true);
     const {isAuth} = useAppSelector(state => state.userReducer);
+    const { page } = useAppSelector(state => state.ordersReducer);
+    const { deviceType } = useAppSelector(selectAdaptiveServiceSlice);
     const {loading} = useAppSelector(selectAuth);
-    const [selected, setSelected] = React.useState<SelectedType>("profile");
+    const [selected, setSelected] = React.useState<SelectedType>(page);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+    React.useEffect(() => {
+        setSelected(page);
+    }, [page])
 
     React.useEffect(() => {
         if (!loading && !isAuth) {
@@ -49,6 +62,27 @@ const Account: React.FC = () => {
         setOpenBackdrop(false);
     };
 
+    const renderAsideMenu = () => (
+        <aside>
+            <ul>
+                <li className={selected === "profile" ? styles.root__selected : null}
+                    onClick={() => setSelected("profile")}>
+                    <PersonIcon/><span>Мой профиль</span></li>
+                <li className={selected === "orders" ? styles.root__selected : null}
+                    onClick={() => setSelected("orders")}>
+                    <HistoryIcon/><span>История заказов</span></li>
+                <li className={selected === "settings" ? styles.root__selected : null}
+                    onClick={() => setSelected("settings")}>
+                    <SettingsIcon/><span>Редактировать профиль</span></li>
+                <li onClick={() => dispatch(setMaterialDialog({
+                    opened: true,
+                    dialogType: MaterialDialogTypes.LOGOUT
+                }))}>
+                    <ExitToAppIcon/><span>Выйти</span></li>
+            </ul>
+        </aside>
+    )
+
     return (
         <div className={styles.root}>
             <div className={styles.root__head}>
@@ -69,24 +103,7 @@ const Account: React.FC = () => {
                     </Backdrop> :
                     (
                         <div className={styles.root__body}>
-                            <aside>
-                                <ul>
-                                    <li className={selected === "profile" ? styles.root__selected : null}
-                                        onClick={() => setSelected("profile")}>
-                                        <PersonIcon/><span>Мой профиль</span></li>
-                                    <li className={selected === "orders" ? styles.root__selected : null}
-                                        onClick={() => setSelected("orders")}>
-                                        <HistoryIcon/><span>История заказов</span></li>
-                                    <li className={selected === "settings" ? styles.root__selected : null}
-                                        onClick={() => setSelected("settings")}>
-                                        <SettingsIcon/><span>Редактировать профиль</span></li>
-                                    <li onClick={() => dispatch(setMaterialDialog({
-                                        opened: true,
-                                        dialogType: MaterialDialogTypes.LOGOUT
-                                    }))}>
-                                        <ExitToAppIcon/><span>Выйти</span></li>
-                                </ul>
-                            </aside>
+                            {deviceType === DeviceType.DESKTOP && renderAsideMenu()}
                             {selected === "profile" && <Profile/>}
                             {selected === "orders" && <Orders/>}
                             {selected === "settings" && <Settings/>}

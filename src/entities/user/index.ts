@@ -18,7 +18,7 @@ export interface IRegistrationProps {
 
 export interface IUserInfo {
     activationLink: string,
-    dateOfBirth: Date,
+    dateOfBirth: Date | string | null,
     id: number,
     email: string,
     isActivated: boolean,
@@ -27,10 +27,10 @@ export interface IUserInfo {
     surname: string,
     tel: string,
     street: string,
-    house: string,
-    floor: string,
-    entrance: string,
-    room: string
+    house: number,
+    floor: number,
+    entrance: number,
+    room: number
 }
 
 export interface IUser {
@@ -43,6 +43,7 @@ export interface IUser {
 export interface IUserState {
     isAuth: boolean,
     user: IUser | null,
+    userInfo: Partial<IUserInfo> | null
     error: string | undefined | null,
     status: 'fulfilled' | 'pending' | 'rejected'
 }
@@ -53,20 +54,32 @@ const fetchUserInfo = createAsyncThunk<IUserInfo, void, { rejectValue: string }>
         try {
             const response = await $api.get('api/user/info');
             return response.data;
-        } catch (e: any) {
-            return rejectWithValue(e.response?.data?.message)
+        } catch (error: any) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message);
+            } else {
+                return rejectWithValue(error.message);
+            }
         }
     }
 )
 
 const fetchPatchUserInfo = createAsyncThunk<any, Omit<IRegistrationProps, "password">, { state: RootState }>(
     "user/fetchPatchUserInfo",
-    async ({email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room}, {getState}) => {
-        const {userReducer} = await getState();
-        if ("user" in userReducer && "id" in userReducer.user) {
-            return await $api.patch("api/user/patch", {
-                id: userReducer.user?.id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room
-            });
+    async ({email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room}, {getState, rejectWithValue}) => {
+        try {
+            const {userReducer} = await getState();
+            if (userReducer.isAuth) {
+                await $api.patch("api/user/patch", {
+                    id: userReducer.user?.id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room
+                });
+            }
+        } catch (error: any) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message);
+            } else {
+                return rejectWithValue(error.message);
+            }
         }
     }
 );
@@ -78,6 +91,7 @@ function isError(action: AnyAction) {
 const initialState: IUserState = {
     isAuth: false,
     user: null,
+    userInfo: null,
     error: null,
     status: 'pending'
 };
@@ -96,9 +110,22 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchUserInfo.pending, (state: IUserState) => {
-                state.status = 'pending'
+                state.error = null;
+                state.status = 'pending';
             })
-            .addCase(fetchUserInfo.fulfilled, (state: IUserState) => {
+            .addCase(fetchUserInfo.fulfilled, (state: IUserState, action: PayloadAction<IUserInfo>) => {
+                state.userInfo = {
+                    dateOfBirth: action.payload.dateOfBirth,
+                    email: action.payload.email,
+                    name: action.payload.name,
+                    surname: action.payload.surname,
+                    tel: action.payload.tel,
+                    street: action.payload.street,
+                    house: action.payload.house,
+                    floor: action.payload.floor ,
+                    entrance: action.payload.entrance,
+                    room: action.payload.room
+                }
                 state.status = 'fulfilled'
             })
             .addMatcher(isError, (state, action: PayloadAction<string>) => {

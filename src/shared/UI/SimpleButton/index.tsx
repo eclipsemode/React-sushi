@@ -8,10 +8,11 @@ interface ISimpleButton {
   clickEvent?: () => void;
   type?: React.HTMLInputTypeAttribute;
   color?: string,
-  variant?: "text" | "outlined" | "contained"
+  variant?: "text" | "outlined" | "contained",
+  disabled?: boolean
 }
 
-const SimpleButton: React.FC<ISimpleButton> = ({children, clickEvent, type, variant = 'outlined', color}) => {
+const SimpleButton: React.FC<ISimpleButton> = ({children, clickEvent, type , variant = 'outlined', color, disabled = false}) => {
 
   const buttonStyle: SxProps = {
     background: variant === 'contained' ? color ?? Colors.$rootTextActive : 'none',
@@ -45,10 +46,16 @@ const SimpleButton: React.FC<ISimpleButton> = ({children, clickEvent, type, vari
       background: color ? color : Colors.$rootTextActive,
       border: `2px solid ${color ? color : Colors.$rootTextActive}`,
       filter: variant === 'contained' ? 'brightness(1.1)' : "none"
+    },
+    '&:disabled': {
+      background: color ? color : Colors.$rootTextActive,
+      color: Colors.$rootText,
+      opacity:' 0.6',
     }
   };
   return (
-    <Button type={type === 'submit' ? 'submit' : 'button'} variant={variant}
+    <Button type={type ===  'submit' ? 'submit' : type === 'reset' ? 'reset' : 'button'} variant={variant}
+            disabled={disabled}
             children={children}
             sx={buttonStyle}
             onClick={clickEvent} defaultValue={children} />

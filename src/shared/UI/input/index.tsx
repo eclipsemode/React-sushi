@@ -25,7 +25,8 @@ interface IProps {
     placeholder?: string
     onChangeEvent?: (value: string) => void,
     value?: string | number,
-    disabled?: boolean
+    disabled?: boolean,
+    defaultValue?: string | number | Date
 }
 
 const Input = ({
@@ -48,7 +49,8 @@ const Input = ({
                    placeholder,
                    onChangeEvent,
                    value,
-                   disabled = false
+                   disabled = false,
+                    defaultValue
                }: IProps) => {
     const renderEndAdornment = () => (
         <InputAdornment sx={{cursor: 'pointer'}} position="end">
@@ -108,6 +110,7 @@ const Input = ({
     const renderInput = () => (
         <TextField
             sx={stylesInput}
+            defaultValue={defaultValue}
             value={value}
             label={label}
             error={error}
@@ -129,6 +132,7 @@ const Input = ({
     const renderMaskInput = () => (
         <InputMask
             value={value}
+            defaultValue={defaultValue}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => !!onChangeEvent && onChangeEvent(event.target.value)}
             mask={mask} maskChar={maskChar} disabled={disabled}>{(inputProps: PropsWithChildren) => <TextField
             {...inputProps}

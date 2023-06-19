@@ -3,16 +3,16 @@ import { $api } from "processes/api";
 
 interface IRegistrationProps {
   email: string,
-  dateOfBirth: Date,
+  dateOfBirth: Date | null,
   password: string,
   name: string,
-  surname: string,
+  surname: string | null,
   tel: string,
-  street: string,
-  house: string | number,
-  floor: string | number,
-  entrance: string | number,
-  room: string | number
+  street: string | null,
+  house: number | null,
+  floor: number | null,
+  entrance: number | null,
+  room: number | null
 }
 const fetchUserRegistration = createAsyncThunk<void, IRegistrationProps>(
   "registration/fetchUserRegistration",

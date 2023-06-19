@@ -9,7 +9,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { fetchUserRegistration } from "features/registration/api";
 import { ValidationError } from "shared/error";
 import formatToDate from "../../../shared/utils/formatToDate";
-import Input from "../../../shared/UI/input";
+import Input from "shared/UI/input";
 import {Stack} from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -49,17 +49,17 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
   const onSubmit: SubmitHandler<FormInputs> = async data => {
     const response = await dispatch(fetchUserRegistration({
       name: data.name,
-      surname: data.surname,
+      surname: data.surname ?? null,
       // @ts-ignore
       dateOfBirth: formatToDate(data.dateOfBirth),
       email: data.email,
       password: data.password,
       tel: data.tel,
-      street: data.street,
-      house: data.house,
-      floor: +data.floor ?? null,
-      entrance: +data.entrance ?? null,
-      room: +data.room ?? null
+      street: data.street ?? null,
+      house: data.house ?? null,
+      floor: data.floor ?? null,
+      entrance: data.entrance ?? null,
+      room: data.room ?? null
     }));
     if (response.meta.requestStatus === "rejected") {
       return new ValidationError(response.payload as any, setError);

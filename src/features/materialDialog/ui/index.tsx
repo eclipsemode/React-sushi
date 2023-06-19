@@ -10,6 +10,7 @@ import SendOrderMaterialDialog from "./materialDialogs/SendOrderMaterialDialog";
 import PromocodeSuccess from "./materialDialogs/PromocodeSuccess";
 import PromocodeInvalid from "./materialDialogs/PromocodeInvalid";
 import ProfileSendSettings from "./materialDialogs/ProfileSendSettings";
+import ProfileResetSettings from "./materialDialogs/account/ProfileResetSettings";
 
 const MaterialDialog = () => {
     const { opened, dialogType } = useAppSelector(selectMaterialDialog);
@@ -20,7 +21,8 @@ const MaterialDialog = () => {
     const handleClose = () => {
         dispatch(setMaterialDialog({
             opened: false,
-            dialogType: null
+            dialogType: null,
+            data: null
         }))
     };
 
@@ -33,6 +35,7 @@ const MaterialDialog = () => {
             case MaterialDialogTypes.PROMOCODE_INVALID: return <PromocodeInvalid />
             case MaterialDialogTypes.PROMOCODE_SUCCESS: return <PromocodeSuccess />
             case MaterialDialogTypes.PROFILE_SETTINGS_SEND: return <ProfileSendSettings />
+            case MaterialDialogTypes.PROFILE_SETTINGS_RESET: return <ProfileResetSettings />
 
             default: return <></>
         }

@@ -8,4 +8,22 @@
 .root__additional {
   display: flex;
   column-gap: 1em;
+
+  & > span {
+    flex: 1;
+  }
+}
+
+.skeleton {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+
+  & span {
+    height: 54.5px;
+    transform-origin: 0 0;
+    transform: none;
+    flex: 1;
+  }
 }

@@ -1,122 +1,147 @@
-import React, {FormEvent} from "react";
-import {fetchUserInfo, IRegistrationProps} from "entities/user";
+import React from "react";
+import {IUserInfo} from "entities/user";
 import {useAppDispatch, useAppSelector} from "app/hooks";
 import styles from "./Settings.module.scss";
-import FormInput from "shared/UI/FormInput";
-import {IUserDataFetched} from "../Profile/Profile";
-import formatDateToString from "../../../shared/utils/formatDateToString";
-import {enqueueSnackbar} from 'notistack';
-import {setMaterialDialog} from "../../../features/materialDialog/api";
+import {clearMaterialDialog, selectMaterialDialog, setMaterialDialog} from "../../../features/materialDialog/api";
 import {MaterialDialogTypes} from "../../../features/materialDialog/model";
-import formatToDate from "../../../shared/utils/formatToDate";
+import {SubmitHandler, useForm} from "react-hook-form";
+import Input from "shared/UI/input";
+import {Box, Skeleton, Stack, Tooltip} from "@mui/material";
+import SimpleButton from "../../../shared/UI/SimpleButton";
+import Colors from "../../../app/utils/Colors";
 
 const Settings: React.FC = () => {
-  const [userInfo, setUserInfo] = React.useState<IUserDataFetched>();
-  const dispatch = useAppDispatch();
-  const { user, isAuth } = useAppSelector(state => state.userReducer);
-  const [name, setName] = React.useState<string>("");
-  const [surname, setSurname] = React.useState<string>("");
-  const [email, setEmail] = React.useState<string>("");
-  const [dateOfBirth, setDateOfBirth] = React.useState<string>("");
-  const [tel, setTel] = React.useState<string>("");
-  const [street, setStreet] = React.useState<string>("");
-  const [house, setHouse] = React.useState<number | string>(0);
-  const [entrance, setEntrance] = React.useState<number | string>(0);
-  const [floor, setFloor] = React.useState<number | string>(0);
-  const [room, setRoom] = React.useState<number | string>(0);
+    const dispatch = useAppDispatch();
+    const {userInfo} = useAppSelector(state => state.userReducer);
+    const {applyCallback} = useAppSelector(selectMaterialDialog);
+    const {
+        register,
+        handleSubmit,
+        reset,
+        getValues,
+        setValue,
+        watch,
+        formState: {errors}
+    } = useForm<Partial<IUserInfo>>();
 
-  const handleResetButton = () => {
-    window.scrollTo({
-      top: 0
-    });
-    if (userInfo) {
-      setName(userInfo.name);
-      setSurname(userInfo.surname);
-      setEmail(userInfo.email);
-      setDateOfBirth(userInfo.dateOfBirth);
-      setTel(userInfo.tel);
-      setStreet(userInfo.street);
-      setHouse(userInfo.house);
-      setEntrance(userInfo.entrance);
-      setFloor(userInfo.floor);
-      setRoom(userInfo.room);
+    React.useEffect(() => {
+        reset({
+            ...userInfo,
+            dateOfBirth: String(userInfo?.dateOfBirth)?.slice(0, 10)
+        })
+    }, [reset, userInfo])
+
+    React.useEffect(() => {
+        if (!!applyCallback) {
+            reset();
+            dispatch(clearMaterialDialog());
+        }
+    }, [applyCallback, dispatch, reset])
+
+    const validateSubmit = React.useCallback((): boolean => {
+        (function deleteLastDigitFromTel() {
+            if ((watch('tel')?.length || 0) > 18) {
+                setValue('tel', watch('tel')?.slice(0, 18))
+            }
+        })()
+
+        return ((watch('surname')?.length || 0) > 0 ? watch('surname') : null) === userInfo?.surname
+            && watch('name') === userInfo?.name
+            && String(userInfo?.dateOfBirth)?.slice(0, 10) === (String(watch('dateOfBirth'))?.length > 0 ? watch('dateOfBirth') : null)
+            && userInfo?.email === ((watch('email')?.length || 0) > 0 ? watch('email') : null)
+            && userInfo?.tel === ((watch('tel')?.length || 0) > 0 ? watch('tel') : null)
+            && userInfo?.street === ((watch('street')?.length || 0) > 0 ? watch('street') : null)
+            && userInfo?.house === (String(watch('house'))?.length > 0 ? watch('house') : null)
+            && userInfo?.entrance === (String(watch('entrance'))?.length > 0 ? watch('entrance') : null)
+            && userInfo?.floor === (String(watch('floor'))?.length > 0 ? watch('floor') : null)
+            && userInfo?.room === (String(watch('room'))?.length > 0 ? watch('room') : null)
+    }, [userInfo, watch, setValue])
+
+    const handleResetButton = (event: React.FormEvent) => {
+        event.preventDefault();
+        dispatch(setMaterialDialog({
+            opened: true,
+            dialogType: MaterialDialogTypes.PROFILE_SETTINGS_RESET
+        }))
+    };
+
+    const onSubmit: SubmitHandler<Partial<IUserInfo>> = ({
+                                                             email,
+                                                             name,
+                                                             surname,
+                                                             dateOfBirth,
+                                                             tel,
+                                                             street,
+                                                             house,
+                                                             floor,
+                                                             entrance,
+                                                             room
+                                                         }) => {
+        dispatch(setMaterialDialog({
+            opened: true,
+            dialogType: MaterialDialogTypes.PROFILE_SETTINGS_SEND,
+            data: {email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room}
+        }))
     }
-    enqueueSnackbar('Данные успешно сброшены!', { variant: 'success' });
-  };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    confirm();
-  }
-
-  const confirm = () => {
-    const formattedDate: Date = formatToDate(dateOfBirth);
-    dispatch(setMaterialDialog({
-      opened: true,
-      dialogType: MaterialDialogTypes.PROFILE_SETTINGS_SEND,
-      data: {email, name, surname, dateOfBirth: formattedDate, tel, street, house, floor, entrance, room}
-    }))
-  }
-
-  React.useEffect(() => {
-    if (user && isAuth) {
-      (async function getUserInfo() {
-        const { payload }: IRegistrationProps | any = await dispatch(fetchUserInfo());
-
-        setUserInfo({
-          email: payload.email,
-          name: payload.name,
-          surname: payload.surname,
-          tel: payload.tel,
-          street: payload.street,
-          house: payload.house,
-          floor: payload.floor ,
-          entrance: payload.entrance,
-          room: payload.room,
-          dateOfBirth: formatDateToString(payload.dateOfBirth)
-        });
-        setName(payload.name);
-        setSurname(payload.surname);
-        setEmail(payload.email);
-        setDateOfBirth(formatDateToString(payload.dateOfBirth));
-        setTel(payload.tel);
-        setStreet(payload.street);
-        setHouse(payload.house);
-        setEntrance(payload.entrance);
-        setFloor(payload.floor);
-        setRoom(payload.room);
-      })();
-    }
-  }, [dispatch, user, isAuth]);
-
-  return (
-    <section className={styles.root}>
-      <form onReset={handleResetButton} onSubmit={(event) => onSubmit(event)} name='settings'>
-        <FormInput type='text' name='name' value={name} required={true} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}>Имя</FormInput>
-        <FormInput type='text' name='surname' value={surname} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setSurname(e.target.value)}>Фамилия</FormInput>
-        <FormInput type='email' name='email' value={email} required={true} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}>Email</FormInput>
-        <FormInput type='text' name='dateOfBirth' mask="99-99-9999" placeholder="xx-xx-xx" maskChar="_" value={dateOfBirth} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setDateOfBirth(e.target.value)}>Дата Рождения</FormInput>
-        <FormInput type='text' name='tel' mask="+7 (999) 999-99-99" required={true} maskChar="" placeholder="+7 (xxx) xxx-xx-xx" value={tel} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setTel(e.target.value)}>Телефон</FormInput>
-        <div className={styles.root__street}>
-          <FormInput type='text' name='street' value={street} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setStreet(e.target.value)}>Улица</FormInput>
-          <FormInput type='number' name='house' value={house} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setHouse(e.target.value)}>Дом</FormInput>
-        </div>
-        <div className={styles.root__additional}>
-          <FormInput type='number' name='entrance' value={entrance} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setEntrance(e.target.value)}>Подъезд</FormInput>
-          <FormInput type='number' name='floor' value={floor} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setFloor(e.target.value)}>Этаж</FormInput>
-          <FormInput type='number' name='room' value={room} inputEvent={(e: React.ChangeEvent<HTMLInputElement>) => setRoom(e.target.value)}>Квартира</FormInput>
-        </div>
-
-        <div className={styles.root__buttons}>
-          <input type='reset'
-                 className={styles.root__btn_reset}
-                 />
-          <input type='submit'
-                 className={styles.root__btn_submit} />
-        </div>
-      </form>
-    </section>
-  );
+    return (
+        <section className={styles.root}>
+            <form onReset={(event) => handleResetButton(event)} onSubmit={handleSubmit(onSubmit)} name='settings'
+                  className={styles.form}>
+                <Input error={!!errors.name} register={register} name='name' label='Имя' required={true} maxLength={20}
+                       validate={(value: string) => !!value.match(/^[a-zа-яё\s]+$/iu)} defaultValue={userInfo?.name}/>
+                <Input register={register} name='surname' label='Фамилия' maxLength={20}
+                       defaultValue={userInfo?.surname}/>
+                <Input error={!!errors.dateOfBirth} register={register} name='dateOfBirth' label='Дата рождения'
+                       type='date' defaultValue={String(userInfo?.dateOfBirth)?.slice(0, 10)}/>
+                <Input error={!!errors.email} register={register} name='email' label='Email' required={true}
+                       pattern={/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/}
+                       defaultValue={userInfo?.email}/>
+                <Input inputMask={true} error={!!errors.tel} register={register} name='tel' mask='+7 (999) 999-99-99'
+                       maskChar='' label='+7 (xxx) xxx-xx-xx' type='tel' required={true} minLength={18} maxLength={18}
+                       defaultValue={userInfo?.tel}/>
+                <Input register={register} name='street' label='Улица' defaultValue={userInfo?.street}/>
+                <Stack spacing={2}>
+                    <Stack direction='row' spacing={2}>
+                        <Input register={register} name='house' label='Дом' type='number'
+                               defaultValue={userInfo?.house}/>
+                        <Input register={register} name='entrance' label='Подьезд' type='number'
+                               defaultValue={userInfo?.entrance}/>
+                    </Stack>
+                    <Stack direction='row' spacing={2}>
+                        <Input register={register} name='floor' label='Этаж' type='number'
+                               defaultValue={userInfo?.floor}/>
+                        <Input register={register} name='room' label='Квартира' type='number'
+                               defaultValue={userInfo?.room}/>
+                    </Stack>
+                </Stack>
+                <Stack direction='row' className={styles.root__buttons}>
+                    {
+                        Object.keys(getValues()).length !== 0 ? <>
+                                <Tooltip title={validateSubmit() && 'Изменения отсутствуют'} arrow placement='top'>
+                                    <Box>
+                                        <SimpleButton color={Colors.$mainColor}
+                                                      disabled={validateSubmit()}
+                                                      variant='contained'
+                                                      type='reset'>Сбросить</SimpleButton>
+                                    </Box>
+                                </Tooltip>
+                                <Tooltip title={validateSubmit() && 'Изменения отсутствуют'} arrow placement='top'>
+                                    <Box>
+                                        <SimpleButton variant='contained' type='submit'
+                                                      disabled={validateSubmit()}>Изменить</SimpleButton>
+                                    </Box>
+                                </Tooltip>
+                            </>
+                            : <>
+                                <Skeleton className={styles.skeleton__button} animation='wave'/>
+                                <Skeleton className={styles.skeleton__button} animation='wave'/>
+                            </>
+                    }
+                </Stack>
+            </form>
+        </section>
+    );
 };
 
 export default Settings;

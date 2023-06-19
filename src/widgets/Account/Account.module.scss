@@ -15,26 +15,6 @@
     color: $header-color;
   }
 
-  &__link {
-    color: $link;
-    border-bottom: 2px solid transparent;
-  }
-
-  &__link:hover {
-    border-bottom-color: $link;
-  }
-
-  &__link2 {
-    color: $header-color !important;
-  }
-
-  &__loading {
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
   &__body {
     display: flex;
     column-gap: 1rem;
@@ -114,5 +94,11 @@
 
   & p {
     color: $root-textActive;
+  }
+}
+
+@media (max-width: $mediumSize) {
+  .root__body {
+    flex-direction: column;
   }
 }
