@@ -42,7 +42,7 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
 								<div className={styles.root__title}>
 										<h3>Оформление самовывоза</h3>
 										<h4>По адресу: г. Армавир, ул. Кропоткина 194</h4>
-										<SimpleButton type="button" clickEvent={props.clickEvent}>Изменить тип доставки</SimpleButton>
+										<SimpleButton type="button" clickEvent={props.clickEvent}>Изменить тип заказа</SimpleButton>
 								</div>
 								<div className={styles.root__content}>
 										<fieldset>

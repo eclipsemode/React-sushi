@@ -57,6 +57,7 @@ export const cartSlice = createSlice({
       state.totalAmount = 0;
       state.totalPrice = 0;
       state.finalPrice = 0;
+      state.orderType = null;
     },
 
     removeItemById: (state, action: PayloadAction<string>) => {

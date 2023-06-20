@@ -55,7 +55,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
       <BlockForm>
         <div className={styles.root__title}>
           <h3>Оформление доставки</h3>
-          <SimpleButton type="button" clickEvent={props.clickEvent}>Изменить тип доставки</SimpleButton>
+          <SimpleButton type="button" clickEvent={props.clickEvent}>Изменить тип заказа</SimpleButton>
         </div>
         <div className={styles.root__content}>
           <fieldset>
