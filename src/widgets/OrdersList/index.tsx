@@ -36,42 +36,47 @@ const OrdersList: React.FC<IOrdersList> = ({orders}) => {
     const renderStatus = (order: IOrdersFetched) => {
         switch (order.status) {
             case 'new':
-                return <Chip className={styles.status} label="В обработке" color="info" />
+                return <Chip className={styles.status} label="В обработке" color="info"/>
             case 'production':
-                return <Chip className={styles.status} label="В производстве" color="primary" />
+                return <Chip className={styles.status} label="В производстве" color="primary"/>
             case 'produced':
-                return <Chip className={styles.status} label="Произведен" color="secondary" />
+                return <Chip className={styles.status} label="Произведен" color="secondary"/>
             case 'delivery':
-                return <Chip className={styles.status} label="В пути" color="warning" />
+                return <Chip className={styles.status} label="В пути" color="warning"/>
             case 'completed':
-                return <Chip className={styles.status} label="Выполнен" color="success" />
+                return <Chip className={styles.status} label="Выполнен" color="success"/>
             case 'deleted':
-                return <Chip className={styles.status} label="Отменен" color="error" />
+                return <Chip className={styles.status} label="Отменен" color="error"/>
             default:
-                return <Chip className={styles.status} label="В обработке" color="info" />
+                return <Chip className={styles.status} label="В обработке" color="info"/>
         }
     }
 
     const renderOrders = () => (
         <div style={{width: '100%'}}>
             {
-                orders.map((order) => (
+                orders.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).map((order) => (
                     <Accordion sx={{background: Colors.$rootCardBackground}} expanded={expanded === String(order.id)}
                                key={order.id} onChange={handleChange(String(order.id))}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon sx={{color: Colors.$rootText}}/>}
-                            sx={{'& .MuiAccordionSummary-content': {flexDirection: deviceType === DeviceType.DESKTOP ? 'row' : 'column', rowGap: '10px'}}}
+                            sx={{
+                                '& .MuiAccordionSummary-content': {
+                                    flexDirection: deviceType === DeviceType.DESKTOP ? 'row' : 'column',
+                                    rowGap: '10px'
+                                }
+                            }}
                             aria-controls="panel1bh-content"
                             id="panel1bh-header"
                         >
                             <Stack sx={{width: deviceType === DeviceType.DESKTOP ? '50%' : '100%', flexShrink: 0}}>
                                 <Typography
-                                    sx={{color: Colors.$rootText}}><span><BorderlessTableOutlined/>Заказ: #{order.id}</span></Typography>
-                                <Typography sx={{color: Colors.$rootText}}><span><CalendarOutlined/><Moment
+                                    sx={{color: Colors.$rootText}}><span><BorderlessTableOutlined/> Заказ: #{order.id}</span></Typography>
+                                <Typography sx={{color: Colors.$rootText}}><span><CalendarOutlined/> <Moment
                                     format='DD-MM-YYYY'>{order.createdAt}</Moment> в <Moment
-                                    format='hh:mm'>{order.createdAt}</Moment></span></Typography>
+                                    format='HH:mm'>{order.createdAt}</Moment></span></Typography>
                                 <Typography
-                                    sx={{color: Colors.$rootText}}><span><EnvironmentOutlined/>{order.type === 'delivery' ? `Доставка: улица ${order.address}, кв. ${order.room}` : 'Самовывоз: г. Армавир, ул. Кропоткина 194'}</span></Typography>
+                                    sx={{color: Colors.$rootText}}><span><EnvironmentOutlined/> {order.type === 'delivery' ? `Доставка: улица ${order.address}, кв. ${order.room}` : 'Самовывоз: г. Армавир, ул. Кропоткина 194'}</span></Typography>
                             </Stack>
                             <Stack sx={{rowGap: '10px'}}>
                                 {renderStatus(order)}
@@ -91,14 +96,23 @@ const OrdersList: React.FC<IOrdersList> = ({orders}) => {
                                 (
                                     <>
                                         <DividerAnt orientation="left" className={styles.divider}>Адресс</DividerAnt>
-                                        <p className={styles.root__data}>{order.address}, подъезд {order.entrance},
-                                            этаж {order.floor}, кв. {order.room}</p>
+                                        <Typography className={styles.root__data}
+                                                    sx={{color: Colors.$rootText}}>{`${order.address} ${order.entrance ? ', подъезд ' + order.entrance : ''} ${order.floor ? ', этаж ' + order.floor : ''} ${order.room ? ', кв. ' + order.room : ''}`}</Typography>
                                     </>
                                 )
                             }
                             <DividerAnt orientation="left" className={styles.divider}>Время</DividerAnt>
-                            <Typography className={styles.root__data}
-                                        sx={{color: Colors.$rootText}}>{order.day === 'today' && 'Сегодня'} {order.time && 'в ' + order.time}</Typography>
+                            {
+                                !order.day
+                                    ? (
+                                        <Typography className={styles.root__data}
+                                                    sx={{color: Colors.$rootText}}>Как можно скорее</Typography>
+                                    )
+                                    : (
+                                        <Typography className={styles.root__data}
+                                                    sx={{color: Colors.$rootText}}>{order.day === 'today' && 'Сегодня'} {order.time && 'в ' + order.time}</Typography>
+                                    )
+                            }
 
                             <DividerAnt orientation="left" className={styles.divider}>Способ оплаты</DividerAnt>
                             <Typography className={styles.root__data}
