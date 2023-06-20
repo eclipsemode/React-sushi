@@ -56,7 +56,7 @@ const OrdersList: React.FC<IOrdersList> = ({orders}) => {
         <div style={{width: '100%'}}>
             {
                 orders.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).map((order) => (
-                    <Accordion sx={{background: Colors.$rootCardBackground}} expanded={expanded === String(order.id)}
+                    <Accordion sx={{background: Colors.$rootCardBackground, '&:before': {backgroundColor: Colors.$infoColor} }} expanded={expanded === String(order.id)}
                                key={order.id} onChange={handleChange(String(order.id))}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon sx={{color: Colors.$rootText}}/>}
