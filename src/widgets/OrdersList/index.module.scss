@@ -37,3 +37,8 @@
   border-color: $info-color !important;
   color: $info-color !important;
 }
+
+.status {
+  max-width: 120px;
+  width: fit-content;
+}

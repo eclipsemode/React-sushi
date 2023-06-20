@@ -1,12 +1,35 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { $api } from "processes/api";
 import { IUserState } from "entities/user";
-import { IOrder } from "features/order/model";
+import {IOrderProducts} from "../../../features/order/model";
+import {OrderType} from "../../../features/order/ui";
+import {PaymentType} from "../../../features/order/ui/DeliveryForm";
 
-export interface IOrdersFetched extends IOrder{
+export type StatusType = 'new' | 'production' | 'produced' | 'delivery' | 'completed' | 'deleted';
+
+export interface IOrdersFetched {
   id: number,
+  orderProducts: IOrderProducts[],
   createdAt: string,
   updatedAt: string,
+  totalPrice: number,
+  totalAmount: number,
+  type: OrderType,
+  name: string,
+  address: string | null,
+  entrance: number | null,
+  floor: number | null,
+  room: number | null,
+  tel: string,
+  email: string,
+  day: "today" | null,
+  time: string | null,
+  utensils: number,
+  payment: PaymentType,
+  commentary: string | null,
+  promocode: string | null,
+  status: StatusType,
+  userId: number
 }
 
 type statusType = 'PENDING' | 'FULFILLED' | 'REJECTED';
