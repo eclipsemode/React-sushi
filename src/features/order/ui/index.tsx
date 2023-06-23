@@ -1,9 +1,8 @@
 import React from 'react';
 import {CartItem} from 'widgets';
-import {selectCart, setOrderType} from 'entities/cart';
+import {ICartProduct, selectCart, setOrderType} from 'entities/cart';
 import styles from './index.module.scss';
 import {useAppDispatch, useAppSelector} from 'app/hooks';
-import {IProducts} from 'entities/products';
 import {DeliveryPrice} from 'features/order/utils';
 import PickupForm from './PickupForm';
 import SimpleButton from 'shared/UI/SimpleButton';
@@ -75,7 +74,7 @@ const CartOrder: React.FC = () => {
                 }
                 </thead>
                 <tbody>
-                {items.map((obj: IProducts) => (
+                {items.map((obj: ICartProduct) => (
                     <CartItem key={obj.id} obj={obj}/>
                 ))}
                 </tbody>

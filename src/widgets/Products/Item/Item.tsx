@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './Item.module.scss';
-import { IProducts } from 'entities/products';
+import { IProduct } from 'entities/products';
 import { AddToCartButton } from 'shared/UI';
 import { Link } from 'react-router-dom';
 
-const Item: React.FC<IProducts> = ({ ...product }) => {
+const Item: React.FC<IProduct> = ({ ...product }) => {
     return (
         <div>
             <Link className={styles.root} to="">
@@ -16,7 +16,7 @@ const Item: React.FC<IProducts> = ({ ...product }) => {
                     </div>
                     <div className={styles.bottom}>
                         <div className={styles.price}>{product.price} ₽</div>
-                        <AddToCartButton product={product} />
+                        <AddToCartButton product={{...product, amount: 0}} />
                     </div>
                 </div>
             </Link>

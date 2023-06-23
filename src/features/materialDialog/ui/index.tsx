@@ -11,6 +11,8 @@ import PromocodeSuccess from "./materialDialogs/PromocodeSuccess";
 import PromocodeInvalid from "./materialDialogs/PromocodeInvalid";
 import ProfileSendSettings from "./materialDialogs/ProfileSendSettings";
 import ProfileResetSettings from "./materialDialogs/account/ProfileResetSettings";
+import ProfileAdminAddProduct from "./materialDialogs/account/ProfileAdminAddProduct";
+import ProfileAdminDeleteProduct from "./materialDialogs/account/ProfileAdminDeleteProduct";
 
 const MaterialDialog = () => {
     const { opened, dialogType } = useAppSelector(selectMaterialDialog);
@@ -36,6 +38,8 @@ const MaterialDialog = () => {
             case MaterialDialogTypes.PROMOCODE_SUCCESS: return <PromocodeSuccess />
             case MaterialDialogTypes.PROFILE_SETTINGS_SEND: return <ProfileSendSettings />
             case MaterialDialogTypes.PROFILE_SETTINGS_RESET: return <ProfileResetSettings />
+            case MaterialDialogTypes.PROFILE_ADMIN_ADD_PRODUCT: return <ProfileAdminAddProduct />
+            case MaterialDialogTypes.PROFILE_ADMIN_DELETE_PRODUCT: return <ProfileAdminDeleteProduct />
 
             default: return <></>
         }

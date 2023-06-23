@@ -1,6 +1,5 @@
 import React from 'react';
-import {addItem, removeItem, removeItemById, selectCart} from "entities/cart";
-import {IProducts} from 'entities/products';
+import {addItem, ICartProduct, removeItem, removeItemById, selectCart} from "entities/cart";
 import styles from './index.module.scss';
 import {useAppDispatch, useAppSelector} from "app/hooks";
 import {CloseOutlined, MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
@@ -10,7 +9,7 @@ import {setMaterialDialog} from "../../features/materialDialog/api";
 import {MaterialDialogTypes} from "../../features/materialDialog/model";
 
 export type CartItemProps = {
-    obj: IProducts;
+    obj: ICartProduct;
 };
 
 const CartItem: React.FC<CartItemProps> = ({obj}) => {
@@ -62,7 +61,7 @@ const CartItem: React.FC<CartItemProps> = ({obj}) => {
                                         onClick={() => handleAddItem()}/>
                 </div>
             </td>
-            <td className={styles.root__total}>{obj.price * obj.amount} ₽</td>
+            <td className={styles.root__total}>{obj.price[0] * obj.amount} ₽</td>
         </tr>
     )
 
@@ -75,7 +74,7 @@ const CartItem: React.FC<CartItemProps> = ({obj}) => {
                         <h5>{obj.name}</h5>
                         <span className={styles.mobile__price}>Цена за 1 шт. - {obj.price} ₽</span>
                     </Stack>
-                    <span className={styles.mobile__priceTotal}>Цена - {obj.price * obj.amount} ₽</span>
+                    <span className={styles.mobile__priceTotal}>Цена - {obj.price[0] * obj.amount} ₽</span>
                 </Stack>
             </td>
             <td className={styles.mobile__amount}>

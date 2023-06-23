@@ -1,24 +1,15 @@
 @import "../../../app/assets/styles/variables";
 
 .root {
-
-}
-
-.container {
-  width: 100%;
-}
-
-.add_product {
-  border: 1px solid gray;
+  border: 1px dashed gray;
   border-radius: 4px;
   padding: 0.5rem 1rem;
   margin-bottom: .5rem;
   background-color: $root-card-background;
   color: $root-text;
-  cursor: pointer;
+  cursor: move;
   height: 45px;
   display: flex;
   align-items: center;
   font-size: 14px;
-  justify-content: center;
 }

@@ -1,7 +1,6 @@
 import { IOrder } from "./IOrder";
-import { ICartState } from "entities/cart";
+import {ICartProduct, ICartState} from "entities/cart";
 import { IUserState } from "entities/user";
-import { IProducts } from "entities/products";
 import {IOrderCreate} from "../api";
 
 class OrderDto {
@@ -10,7 +9,7 @@ class OrderDto {
   constructor(cart: ICartState, user: IUserState, formData: Partial<IOrder>, orderCreateReducer: IOrderCreate) {
     this.order = {
       userId: user.isAuth ? Number(user.user?.id) : null,
-      orderProducts: cart.items.map((e: IProducts) => ({
+      orderProducts: cart.items.map((e: ICartProduct) => ({
         amount: +e.amount,
         id: +e.id,
         price: +e.price,
@@ -18,7 +17,7 @@ class OrderDto {
         rating: +e.rating,
         description: e.description,
         image: e.image,
-        categoryId: +e.category
+        categoryId: +e.categoryId
       })),
       totalPrice: cart.finalPrice,
       totalAmount: cart.totalAmount,

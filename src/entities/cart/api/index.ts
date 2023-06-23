@@ -1,9 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
-import { IProducts } from "entities/products";
+import {IProduct} from "entities/products";
+
+
+export interface ICartProduct extends IProduct{
+  amount: number
+}
 
 export interface ICartState {
-  items: IProducts[];
+  items: ICartProduct[];
   totalPrice: number;
   finalPrice: number;
   deliveryPrice: number;
@@ -24,7 +29,7 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<IProducts>) => {
+    addItem: (state, action: PayloadAction<ICartProduct>) => {
       const foundItem = state.items.find((obj) => obj.id === action.payload.id);
 
       foundItem
@@ -34,12 +39,12 @@ export const cartSlice = createSlice({
           amount: 1,
         });
 
-      state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.amount + sum, 0);
+      state.totalPrice = state.items.reduce((sum, obj) => obj.price[0] * obj.amount + sum, 0);
 
       state.totalAmount = state.items.reduce((value, obj) => value + obj.amount, 0);
     },
 
-    removeItem: (state, action: PayloadAction<string>) => {
+    removeItem: (state, action: PayloadAction<number>) => {
       const foundItem = state.items.find((obj) => Number(obj.id === action.payload));
 
       if (!foundItem) return;
@@ -48,7 +53,7 @@ export const cartSlice = createSlice({
         ? foundItem.amount--
         : (state.items = state.items.filter((obj) => obj.id !== action.payload));
 
-      state.totalPrice = state.items.reduce((value, obj) => value + obj.price * obj.amount, 0);
+      state.totalPrice = state.items.reduce((value, obj) => value + obj.price[0] * obj.amount, 0);
       state.totalAmount = state.items.reduce((value, obj) => value + obj.amount, 0);
     },
 
@@ -60,10 +65,10 @@ export const cartSlice = createSlice({
       state.orderType = null;
     },
 
-    removeItemById: (state, action: PayloadAction<string>) => {
+    removeItemById: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((obj) => Number(obj.id !== action.payload));
       state.totalPrice = state.items.reduce((value, obj) => {
-        return value + obj.price;
+        return value + obj.price[0];
       }, 0);
       state.totalAmount = state.items.reduce((value, obj) => {
         return value + obj.amount;

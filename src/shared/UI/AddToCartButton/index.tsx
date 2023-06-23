@@ -1,17 +1,16 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { IProducts } from 'entities/products';
-import { addItem, removeItem } from 'entities/cart';
+import {addItem, ICartProduct, removeItem} from 'entities/cart';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 type AddToCartButtonProps = {
-    product: IProducts;
+    product: ICartProduct;
 };
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
     const dispatch = useAppDispatch();
-    const cartItem = useAppSelector((state) => state.cartReducer.items.find((obj: IProducts) => obj.id === product.id));
+    const cartItem = useAppSelector((state) => state.cartReducer.items.find((obj: ICartProduct) => obj.id === product.id));
     let amount = !cartItem ? 0 : cartItem.amount;
     const handleAddItem = () => {
         dispatch(addItem(product));
