@@ -33,7 +33,7 @@ export interface IOrdersFetched {
 }
 
 type statusType = 'PENDING' | 'FULFILLED' | 'REJECTED';
-export type SelectedType = "profile" | "orders" | "settings";
+export type SelectedType = "profile" | "orders" | "settings" | 'admin';
 
 export interface IOrdersReducer {
   status: statusType;

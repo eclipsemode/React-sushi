@@ -15,17 +15,18 @@ import RouterPath from "app/utils/menuPath";
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HistoryIcon from '@mui/icons-material/History';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import {selectAuth} from "../../processes/services";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {setMaterialDialog} from "features/materialDialog/api";
 import {MaterialDialogTypes} from "features/materialDialog/model";
 import {DeviceType, selectAdaptiveServiceSlice} from "../../processes/services/adaptiveService/adaptiveService";
-
-type SelectedType = "profile" | "orders" | "settings";
+import Admin from "./Admin";
+import {SelectedType} from "./api";
 
 const Account: React.FC = () => {
     const [openBackdrop, setOpenBackdrop] = React.useState(true);
-    const {isAuth} = useAppSelector(state => state.userReducer);
+    const {isAuth, user} = useAppSelector(state => state.userReducer);
     const { page } = useAppSelector(state => state.ordersReducer);
     const { deviceType } = useAppSelector(selectAdaptiveServiceSlice);
     const {loading} = useAppSelector(selectAuth);
@@ -53,7 +54,7 @@ const Account: React.FC = () => {
         <Typography key={3}>
             {
                 loading ? <Skeleton animation='wave' height={24} width={100}/> :
-                    selected === 'profile' ? 'Мой профиль' : selected === 'orders' ? 'История заказов' : 'Редактировать профиль'
+                    selected === 'profile' ? 'Мой профиль' : selected === 'orders' ? 'История заказов' : selected === 'settings' ? 'Редактировать профиль' : 'Админ-панель'
             }
         </Typography>,
     ];
@@ -74,6 +75,13 @@ const Account: React.FC = () => {
                 <li className={selected === "settings" ? styles.root__selected : null}
                     onClick={() => setSelected("settings")}>
                     <SettingsIcon/><span>Редактировать профиль</span></li>
+                {
+                    user?.role === 'ADMIN' && (
+                        <li className={selected === "admin" ? styles.root__selected : null}
+                            onClick={() => setSelected("admin")}>
+                            <AdminPanelSettingsIcon/><span>Админ-панель</span></li>
+                    )
+                }
                 <li onClick={() => dispatch(setMaterialDialog({
                     opened: true,
                     dialogType: MaterialDialogTypes.LOGOUT
@@ -107,6 +115,7 @@ const Account: React.FC = () => {
                             {selected === "profile" && <Profile/>}
                             {selected === "orders" && <Orders/>}
                             {selected === "settings" && <Settings/>}
+                            {selected === "admin" && <Admin/>}
                         </div>
                     )
             }

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "app/store";
-import { $api } from "processes/api";
+import {$api} from "processes/api";
 
 export enum ProductsStatus {
   PENDING,
@@ -24,6 +24,20 @@ export interface IProductsState {
   productsStatus: ProductsStatus;
 }
 
+export interface ICreateProduct {
+  name: string,
+  price: number | number[],
+  rating: number,
+  description: string,
+  image: File,
+  categoryId: number
+}
+
+export interface IProductCreated extends Omit<ICreateProduct, 'image'> {
+  id: number,
+  image: string
+}
+
 export const fetchProducts = createAsyncThunk<IProducts[], void, { state: RootState }>(
   "products/fetchProducts",
   async (_, { rejectWithValue, getState }) => {
@@ -40,6 +54,33 @@ export const fetchProducts = createAsyncThunk<IProducts[], void, { state: RootSt
     }
   }
 );
+
+export const createProduct = createAsyncThunk<IProductCreated, ICreateProduct>(
+    'products/createProduct',
+    async ({name, price, rating, description, image, categoryId}, {rejectWithValue}) => {
+      try {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('price', String(price));
+        formData.append('rating', String(rating));
+        formData.append('description', description);
+        formData.append('image', image);
+        formData.append('categoryId', String(categoryId));
+        const response = await $api.post('api/product', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        return response.data;
+      } catch (error: any) {
+        if (error.response && error.response.data.message) {
+          return rejectWithValue(error.response.data.message);
+        } else {
+          return rejectWithValue(error.message);
+        }
+      }
+    }
+)
 
 const initialState: IProductsState = {
   products: [],
