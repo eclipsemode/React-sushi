@@ -4,7 +4,7 @@ import Colors from "app/utils/Colors";
 import {selectMaterialDialog, setMaterialDialog} from "../../../api";
 import {useAppDispatch, useAppSelector} from "app/hooks";
 import {enqueueSnackbar} from "notistack";
-import {deleteProduct, getProducts} from "../../../../../entities/products";
+import {deleteProduct, getProducts} from "entities/products/api";
 
 const ProfileSendSettings = () => {
     const dispatch = useAppDispatch();

@@ -3,7 +3,7 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 
 import filterReducer from 'features/filter/api';
-import productsReducer from 'entities/products';
+import productsReducer from 'entities/products/api';
 import cartReducer from 'entities/cart';
 import userReducer from 'entities/user';
 import categoriesReducer from 'entities/categories';

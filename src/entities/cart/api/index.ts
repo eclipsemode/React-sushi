@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
-import {IProduct} from "entities/products";
+import {IProduct} from "entities/products/api";
 
 
 export interface ICartProduct extends IProduct{

@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { Banner, Categories, Products } from 'widgets';
+import { Banner, Categories } from 'widgets';
 import { useAppSelector } from 'app/hooks';
 import { Sort } from 'features/filter/ui';
 import {Skeleton} from "@mui/material";
+import Products from "entities/products/ui/Products";
 
 const Index: React.FC = () => {
     const { categories } = useAppSelector((state) => state.categoriesReducer);

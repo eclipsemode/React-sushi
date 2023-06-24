@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Item.module.scss';
-import { IProduct } from 'entities/products';
+import { IProduct } from 'entities/products/api';
 import { AddToCartButton } from 'shared/UI';
 import { Link } from 'react-router-dom';
 

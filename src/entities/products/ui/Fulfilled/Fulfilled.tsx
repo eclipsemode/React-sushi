@@ -1,6 +1,6 @@
 import React from 'react';
 import Item from '../Item/Item';
-import { IProduct, selectProducts } from 'entities/products';
+import { IProduct, selectProducts } from 'entities/products/api';
 import { useAppSelector } from "app/hooks";
 
 const Fulfilled: React.FC = () => {

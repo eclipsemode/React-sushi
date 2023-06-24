@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchProducts, ProductsStatus, selectProducts } from 'entities/products';
+import { fetchProducts, ProductsStatus, selectProducts } from 'entities/products/api';
 import { selectFilter, setCategoryNumber } from 'features/filter/api';
 import qs from 'qs';
 import { useLocation, useNavigate } from 'react-router-dom';

@@ -3,7 +3,7 @@ import {addItem, ICartProduct, removeItem, removeItemById, selectCart} from "ent
 import styles from './index.module.scss';
 import {useAppDispatch, useAppSelector} from "app/hooks";
 import {CloseOutlined, MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
-import {DeviceType, selectAdaptiveServiceSlice} from "../../processes/services/adaptiveService/adaptiveService";
+import {DeviceType, selectAdaptiveServiceSlice} from "processes/services/adaptiveService/adaptiveService";
 import {Stack} from "@mui/material";
 import {setMaterialDialog} from "../../features/materialDialog/api";
 import {MaterialDialogTypes} from "../../features/materialDialog/model";

@@ -2,7 +2,7 @@ import React from "react";
 import update from 'immutability-helper'
 import DragAndDropItem from "../../../../shared/UI/DragAndDrop";
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
-import {getProducts, IProduct, selectProducts} from "../../../../entities/products";
+import {getProducts, IProduct, selectProducts} from "entities/products/api";
 import {enqueueSnackbar} from "notistack";
 
 const ProductsListDnD = () => {

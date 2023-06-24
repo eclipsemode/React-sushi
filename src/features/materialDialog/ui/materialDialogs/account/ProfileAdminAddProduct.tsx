@@ -5,7 +5,7 @@ import {DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import SimpleButton from "shared/UI/SimpleButton";
 import Colors from "app/utils/Colors";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {createProduct, getProducts, ICreateProduct} from "entities/products";
+import {createProduct, getProducts, ICreateProduct} from "entities/products/api";
 import Input from "../../../../../shared/UI/input";
 
 interface ICreateProductForm extends Omit<ICreateProduct, 'image'> {
