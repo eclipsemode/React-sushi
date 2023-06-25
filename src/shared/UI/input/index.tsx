@@ -2,7 +2,7 @@ import {InputAdornment, SxProps, TextField} from "@mui/material";
 import Colors from "../../../app/utils/Colors";
 import {ValidationRule} from "react-hook-form";
 import InputMask from "react-input-mask";
-import React, {PropsWithChildren} from "react";
+import React, {CSSProperties, PropsWithChildren} from "react";
 
 interface IProps {
     variant?: 'outlined' | 'filled' | 'standard',
@@ -18,6 +18,7 @@ interface IProps {
     maxLength?: number | undefined
     endAdornment?: JSX.Element,
     validate?: (value: string) => boolean | undefined,
+    style?: CSSProperties,
 
     inputMask?: boolean,
     mask?: string | undefined,
@@ -50,7 +51,8 @@ const Input = ({
                    onChangeEvent,
                    value,
                    disabled = false,
-                    defaultValue
+                   defaultValue,
+                   style
                }: IProps) => {
     const renderEndAdornment = () => (
         <InputAdornment sx={{cursor: 'pointer'}} position="end">
@@ -110,6 +112,7 @@ const Input = ({
     const renderInput = () => (
         <TextField
             sx={stylesInput}
+            style={style}
             defaultValue={defaultValue}
             value={value}
             label={label}

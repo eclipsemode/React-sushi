@@ -13,13 +13,19 @@ export interface IProductsState {
     productsStatus: ProductsStatus;
 }
 
+export type ProductType = 'pizza' | 'other'
+
 export interface ICreateProduct {
     name: string,
     price: number | number[],
     rating: number,
     description: string,
     image: File,
-    categoryId: number
+    categoryId: number,
+    sku: string | string[] | null,
+    orderIndex: number | null,
+    type: ProductType | null,
+    size: string | string[] | null
 }
 
 export interface IProductCreated extends Omit<ICreateProduct, 'image'> {
@@ -30,14 +36,15 @@ export interface IProductCreated extends Omit<ICreateProduct, 'image'> {
 export interface IProduct {
     id: number,
     name: string,
-    price: number[],
+    price: number,
     rating: number,
     description: string,
     image: string,
-    sku: string[] | null,
+    sku: string | null,
     orderIndex: number | null,
     type: 'pizza' | 'other',
-    categoryId: number
+    categoryId: number,
+    size: string | string[] | null
 }
 
 export const fetchProducts = createAsyncThunk<IProduct[], void, { state: RootState }>(
@@ -57,17 +64,31 @@ export const fetchProducts = createAsyncThunk<IProduct[], void, { state: RootSta
     }
 );
 
+
 export const createProduct = createAsyncThunk<IProductCreated, ICreateProduct>(
     'products/createProduct',
-    async ({name, price, rating, description, image, categoryId}, {rejectWithValue}) => {
+    async ({name, price, rating, description, image, categoryId, sku, orderIndex, type, size}, {rejectWithValue}) => {
         try {
             const formData = new FormData();
             formData.append('name', name);
-            formData.append('price', String(price));
+            formData.append('price', JSON.stringify(price));
             formData.append('rating', String(rating));
             formData.append('description', description);
             formData.append('image', image);
             formData.append('categoryId', String(categoryId));
+            if (size) {
+                formData.append('size', JSON.stringify(size));
+            }
+            if (sku) {
+                formData.append('sku', JSON.stringify(sku));
+            }
+            if (orderIndex) {
+                formData.append('orderIndex', String(orderIndex));
+            }
+            if (type) {
+                formData.append('type', String(type));
+            }
+
             const response = await $api.post('api/product', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'

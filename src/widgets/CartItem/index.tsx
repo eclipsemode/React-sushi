@@ -61,7 +61,7 @@ const CartItem: React.FC<CartItemProps> = ({obj}) => {
                                         onClick={() => handleAddItem()}/>
                 </div>
             </td>
-            <td className={styles.root__total}>{obj.price[0] * obj.amount} ₽</td>
+            <td className={styles.root__total}>{obj.price * obj.amount} ₽</td>
         </tr>
     )
 
@@ -74,7 +74,7 @@ const CartItem: React.FC<CartItemProps> = ({obj}) => {
                         <h5>{obj.name}</h5>
                         <span className={styles.mobile__price}>Цена за 1 шт. - {obj.price} ₽</span>
                     </Stack>
-                    <span className={styles.mobile__priceTotal}>Цена - {obj.price[0] * obj.amount} ₽</span>
+                    <span className={styles.mobile__priceTotal}>Цена - {obj.price * obj.amount} ₽</span>
                 </Stack>
             </td>
             <td className={styles.mobile__amount}>

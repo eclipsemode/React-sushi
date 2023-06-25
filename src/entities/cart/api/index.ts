@@ -39,7 +39,7 @@ export const cartSlice = createSlice({
           amount: 1,
         });
 
-      state.totalPrice = state.items.reduce((sum, obj) => obj.price[0] * obj.amount + sum, 0);
+      state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.amount + sum, 0);
 
       state.totalAmount = state.items.reduce((value, obj) => value + obj.amount, 0);
     },
@@ -53,7 +53,7 @@ export const cartSlice = createSlice({
         ? foundItem.amount--
         : (state.items = state.items.filter((obj) => obj.id !== action.payload));
 
-      state.totalPrice = state.items.reduce((value, obj) => value + obj.price[0] * obj.amount, 0);
+      state.totalPrice = state.items.reduce((value, obj) => value + obj.price * obj.amount, 0);
       state.totalAmount = state.items.reduce((value, obj) => value + obj.amount, 0);
     },
 
@@ -68,7 +68,7 @@ export const cartSlice = createSlice({
     removeItemById: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((obj) => Number(obj.id !== action.payload));
       state.totalPrice = state.items.reduce((value, obj) => {
-        return value + obj.price[0];
+        return value + obj.price;
       }, 0);
       state.totalAmount = state.items.reduce((value, obj) => {
         return value + obj.amount;
