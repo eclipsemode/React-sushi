@@ -9,7 +9,6 @@ export type StatusType = 'new' | 'production' | 'produced' | 'delivery' | 'compl
 
 export interface IOrdersFetched {
   id: number,
-  orderProducts: IOrderProducts[],
   createdAt: string,
   updatedAt: string,
   totalPrice: number,
@@ -29,7 +28,8 @@ export interface IOrdersFetched {
   commentary: string | null,
   promocode: string | null,
   status: StatusType,
-  userId: number
+  userId: number,
+  products: IOrderProducts[],
 }
 
 type statusType = 'PENDING' | 'FULFILLED' | 'REJECTED';
@@ -45,7 +45,7 @@ const fetchOrdersByUserId = createAsyncThunk<IOrdersFetched[], void, { state: { 
   async (_, { rejectWithValue, getState }) => {
     try {
       const { userReducer } = getState();
-      const response = await $api.post("api/order/get-by-id", { id: userReducer.user?.id });
+      const response = await $api.get(`api/order/get/${userReducer.user?.id}`);
       return response.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {

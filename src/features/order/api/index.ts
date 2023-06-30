@@ -3,7 +3,7 @@ import {IUserState} from "entities/user";
 import {ICartState} from "entities/cart";
 import OrderDto from "features/order/model/OrderDto";
 import {$api, $api_guest} from "processes/api";
-import {IFormData, IOrder} from "../model";
+import {IFormData} from "../model";
 
 export interface IPromocode {
     id: number,
@@ -14,7 +14,7 @@ export interface IPromocode {
 }
 
 
-const fetchOrderCreate = createAsyncThunk<void, Partial<IOrder>, { rejectValue: any, state: { userReducer: IUserState, cartReducer: ICartState, orderCreateReducer: IOrderCreate } }>(
+const fetchOrderCreate = createAsyncThunk<void, IFormData, { rejectValue: any, state: { userReducer: IUserState, cartReducer: ICartState, orderCreateReducer: IOrderCreate } }>(
   'order/fetchOrderCreate',
   async (formData, { rejectWithValue, getState }) => {
     try {

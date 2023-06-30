@@ -8,7 +8,7 @@ import {enqueueSnackbar} from "notistack";
 const ProductsListDnD = () => {
     const dispatch = useAppDispatch();
     const {products} = useAppSelector(selectProducts);
-    const [cards, setCards] = React.useState<IProduct[]>([])
+    const [cards, setCards] = React.useState<IProduct[][]>([])
 
     React.useEffect(() => {
         setCards(products)
@@ -25,24 +25,24 @@ const ProductsListDnD = () => {
     }, [dispatch])
 
     const moveItem = React.useCallback((dragIndex: number, hoverIndex: number) => {
-        setCards((prevCards: IProduct[]) =>
+        setCards((prevCards: IProduct[][]) =>
             update(prevCards, {
                 $splice: [
                     [dragIndex, 1],
-                    [hoverIndex, 0, prevCards[dragIndex] as IProduct],
+                    [hoverIndex, 0, prevCards[dragIndex] as IProduct[]],
                 ],
             }),
         )
     }, [])
 
     const renderCard = React.useCallback(
-        (card: IProduct, index: number) => {
+        (card: IProduct[], index: number) => {
             return (
                 <DragAndDropItem
-                    key={card.id}
+                    key={card[0].id}
                     index={index}
-                    id={card.id}
-                    text={card.name}
+                    id={card[0].id}
+                    text={card[0].name}
                     moveItem={moveItem}
                 />
             )
@@ -53,7 +53,6 @@ const ProductsListDnD = () => {
     return (
         <div>{cards.map((card, i) => renderCard(card, i))}</div>
     )
-
 };
 
 export default ProductsListDnD;

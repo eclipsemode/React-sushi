@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 import {IProduct} from "entities/products/api";
 
-
 export interface ICartProduct extends IProduct{
   amount: number
 }
@@ -30,7 +29,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<ICartProduct>) => {
-      const foundItem = state.items.find((obj) => obj.id === action.payload.id);
+      const foundItem = state.items.find((obj) => obj.sizeId === action.payload.sizeId);
 
       foundItem
         ? foundItem.amount++
@@ -45,13 +44,13 @@ export const cartSlice = createSlice({
     },
 
     removeItem: (state, action: PayloadAction<number>) => {
-      const foundItem = state.items.find((obj) => Number(obj.id === action.payload));
+      const foundItem = state.items.find((obj) => Number(obj.sizeId === action.payload));
 
       if (!foundItem) return;
 
       foundItem.amount > 1
         ? foundItem.amount--
-        : (state.items = state.items.filter((obj) => obj.id !== action.payload));
+        : (state.items = state.items.filter((obj) => obj.sizeId !== action.payload));
 
       state.totalPrice = state.items.reduce((value, obj) => value + obj.price * obj.amount, 0);
       state.totalAmount = state.items.reduce((value, obj) => value + obj.amount, 0);
@@ -66,7 +65,7 @@ export const cartSlice = createSlice({
     },
 
     removeItemById: (state, action: PayloadAction<number>) => {
-      state.items = state.items.filter((obj) => Number(obj.id !== action.payload));
+      state.items = state.items.filter((obj) => Number(obj.sizeId !== action.payload));
       state.totalPrice = state.items.reduce((value, obj) => {
         return value + obj.price;
       }, 0);

@@ -100,6 +100,7 @@ const DragAndDropItem = ({id, text, index, moveItem}: IProps) => {
 
     const opacity = isDragging ? 0 : 1
     drag(drop(ref))
+
     return (
         <div className={styles.root} ref={ref} style={{opacity}} data-handler-id={handlerId}>
             <Stack direction='row' sx={{justifyContent: 'space-between', width: '100%'}}>

@@ -9,7 +9,7 @@ export enum ProductsStatus {
 }
 
 export interface IProductsState {
-    products: IProduct[];
+    products: IProduct[][];
     productsStatus: ProductsStatus;
 }
 
@@ -17,37 +17,44 @@ export type ProductType = 'pizza' | 'other'
 
 export interface ICreateProduct {
     name: string,
-    price: number | number[],
+    price: number[],
     rating: number,
     description: string,
     image: File,
     categoryId: number,
-    sku: string | string[] | null,
+    sku: string[] | null,
     orderIndex: number | null,
     type: ProductType | null,
-    size: string | string[] | null
-}
-
-export interface IProductCreated extends Omit<ICreateProduct, 'image'> {
-    id: number,
-    image: string
+    size: string[] | null
 }
 
 export interface IProduct {
     id: number,
     name: string,
-    price: number,
     rating: number,
     description: string,
     image: string,
-    sku: string | null,
     orderIndex: number | null,
     type: 'pizza' | 'other',
     categoryId: number,
-    size: string | string[] | null
+    sizeId: number,
+    size: string,
+    price: number,
+    sku: string | null
 }
 
-export const fetchProducts = createAsyncThunk<IProduct[], void, { state: RootState }>(
+export interface IProductCreated extends Omit<ICreateProduct, 'image' | 'price' | 'size' | 'sku'> {
+    id: number,
+    image: string,
+    sizes: {
+        size: string | null,
+        price: number,
+        sku: string | null
+
+    }[]
+}
+
+export const fetchProducts = createAsyncThunk<IProduct[][], void, { state: RootState }>(
     "products/fetchProducts",
     async (_, {rejectWithValue, getState}) => {
         try {
@@ -105,11 +112,11 @@ export const createProduct = createAsyncThunk<IProductCreated, ICreateProduct>(
     }
 )
 
-export const getProducts = createAsyncThunk<IProduct[], void>(
+export const getProducts = createAsyncThunk<IProduct[][], void>(
     'products/getProducts',
     async (_, {rejectWithValue}) => {
         try {
-            const response = await $api.get('api/product/get-all');
+            const response = await $api.get('api/product/');
             return response.data;
         } catch (error: any) {
             if (error.response && error.response.data.message) {
@@ -151,7 +158,7 @@ export const productsSlice = createSlice({
             state.productsStatus = ProductsStatus.PENDING;
             state.products = [];
         })
-            .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
+            .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<IProduct[][]>) => {
                 state.products = action.payload;
                 state.productsStatus = ProductsStatus.FULFILLED;
             })
@@ -171,7 +178,7 @@ export const productsSlice = createSlice({
             .addCase(getProducts.pending, (state) => {
                 state.productsStatus = ProductsStatus.PENDING;
             })
-            .addCase(getProducts.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
+            .addCase(getProducts.fulfilled, (state, action: PayloadAction<IProduct[][]>) => {
                 state.products = action.payload;
                 state.productsStatus = ProductsStatus.FULFILLED;
             })

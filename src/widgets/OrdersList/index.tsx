@@ -124,10 +124,9 @@ const OrdersList: React.FC<IOrdersList> = ({orders}) => {
 
                             <br/>
 
-
                             {
-                                order.orderProducts.map((product, index) => (
-                                    <List key={product.id + product.name} sx={{width: '100%', bgcolor: 'transparent'}}>
+                                order.products.map((product, index) => (
+                                    <List key={product.sizeId + product.name} sx={{width: '100%', bgcolor: 'transparent'}}>
                                         <ListItem alignItems="flex-start">
                                             <ListItemAvatar>
                                                 <Avatar alt="Remy Sharp"
@@ -135,7 +134,7 @@ const OrdersList: React.FC<IOrdersList> = ({orders}) => {
                                             </ListItemAvatar>
                                             <ListItemText
                                                 sx={{color: Colors.$rootText}}
-                                                primary={product.name}
+                                                primary={product.name + (product.size !== 'default' ? ' ' + product.size : '')}
                                                 secondary={
                                                     <React.Fragment>
                                                         <span style={{
@@ -146,13 +145,13 @@ const OrdersList: React.FC<IOrdersList> = ({orders}) => {
                                                         <span style={{
                                                             color: Colors.$rootText,
                                                             fontSize: '12px'
-                                                        }}>Стоимость: {product.price} ₽</span>
+                                                        }}>Стоимость: {product.amount} * {product.price} ₽ = {order.totalPrice} ₽</span>
                                                     </React.Fragment>
                                                 }
                                             />
                                         </ListItem>
                                         {
-                                            index !== order.orderProducts.length - 1 &&
+                                            index !== order.products.length - 1 &&
                                             <Divider variant="inset" sx={{borderColor: Colors.$infoColor}}
                                                      component="li"/>
                                         }

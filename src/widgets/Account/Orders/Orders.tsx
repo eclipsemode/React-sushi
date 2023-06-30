@@ -5,17 +5,24 @@ import OrdersList from "../../OrdersList";
 import styles from "./index.module.scss";
 import { Empty } from "antd";
 import {Skeleton} from "@mui/material";
+import {enqueueSnackbar} from "notistack";
 
 const Orders: React.FC = () => {
   const dispatch = useAppDispatch();
   const { status } = useAppSelector((state): IOrdersReducer => state.ordersReducer)
-  const [orders, setOrders] = React.useState<IOrdersFetched[]>();
+    const [orders, setOrders] = React.useState<IOrdersFetched[]>();
 
 
   React.useEffect(() => {
     (async function fn() {
-      const { payload }: any = await dispatch(fetchOrdersByUserId());
-      setOrders(payload);
+        try {
+            const orders: any = await dispatch(fetchOrdersByUserId()).unwrap();
+            if (orders) {
+                setOrders(orders);
+            }
+        } catch (e) {
+            enqueueSnackbar('Ошибка загрузки истории заказов', { variant: 'error' })
+        }
     })();
   }, [dispatch]);
 

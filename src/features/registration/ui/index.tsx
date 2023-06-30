@@ -8,7 +8,6 @@ import { ErrorMessage } from "@hookform/error-message";
 
 import { fetchUserRegistration } from "features/registration/api";
 import { ValidationError } from "shared/error";
-import formatToDate from "../../../shared/utils/formatToDate";
 import Input from "shared/UI/input";
 import {Stack} from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -50,8 +49,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
     const response = await dispatch(fetchUserRegistration({
       name: data.name,
       surname: data.surname ?? null,
-      // @ts-ignore
-      dateOfBirth: formatToDate(data.dateOfBirth),
+      dateOfBirth: data.dateOfBirth,
       email: data.email,
       password: data.password,
       tel: data.tel,
@@ -127,7 +125,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
             render={(): any => nameError()} />
             <Input error={!!errors.name} register={register} name='name' label='Имя' required={true} maxLength={20} validate={(value: string) => !!value.match(/^[a-zа-яё\s]+$/iu)}/>
           <Input register={register} name='surname' label='Фамилия' maxLength={20}/>
-          <Input inputMask={true} error={!!errors.dateOfBirth} register={register} name='dateOfBirth' mask='99-99-9999' maskChar='' label='Дата рождения' type='text' />
+          <Input error={!!errors.dateOfBirth} register={register} name='dateOfBirth' label='Дата рождения' type='date' />
           <ErrorMessage
             name="email"
             errors={errors}

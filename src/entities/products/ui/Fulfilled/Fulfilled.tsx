@@ -7,8 +7,8 @@ const Fulfilled: React.FC = () => {
     const { products } = useAppSelector(selectProducts);
     return (
         <section className="content__items">
-            {products.map((product: IProduct) => (
-                <Item key={product.id} {...product} />
+            {products.map((product: IProduct[]) => (
+                <Item key={product.at(0)?.id} product={product} />
             ))}
         </section>
     );

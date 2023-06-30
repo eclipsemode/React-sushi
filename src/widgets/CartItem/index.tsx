@@ -28,7 +28,7 @@ const CartItem: React.FC<CartItemProps> = ({obj}) => {
                 dialogType: MaterialDialogTypes.CLEAR_CART
             }))
         } else {
-            dispatch(removeItem(obj.id));
+            dispatch(removeItem(obj.sizeId));
         }
     }
 
@@ -39,7 +39,7 @@ const CartItem: React.FC<CartItemProps> = ({obj}) => {
                 dialogType: MaterialDialogTypes.CLEAR_CART
             }))
         } else {
-            dispatch(removeItemById(obj.id));
+            dispatch(removeItemById(obj.sizeId));
         }
     };
 
@@ -49,7 +49,7 @@ const CartItem: React.FC<CartItemProps> = ({obj}) => {
                 <CloseOutlined onClick={handleRemoveItemById}/>
                 <img width={200}
                      src={process.env.REACT_APP_API_URL + obj.image} alt="productImg"/>
-                <h5>{obj.name}</h5>
+                <h5>{obj.name} {obj.type === 'pizza' && obj.size}</h5>
             </td>
             <td className={styles.root__price}>{obj.price} ₽</td>
             <td className={styles.root__amount}>
@@ -71,7 +71,7 @@ const CartItem: React.FC<CartItemProps> = ({obj}) => {
                 <img width={100} src={process.env.REACT_APP_API_URL + obj.image} alt="productImg"/>
                 <Stack justifyContent='space-between'>
                     <Stack>
-                        <h5>{obj.name}</h5>
+                        <h5>{obj.name} {obj.type === 'pizza' && obj.size}</h5>
                         <span className={styles.mobile__price}>Цена за 1 шт. - {obj.price} ₽</span>
                     </Stack>
                     <span className={styles.mobile__priceTotal}>Цена - {obj.price * obj.amount} ₽</span>

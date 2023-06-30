@@ -75,7 +75,7 @@ const CartOrder: React.FC = () => {
                 </thead>
                 <tbody>
                 {items.map((obj: ICartProduct) => (
-                    <CartItem key={obj.id} obj={obj}/>
+                    <CartItem key={obj.sizeId} obj={obj}/>
                 ))}
                 </tbody>
                 <tfoot>

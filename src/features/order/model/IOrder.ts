@@ -1,24 +1,19 @@
 import {PaymentType, TelType} from "../ui/DeliveryForm";
 import { OrderType } from "../ui";
-interface IOrderProducts {
-  id: number,
-  name: string,
-  price: number,
-  rating: number,
-  description: string,
-  image: string,
-  categoryId: number,
-  amount: number
+import {ICartProduct} from "../../../entities/cart";
+interface IOrderProducts extends Omit<ICartProduct, 'id'>{
+  id?: number,
+  productId: number,
+  orderId?: number
   }
 
 
 interface IOrder extends IFormData{
-  userId: number | null,
-  orderProducts: IOrderProducts[],
+  userId?: number | null,
+  products: IOrderProducts[],
   totalPrice: number,
   totalAmount: number,
-  type: OrderType,
-  promocode: string | null
+  promocode?: string | null
 }
 
 type DeliveryTimeType = 1 | 2;
@@ -35,11 +30,12 @@ interface IFormData {
   time: string | null,
   utensils: number,
   payment: PaymentType,
-  commentary: string,
+  commentary: string | null,
   deliveryTime?: DeliveryTimeType,
   agreement_1?: boolean,
   agreement_2?: boolean,
   agreement_3?: boolean,
+  type?: OrderType
 }
 
 export type { IOrderProducts, IOrder, IFormData };

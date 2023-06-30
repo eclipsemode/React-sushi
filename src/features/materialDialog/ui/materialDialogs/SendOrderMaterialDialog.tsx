@@ -21,9 +21,45 @@ const SendOrderMaterialDialog = () => {
     const callback = async () => {
         try {
             if (dialogType === MaterialDialogTypes.SEND_ORDER_DELIVERY) {
-                await dispatch(fetchOrderCreate({...formData, type: 'delivery'})).unwrap();
+                await dispatch(fetchOrderCreate({
+                    name: formData?.name || '',
+                    address: formData?.address,
+                    entrance: formData?.entrance,
+                    floor: formData?.floor,
+                    room: formData?.room,
+                    tel: formData?.tel || '+7 (918) 000-00-00',
+                    email: formData?.email || '',
+                    day: formData?.day ?? null,
+                    time: formData?.time ?? null,
+                    utensils: formData?.utensils ?? 0,
+                    payment: formData?.payment || 'cash',
+                    commentary: formData?.commentary ?? null,
+                    deliveryTime: formData?.deliveryTime,
+                    agreement_1: formData?.agreement_1,
+                    agreement_2: formData?.agreement_2,
+                    agreement_3: formData?.agreement_3,
+                    type: 'delivery'
+                })).unwrap();
             } else {
-                await dispatch(fetchOrderCreate({...formData, type: 'pickup'})).unwrap();
+                await dispatch(fetchOrderCreate({
+                    name: formData?.name || '',
+                    address: formData?.address,
+                    entrance: formData?.entrance,
+                    floor: formData?.floor,
+                    room: formData?.room,
+                    tel: formData?.tel || '+7 (918) 000-00-00',
+                    email: formData?.email || '',
+                    day: formData?.day ?? null,
+                    time: formData?.time ?? null,
+                    utensils: formData?.utensils ?? 0,
+                    payment: formData?.payment || 'cash',
+                    commentary: formData?.commentary ?? null,
+                    deliveryTime: formData?.deliveryTime,
+                    agreement_1: formData?.agreement_1,
+                    agreement_2: formData?.agreement_2,
+                    agreement_3: formData?.agreement_3,
+                    type: 'pickup'
+                })).unwrap();
             }
             enqueueSnackbar('Заказ отправлен, оператор перезвонит для подтверждения в течении 5 минут!', { variant: 'success' });
         } catch (e) {

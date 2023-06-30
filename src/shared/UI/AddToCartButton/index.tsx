@@ -10,14 +10,14 @@ type AddToCartButtonProps = {
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
     const dispatch = useAppDispatch();
-    const cartItem = useAppSelector((state) => state.cartReducer.items.find((obj: ICartProduct) => obj.id === product.id));
+    const cartItem = useAppSelector((state) => state.cartReducer.items.find((obj: ICartProduct) => obj.sizeId === product.sizeId));
     let amount = !cartItem ? 0 : cartItem.amount;
     const handleAddItem = () => {
         dispatch(addItem(product));
     };
 
     const handleRemoveItem = () => {
-        dispatch(removeItem(product.id));
+        dispatch(removeItem(product.sizeId));
     };
 
     const handleAddProduct = () => {

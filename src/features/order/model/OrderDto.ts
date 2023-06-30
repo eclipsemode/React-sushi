@@ -1,23 +1,28 @@
-import { IOrder } from "./IOrder";
-import {ICartProduct, ICartState} from "entities/cart";
+import {IFormData, IOrder} from "./IOrder";
+import {ICartState} from "entities/cart";
 import { IUserState } from "entities/user";
 import {IOrderCreate} from "../api";
 
 class OrderDto {
-  public order: Partial<IOrder>;
+  public order: IOrder;
 
-  constructor(cart: ICartState, user: IUserState, formData: Partial<IOrder>, orderCreateReducer: IOrderCreate) {
+  constructor(cart: ICartState, user: IUserState, formData: IFormData, orderCreateReducer: IOrderCreate) {
     this.order = {
-      userId: user.isAuth ? Number(user.user?.id) : null,
-      orderProducts: cart.items.map((e: ICartProduct) => ({
-        amount: +e.amount,
-        id: +e.id,
-        price: +e.price,
-        name: e.name,
-        rating: +e.rating,
-        description: e.description,
-        image: e.image,
-        categoryId: +e.categoryId
+      userId: Number(user.user?.id) ?? null,
+      products: cart.items.map((product) => ({
+        amount: +product.amount,
+        productId: +product.id,
+        name: product.name,
+        rating: +product.rating,
+        description: product.description,
+        image: product.image,
+        orderIndex: product.orderIndex ? +product.orderIndex : null,
+        type: product.type ?? null,
+        categoryId: +product.categoryId,
+        sizeId: +product.sizeId,
+        size: product.size,
+        price: +product.price,
+        sku: product.sku
       })),
       totalPrice: cart.finalPrice,
       totalAmount: cart.totalAmount,
