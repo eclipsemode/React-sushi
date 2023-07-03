@@ -1,6 +1,6 @@
 import React from "react";
 import InputMask from "react-input-mask";
-import styles from "./index.module.css";
+import styles from "./index.module.scss";
 
 interface IFormInput {
   children: React.ReactNode;

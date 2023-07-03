@@ -1,7 +1,13 @@
 {
-  "name": "client",
+  "name": "lime",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
@@ -16,22 +22,23 @@
     "@types/immutability-helper": "^2.6.3",
     "@types/jest": "^27.0.1",
     "@types/lodash.debounce": "^4.0.7",
-    "@types/node": "18.15.12",
+    "@types/node": "20.3.2",
     "@types/qs": "^6.9.7",
-    "@types/react": "18.0.37",
-    "@types/react-dom": "18.0.11",
+    "@types/react": "18.2.14",
+    "@types/react-dom": "18.2.6",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-slick": "^0.23.10",
     "antd": "^5.4.4",
     "axios": "^1.3.6",
     "compose-function": "^3.0.3",
-    "dotenv": "^16.0.3",
-    "eslint": "8.38.0",
+    "eslint": "8.43.0",
+    "eslint-config-next": "13.4.7",
     "immutability-helper": "^3.1.1",
     "jwt-decode": "^3.1.2",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.29.4",
+    "next": "13.4.7",
     "node-sass": "^8.0.0",
     "notistack": "^3.0.1",
     "qs": "^6.11.1",
@@ -43,42 +50,10 @@
     "react-input-mask": "^2.0.4",
     "react-moment": "^1.1.3",
     "react-redux": "^8.0.5",
-    "react-router": "^6.10.0",
-    "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.8",
     "redux-persist": "^6.0.0",
     "sass": "^1.62.0",
-    "typescript": "5.0.4",
-    "web-vitals": "^2.1.0"
-  },
-  "devDependencies": {
-    "eslint-config-react-app": "^7.0.1",
-    "gh-pages": "^5.0.0",
-    "prettier": "^2.8.7"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "typescript": "5.1.6"
   }
 }

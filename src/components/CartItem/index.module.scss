@@ -1,0 +1,116 @@
+@import '@assets/styles/variables';
+
+.root {
+  background: $background;
+  height: 179px;
+
+  &__product {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    column-gap: 3rem;
+    height: inherit;
+
+    & svg {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      transition: fill ease-in-out 0.2s;
+      margin-left: 1rem;
+    }
+
+    & svg:hover {
+      fill: $root-textActive;
+    }
+
+    & > img {
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  &__price {
+    font-size: 20px;
+    font-weight: 600;
+    color: $root-text;
+    width: 142px;
+    text-align: center;
+  }
+
+  &__amount {
+    width: 270px;
+    font-size: 1.5em;
+
+    & div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 1rem;
+    }
+
+    & svg:hover {
+      color: $root-textActive;
+    }
+  }
+
+  &__total {
+    font-size: 20px;
+    font-weight: 600;
+    color: $root-text;
+    width: 204px;
+    text-align: center;
+  }
+}
+
+.mobile__root {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px;
+  align-items: center;
+
+  & > td {
+    height: 70px;
+  }
+}
+
+.mobile__amount > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  row-gap: 5px;
+  flex-direction: column-reverse;
+}
+
+.mobile__amount .mobile__amountNumber {
+  color: $root-textActive;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.mobile__amount svg {
+  color: $root-textActive;
+}
+
+.mobile__product {
+  display: flex;
+  column-gap: 10px;
+
+  & img {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  & h5 {
+    font-size: 18px;
+  }
+
+  & .mobile__price {
+    font-size: 12px;
+  }
+
+  & .mobile__priceTotal {
+    color: $root-textActive;
+    font-weight: 600;
+    font-size: 16px;
+  }
+}

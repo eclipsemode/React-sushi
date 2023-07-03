@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import { SxProps } from "@mui/material";
-import Colors from "../../../app/utils/Colors";
+import Colors from "@shared/utils/Colors";
 
 interface ISimpleButton {
   children: string,

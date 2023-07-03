@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./index.module.scss";
 import { CheckOutlined } from "@ant-design/icons";
-import {IFormData} from "../../../features/order/model";
+import {IFormData} from "@store/features/order/model";
 
 interface ICheckbox {
   children: React.ReactNode;

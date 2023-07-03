@@ -1,0 +1,53 @@
+@import '@assets/styles/variables';
+
+.root {
+  width: 100%;
+  height: 409px;
+  background: $secondary-color;
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+
+    & span:first-child {
+      font-family: 'Satisfy', sans-serif;
+      font-size: 56px;
+      color: $header-color;
+    }
+
+    & span:nth-child(2) {
+      font-size: 100px;
+      color: $main-color;
+      font-weight: 900;
+    }
+
+    & span:last-child {
+      font-size: 28px;
+      color: $header-color;
+    }
+  }
+
+  & img {
+    width: 490px;
+    height: 291.2px;
+    transition: all ease-in-out .2s;
+  }
+
+  &:hover {
+    & img {
+      transform: scale(110%);
+    }
+  }
+}
+
+.image {
+  border-radius: 15px;
+  margin: 0 auto;
+  width: 100%;
+  max-height: 465.45px;
+}

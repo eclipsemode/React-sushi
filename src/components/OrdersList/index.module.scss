@@ -1,0 +1,43 @@
+@import "@assets/styles/variables";
+.root {
+
+}
+
+.root__info {
+  display: flex;
+  flex-direction: column;
+}
+.root__top {
+  display: flex;
+  color: $root-text;
+  justify-content: space-between;
+}
+
+.root__middle {
+  color: $root-text;
+}
+
+.root__bottom {
+  color: $root-text;
+}
+
+.root__avatar {
+  & img {
+    object-fit: contain;
+  }
+}
+
+.root__data {
+  text-align: left;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+.divider {
+  border-color: $info-color !important;
+  color: $info-color !important;
+}
+
+.status {
+  width: 120px;
+}

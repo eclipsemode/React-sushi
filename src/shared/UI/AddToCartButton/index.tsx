@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
-import {addItem, ICartProduct, removeItem} from 'entities/cart';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
+import {addItem, ICartProduct, removeItem} from '@store/features/cart/api';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 type AddToCartButtonProps = {

@@ -7,9 +7,9 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 import {ItemTypes} from "./ItemTypes";
 import {Stack} from "@mui/material";
-import {useAppDispatch} from "../../../app/hooks";
-import {setMaterialDialog} from "../../../features/materialDialog/api";
-import {MaterialDialogTypes} from "../../../features/materialDialog/model";
+import {useAppDispatch} from "@store/hooks";
+import {setMaterialDialog} from "@store/features/materialDialog/api";
+import {MaterialDialogTypes} from "@store/features/materialDialog/model";
 
 interface IProps {
     id: any

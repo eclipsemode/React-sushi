@@ -1,0 +1,48 @@
+@import "@assets/styles/variables";
+@import '@assets/styles/mixins/container';
+
+.root {
+  width: 100%;
+  background: $root-header--1;
+  padding: 20px 0;
+}
+
+.about {
+  font-size: 20px;
+}
+
+.tel {
+  font-size: 22px;
+}
+
+.links > a {
+  font-size: 22px;
+
+  &:hover {
+    color: $root-textActive;
+  }
+}
+
+.center {
+  text-align: center;
+
+  & > span {
+    font-size: 18px;
+  }
+}
+
+.categories > a {
+  font-size: 18px;
+}
+
+.categories > a:hover {
+  color: $root-textActive
+}
+
+.categories {
+  max-height: 145px;
+  flex-wrap: wrap-reverse;
+  text-align: left;
+  column-gap: 50px;
+  row-gap: 10px;
+}
