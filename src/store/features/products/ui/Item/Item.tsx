@@ -6,6 +6,7 @@ import {ButtonGroup, SxProps} from "@mui/material";
 import Button from "@mui/material/Button";
 import Colors from "@shared/utils/Colors";
 import Link from 'next/link'
+import Image from "next/image";
 
 interface IProps {
     product: IProduct[]
@@ -23,12 +24,12 @@ const ButtonGroupStyles: SxProps = {
 }
 
 const Item = ({product}: IProps) => {
-    const [selectedSize, setSelectedSize] = React.useState<number>(product[0].sizeId);
+    const [selectedSize, setSelectedSize] = React.useState<number>(product[0]?.sizeId);
     const foundProduct = product.find((item) => item.sizeId === selectedSize);
     return (
         <div>
             <Link className={styles.root} href="">
-                <img className={styles.image} src={process.env.REACT_APP_API_URL + product[0].image} alt="Item" />
+                <Image width={306} loading='lazy' height={170} placeholder='blur' blurDataURL='data:images/blur.png' className={styles.image} src={process.env.REACT_APP_API_URL + product[0]?.image} alt={product[0].name} />
                 <div className={styles.root__content}>
                     {
                         product.length > 1 && (
@@ -41,9 +42,9 @@ const Item = ({product}: IProps) => {
                             </ButtonGroup>
                         )
                     }
-                    <h4 className={styles.title}>{product[0].name}</h4>
+                    <h4 className={styles.title}>{product[0]?.name}</h4>
                     <div className={styles.root__description}>
-                        <p>{product[0].description}</p>
+                        <p>{product[0]?.description}</p>
                     </div>
                     <div className={styles.bottom}>
                         <div className={styles.price}>{product.find((item) => item.sizeId === selectedSize)?.price} ₽</div>

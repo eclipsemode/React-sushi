@@ -93,7 +93,7 @@ export const createProduct = createAsyncThunk<IProductCreated, ICreateProduct>(
                 formData.append('orderIndex', String(orderIndex));
             }
             if (type) {
-                formData.append('type', String(type));
+                formData.append('type', type);
             }
 
             const response = await $api.post('api/product', formData, {

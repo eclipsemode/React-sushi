@@ -114,7 +114,7 @@ const Header: React.FC = () => {
         <header ref={headerRef} className={styles.root}>
             <div className={styles.root__container}>
                 <Link href={RouterPath.HOME} onClick={() => window.scrollTo(0, 0)}>
-                    <Image width={150} height={50} src={'/images/logo.png'} alt="Item logo" />
+                    <Image width={150} height={50} src={'/images/logo.png'} priority alt="Item logo" />
                 </Link>
                 <Stack spacing={0.5}>
                     <span className={styles.city}>

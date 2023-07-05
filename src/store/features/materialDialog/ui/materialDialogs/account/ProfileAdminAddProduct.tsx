@@ -20,8 +20,9 @@ import React, {CSSProperties} from "react";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-interface ICreateProductForm extends Omit<ICreateProduct, 'image'> {
+interface ICreateProductForm extends Omit<ICreateProduct, 'image' | 'price'> {
     image: FileList,
+    price: number,
     price1: number,
     price2: number,
     price3: number,
@@ -73,6 +74,7 @@ const ProfileAdminAddProduct = () => {
                 } else {
                     await dispatch(createProduct({
                         ...data,
+                        price: [data.price],
                         image: fileImage
                     })).unwrap();
                 }
