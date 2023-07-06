@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import { fetchProducts, ProductsStatus, selectProducts } from '@store/features/products/api';
 import { selectFilter, setCategoryNumber } from '@store/features/filter/api';

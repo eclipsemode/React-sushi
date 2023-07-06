@@ -129,8 +129,7 @@ const OrdersList: React.FC<IOrdersList> = ({orders}) => {
                                     <List key={product.sizeId + product.name} sx={{width: '100%', bgcolor: 'transparent'}}>
                                         <ListItem alignItems="flex-start">
                                             <ListItemAvatar>
-                                                <Avatar alt="Remy Sharp"
-                                                        src={process.env.REACT_APP_API_URL + product.image}/>
+                                                <Avatar alt="Remy Sharp" src={process.env.REACT_APP_API_URL + product.image}/>
                                             </ListItemAvatar>
                                             <ListItemText
                                                 sx={{color: Colors.$rootText}}

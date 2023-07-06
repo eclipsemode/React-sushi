@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import { fetchAuth } from '@store/features/auth';

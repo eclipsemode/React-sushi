@@ -1,3 +1,4 @@
+"use client"
 import {Dialog, useMediaQuery} from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import Colors from "@shared/utils/Colors";

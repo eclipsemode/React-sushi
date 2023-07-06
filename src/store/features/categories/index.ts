@@ -1,10 +1,15 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { $api } from "@services/api";
 
 type CategoriesStatusType = 'fulfilled' | 'pending' | 'rejected';
 
+export interface ICategories {
+  id: number,
+  name: string
+}
+
 export interface ICategoryState {
-  categories: { id: number, name: string }[];
+  categories: ICategories[];
   categoriesStatus: CategoriesStatusType;
 }
 
@@ -32,7 +37,12 @@ const initialState: ICategoryState = {
 const categoriesSlice = createSlice({
   name: 'category',
   initialState,
-  reducers: {},
+  reducers: {
+    setCategories: (state, action: PayloadAction<ICategories[]>) => {
+      state.categories = action.payload;
+      state.categoriesStatus = 'fulfilled';
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCategories.fulfilled, (state, action) => {
@@ -49,5 +59,7 @@ const categoriesSlice = createSlice({
 })
 
 export { fetchCategories };
+
+export const { setCategories } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

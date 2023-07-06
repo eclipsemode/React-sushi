@@ -5,17 +5,11 @@ import {Skeleton} from "@mui/material";
 import {Sort} from "@store/features/filter/ui";
 import Products from "@store/features/products/ui/Products";
 import React from "react";
-import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {fetchCategories} from "@store/features/categories";
+import {useAppSelector} from "@store/hooks";
 
 async function Home() {
-    const dispatch = useAppDispatch();
     const {categories} = useAppSelector((state) => state.categoriesReducer);
     const {categoryNumber} = useAppSelector((state) => state.filterReducer);
-
-    React.useEffect(() => {
-        dispatch(fetchCategories());
-    }, [dispatch]);
 
     return (
         <>

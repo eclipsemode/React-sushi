@@ -1,14 +1,16 @@
 import React from "react";
 import styles from "./index.module.scss";
 import { ApplyButton, Input } from "@shared/UI";
-import { useAppDispatch } from "@store/hooks";
+import {useAppDispatch, useAppSelector} from "@store/hooks";
 import { fetchUserLogin } from "@store/features/login/api";
 import { useForm, SubmitHandler } from "react-hook-form";
 import  { ErrorMessage } from "@hookform/error-message";
-import { ValidationError } from "@shared/error";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import {enqueueSnackbar} from "notistack";
+import {selectUser} from "@store/features/user";
 import {useRouter} from "next/navigation";
+import RouterPath from "@shared/utils/menuPath";
 
 type LoginProps = {
   setAuth: (value: boolean) => void;
@@ -24,18 +26,26 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
   const dispatch = useAppDispatch();
   const [passwordHidden, setPasswordHidden] = React.useState<boolean>(true);
   const passwordRef = React.useRef<HTMLInputElement>(null);
-  const { register, handleSubmit, setError, formState: { errors } } = useForm<Inputs>();
+  const { isAuth } = useAppSelector(selectUser);
+  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+  
+  React.useEffect(() => {
+    if (isAuth) {
+      router.push(RouterPath.HOME)
+    }
+  }, [isAuth, router])
 
   const reloadPage = () => {
-    router.push('/');
+    window.location.reload();
   }
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
-    const response: any = await dispatch(fetchUserLogin({ login: data.login, password: data.password }));
-    if (response.meta.requestStatus === 'rejected') {
-      return new ValidationError(response.payload, setError)
+    try {
+      await dispatch(fetchUserLogin({ login: data.login, password: data.password })).unwrap();
+      reloadPage();
+    } catch (e) {
+      enqueueSnackbar('Неверный логин или пароль', { variant: 'error' })
     }
-    reloadPage();
   };
 
   const handlePasswordHidden = (): void => {

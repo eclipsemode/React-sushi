@@ -24,6 +24,10 @@ const ProductsListDnD = () => {
         })()
     }, [dispatch])
 
+    React.useEffect(() => {
+        console.log(cards)
+    }, [cards])
+
     const moveItem = React.useCallback((dragIndex: number, hoverIndex: number) => {
         setCards((prevCards: IProduct[][]) =>
             update(prevCards, {

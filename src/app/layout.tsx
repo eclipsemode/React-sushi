@@ -24,16 +24,14 @@ const RootLayout = ({children}: { children: React.ReactNode }) => {
         <html lang="ru">
         <body className={`App`}>
         <Providers>
-            <>
-            <Header />
+            <Header/>
             <main className="content">
                 <div className="container">
                     {children}
                 </div>
             </main>
-            <Footer />
-            <ToTopArrow />
-            </>
+            <Footer/>
+            <ToTopArrow/>
         </Providers>
         </body>
         </html>

@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import { useAppDispatch } from '@store/hooks';
 import { setCurrentWindowInnerWidth } from '@store/features/adaptive';
