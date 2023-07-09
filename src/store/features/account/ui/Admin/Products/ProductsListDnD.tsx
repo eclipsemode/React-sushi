@@ -2,20 +2,39 @@ import React from "react";
 import update from 'immutability-helper'
 import DragAndDropItem from "@shared/UI/DragAndDrop";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {getProducts, IProduct, selectProducts} from "@store/features/products/api";
+import styles from './index.module.scss'
+import {
+    changeProductsOrder,
+    getProducts,
+    IProduct,
+    IProductOrderChange,
+    selectProducts
+} from "@store/features/products/api";
 import {enqueueSnackbar} from "notistack";
+import {Stack} from "@mui/material";
 
 const ProductsListDnD = () => {
     const dispatch = useAppDispatch();
     const {products} = useAppSelector(selectProducts);
+    const {categories} = useAppSelector((state) => state.categoriesReducer);
     const [cards, setCards] = React.useState<IProduct[][]>([])
+
+    const parseCards = (cards: IProduct[][]) => {
+        const newCards: IProductOrderChange[] = cards.map((card, index) => {
+            return {
+                id: card.at(0)?.id || 0,
+                orderIndex: index + 1
+            }
+        });
+        return newCards;
+    }
 
     React.useEffect(() => {
         setCards(products)
     }, [products])
 
     React.useEffect(() => {
-        (async function() {
+        (async function () {
             try {
                 await dispatch(getProducts()).unwrap();
             } catch (e) {
@@ -23,10 +42,6 @@ const ProductsListDnD = () => {
             }
         })()
     }, [dispatch])
-
-    React.useEffect(() => {
-        console.log(cards)
-    }, [cards])
 
     const moveItem = React.useCallback((dragIndex: number, hoverIndex: number) => {
         setCards((prevCards: IProduct[][]) =>
@@ -42,20 +57,26 @@ const ProductsListDnD = () => {
     const renderCard = React.useCallback(
         (card: IProduct[], index: number) => {
             return (
-                <DragAndDropItem
-                    key={card[0].id}
-                    index={index}
-                    id={card[0].id}
-                    text={card[0].name}
-                    moveItem={moveItem}
-                />
+                <div onDrop={() => dispatch(changeProductsOrder(parseCards(cards)))} key={card[0].id}>
+                    <DragAndDropItem
+                        index={index}
+                        id={card[0].id}
+                        text={card[0].name}
+                        moveItem={moveItem}
+                    />
+                </div>
             )
         },
-        [moveItem],
+        [cards, dispatch, moveItem],
     )
 
     return (
-        <div>{cards.map((card, i) => renderCard(card, i))}</div>
+        categories.map(category => (
+            <Stack key={category.id} className={styles.root}>
+                <h3 className={styles.title}>{category.name}</h3>
+                <div className={styles.card}>{cards.map((card, i) => (category.id === card[0].categoryId) && renderCard(card, i))}</div>
+            </Stack>
+        ))
     )
 };
 

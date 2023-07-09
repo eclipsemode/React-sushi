@@ -54,6 +54,11 @@ export interface IProductCreated extends Omit<ICreateProduct, 'image' | 'price' 
     }[]
 }
 
+export interface IProductOrderChange {
+    id: number,
+    orderIndex: number
+}
+
 export const fetchProducts = createAsyncThunk<IProduct[][], void, { state: RootState }>(
     "products/fetchProducts",
     async (_, {rejectWithValue, getState}) => {
@@ -133,6 +138,25 @@ export const deleteProduct = createAsyncThunk<string, number>(
     async (id, {rejectWithValue}) => {
         try {
             const response = await $api.delete(`api/product/${id}`);
+            return response.data;
+        } catch (error: any) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message);
+            } else {
+                return rejectWithValue(error.message);
+            }
+        }
+    }
+)
+
+export const changeProductsOrder = createAsyncThunk<void, IProductOrderChange[]>(
+    'products/changeProductsOrder',
+    async (data, {rejectWithValue, dispatch}) => {
+        try {
+            const response = await $api.post('api/product/change-order', {
+                data
+            });
+            await dispatch(getProducts()).unwrap();
             return response.data;
         } catch (error: any) {
             if (error.response && error.response.data.message) {

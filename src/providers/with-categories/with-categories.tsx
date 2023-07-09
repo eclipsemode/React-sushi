@@ -2,7 +2,7 @@ import React from 'react';
 import StoreCategories from "@providers/with-categories/StoreCategories";
 
 async function getCategories() {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}api/categories`, { cache: 'no-store'});
+    const response = await fetch(`${process.env.REACT_APP_API_URL}api/categories`, { cache: 'force-cache'});
     return response.json();
 }
 
