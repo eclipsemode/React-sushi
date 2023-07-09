@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@store/index';
+import {SortNameType} from "@store/features/filter/model";
 
 export enum SortType {
+  ORDER_INDEX = 'orderIndex',
   RATING = 'rating',
   PRICE = 'price',
   NAME = 'name',
@@ -20,7 +22,7 @@ export interface IFilterState {
 
 const initialState: IFilterState = {
   sortId: 0,
-  sortType: SortType.RATING,
+  sortType: SortType.ORDER_INDEX,
   sortOrder: SortOrderType.ASC,
   categoryNumber: 1,
 };
@@ -29,14 +31,10 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setSortId: (state, action: PayloadAction<number>) => {
-      state.sortId = action.payload;
-    },
-    setSortType: (state, action: PayloadAction<SortType>) => {
-      state.sortType = action.payload;
-    },
-    setSortOrder: (state, action: PayloadAction<SortOrderType>) => {
-      state.sortOrder = action.payload;
+    setSort: (state, action: PayloadAction<SortNameType>) => {
+      state.sortId = action.payload.id;
+      state.sortType = action.payload.sortType;
+      state.sortOrder = action.payload.orderType;
     },
     setCategoryNumber: (state, action: PayloadAction<number>) => {
       state.categoryNumber = Number(action.payload);
@@ -45,6 +43,6 @@ export const filterSlice = createSlice({
 });
 
 export const selectFilter = (state: RootState) => state.filterReducer;
-export const { setSortId, setSortType, setSortOrder, setCategoryNumber } =
+export const { setCategoryNumber, setSort } =
   filterSlice.actions;
 export default filterSlice.reducer;

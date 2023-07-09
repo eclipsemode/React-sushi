@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store/index";
 import {$api} from "@services/api";
+import {SortOrderType, SortType} from "@store/features/filter/api";
 
 export enum ProductsStatus {
     PENDING = 'pending',
@@ -64,7 +65,7 @@ export const fetchProducts = createAsyncThunk<IProduct[][], void, { state: RootS
     async (_, {rejectWithValue, getState}) => {
         try {
             const {filterReducer} = getState();
-            const {data} = await $api.get(`api/product?categoryId=${filterReducer.categoryNumber || 1}&sortBy=${filterReducer.sortType}&sortOrder=${filterReducer.sortOrder}`);
+            const {data} = await $api.get(`api/product?categoryId=${filterReducer.categoryNumber || 1}&sortBy=${filterReducer.sortType || SortType.ORDER_INDEX}&sortOrder=${filterReducer.sortOrder || SortOrderType.ASC}`);
             return data;
         } catch (error: any) {
             if (error.response && error.response.data.message) {

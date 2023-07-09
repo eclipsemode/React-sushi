@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 
-import { setSortType, setSortId, setSortOrder, selectFilter } from '@store/features/filter/api';
+import {selectFilter, setSort} from '@store/features/filter/api';
 import { SortNameType } from '@store/features/filter/model';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 
@@ -21,9 +21,7 @@ const Popup: React.FC<PopupProps> = ({ popupHidden, sortNames, handlePopup, popu
 
         if (!sortObj) return;
 
-        dispatch(setSortId(sortObj.id));
-        dispatch(setSortType(sortObj.sortType));
-        dispatch(setSortOrder(sortObj.orderType));
+        dispatch(setSort(sortObj));
 
         handlePopup();
     };
