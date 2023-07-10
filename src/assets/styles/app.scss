@@ -47,7 +47,7 @@ body {
     grid-row-gap: 55px;
     justify-items: center;
 
-    & a {
+    & > div {
       background: $root-header--1;
     }
 

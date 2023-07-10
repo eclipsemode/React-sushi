@@ -22,6 +22,7 @@ function Providers({children}: IProps) {
                 <MaterialDialog/>
             </WithSnackbar>
         </WithPersist>
+
     </WithStore>;
 }
 

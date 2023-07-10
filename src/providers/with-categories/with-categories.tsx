@@ -9,11 +9,7 @@ async function getCategories() {
 
 const WithCategories = async () => {
     const categories = await getCategories();
-    return (
-        <>
-        <StoreCategories categories={categories} />
-        </>
-    )
+    return <StoreCategories categories={categories} />
 };
 
 export default WithCategories;

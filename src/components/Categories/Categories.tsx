@@ -56,13 +56,13 @@ function Categories() {
                       ))
                     : categories.map((category, index) => (
                           <li key={category.id} onClick={() => handleClickCategory(category.id)}>
-                              <Link href={`/?categoryNumber=${category.id}`}>
+                              {/*<Link href={`/?categoryNumber=${category.id}`}>*/}
                                   <MenuButton
                                       image={categoryImg(index)}
                                       text={category.name}
                                       active={categoryNumber === category.id}
                                   />
-                              </Link>
+                              {/*</Link>*/}
                           </li>
                       ))}
             </ul>

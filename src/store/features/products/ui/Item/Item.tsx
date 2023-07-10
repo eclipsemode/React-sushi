@@ -5,7 +5,6 @@ import { AddToCartButton } from '@shared/UI';
 import {ButtonGroup, SxProps} from "@mui/material";
 import Button from "@mui/material/Button";
 import Colors from "@shared/utils/Colors";
-import Link from 'next/link'
 import Image from "next/image";
 
 interface IProps {
@@ -27,8 +26,7 @@ const Item = ({product}: IProps) => {
     const [selectedSize, setSelectedSize] = React.useState<number>(product[0]?.sizeId);
     const foundProduct = product.find((item) => item.sizeId === selectedSize);
     return (
-        <div>
-            <Link className={styles.root} href="">
+        <div className={styles.root}>
                 <Image width={306} loading='lazy' height={170} placeholder='blur' blurDataURL='data:images/blur.png' className={styles.image} src={process.env.REACT_APP_API_URL + product[0]?.image} alt={product[0].name} />
                 <div className={styles.root__content}>
                     {
@@ -59,7 +57,6 @@ const Item = ({product}: IProps) => {
 
                     </div>
                 </div>
-            </Link>
         </div>
     );
 };

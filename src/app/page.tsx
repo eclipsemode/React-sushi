@@ -5,11 +5,13 @@ import {Skeleton} from "@mui/material";
 import {Sort} from "@store/features/filter/ui";
 import Products from "@store/features/products/ui/Products";
 import React from "react";
-import {useAppSelector} from "@store/hooks";
+import {useAppDispatch, useAppSelector} from "@store/hooks";
+import {fetchProducts} from "@store/features/products/api";
 
 async function Home() {
     const {categories} = useAppSelector((state) => state.categoriesReducer);
     const {categoryNumber} = useAppSelector((state) => state.filterReducer);
+    const dispatch = useAppDispatch();
 
     return (
         <>
@@ -17,6 +19,7 @@ async function Home() {
             <div className="content__top">
                 <Categories/>
             </div>
+            <button onClick={() => dispatch(fetchProducts())}>Hello</button>
             <section className="content__head">
                 <h2 className="content__title">
                     {categories.length !== 0 ? (
