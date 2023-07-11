@@ -133,7 +133,7 @@ const OrdersList: React.FC<IOrdersList> = ({orders}) => {
                                             </ListItemAvatar>
                                             <ListItemText
                                                 sx={{color: Colors.$rootText}}
-                                                primary={product.name + (product.size !== 'default' ? ' ' + product.size : '')}
+                                                primary={product.name + (!!product.size ? ' ' + product.size : '')}
                                                 secondary={
                                                     <React.Fragment>
                                                         <span style={{
