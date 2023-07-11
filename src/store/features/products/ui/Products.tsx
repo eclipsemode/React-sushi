@@ -1,14 +1,14 @@
 "use client"
 import React from 'react';
-import { fetchProducts, ProductsStatus, selectProducts } from '@store/features/products/api';
-import { selectFilter, setCategoryNumber } from '@store/features/filter/api';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { Rejected, Pending, Fulfilled } from './index';
+import {fetchProducts, ProductsStatus, selectProducts} from '@store/features/products/api';
+import {selectFilter, setCategoryNumber} from '@store/features/filter/api';
+import {useAppDispatch, useAppSelector} from '@store/hooks';
+import {Rejected, Pending, Fulfilled} from './index';
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 
 const Products: React.FC = () => {
-    const { categoryNumber, sortType, sortOrder } = useAppSelector(selectFilter);
-    const { productsStatus } = useAppSelector(selectProducts);
+    const {categoryNumber, sortType, sortOrder} = useAppSelector(selectFilter);
+    const {productsStatus} = useAppSelector(selectProducts);
     const dispatch = useAppDispatch();
     const router = useRouter();
     const pathname = usePathname();
@@ -39,11 +39,11 @@ const Products: React.FC = () => {
     }, [categoryNumber, dispatch, sortOrder, sortType]);
 
     return productsStatus === ProductsStatus.PENDING ? (
-        <Pending />
+        <Pending/>
     ) : productsStatus === ProductsStatus.REJECTED ? (
-        <Rejected />
+        <Rejected/>
     ) : (
-        <Fulfilled />
+        <Fulfilled/>
     );
 };
 

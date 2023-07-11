@@ -1,6 +1,7 @@
 @import "@assets/styles/variables";
 
 .root {
+  cursor: pointer;
   padding: 5px;
   width: 130px;
   border-radius: 12px;
@@ -21,6 +22,7 @@
 }
 
 .rootActive {
+  cursor: pointer;
   background-color: $root-header--08;
   padding: 5px;
   width: 130px;

@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
                             </Stack>
                         </Stack>
                         <Stack className={styles.center} spacing={1} alignItems="center">
-                            <Image src={'/images/logo.png'} width={150} height={50} alt="logo" />
+                            <Image src={'/images/logo.png'} width={150} priority height={50} alt="logo" />
                             <span>
                                 город - <span style={{ fontWeight: 'bold' }}>{city}</span>
                             </span>

@@ -1,18 +1,20 @@
 "use client"
 import React from 'react';
 import styles from './index.module.scss';
-import { setCategoryNumber } from '@store/features/filter/api';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
+// import { setCategoryNumber } from '@store/features/filter/api';
+import {
+    // useAppDispatch,
+    useAppSelector } from '@store/hooks';
 import MenuButton from '@shared/UI/MenuButton';
 import { Skeleton } from '@mui/material';
 import Link from "next/link";
 
 function Categories() {
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
     const { categoriesStatus, categories } = useAppSelector((state) => state.categoriesReducer);
     const { categoryNumber } = useAppSelector((state) => state.filterReducer);
     const handleClickCategory = (id: number) => {
-        dispatch(setCategoryNumber(id));
+        // dispatch(setCategoryNumber(id));
     };
     const categoryImg = (i: number) => {
         switch (i) {
@@ -56,13 +58,13 @@ function Categories() {
                       ))
                     : categories.map((category, index) => (
                           <li key={category.id} onClick={() => handleClickCategory(category.id)}>
-                              {/*<Link href={`/?categoryNumber=${category.id}`}>*/}
+                              <Link href={`/?categoryNumber=${category.id}`}>
                                   <MenuButton
                                       image={categoryImg(index)}
                                       text={category.name}
                                       active={categoryNumber === category.id}
                                   />
-                              {/*</Link>*/}
+                              </Link>
                           </li>
                       ))}
             </ul>

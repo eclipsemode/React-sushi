@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import styles from "./Account.module.scss";
 import {useAppDispatch, useAppSelector} from "@store/hooks";

@@ -5,16 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/cart/lodaing.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/contacts/loading.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/login/loading.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/personal/loading.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/personal/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/personal/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Categories/Categories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Categories/Categories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/providers/with-categories/with-categories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/with-categories/with-categories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/providers/with-providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/with-providers.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/products/ui/Item/Item.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/products/ui/Item/Item.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/hooks/use-store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/hooks/use-store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Account.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/products/ui/Products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/products/ui/Products.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +27,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -322,6 +327,7 @@
       <workItem from="1688976114431" duration="2716000" />
       <workItem from="1688980119429" duration="4211000" />
       <workItem from="1688991017836" duration="2127000" />
+      <workItem from="1689080893809" duration="705000" />
     </task>
     <servers />
   </component>
