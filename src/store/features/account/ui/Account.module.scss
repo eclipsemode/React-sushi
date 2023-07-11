@@ -100,5 +100,15 @@
 @media (max-width: $mediumSize) {
   .root__body {
     flex-direction: column;
+    row-gap: 15px;
+  }
+
+  .root__body > aside {
+    min-height: auto;
+    min-width: auto;
+  }
+
+  .root__body > aside li {
+    justify-content: center;
   }
 }

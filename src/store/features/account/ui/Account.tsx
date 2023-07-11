@@ -1,4 +1,3 @@
-'use client'
 import React from "react";
 import styles from "./Account.module.scss";
 import {useAppDispatch, useAppSelector} from "@store/hooks";
@@ -113,7 +112,7 @@ const Account: React.FC = () => {
                     </Backdrop> :
                     (
                         <div className={styles.root__body}>
-                            {deviceType === DeviceType.DESKTOP && renderAsideMenu()}
+                            {renderAsideMenu()}
                             {selected === "profile" && <Profile/>}
                             {selected === "orders" && <Orders/>}
                             {selected === "settings" && <Settings/>}
