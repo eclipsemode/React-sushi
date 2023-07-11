@@ -19,7 +19,6 @@ import {selectAuth} from "@store/features/auth";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {setMaterialDialog} from "@store/features/materialDialog/api";
 import {MaterialDialogTypes} from "@store/features/materialDialog/model";
-import {DeviceType, selectAdaptiveServiceSlice} from "@store/features/adaptive";
 import Admin from "./Admin";
 import {SelectedType} from "../api";
 import {useRouter} from "next/navigation";
@@ -29,7 +28,6 @@ const Account: React.FC = () => {
     const [openBackdrop, setOpenBackdrop] = React.useState(true);
     const {isAuth, user} = useAppSelector(state => state.userReducer);
     const { page } = useAppSelector(state => state.ordersReducer);
-    const { deviceType } = useAppSelector(selectAdaptiveServiceSlice);
     const {loading} = useAppSelector(selectAuth);
     const [selected, setSelected] = React.useState<SelectedType>(page);
     const router = useRouter();
