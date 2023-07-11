@@ -14,9 +14,6 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {useRouter} from "next/navigation";
 import MenuPath from "@shared/utils/menuPath";
 
-type RegistrationProps = {
-  setAuth: (value: boolean) => void;
-}
 
 type FormInputs = {
   email: string,
@@ -33,7 +30,7 @@ type FormInputs = {
   room: number
 };
 
-const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
+const Registration = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { register, handleSubmit, setError, watch, formState: { errors } } = useForm<FormInputs>();
@@ -43,7 +40,7 @@ const Registration: React.FC<RegistrationProps> = ({ setAuth }) => {
     setPasswordHidden(!passwordHidden);
   };
   const handleAuth = () => {
-    setAuth(true);
+    router.push(MenuPath.LOGIN);
   };
 
   const onSubmit: SubmitHandler<FormInputs> = async data => {

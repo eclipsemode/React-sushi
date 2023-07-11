@@ -1,48 +1,34 @@
 import React from "react";
 import styles from "./index.module.scss";
 import { ApplyButton, Input } from "@shared/UI";
-import {useAppDispatch, useAppSelector} from "@store/hooks";
+import {useAppDispatch} from "@store/hooks";
 import { fetchUserLogin } from "@store/features/login/api";
 import { useForm, SubmitHandler } from "react-hook-form";
 import  { ErrorMessage } from "@hookform/error-message";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {enqueueSnackbar} from "notistack";
-import {selectUser} from "@store/features/user";
 import {useRouter} from "next/navigation";
-import RouterPath from "@shared/utils/menuPath";
-
-type LoginProps = {
-  setAuth: (value: boolean) => void;
-}
+import MenuPath from "@shared/utils/menuPath";
+import {fetchAuth} from "@store/features/auth";
 
 type Inputs = {
   login: string,
   password: string,
 };
 
-const Login: React.FC<LoginProps> = ({ setAuth }) => {
+const Login = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [passwordHidden, setPasswordHidden] = React.useState<boolean>(true);
   const passwordRef = React.useRef<HTMLInputElement>(null);
-  const { isAuth } = useAppSelector(selectUser);
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
-  
-  React.useEffect(() => {
-    if (isAuth) {
-      router.push(RouterPath.HOME)
-    }
-  }, [isAuth, router])
-
-  const reloadPage = () => {
-    window.location.reload();
-  }
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
     try {
       await dispatch(fetchUserLogin({ login: data.login, password: data.password })).unwrap();
-      reloadPage();
+      await dispatch(fetchAuth());
+      router.push(MenuPath.HOME)
     } catch (e) {
       enqueueSnackbar('Неверный логин или пароль', { variant: 'error' })
     }
@@ -54,7 +40,7 @@ const Login: React.FC<LoginProps> = ({ setAuth }) => {
   };
 
   const handleAuth = () => {
-    setAuth(false);
+    router.push(MenuPath.REGISTRATION);
   };
 
   const loginError = (): JSX.Element | void => {
