@@ -6,8 +6,7 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    FormControl,
-    InputLabel, NativeSelect, Stack
+    Stack
 } from "@mui/material";
 import SimpleButton from "@shared/UI/SimpleButton";
 import Colors from "@shared/utils/Colors";
@@ -18,6 +17,7 @@ import Input from "@shared/UI/input";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import {ICreateProductForm} from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddProduct";
+import Select from "@shared/UI/Select";
 
 const rowStyle: CSSProperties = {
     marginTop: '10px'
@@ -109,21 +109,10 @@ const ProfileAdminEditProduct = () => {
 
     const renderSelectType = () => (
         <Box sx={{minWidth: 120}}>
-            <FormControl fullWidth>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    Тип
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={'other'}
-                    {...register('type')}
-                    inputProps={{
-                        id: 'uncontrolled-native',
-                    }}
-                >
-                    <option value={'other'}>Другое</option>
-                    <option value={'pizza'}>Пицца</option>
-                </NativeSelect>
-            </FormControl>
+            <Select register={register} name='type'>
+                <option value={'other'}>Другое</option>
+                <option value={'pizza'}>Пицца</option>
+            </Select>
         </Box>
     )
 
