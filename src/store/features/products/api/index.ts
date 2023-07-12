@@ -29,6 +29,10 @@ export interface ICreateProduct {
     size: string[] | null
 }
 
+export interface IChangeProduct extends Omit<ICreateProduct, 'image'> {
+    image: File | null
+}
+
 export interface IProduct {
     id: number,
     name: string,
@@ -158,6 +162,49 @@ export const changeProductsOrder = createAsyncThunk<void, IProductOrderChange[]>
                 data
             });
             await dispatch(getProducts()).unwrap();
+            return response.data;
+        } catch (error: any) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message);
+            } else {
+                return rejectWithValue(error.message);
+            }
+        }
+    }
+)
+
+export const changeProduct = createAsyncThunk<void, Record<'id', number> & IChangeProduct>(
+    'products/changeProduct',
+    async ({id, name, price, rating, description, image, categoryId, sku, orderIndex, type, size}, {rejectWithValue}) => {
+        try {
+            const formData = new FormData();
+            formData.append('id', String(id))
+            formData.append('name', name);
+            formData.append('price', JSON.stringify(price));
+            formData.append('rating', String(rating));
+            formData.append('description', description);
+            if (image) {
+                formData.append('image', image);
+            }
+            formData.append('categoryId', String(categoryId));
+            if (size) {
+                formData.append('size', JSON.stringify(size));
+            }
+            if (sku) {
+                formData.append('sku', JSON.stringify(sku));
+            }
+            if (orderIndex) {
+                formData.append('orderIndex', String(orderIndex));
+            }
+            if (type) {
+                formData.append('type', type);
+            }
+
+            const response = await $api.put('api/product', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
             return response.data;
         } catch (error: any) {
             if (error.response && error.response.data.message) {

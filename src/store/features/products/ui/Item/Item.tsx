@@ -27,7 +27,7 @@ const Item = ({product}: IProps) => {
     const foundProduct = product.find((item) => item.sizeId === selectedSize);
     return (
         <div className={styles.root}>
-                <Image width={306} loading='lazy' height={170} placeholder='blur' blurDataURL='data:images/blur.png' className={styles.image} src={process.env.REACT_APP_API_URL + product[0]?.image} alt={product[0].name} />
+                <Image width={306} loading='lazy' height={170} placeholder='blur' blurDataURL='data:images/blur.png' className={styles.image} src={process.env.REACT_APP_API_URL + product[0]?.image} alt={product[0]?.name} />
                 <div className={styles.root__content}>
                     {
                         product.length > 1 && (

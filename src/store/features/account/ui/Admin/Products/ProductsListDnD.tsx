@@ -63,6 +63,7 @@ const ProductsListDnD = () => {
                         id={card[0].id}
                         text={card[0].name}
                         moveItem={moveItem}
+                        card={card}
                     />
                 </div>
             )
@@ -74,7 +75,7 @@ const ProductsListDnD = () => {
         categories.map(category => (
             <Stack key={category.id} className={styles.root}>
                 <h3 className={styles.title}>{category.name}</h3>
-                <div className={styles.card}>{cards.map((card, i) => (category.id === card[0].categoryId) && renderCard(card, i))}</div>
+                <div className={styles.card}>{cards.map((card, i) => (category.id === card[0]?.categoryId) && renderCard(card, i))}</div>
             </Stack>
         ))
     )

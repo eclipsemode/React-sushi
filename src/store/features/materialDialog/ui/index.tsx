@@ -14,6 +14,7 @@ import ProfileSendSettings from "./materialDialogs/ProfileSendSettings";
 import ProfileResetSettings from "./materialDialogs/account/ProfileResetSettings";
 import ProfileAdminAddProduct from "./materialDialogs/account/ProfileAdminAddProduct";
 import ProfileAdminDeleteProduct from "./materialDialogs/account/ProfileAdminDeleteProduct";
+import ProfileAdminEditProduct from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditProduct";
 
 const MaterialDialog = () => {
     const { opened, dialogType } = useAppSelector(selectMaterialDialog);
@@ -41,6 +42,7 @@ const MaterialDialog = () => {
             case MaterialDialogTypes.PROFILE_SETTINGS_RESET: return <ProfileResetSettings />
             case MaterialDialogTypes.PROFILE_ADMIN_ADD_PRODUCT: return <ProfileAdminAddProduct />
             case MaterialDialogTypes.PROFILE_ADMIN_DELETE_PRODUCT: return <ProfileAdminDeleteProduct />
+            case MaterialDialogTypes.PROFILE_ADMIN_EDIT_PRODUCT: return <ProfileAdminEditProduct />
 
             default: return <></>
         }

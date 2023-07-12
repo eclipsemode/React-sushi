@@ -10,12 +10,15 @@ import {Stack} from "@mui/material";
 import {useAppDispatch} from "@store/hooks";
 import {setMaterialDialog} from "@store/features/materialDialog/api";
 import {MaterialDialogTypes} from "@store/features/materialDialog/model";
+import SettingsIcon from '@mui/icons-material/Settings';
+import {IProduct} from "@store/features/products/api";
 
 interface IProps {
     id: any
     text: string
     index: number
-    moveItem: (dragIndex: number, hoverIndex: number) => void
+    moveItem: (dragIndex: number, hoverIndex: number) => void,
+    card: IProduct[]
 }
 
 interface DragItem {
@@ -24,7 +27,7 @@ interface DragItem {
     type: string
 }
 
-const DragAndDropItem = ({id, text, index, moveItem}: IProps) => {
+const DragAndDropItem = ({id, text, index, moveItem, card}: IProps) => {
     const dispatch = useAppDispatch();
     const ref = React.useRef<HTMLDivElement>(null)
     const [{handlerId}, drop] = useDrop<
@@ -108,11 +111,21 @@ const DragAndDropItem = ({id, text, index, moveItem}: IProps) => {
                     <DragIndicatorIcon/>
                     {text}
                 </Stack>
-                <RemoveCircleOutlineIcon color='error' sx={{cursor: 'pointer'}} onClick={() => dispatch(setMaterialDialog({
-                    opened: true,
-                    dialogType: MaterialDialogTypes.PROFILE_ADMIN_DELETE_PRODUCT,
-                    data: { id }
-                }))}/>
+                <Stack direction='row' sx={{columnGap: '5px'}}>
+                    <SettingsIcon sx={{cursor: 'pointer'}} onClick={() => {
+                        dispatch(setMaterialDialog({
+                            opened: true,
+                            dialogType: MaterialDialogTypes.PROFILE_ADMIN_EDIT_PRODUCT,
+                            data: card
+                        }))
+                    }}/>
+                    <RemoveCircleOutlineIcon color='error' sx={{cursor: 'pointer'}}
+                                             onClick={() => dispatch(setMaterialDialog({
+                                                 opened: true,
+                                                 dialogType: MaterialDialogTypes.PROFILE_ADMIN_DELETE_PRODUCT,
+                                                 data: {id}
+                                             }))}/>
+                </Stack>
             </Stack>
         </div>
     )

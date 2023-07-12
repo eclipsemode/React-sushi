@@ -6,7 +6,7 @@ import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {enqueueSnackbar} from "notistack";
 import {deleteProduct, getProducts} from "@store/features/products/api";
 
-const ProfileSendSettings = () => {
+const ProfileAdminDeleteProduct = () => {
     const dispatch = useAppDispatch();
     const {data} = useAppSelector(selectMaterialDialog);
 
@@ -54,4 +54,4 @@ const ProfileSendSettings = () => {
     );
 };
 
-export default ProfileSendSettings;
+export default ProfileAdminDeleteProduct;

@@ -27,7 +27,7 @@ interface IProps {
     onChangeEvent?: (value: string) => void,
     value?: string | number,
     disabled?: boolean,
-    defaultValue?: string | number | Date
+    defaultValue?: string | number | Date | null
 }
 
 const Input = ({

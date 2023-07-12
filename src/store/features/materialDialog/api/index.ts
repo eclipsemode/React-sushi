@@ -1,19 +1,20 @@
-import {createSlice, Draft, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "@store/index";
 import {MaterialDialogTypes} from "../model";
+import {IProduct} from "@store/features/products/api";
 
-export interface IMaterialDialog {
+export interface IMaterialDialog<T> {
     opened: boolean,
     dialogType: MaterialDialogTypes | null,
-    data?: any | null,
+    data?: T,
     applyCallback?: boolean
 }
 
 
-const initialState: IMaterialDialog = {
+const initialState: IMaterialDialog<IProduct[]> = {
     opened: false,
     dialogType: null,
-    data: null,
+    data: undefined,
     applyCallback: false
 }
 
@@ -21,16 +22,16 @@ export const materialDialogSlice = createSlice({
     name: 'materialDialog',
     initialState,
     reducers: {
-        setMaterialDialog: (state: Draft<IMaterialDialog>, action: PayloadAction<IMaterialDialog>) => {
+        setMaterialDialog: <T>(state: IMaterialDialog<T>, action: PayloadAction<IMaterialDialog<T>>) => {
             state.dialogType = action.payload.dialogType;
             state.opened = action.payload.opened;
-            state.data = action.payload.data ?? null;
+            state.data = action.payload.data ?? undefined;
             state.applyCallback = action.payload.applyCallback ?? false;
         },
         clearMaterialDialog: (state) => {
             state.dialogType = null;
             state.opened = false;
-            state.data = null;
+            state.data = undefined;
             state.applyCallback = false;
         }
     }
