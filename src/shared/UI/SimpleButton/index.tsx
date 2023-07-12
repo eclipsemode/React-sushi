@@ -56,9 +56,8 @@ const SimpleButton: React.FC<ISimpleButton> = ({children, clickEvent, type , var
   return (
     <Button type={type ===  'submit' ? 'submit' : type === 'reset' ? 'reset' : 'button'} variant={variant}
             disabled={disabled}
-            children={children}
             sx={buttonStyle}
-            onClick={clickEvent} defaultValue={children} />
+            onClick={clickEvent} defaultValue={children}>{children}</Button>
   );
 };
 

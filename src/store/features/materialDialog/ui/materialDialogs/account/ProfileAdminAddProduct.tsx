@@ -17,6 +17,7 @@ import React, {CSSProperties} from "react";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Select from "@shared/UI/Select";
+import InputFile from "@shared/UI/InputFile";
 
 export interface ICreateProductForm extends Omit<ICreateProduct, 'image' | 'price'> {
     image: FileList,
@@ -137,10 +138,7 @@ const ProfileAdminAddProduct = () => {
                            style={rowStyle}/>
                     <Input required={true} label='Описание' type="text" register={register} name='description'
                            style={rowStyle}/>
-                    <Stack direction='row' style={rowStyle} sx={{alignItems: 'center', columnGap: '10px'}}>
-                        <span style={{color: Colors.$rootText}}>Изображение</span>
-                        <input required type="file" {...register('image')} style={{color: Colors.$rootText}}/>
-                    </Stack>
+                    <InputFile register={register} name='image' style={{marginTop: '20px'}}/>
 
                     <Input label='Категория' type="number" register={register} name='categoryId' style={rowStyle}/>
                     {
