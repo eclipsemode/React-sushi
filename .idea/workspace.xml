@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/shared/UI/InputFile/index.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/shared/UI/InputFile/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/SimpleButton/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/SimpleButton/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/InputFile/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/InputFile/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/Select/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/Select/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/Select/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/Select/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddProduct.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddProduct.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditProduct.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditProduct.tsx" afterDir="false" />
     </list>
@@ -327,7 +327,9 @@
       <workItem from="1689103463812" duration="1200000" />
       <workItem from="1689160163510" duration="6159000" />
       <workItem from="1689175636002" duration="8764000" />
-      <workItem from="1689187966090" duration="1953000" />
+      <workItem from="1689187966090" duration="2013000" />
+      <workItem from="1689193727871" duration="480000" />
+      <workItem from="1689237804220" duration="4092000" />
     </task>
     <servers />
   </component>

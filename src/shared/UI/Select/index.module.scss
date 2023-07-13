@@ -18,5 +18,9 @@
 
   & > option {
     background: $root-card-background;
+
+    &:checked {
+      background: rgba(15, 15, 15, 0.9);
+    }
   }
 }

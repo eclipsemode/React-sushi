@@ -1,4 +1,4 @@
-import {useAppDispatch} from "@store/hooks";
+import {useAppDispatch, useAppSelector} from "@store/hooks";
 import {setMaterialDialog} from "../../../api";
 import {enqueueSnackbar} from "notistack";
 import {
@@ -29,7 +29,7 @@ export interface ICreateProductForm extends Omit<ICreateProduct, 'image' | 'pric
     sku3: string,
     size1: string,
     size2: string,
-    size3: string
+    size3: string,
 }
 
 const rowStyle: CSSProperties = {
@@ -38,6 +38,7 @@ const rowStyle: CSSProperties = {
 
 const ProfileAdminAddProduct = () => {
     const dispatch = useAppDispatch();
+    const {categories} =  useAppSelector(state => state.categoriesReducer);
     const {register, reset, handleSubmit, watch} = useForm<ICreateProductForm>();
     const [amountPizzaSize, setAmountPizzaSize] = React.useState<number>(1);
     const success = () => {
@@ -138,9 +139,17 @@ const ProfileAdminAddProduct = () => {
                            style={rowStyle}/>
                     <Input required={true} label='Описание' type="text" register={register} name='description'
                            style={rowStyle}/>
-                    <InputFile register={register} name='image' style={{marginTop: '20px'}}/>
+                    <InputFile required={true} register={register} name='image' style={{marginTop: '20px'}}/>
 
-                    <Input label='Категория' type="number" register={register} name='categoryId' style={rowStyle}/>
+                    <Select required={true} register={register} name='categoryId' style={rowStyle} defaultValue='0' validate={(value) => value !== '0'}>
+                        <>
+                        <option value={0} disabled>Выберите категорию</option>
+                        {
+                            categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)
+                        }
+                        </>
+                    </Select>
+
                     {
                         watch('type') !== 'pizza' &&
                         <Input label='Артикул' type="text" register={register} name='sku' style={rowStyle}/>

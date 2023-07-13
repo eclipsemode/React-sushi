@@ -27,6 +27,7 @@ const rowStyle: CSSProperties = {
 const ProfileAdminEditProduct = () => {
     const dispatch = useAppDispatch();
     const {data} = useAppSelector(selectMaterialDialog);
+    const {categories} = useAppSelector(state => state.categoriesReducer);
     const {register, reset, handleSubmit, watch} = useForm<ICreateProductForm>({
         defaultValues: {
             name: !!data && data[0].name || '',
@@ -42,10 +43,11 @@ const ProfileAdminEditProduct = () => {
             size3: !!data && data.length > 2 && data[2].size || '',
             rating: !!data && data[0].rating || undefined,
             description: !!data && data[0].description || '',
-            categoryId: !!data && data[0].categoryId || undefined
+            categoryId: !!data && data[0].categoryId || undefined,
         }
     });
     const [amountPizzaSize, setAmountPizzaSize] = React.useState<number>(!!data && data.length || 1);
+
     const success = () => {
         dispatch(getProducts());
     };
@@ -147,7 +149,12 @@ const ProfileAdminEditProduct = () => {
                            style={rowStyle}/>
                     <InputFile register={register} name='image' style={{marginTop: '20px'}}/>
 
-                    <Input label='Категория' type="number" register={register} name='categoryId' style={rowStyle}/>
+                    <Select register={register} name='categoryId' style={rowStyle} validate={(value) => value !== '0'}>
+                        {
+                            categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)
+                        }
+                    </Select>
+
                     {
                         watch('type') !== 'pizza' &&
                         <Input label='Артикул' type="text" register={register} name='sku' style={rowStyle}/>
