@@ -44,6 +44,16 @@ const CartOrder: React.FC = () => {
         }))
     };
 
+    const checkPromocode = async () => {
+        try {
+            if (promoCodeValue !== null && promoCodeValue.length > 0) {
+                dispatch(fetchPromocodeCheck(promoCodeValue)).unwrap();
+            }
+        } catch (e) {
+
+        }
+    }
+
     const renderDesktopTableHeader = () => (
         <tr>
             <th>Товар</th>
@@ -125,11 +135,7 @@ const CartOrder: React.FC = () => {
                                 </SimpleButton>
                             )
                             : (
-                                <SimpleButton type="button" clickEvent={() => {
-                                    if (promoCodeValue !== null && promoCodeValue.length > 0) {
-                                        dispatch(fetchPromocodeCheck(promoCodeValue));
-                                    }
-                                }}>
+                                <SimpleButton type="button" clickEvent={checkPromocode}>
                                     Применить
                                 </SimpleButton>
                             )

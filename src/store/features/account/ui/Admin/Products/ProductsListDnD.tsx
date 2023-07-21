@@ -12,6 +12,8 @@ import {
 } from "@store/features/products/api";
 import {enqueueSnackbar} from "notistack";
 import {Stack} from "@mui/material";
+import {setMaterialDialog} from "@store/features/materialDialog/api";
+import {MaterialDialogTypes} from "@store/features/materialDialog/model";
 
 const ProductsListDnD = () => {
     const dispatch = useAppDispatch();
@@ -63,7 +65,20 @@ const ProductsListDnD = () => {
                         id={card[0].id}
                         text={card[0].name}
                         moveItem={moveItem}
-                        card={card}
+                        editEvent={() => {
+                            dispatch(setMaterialDialog({
+                                opened: true,
+                                dialogType: MaterialDialogTypes.PROFILE_ADMIN_EDIT_PRODUCT,
+                                data: card
+                            }))
+                        }}
+                        deleteEvent={() => {
+                            dispatch(setMaterialDialog({
+                                opened: true,
+                                dialogType: MaterialDialogTypes.PROFILE_ADMIN_DELETE_PRODUCT,
+                                data: card
+                            }))
+                        }}
                     />
                 </div>
             )

@@ -5,12 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Categories/CategoriesListDnD.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Categories/index.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Categories/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Products/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Promocode/index.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Promocode/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddCategory.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminDeleteCategory.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/InputFile/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/InputFile/index.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/Select/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/Select/index.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/Select/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/Select/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddProduct.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddProduct.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditProduct.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditProduct.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/providers/with-categories/with-categories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/with-categories/with-categories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/DragAndDrop/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/DragAndDrop/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/input/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/input/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Products/ProductsListDnD.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Products/ProductsListDnD.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Admin/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Admin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/categories/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/categories/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/model/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/model/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminDeleteProduct.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminDeleteProduct.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/ui/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/ui/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -329,7 +345,15 @@
       <workItem from="1689175636002" duration="8764000" />
       <workItem from="1689187966090" duration="2013000" />
       <workItem from="1689193727871" duration="480000" />
-      <workItem from="1689237804220" duration="4092000" />
+      <workItem from="1689237804220" duration="5742000" />
+      <workItem from="1689266219995" duration="329000" />
+      <workItem from="1689266669354" duration="4482000" />
+      <workItem from="1689326963810" duration="1704000" />
+      <workItem from="1689331656029" duration="2535000" />
+      <workItem from="1689355575576" duration="433000" />
+      <workItem from="1689358570623" duration="2438000" />
+      <workItem from="1689961901516" duration="706000" />
+      <workItem from="1689963085328" duration="814000" />
     </task>
     <servers />
   </component>

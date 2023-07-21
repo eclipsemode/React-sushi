@@ -126,6 +126,7 @@ const Input = ({
             defaultValue={defaultValue}
             value={value}
             label={label}
+            required={required}
             error={error}
             onChange={event => !!onChangeEvent && onChangeEvent(event.target.value)}
             inputProps={{
@@ -133,7 +134,7 @@ const Input = ({
                 type,
                 autoComplete,
                 placeholder,
-                ...(!!register && register(name, {required, pattern, minLength, maxLength, validate}))
+                ...(!!register && register(name, {pattern, minLength, maxLength, validate}))
             }}
             InputProps={{
                 endAdornment: renderEndAdornment()
@@ -151,13 +152,14 @@ const Input = ({
             {...inputProps}
             sx={stylesInput}
             label={label}
+            required={required}
             error={error}
             inputProps={{
                 name,
                 type,
                 autoComplete,
                 placeholder,
-                ...(!!register && register(name, {required, pattern, minLength, maxLength, validate}))
+                ...(!!register && register(name, {pattern, minLength, maxLength, validate}))
             }}
             InputProps={{
                 endAdornment: renderEndAdornment()

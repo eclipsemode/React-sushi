@@ -1,20 +1,21 @@
+import React from 'react';
+import {useAppDispatch, useAppSelector} from "@store/hooks";
+import {selectMaterialDialog, setMaterialDialog} from "@store/features/materialDialog/api";
+import {enqueueSnackbar} from "notistack";
 import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import SimpleButton from "@shared/UI/SimpleButton";
 import Colors from "@shared/utils/Colors";
-import {selectMaterialDialog, setMaterialDialog} from "../../../api";
-import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {enqueueSnackbar} from "notistack";
-import {deleteProduct, getProducts} from "@store/features/products/api";
+import {deleteCategory, fetchCategories} from "@store/features/categories";
 
-const ProfileAdminDeleteProduct = () => {
+const ProfileAdminDeleteCategory = () => {
     const dispatch = useAppDispatch();
-    const {data} = useAppSelector(selectMaterialDialog);
+    const { data } = useAppSelector(selectMaterialDialog);
 
     const callback = async () => {
         try {
-            await dispatch(deleteProduct(!!data && data[0].id || 0)).unwrap();
-            await dispatch(getProducts()).unwrap();
-            enqueueSnackbar('Продукт успешно удален!', {variant: 'success'});
+            await dispatch(deleteCategory(data.id)).unwrap();
+            await dispatch(fetchCategories());
+            enqueueSnackbar('Категория успешно удалена!', {variant: 'success'});
         } catch (e) {
             enqueueSnackbar('Ошибка удаления, попробуйте позднее', {variant: 'error'});
         }
@@ -38,7 +39,7 @@ const ProfileAdminDeleteProduct = () => {
     return (
         <>
             <DialogTitle id="responsive-dialog-title">
-                Вы уверены что хотите удалить продукт?
+                Вы уверены что хотите удалить категорию?
             </DialogTitle>
             <DialogContent>
                 <DialogContentText>
@@ -54,4 +55,4 @@ const ProfileAdminDeleteProduct = () => {
     );
 };
 
-export default ProfileAdminDeleteProduct;
+export default ProfileAdminDeleteCategory;

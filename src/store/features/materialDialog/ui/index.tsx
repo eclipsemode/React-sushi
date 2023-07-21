@@ -15,6 +15,9 @@ import ProfileResetSettings from "./materialDialogs/account/ProfileResetSettings
 import ProfileAdminAddProduct from "./materialDialogs/account/ProfileAdminAddProduct";
 import ProfileAdminDeleteProduct from "./materialDialogs/account/ProfileAdminDeleteProduct";
 import ProfileAdminEditProduct from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditProduct";
+import ProfileAdminDeleteCategory
+    from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminDeleteCategory";
+import ProfileAdminAddCategory from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddCategory";
 
 const MaterialDialog = () => {
     const { opened, dialogType } = useAppSelector(selectMaterialDialog);
@@ -43,6 +46,9 @@ const MaterialDialog = () => {
             case MaterialDialogTypes.PROFILE_ADMIN_ADD_PRODUCT: return <ProfileAdminAddProduct />
             case MaterialDialogTypes.PROFILE_ADMIN_DELETE_PRODUCT: return <ProfileAdminDeleteProduct />
             case MaterialDialogTypes.PROFILE_ADMIN_EDIT_PRODUCT: return <ProfileAdminEditProduct />
+            case MaterialDialogTypes.PROFILE_ADMIN_DELETE_CATEGORY: return <ProfileAdminDeleteCategory />
+            case MaterialDialogTypes.PROFILE_ADMIN_ADD_CATEGORY: return <ProfileAdminAddCategory />
+            case MaterialDialogTypes.PROFILE_ADMIN_EDIT_CATEGORY: return <></>
 
             default: return <></>
         }
