@@ -13,7 +13,7 @@ interface IProps {
 const MenuButton = ({ image, text, color, active = false, clickEvent }: IProps) => {
     return (
         <Stack spacing={1} className={!!active ? styles.rootActive : styles.root} alignItems="center" onClick={clickEvent}>
-            <Image src={image ?? ''} width={30} height={30} alt={text} loading="lazy" />
+            <div style={{position: 'relative', height: '30px', width: '100%'}}><Image src={image ?? ''} fill style={{objectFit: 'contain'}} alt={text} loading="lazy" /></div>
             <span style={{ color }}>{text}</span>
         </Stack>
     );

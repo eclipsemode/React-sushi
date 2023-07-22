@@ -74,6 +74,32 @@ export const deleteCategory = createAsyncThunk<void, string>(
     }
 )
 
+export const changeCategory = createAsyncThunk<void, {id: number, name: string, image: File}>(
+    'categories/changeCategory',
+    async ({id, name, image}, {rejectWithValue}) => {
+        try {
+            const formData = new FormData();
+            formData.append('id', String(id));
+            formData.append('name', name);
+            if (image) {
+                formData.append('image', image);
+            }
+            const res = await $api.put('api/categories', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            return res.data;
+        } catch (error: any) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message);
+            } else {
+                return rejectWithValue(error.message);
+            }
+        }
+    }
+)
+
 const initialState: ICategoryState = {
     categories: [],
     categoriesStatus: 'pending'

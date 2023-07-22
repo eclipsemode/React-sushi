@@ -32,9 +32,9 @@ const Products: React.FC = () => {
     React.useEffect(() => {
         if (pathname) {
             const searchCategoryNumber = Number(searchParams.get('categoryNumber'));
-            dispatch(setCategoryNumber(searchCategoryNumber || categories[0].id));
+            dispatch(setCategoryNumber(searchCategoryNumber || categories[0]?.id));
         }
-    }, [dispatch, pathname, router, searchParams]);
+    }, [categories, dispatch, pathname, router, searchParams]);
 
     React.useEffect(() => {
         dispatch(fetchProducts());

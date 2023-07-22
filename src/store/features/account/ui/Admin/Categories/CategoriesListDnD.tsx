@@ -46,6 +46,11 @@ const CategoriesListDnD = () => {
                         moveItem={moveItem}
                         deleteEvent={() => handleDeleteCategory(card.id)}
                         editEvent={() => {
+                            dispatch(setMaterialDialog({
+                                opened: true,
+                                dialogType: MaterialDialogTypes.PROFILE_ADMIN_EDIT_CATEGORY,
+                                data: card
+                            }))
                         }}/>
                 </div>
             )

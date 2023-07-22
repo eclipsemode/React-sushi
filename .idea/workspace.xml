@@ -5,20 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditCategory.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/menu/nabory.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/menu/napitki.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/menu/pizza-slice.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/menu/salad.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/menu/sauces.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/menu/snack.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/menu/soup.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/menu/sushi--gunkany.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/menu/sushi.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/menu/take-away.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Categories/Categories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Categories/Categories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Categories/CategoriesListDnD.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Categories/CategoriesListDnD.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/filter/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/filter/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/categories/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/categories/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddCategory.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/features/products/ui/Products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/products/ui/Products.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -349,7 +344,8 @@
       <workItem from="1689963085328" duration="868000" />
       <workItem from="1689971432491" duration="624000" />
       <workItem from="1690017489822" duration="7000" />
-      <workItem from="1690019516254" duration="1220000" />
+      <workItem from="1690019516254" duration="3142000" />
+      <workItem from="1690045630720" duration="1859000" />
     </task>
     <servers />
   </component>
