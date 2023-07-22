@@ -24,7 +24,7 @@ const initialState: IFilterState = {
   sortId: 0,
   sortType: SortType.ORDER_INDEX,
   sortOrder: SortOrderType.ASC,
-  categoryNumber: 1,
+  categoryNumber: 0,
 };
 
 export const filterSlice = createSlice({

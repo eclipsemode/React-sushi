@@ -12,16 +12,6 @@ const CategoriesListDnD = () => {
     const {categories} = useAppSelector((state) => state.categoriesReducer);
     const [cards, setCards] = React.useState<ICategories[]>([])
 
-    // const parseCards = (cards: ICategories[]) => {
-    //     const newCards: IProductOrderChange[] = cards.map((card, index) => {
-    //         return {
-    //             id: card.at(0)?.id || 0,
-    //             orderIndex: index + 1
-    //         }
-    //     });
-    //     return newCards;
-    // }
-
     const handleDeleteCategory = (id: number) => {
         dispatch(setMaterialDialog({
             opened: true,
