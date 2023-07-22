@@ -6,7 +6,8 @@ type CategoriesStatusType = 'fulfilled' | 'pending' | 'rejected';
 export interface ICategories {
     id: number,
     name: string,
-    image: string
+    image: string,
+    orderIndex: number
 }
 
 export interface ICreateCategory {
@@ -14,12 +15,23 @@ export interface ICreateCategory {
     image: File
 }
 
+interface IChangeCategory {
+    id: number,
+    name: string,
+    image: File
+}
+
+interface IChangeCategoryOrder {
+    id: number,
+    orderIndex: number
+}
+
 export interface ICategoryState {
     categories: ICategories[];
     categoriesStatus: CategoriesStatusType;
 }
 
-export const fetchCategories = createAsyncThunk<ICategoryState, void, { rejectValue: string }>(
+export const fetchCategories = createAsyncThunk<ICategories[], void, { rejectValue: string }>(
     "categories/fetchCategories",
     async (_, {rejectWithValue}) => {
         try {
@@ -74,7 +86,7 @@ export const deleteCategory = createAsyncThunk<void, string>(
     }
 )
 
-export const changeCategory = createAsyncThunk<void, {id: number, name: string, image: File}>(
+export const changeCategory = createAsyncThunk<void, IChangeCategory>(
     'categories/changeCategory',
     async ({id, name, image}, {rejectWithValue}) => {
         try {
@@ -89,6 +101,22 @@ export const changeCategory = createAsyncThunk<void, {id: number, name: string, 
                     'Content-Type': 'multipart/form-data'
                 }
             })
+            return res.data;
+        } catch (error: any) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message);
+            } else {
+                return rejectWithValue(error.message);
+            }
+        }
+    }
+)
+
+export const changeCategoryOrder = createAsyncThunk<void, IChangeCategoryOrder[]>(
+    'categories/changeCategoryOrder',
+    async (categoryArr, {rejectWithValue}) => {
+        try {
+            const res = await $api.patch('api/categories', {data: categoryArr});
             return res.data;
         } catch (error: any) {
             if (error.response && error.response.data.message) {
@@ -116,8 +144,8 @@ const categoriesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchCategories.fulfilled, (state, action) => {
-                state.categories = action.payload as any;
+            .addCase(fetchCategories.fulfilled, (state, action: PayloadAction<ICategories[]>) => {
+                state.categories = action.payload;
                 state.categoriesStatus = 'fulfilled';
             })
             .addCase(fetchCategories.pending, (state) => {
