@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditCategory.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Categories/CategoriesListDnD.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Categories/CategoriesListDnD.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/categories/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/categories/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddCategory.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/products/ui/Products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/products/ui/Products.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -345,7 +336,8 @@
       <workItem from="1689971432491" duration="624000" />
       <workItem from="1690017489822" duration="7000" />
       <workItem from="1690019516254" duration="3142000" />
-      <workItem from="1690045630720" duration="1859000" />
+      <workItem from="1690045630720" duration="2230000" />
+      <workItem from="1690054196981" duration="350000" />
     </task>
     <servers />
   </component>
