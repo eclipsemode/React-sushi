@@ -19,6 +19,7 @@ interface IProps {
     endAdornment?: JSX.Element,
     validate?: (value: string) => boolean | undefined,
     style?: CSSProperties,
+    className?: string,
 
     inputMask?: boolean,
     mask?: string | undefined,
@@ -52,7 +53,8 @@ const Input = ({
                    value,
                    disabled = false,
                    defaultValue,
-                   style
+                   style,
+                   className
                }: IProps) => {
     const renderEndAdornment = () => (
         <InputAdornment sx={{cursor: 'pointer'}} position="end">
@@ -123,10 +125,12 @@ const Input = ({
         <TextField
             sx={stylesInput}
             style={style}
+            className={className}
             defaultValue={defaultValue}
             value={value}
             label={label}
             required={required}
+            disabled={disabled}
             error={error}
             onChange={event => !!onChangeEvent && onChangeEvent(event.target.value)}
             inputProps={{
@@ -146,6 +150,7 @@ const Input = ({
     const renderMaskInput = () => (
         <InputMask
             value={value}
+            className={className}
             defaultValue={defaultValue}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => !!onChangeEvent && onChangeEvent(event.target.value)}
             mask={mask} maskChar={maskChar} disabled={disabled}>{(inputProps: PropsWithChildren) => <TextField

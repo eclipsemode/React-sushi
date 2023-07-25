@@ -26,11 +26,7 @@ interface DragItem {
 
 const DragAndDropItem = ({id, text, index, moveItem, editEvent, deleteEvent}: IProps) => {
     const ref = React.useRef<HTMLDivElement>(null)
-    const [{handlerId}, drop] = useDrop<
-        DragItem,
-        void,
-        { handlerId: Identifier | null }
-    >({
+    const [{handlerId}, drop] = useDrop<DragItem, void, { handlerId: Identifier | null }>({
         accept: ItemTypes.CARD,
         collect(monitor) {
             return {

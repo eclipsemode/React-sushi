@@ -20,6 +20,12 @@ import ProfileAdminDeleteCategory
 import ProfileAdminAddCategory from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddCategory";
 import ProfileAdminEditCategory
     from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditCategory";
+import ProfileAdminAddPromocode
+    from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddPromocode";
+import ProfileAdminChangePromocode
+    from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminChangePromocode";
+import ProfileAdminDeletePromocode
+    from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminDeletePromocode";
 
 const MaterialDialog = () => {
     const { opened, dialogType } = useAppSelector(selectMaterialDialog);
@@ -51,6 +57,9 @@ const MaterialDialog = () => {
             case MaterialDialogTypes.PROFILE_ADMIN_DELETE_CATEGORY: return <ProfileAdminDeleteCategory />
             case MaterialDialogTypes.PROFILE_ADMIN_ADD_CATEGORY: return <ProfileAdminAddCategory />
             case MaterialDialogTypes.PROFILE_ADMIN_EDIT_CATEGORY: return <ProfileAdminEditCategory />
+            case MaterialDialogTypes.PROFILE_ADMIN_ADD_PROMOCODE: return <ProfileAdminAddPromocode />
+            case MaterialDialogTypes.PROFILE_ADMIN_CHANGE_PROMOCODE: return <ProfileAdminChangePromocode />
+            case MaterialDialogTypes.PROFILE_ADMIN_DELETE_PROMOCODE: return <ProfileAdminDeletePromocode />
 
             default: return <></>
         }
@@ -59,7 +68,7 @@ const MaterialDialog = () => {
     return (
         <Dialog
             sx={{
-                ' .MuiPaper-root': {
+                ' > .MuiDialog-container > .MuiPaper-root': {
                     background: Colors.$rootCardBackground,
                     borderRadius: '12px',
                     padding: '25px'

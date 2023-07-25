@@ -14,7 +14,7 @@ interface IAgreementProps {
 
 const Agreement: React.FC<IAgreementProps> = (props) => {
   const { totalPrice, deliveryPrice, totalAmount } = useAppSelector(state => state.cartReducer);
-  const { promocode } = useAppSelector(state => state.orderCreateReducer)
+  const { promocode } = useAppSelector(state => state.promocodeReducer)
   const dispatch = useAppDispatch();
   
   const calculateTotalPrice = React.useCallback(() => {

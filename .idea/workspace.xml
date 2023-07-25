@@ -5,9 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Promocode/PromoCodeListDnD.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddPromocode.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminChangePromocode.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileAdminDeletePromocode.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/index.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/promocode/api/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Categories/CategoriesListDnD.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Categories/CategoriesListDnD.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/categories/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/categories/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/Alert/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/Alert/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/DragAndDrop/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/DragAndDrop/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/Select/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/Select/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/input/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/input/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Promocode/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Promocode/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Promocode/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Promocode/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Admin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/model/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/model/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/middleware/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/promocode/middleware/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/middleware/promoCodeMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/promocode/middleware/promoCodeMiddleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/ui/Agreement/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/ui/Agreement/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/ui/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/ui/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/ui/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/ui/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/user/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,11 +97,11 @@
       <recent name="D:\Frontend\React-sushi\next" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Frontend\React-sushi\src\store\features\promocode\middleware" />
       <recent name="D:\Frontend\React-sushi\src\providers\with-categories" />
       <recent name="D:\Frontend\React-sushi" />
       <recent name="D:\Frontend\React-sushi\src" />
       <recent name="D:\Frontend\React-sushi\next\public\images" />
-      <recent name="D:\Frontend\React-sushi\next\src\store\features\account\ui" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -342,7 +364,17 @@
       <workItem from="1690054196981" duration="350000" />
       <workItem from="1690054827526" duration="1202000" />
       <workItem from="1690056255526" duration="1297000" />
-      <workItem from="1690058384500" duration="628000" />
+      <workItem from="1690058384500" duration="673000" />
+      <workItem from="1690109965805" duration="358000" />
+      <workItem from="1690223438229" duration="4959000" />
+      <workItem from="1690231484624" duration="3626000" />
+      <workItem from="1690235301193" duration="845000" />
+      <workItem from="1690275828554" duration="5934000" />
+      <workItem from="1690282795522" duration="3227000" />
+      <workItem from="1690291646162" duration="1766000" />
+      <workItem from="1690295326709" duration="2742000" />
+      <workItem from="1690298187112" duration="12000" />
+      <workItem from="1690311987251" duration="1133000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,4 @@
-import {AnyAction, createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {$api} from "@services/api";
 
 export interface IRegistrationProps {
@@ -84,9 +84,9 @@ const fetchPatchUserInfo = createAsyncThunk<any, Omit<IRegistrationProps, "passw
     }
 );
 
-function isError(action: AnyAction) {
-    return action.type.endsWith("rejected");
-}
+// function isError(action: AnyAction) {
+//     return action.type.endsWith("rejected");
+// }
 
 const initialState: IUserState = {
     isAuth: false,
@@ -128,12 +128,12 @@ const userSlice = createSlice({
                 }
                 state.status = 'fulfilled'
             })
-            .addMatcher(isError, (state, action: PayloadAction<string>) => {
-                state.user = {} as IUser;
-                state.isAuth = false;
-                state.status = 'rejected'
-                state.error = action.payload;
-            });
+            // .addMatcher(isError, (state, action: PayloadAction<string>) => {
+            //     state.user = {} as IUser;
+            //     state.isAuth = false;
+            //     state.status = 'rejected'
+            //     state.error = action.payload;
+            // });
     }
 });
 

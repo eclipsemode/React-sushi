@@ -15,7 +15,7 @@ import {setMaterialDialog} from "@store/features/materialDialog/api";
 import {MaterialDialogTypes} from "@store/features/materialDialog/model";
 import Input from "@shared/UI/input";
 import {Box, CircularProgress, Stack} from "@mui/material";
-import {clearPromocodeData, fetchPromocodeCheck, setPromocodeError} from "../api";
+import {clearPromocodeData, fetchPromocodeCheck, setPromocodeError} from "@store/features/promocode/api";
 import InfoIcon from '@mui/icons-material/Info';
 import Divider from '@mui/material/Divider';
 
@@ -24,7 +24,7 @@ export type OrderType = 'delivery' | 'pickup' | null;
 const CartOrder: React.FC = () => {
     const {items, totalPrice, deliveryPrice, orderType} = useAppSelector(selectCart);
     const {deviceType} = useAppSelector(selectAdaptiveServiceSlice);
-    const {promocode, promocodeError, promocodeCreateLoadProcess} = useAppSelector(state => state.orderCreateReducer);
+    const {promocode, promocodeError, promocodeLoadSaveProcess} = useAppSelector(state => state.promocodeReducer);
     const dispatch = useAppDispatch();
     const [promoCodeAccepted, setPromoCodeAccepted] = React.useState<boolean>(false);
     const [promoCodeValue, setPromoCodeValue] = React.useState<string>('');
@@ -114,7 +114,7 @@ const CartOrder: React.FC = () => {
                     <Box sx={{maxWidth: '300px'}}><Input error={promocodeError}
                                                          value={promoCodeValue || ''}
                                                          disabled={promoCodeAccepted}
-                                                         endAdornment={promocodeCreateLoadProcess ? <CircularProgress size={20} /> : <Box width={20}></Box>}
+                                                         endAdornment={promocodeLoadSaveProcess ? <CircularProgress size={20} /> : <Box width={20}></Box>}
                                                          onChangeEvent={(value) => {
                                                              if (!!promocodeError) {
                                                                  dispatch(setPromocodeError(false));
