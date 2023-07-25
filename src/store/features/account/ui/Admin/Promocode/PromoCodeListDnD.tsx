@@ -10,6 +10,7 @@ import {Pagination, Skeleton} from "@mui/material";
 import Colors from "@shared/utils/Colors";
 import {enqueueSnackbar} from "notistack";
 import {Input} from "@shared/UI";
+import debounce from 'lodash.debounce';
 
 const PromoCodeListDnD = () => {
     const dispatch = useAppDispatch();
@@ -78,9 +79,16 @@ const PromoCodeListDnD = () => {
         [dispatch, handleDeletePromoCode, moveItem],
     )
 
+    const searchDebounce = React.useCallback(
+        debounce( async (value: string) => {
+            await dispatch(getAllPromoCodes({match: value})).unwrap();
+        }, 450),
+        [],
+    );
+
     const handleSearch = async (value: string) => {
         try {
-            await dispatch(getAllPromoCodes({match: value}))
+            await searchDebounce(value);
         } catch (e) {
             enqueueSnackbar('Ошибка поиска по названию, попробуйте позднее', { variant: 'error' })
         }
