@@ -1,0 +1,36 @@
+@import '@assets/styles/variables';
+@import '@assets/styles/mixins/authorisation';
+
+.root {
+  max-width: 450px;
+  width: 100%;
+  margin: 0 auto;
+  background: $root-card-background;
+  border-radius: 12px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 20px;
+}
+
+.repeatButton {
+  cursor: pointer;
+  color: $root-textActive;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.repeatButton_disabled {
+  cursor: not-allowed;
+  color: $info-color;
+  white-space: nowrap;
+  font-size: 14px;
+}

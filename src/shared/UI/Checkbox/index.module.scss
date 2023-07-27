@@ -5,7 +5,9 @@
 }
 
 .root__input {
-  display: none;
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
 }
 
 .root__input+label {

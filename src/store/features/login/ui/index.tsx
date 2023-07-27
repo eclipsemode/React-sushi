@@ -10,7 +10,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {enqueueSnackbar} from "notistack";
 import {useRouter} from "next/navigation";
 import MenuPath from "@shared/utils/menuPath";
-import {fetchAuth} from "@store/features/auth";
+import {fetchAuth} from "@store/features/auth/api";
 
 type Inputs = {
   login: string,

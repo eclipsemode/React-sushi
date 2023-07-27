@@ -45,7 +45,7 @@ const Header: React.FC = () => {
             case RouterPath.CART:
                 setActiveMenu(2);
                 break;
-            case RouterPath.LOGIN:
+            case RouterPath.AUTH:
                 setActiveMenu(3);
                 break;
             case RouterPath.PERSONAL:
@@ -132,7 +132,7 @@ const Header: React.FC = () => {
                     </li>
                 </ul>
                 <div className={styles.root__info}>
-                    <Link href={isAuth ? '' : 'login'}>
+                    <Link href={isAuth ? '' : RouterPath.AUTH}>
                         {isAuth ? (
                             <div className={styles.root__auth} onClick={(e: React.MouseEvent) => accHandle(e)}>
                                 {user && (
@@ -248,7 +248,7 @@ const Header: React.FC = () => {
                         aria-expanded={open ? 'true' : undefined}
                         className={activeMenu === 3 ? styles.mobileButtonActive : styles.mobileButton}
                         label="Профиль"
-                        onClick={(event) => isAuth ? handleClick(event) : router.push(RouterPath.LOGIN)}
+                        onClick={(event) => isAuth ? handleClick(event) : router.push(RouterPath.AUTH)}
                         icon={<PersonIcon />}
                     />
                 </BottomNavigation>

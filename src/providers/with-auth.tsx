@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
-import { fetchAuth } from '@store/features/auth';
+import { fetchAuth } from '@store/features/auth/api';
 import {fetchUserInfo, selectUser} from "@store/features/user";
 import {enqueueSnackbar} from "notistack";
 

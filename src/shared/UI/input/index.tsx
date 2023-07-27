@@ -66,10 +66,6 @@ const Input = ({
         width: '100%',
         '& input': {
             color: Colors.$rootText,
-            // '&::-webkit-datetime-edit-year-field:not([aria-valuenow]), &::-webkit-datetime-edit-month-field:not([aria-valuenow]), &::-webkit-datetime-edit-day-field:not([aria-valuenow])': {
-            //     background: 'red',
-            //     color: 'transparent !important'
-            // }
         },
         '& input[type=date]:required:invalid::-webkit-datetime-edit': {
             color: 'transparent !important'

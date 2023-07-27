@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/auth/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/auth/api/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/auth/ui/Confirm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/auth/ui/index.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/auth/ui/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Promocode/PromoCodeListDnD.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Promocode/PromoCodeListDnD.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/providers/with-auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/with-auth.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/Checkbox/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/Checkbox/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/Checkbox/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/Checkbox/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/input/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/input/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/utils/menuPath.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/utils/menuPath.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/auth/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/auth/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/login/ui/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/login/ui/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,11 +88,11 @@
       <recent name="D:\Frontend\React-sushi\next" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Frontend\React-sushi\src\app\auth" />
       <recent name="D:\Frontend\React-sushi\src\store\features\promocode\middleware" />
       <recent name="D:\Frontend\React-sushi\src\providers\with-categories" />
       <recent name="D:\Frontend\React-sushi" />
       <recent name="D:\Frontend\React-sushi\src" />
-      <recent name="D:\Frontend\React-sushi\next\public\images" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -352,7 +366,15 @@
       <workItem from="1690295326709" duration="2742000" />
       <workItem from="1690298187112" duration="12000" />
       <workItem from="1690311987251" duration="1133000" />
-      <workItem from="1690313195468" duration="655000" />
+      <workItem from="1690313195468" duration="692000" />
+      <workItem from="1690319458339" duration="138000" />
+      <workItem from="1690463983198" duration="365000" />
+      <workItem from="1690464462496" duration="1689000" />
+      <workItem from="1690466220031" duration="736000" />
+      <workItem from="1690466982271" duration="1458000" />
+      <workItem from="1690468574759" duration="182000" />
+      <workItem from="1690469063992" duration="2528000" />
+      <workItem from="1690482247131" duration="10217000" />
     </task>
     <servers />
   </component>
