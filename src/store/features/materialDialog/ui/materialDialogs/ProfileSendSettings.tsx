@@ -9,11 +9,11 @@ import {fetchPatchUserInfo, fetchUserInfo} from "@store/features/user";
 const ProfileSendSettings = () => {
     const dispatch = useAppDispatch();
     const { data } = useAppSelector(selectMaterialDialog)
-    const {email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room} = data;
+    const {email, name, surname, dateOfBirth, street, house, floor, entrance, room} = data;
 
     const callback = async () => {
         try {
-            await dispatch(fetchPatchUserInfo({email, name, surname, dateOfBirth: new Date(dateOfBirth), tel, street, house, floor, entrance, room})).unwrap();
+            await dispatch(fetchPatchUserInfo({email, name, surname, dateOfBirth: new Date(dateOfBirth), street, house, floor, entrance, room})).unwrap();
             await dispatch(fetchUserInfo());
             enqueueSnackbar('Данные успешно изменены!', { variant: 'success' });
         } catch (e) {

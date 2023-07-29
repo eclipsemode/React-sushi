@@ -5,4 +5,3 @@ export { default as Categories } from './Categories/Categories';
 export { default as NotFoundBlock } from './NotFoundBlock/NotFoundBlock';
 export { default as Banner } from './Banner/Banner';
 export { default as ModalAccount } from './ModalAccount';
-export { default as ActivatedPageBlock } from './ActivatedPageBlock';

@@ -3,7 +3,6 @@ import {$api, $api_guest} from "@services/api";
 import {setAuth, setUser} from "@store/features/user";
 
 export interface IAuthState {
-    loading: boolean,
     error: boolean,
     authLoadSaveProcess: boolean
 }
@@ -69,14 +68,13 @@ export const confirmAuth = createAsyncThunk<IConfirmAuthResponse, IConfirmAuth>(
 )
 
 const initialState: IAuthState = {
-    loading: true,
     error: false,
     authLoadSaveProcess: false
 }
 
-const isPendingAction = isPending(signIn, confirmAuth);
-const isFulfilledAction = isFulfilled(signIn, confirmAuth);
-const isisRejectedAction = isRejected(signIn, confirmAuth);
+const isPendingAction = isPending(signIn, confirmAuth, fetchAuth);
+const isFulfilledAction = isFulfilled(signIn, confirmAuth, fetchAuth);
+const isisRejectedAction = isRejected(signIn, confirmAuth, fetchAuth);
 
 const userAuthSlice = createSlice({
     name: "auth",
@@ -85,15 +83,12 @@ const userAuthSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchAuth.pending, (state) => {
-                state.loading = true;
                 state.error = false;
             })
             .addCase(fetchAuth.fulfilled, (state) => {
-                state.loading = false;
                 state.error = false;
             })
             .addCase(fetchAuth.rejected, (state) => {
-                state.loading = false;
                 state.error = true;
             })
 

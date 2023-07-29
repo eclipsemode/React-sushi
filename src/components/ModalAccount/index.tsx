@@ -17,7 +17,7 @@ const ModalAccount: React.FC<IModalAccountProps> = ({ modalRef }) => {
     const router = useRouter();
 
     const handleAccount = () => {
-        router.push(MenuPath.PERSONAL);
+        router.push(MenuPath.PROFILE);
     };
 
     const handleExit = () => {

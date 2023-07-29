@@ -5,7 +5,6 @@ export interface IRegistrationProps {
     id?: number
     email: string,
     dateOfBirth: Date,
-    password: string,
     name: string,
     surname: string,
     tel: string,
@@ -22,7 +21,6 @@ export interface IUserInfo {
     id: number,
     email: string,
     isActivated: boolean,
-    password: string,
     name: string,
     surname: string,
     tel: string,
@@ -64,14 +62,14 @@ const fetchUserInfo = createAsyncThunk<IUserInfo, void, { rejectValue: string }>
     }
 )
 
-const fetchPatchUserInfo = createAsyncThunk<any, Omit<IRegistrationProps, "password">, { state: RootState }>(
+const fetchPatchUserInfo = createAsyncThunk<void, Omit<IRegistrationProps, "password" | "tel">, { state: RootState }>(
     "user/fetchPatchUserInfo",
-    async ({email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room}, {getState, rejectWithValue}) => {
+    async ({email, name, surname, dateOfBirth, street, house, floor, entrance, room}, {getState, rejectWithValue}) => {
         try {
             const {userReducer} = await getState();
             if (userReducer.isAuth) {
                 await $api.patch("api/user/patch", {
-                    id: userReducer.user?.id, email, name, surname, dateOfBirth, tel, street, house, floor, entrance, room
+                    id: userReducer.user?.id, email, name, surname, dateOfBirth, street, house, floor, entrance, room
                 });
             }
         } catch (error: any) {
@@ -83,10 +81,6 @@ const fetchPatchUserInfo = createAsyncThunk<any, Omit<IRegistrationProps, "passw
         }
     }
 );
-
-// function isError(action: AnyAction) {
-//     return action.type.endsWith("rejected");
-// }
 
 const initialState: IUserState = {
     isAuth: false,
@@ -128,12 +122,6 @@ const userSlice = createSlice({
                 }
                 state.status = 'fulfilled'
             })
-            // .addMatcher(isError, (state, action: PayloadAction<string>) => {
-            //     state.user = {} as IUser;
-            //     state.isAuth = false;
-            //     state.status = 'rejected'
-            //     state.error = action.payload;
-            // });
     }
 });
 

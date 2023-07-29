@@ -15,47 +15,39 @@ import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HistoryIcon from '@mui/icons-material/History';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import {selectAuth} from "@store/features/auth";
+import {selectAuth} from "@store/features/auth/api";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import {setMaterialDialog} from "@store/features/materialDialog/api";
 import {MaterialDialogTypes} from "@store/features/materialDialog/model";
 import Admin from "./Admin";
 import {SelectedType} from "../api";
-import {useRouter} from "next/navigation";
 import Link from 'next/link'
 
 const Account: React.FC = () => {
     const [openBackdrop, setOpenBackdrop] = React.useState(true);
-    const {isAuth, user} = useAppSelector(state => state.userReducer);
+    const { user} = useAppSelector(state => state.userReducer);
     const { page } = useAppSelector(state => state.ordersReducer);
-    const {loading} = useAppSelector(selectAuth);
+    const {authLoadSaveProcess} = useAppSelector(selectAuth);
     const [selected, setSelected] = React.useState<SelectedType>(page);
-    const router = useRouter();
     const dispatch = useAppDispatch();
 
     React.useEffect(() => {
         setSelected(page);
     }, [page])
 
-    React.useEffect(() => {
-        if (!loading && !isAuth) {
-            router.push(RouterPath.HOME)
-        }
-    }, [isAuth, router, loading])
-
     const breadcrumbs = [
         <Link key={1} href={RouterPath.HOME}>
             Главная
         </Link>,
-        <Link key={2} href={RouterPath.PERSONAL}>
+        <Link key={2} href={RouterPath.PROFILE}>
             Аккаунт
         </Link>,
         <Typography key={3}>
             {
-                loading ? <Skeleton animation='wave' height={24} width={100}/> :
+                authLoadSaveProcess ? <Skeleton animation='wave' height={24} width={100}/> :
                     selected === 'profile' ? 'Мой профиль' : selected === 'orders' ? 'История заказов' : selected === 'settings' ? 'Редактировать профиль' : 'Админ-панель'
             }
-        </Typography>,
+        </Typography>
     ];
 
     const handleClose = () => {
@@ -101,7 +93,7 @@ const Account: React.FC = () => {
                 </Breadcrumbs>
             </div>
             {
-                loading ? <Backdrop
+                authLoadSaveProcess ? <Backdrop
                         sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                         open={openBackdrop}
                         onClick={handleClose}

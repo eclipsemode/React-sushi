@@ -45,10 +45,7 @@ const Header: React.FC = () => {
             case RouterPath.CART:
                 setActiveMenu(2);
                 break;
-            case RouterPath.AUTH:
-                setActiveMenu(3);
-                break;
-            case RouterPath.PERSONAL:
+            case RouterPath.PROFILE:
                 setActiveMenu(3);
                 break;
             case RouterPath.CONTACTS:
@@ -67,7 +64,7 @@ const Header: React.FC = () => {
     };
 
     const handleClickMenu = (page: SelectedType) => {
-        router.push(RouterPath.PERSONAL);
+        router.push(RouterPath.PROFILE);
         dispatch(setPage(page));
         handleClose();
     }
@@ -132,7 +129,7 @@ const Header: React.FC = () => {
                     </li>
                 </ul>
                 <div className={styles.root__info}>
-                    <Link href={isAuth ? '' : RouterPath.AUTH}>
+                    <Link href={RouterPath.PROFILE}>
                         {isAuth ? (
                             <div className={styles.root__auth} onClick={(e: React.MouseEvent) => accHandle(e)}>
                                 {user && (
@@ -248,7 +245,7 @@ const Header: React.FC = () => {
                         aria-expanded={open ? 'true' : undefined}
                         className={activeMenu === 3 ? styles.mobileButtonActive : styles.mobileButton}
                         label="Профиль"
-                        onClick={(event) => isAuth ? handleClick(event) : router.push(RouterPath.AUTH)}
+                        onClick={(event) => isAuth ? handleClick(event) : router.push(RouterPath.PROFILE)}
                         icon={<PersonIcon />}
                     />
                 </BottomNavigation>
@@ -272,9 +269,9 @@ const Header: React.FC = () => {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={() => handleClickMenu('profile')} selected={pathname === RouterPath.PERSONAL && page === 'profile'}>Профиль</MenuItem>
-                    <MenuItem onClick={() => handleClickMenu('orders')} selected={pathname === RouterPath.PERSONAL && page === 'orders'}>История заказов</MenuItem>
-                    <MenuItem onClick={() => handleClickMenu('settings')} selected={pathname === RouterPath.PERSONAL && page === 'settings'}>Редактировать профиль</MenuItem>
+                    <MenuItem onClick={() => handleClickMenu('profile')} selected={pathname === RouterPath.PROFILE && page === 'profile'}>Профиль</MenuItem>
+                    <MenuItem onClick={() => handleClickMenu('orders')} selected={pathname === RouterPath.PROFILE && page === 'orders'}>История заказов</MenuItem>
+                    <MenuItem onClick={() => handleClickMenu('settings')} selected={pathname === RouterPath.PROFILE && page === 'settings'}>Редактировать профиль</MenuItem>
                     <MenuItem onClick={() => {
                         handleClose();
                         dispatch(setMaterialDialog({

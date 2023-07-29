@@ -154,6 +154,7 @@ const Input = ({
             sx={stylesInput}
             label={label}
             required={required}
+            disabled={disabled}
             error={error}
             inputProps={{
                 name,
