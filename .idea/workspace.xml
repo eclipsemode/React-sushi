@@ -6,54 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/activated/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/loading.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/login/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/not-found.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/not-found.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/personal/loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/loading.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/personal/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/registered/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/registration/index.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/registration/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ActivatedPageBlock/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ModalAccount/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ModalAccount/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NotFoundBlock/NotFoundBlock.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NotFoundBlock/NotFoundBlock.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OrderDelivered/index.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OrderDelivered/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SuccessfullyRegistered/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/providers/with-auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/with-auth.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/providers/with-providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/with-providers.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/Button/index.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/Button/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/CartBlock/index.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/CartBlock/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/ClearButton/index.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/ClearButton/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/DoubleButton/index.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/DoubleButton/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/FormInput/index.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/FormInput/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/TextInput/index.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/TextInput/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/input/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/input/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/utils/menuPath.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/utils/menuPath.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Account.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Settings/Settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Settings/Settings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/auth/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/auth/api/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/login/api/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/login/ui/index.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/login/ui/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/ProfileSendSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/ProfileSendSettings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileResetSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/account/ProfileResetSettings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/registration/api/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/registration/ui/index.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/registration/ui/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/user/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/providers/with-categories/with-categories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/with-categories/with-categories.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -418,7 +373,7 @@
       <workItem from="1690637410646" duration="382000" />
       <workItem from="1690637827694" duration="770000" />
       <workItem from="1690652062983" duration="3292000" />
-      <workItem from="1690661510414" duration="2268000" />
+      <workItem from="1690661510414" duration="4790000" />
     </task>
     <servers />
   </component>
