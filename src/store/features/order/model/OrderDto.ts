@@ -1,12 +1,11 @@
 import {IFormData, IOrder} from "./IOrder";
 import {ICartState} from "@store/features/cart/api";
 import { IUserState } from "@store/features/user";
-import {IOrderCreate} from "../api";
 
 class OrderDto {
   public order: IOrder;
 
-  constructor(cart: ICartState, user: IUserState, formData: IFormData, orderCreateReducer: IOrderCreate) {
+  constructor(cart: ICartState, user: IUserState, formData: IFormData, promoCode?: string) {
     this.order = {
       userId: Number(user.user?.id) ?? null,
       products: cart.items.map((product) => ({
@@ -39,7 +38,7 @@ class OrderDto {
       utensils: formData.utensils,
       payment: formData.payment,
       commentary: formData.commentary,
-      promocode: orderCreateReducer.promocode?.code ?? null
+      promocode: promoCode ?? null
     };
   }
 }

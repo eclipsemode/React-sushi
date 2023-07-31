@@ -71,10 +71,12 @@ const ProfileAdminAddProduct = () => {
                     })).unwrap();
 
                 } else {
+                    const newSku: string[] = data.sku ? [String(data.sku)] : []
                     await dispatch(createProduct({
                         ...data,
                         price: [data.price1],
-                        image: fileImage
+                        image: fileImage,
+                        sku: newSku
                     })).unwrap();
                 }
             }
