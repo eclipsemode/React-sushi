@@ -5,7 +5,7 @@ import {IOrderProducts} from "@store/features/order/model";
 import {OrderType} from "@store/features/order/ui";
 import {PaymentType} from "@store/features/order/ui/DeliveryForm";
 
-export type StatusType = 'new' | 'production' | 'produced' | 'delivery' | 'completed' | 'deleted';
+export type StatusType = 'new' | 'accepted' | 'production' | 'produced' | 'delivery' | 'completed' | 'deleted';
 
 export interface IOrdersFetched {
   id: number,

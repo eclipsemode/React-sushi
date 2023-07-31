@@ -5,7 +5,7 @@ import OrderDto from "@store/features/order/model/OrderDto";
 import {$api} from "@services/api";
 import {IFormData} from "../model";
 import {IPromocodeState} from "@store/features/promocode/api";
-import Frontpad from "@services/frontpad";
+// import Frontpad from "@services/frontpad";
 
 
 const fetchOrderCreate = createAsyncThunk<void, IFormData, {
@@ -17,14 +17,15 @@ const fetchOrderCreate = createAsyncThunk<void, IFormData, {
         try {
             const {userReducer, cartReducer, promocodeReducer} = getState();
             const orderDto = new OrderDto(cartReducer, userReducer, formData, promocodeReducer.promocode?.code);
-            const frontpadApi = new Frontpad();
-            frontpadApi.newOrder(cartReducer.items, {
-                name: formData.name,
-                ...(formData.address && {street: formData.address}),
-                phone: formData.tel,
-                hook_status: ['1', '3', '13', '12', '4', '11', '10']
-            })
-            return;
+            // const frontpadApi = new Frontpad();
+            // frontpadApi.newOrder(cartReducer.items, {
+            //     name: formData.name,
+            //     ...(formData.address && {street: formData.address}),
+            //     phone: formData.tel,
+            //     hook_status: ['1', '3', '13', '12', '4', '11', '10'],
+            //     hook_url: process.env.WEBHOOK_FRONTPAD_STATUS
+            // })
+            // return;
             const response = await $api.post('api/order/create', orderDto.order);
             return response.data;
         } catch (error: any) {

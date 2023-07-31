@@ -5,6 +5,7 @@ const nextConfig = {
         REACT_APP_API_URL: 'http://localhost:5000/',
         FRONTPAD_SECRET: process.env.FRONTPAD_SECRET,
         FRONTPAD_API_URL: process.env.FRONTPAD_API_URL,
+        WEBHOOK_FRONTPAD_STATUS: process.env.WEBHOOK_FRONTPAD_STATUS
     },
     images: {
         remotePatterns: [

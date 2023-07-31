@@ -37,6 +37,8 @@ const OrdersList: React.FC<IOrdersList> = ({orders}) => {
         switch (order.status) {
             case 'new':
                 return <Chip className={styles.status} label="В обработке" color="info"/>
+            case 'accepted':
+                return <Chip className={styles.status} label="Принят" color="primary"/>
             case 'production':
                 return <Chip className={styles.status} label="В производстве" color="primary"/>
             case 'produced':
