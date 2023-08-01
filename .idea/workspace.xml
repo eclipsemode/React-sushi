@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/__tests__/components/Banner/index.test.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__tests__/pages/index.test.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__tests__/store/auth/index.test.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__tests__/store/city/index.test.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jest.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OrdersList/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrdersList/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/account/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/api/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/order/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +65,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;D:/Frontend/React-sushi/node_modules/react-scripts&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;D:\\Frontend\\React-sushi\\client\\node_modules\\prettier&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;watcher.settings&quot;,
@@ -83,6 +88,53 @@
       <recent name="D:\Frontend\React-sushi\src\app\auth" />
       <recent name="D:\Frontend\React-sushi\src\store\features\promocode\middleware" />
     </key>
+  </component>
+  <component name="RunManager" selected="Jest.Banner tests">
+    <configuration name="Banner tests" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/__tests__/components/Banner/index.test.tsx" />
+      <test-names>
+        <test-name value="Banner tests" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Banner tests.Should have alt for all images" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/__tests__/components/Banner/index.test.tsx" />
+      <test-names>
+        <test-name value="Banner tests" />
+        <test-name value="Should have alt for all images" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Banner tests.Should have an img" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/__tests__/components/Banner/index.test.tsx" />
+      <test-names>
+        <test-name value="Banner tests" />
+        <test-name value="Should have an img" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.Banner tests" />
+        <item itemvalue="Jest.Banner tests.Should have alt for all images" />
+        <item itemvalue="Jest.Banner tests.Should have an img" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -385,7 +437,10 @@
       <workItem from="1690795555626" duration="6845000" />
       <workItem from="1690810900784" duration="8685000" />
       <workItem from="1690825145749" duration="1071000" />
-      <workItem from="1690830757537" duration="671000" />
+      <workItem from="1690830757537" duration="1598000" />
+      <workItem from="1690834429999" duration="2659000" />
+      <workItem from="1690896735119" duration="10468000" />
+      <workItem from="1690916443299" duration="804000" />
     </task>
     <servers />
   </component>

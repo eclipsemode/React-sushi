@@ -5,10 +5,9 @@ import { Carousel } from 'antd';
 import Image from "next/image";
 
 const Banner: React.FC = () => {
-
     return (
         <Box sx={{ marginBottom: '50px', borderRadius: '15px', overflow: 'hidden' }}>
-            <Carousel autoplay>
+            <Carousel autoplay data-testid='carousel'>
                 <div className={styles.imageContainer}>
                     <Image className={styles.image} alt="banner" fill src={'/images/banner/promo_60436d1c910f9504434024.1192.png'} sizes='(max-width: 768px) 100vw' priority />
                 </div>
