@@ -13,7 +13,7 @@ const ProfileSendSettings = () => {
 
     const callback = async () => {
         try {
-            await dispatch(fetchPatchUserInfo({email, name, surname, dateOfBirth: new Date(dateOfBirth), street, house, floor, entrance, room})).unwrap();
+            await dispatch(fetchPatchUserInfo({email, name, surname, dateOfBirth, street, house, floor, entrance, room})).unwrap();
             await dispatch(fetchUserInfo());
             enqueueSnackbar('Данные успешно изменены!', { variant: 'success' });
         } catch (e) {

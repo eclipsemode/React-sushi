@@ -69,7 +69,7 @@ const fetchPatchUserInfo = createAsyncThunk<void, Omit<IRegistrationProps, "pass
             const {userReducer} = await getState();
             if (userReducer.isAuth) {
                 await $api.patch("api/user/patch", {
-                    id: userReducer.user?.id, email, name, surname, dateOfBirth, street, house, floor, entrance, room
+                    id: userReducer.user?.id, email, name, surname, dateOfBirth: new Date(dateOfBirth), street, house, floor, entrance, room
                 });
             }
         } catch (error: any) {

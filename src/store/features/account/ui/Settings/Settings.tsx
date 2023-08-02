@@ -46,8 +46,8 @@ const Settings: React.FC = () => {
 
     const validateSubmit = (): boolean => {
         return watch('name') === (userInfo?.name || '') && watch('surname') === (userInfo?.surname || '') && watch('dateOfBirth') === (formatDateToYyyyMmDd(String(userInfo?.dateOfBirth)) || '')
-        && watch('email') === (userInfo?.email || '') && watch('street') === (userInfo?.street || '') && (String(watch('house')) || null) === String(userInfo?.house) && (String(watch('entrance')) || null) === String(userInfo?.entrance)
-        && (String(watch('floor')) || null) === String(userInfo?.floor) && (String(watch('room')) || null) === String(userInfo?.room)
+            && watch('email') === (userInfo?.email || '') && watch('street') === (userInfo?.street || '') && (String(watch('house') || null)) === String(userInfo?.house) && (String(watch('entrance') || null)) === String(userInfo?.entrance)
+            && (String(watch('floor') || null)) === String(userInfo?.floor) && (String(watch('room') || null)) === String(userInfo?.room)
     }
 
     const handleResetButton = (event: React.FormEvent) => {
@@ -87,7 +87,8 @@ const Settings: React.FC = () => {
                        type='date'/>
                 <Input error={!!errors.email} register={register} name='email' label='Email'
                        pattern={/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/}/>
-                <Input error={!!errors.tel} register={register} name='tel' disabled label='+7 (xxx) xxx-xx-xx' type='tel'/>
+                <Input error={!!errors.tel} register={register} name='tel' disabled label='+7 (xxx) xxx-xx-xx'
+                       type='tel'/>
                 <Input register={register} name='street' label='Улица'/>
                 <Stack spacing={2}>
                     <Stack direction='row' spacing={2}>

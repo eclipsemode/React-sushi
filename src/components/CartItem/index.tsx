@@ -7,6 +7,7 @@ import {DeviceType, selectAdaptiveServiceSlice} from "@store/features/adaptive";
 import {Stack} from "@mui/material";
 import {setMaterialDialog} from "@store/features/materialDialog/api";
 import {MaterialDialogTypes} from "@store/features/materialDialog/model";
+import Image from "next/image";
 
 export type CartItemProps = {
     obj: ICartProduct;
@@ -47,7 +48,7 @@ const CartItem: React.FC<CartItemProps> = ({obj}) => {
         <tr className={styles.root}>
             <td className={styles.root__product}>
                 <CloseOutlined onClick={handleRemoveItemById}/>
-                <img width={200}
+                <Image width={200} height={133}
                      src={process.env.REACT_APP_API_URL + obj.image} alt="productImg"/>
                 <h5>{obj.name} {obj.type === 'pizza' && obj.size}</h5>
             </td>

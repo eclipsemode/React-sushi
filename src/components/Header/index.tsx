@@ -7,26 +7,20 @@ import PersonIcon from '@mui/icons-material/Person';
 import PhoneIcon from '@mui/icons-material/Phone';
 import HomeIcon from '@mui/icons-material/Home';
 import {selectCart} from '@store/features/cart/api';
-import {useAppDispatch, useAppSelector} from '@store/hooks';
+import {useAppSelector} from '@store/hooks';
 import {ModalAccount} from '@components/index';
 import {DeviceType, selectAdaptiveServiceSlice} from '@store/features/adaptive';
-import {Badge, BottomNavigation, BottomNavigationAction, Box, Menu, MenuItem, Stack} from '@mui/material';
+import {Badge, BottomNavigation, BottomNavigationAction, Box, Stack} from '@mui/material';
 import RouterPath from '@shared/utils/menuPath';
 import {selectCity} from '@store/features/city';
-import Colors from "@shared/utils/Colors";
-import {setMaterialDialog} from "@store/features/materialDialog/api";
-import {MaterialDialogTypes} from "@store/features/materialDialog/model";
-import {SelectedType, setPage} from "@store/features/account/api";
 import {usePathname, useRouter} from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
 const Header: React.FC = () => {
-    const dispatch = useAppDispatch();
     const router = useRouter();
     const pathname = usePathname();
     const { city } = useAppSelector(selectCity);
-    const { page } = useAppSelector(state => state.ordersReducer);
     const [activeMenu, setActiveMenu] = React.useState<number>(0);
     const { totalPrice, deliveryPrice } = useAppSelector(selectCart);
     const { isAuth, user } = useAppSelector((state) => state.userReducer);
@@ -34,8 +28,6 @@ const Header: React.FC = () => {
     const [accModal, setAccModal] = React.useState<boolean>(false);
     const headerRef = React.useRef<HTMLDivElement>(null);
     const modalRef = React.useRef<HTMLDivElement>(null);
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
 
     const setActiveMenuByLocation = React.useCallback(() => {
         switch (pathname) {
@@ -54,20 +46,7 @@ const Header: React.FC = () => {
             default:
                 setActiveMenu(0);
         }
-    }, [router])
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-        setActiveMenuByLocation();
-    };
-
-    const handleClickMenu = (page: SelectedType) => {
-        router.push(RouterPath.PROFILE);
-        dispatch(setPage(page));
-        handleClose();
-    }
+    }, [pathname])
 
     React.useEffect(() => {
         setActiveMenuByLocation();
@@ -207,6 +186,7 @@ const Header: React.FC = () => {
                                 router.push(RouterPath.CART);
                                 break;
                             case 3:
+                                router.push(RouterPath.PROFILE)
                                 break;
                             default:
                                 router.push(RouterPath.HOME);
@@ -239,47 +219,11 @@ const Header: React.FC = () => {
                         }
                     />
                     <BottomNavigationAction
-                        id="basic-button"
-                        aria-controls={open ? 'basic-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
                         className={activeMenu === 3 ? styles.mobileButtonActive : styles.mobileButton}
                         label="Профиль"
-                        onClick={(event) => isAuth ? handleClick(event) : router.push(RouterPath.PROFILE)}
                         icon={<PersonIcon />}
                     />
                 </BottomNavigation>
-
-                <Menu
-                    sx={{
-                        '& > .MuiPaper-root': {
-                            background: Colors.$rootCardBackground,
-                            color: Colors.$rootText
-                        },
-                        '& li:hover': {
-                            background: Colors.$rootTextHover
-                        }
-                    }}
-                    disableScrollLock={true}
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    MenuListProps={{
-                        'aria-labelledby': 'basic-button',
-                    }}
-                >
-                    <MenuItem onClick={() => handleClickMenu('profile')} selected={pathname === RouterPath.PROFILE && page === 'profile'}>Профиль</MenuItem>
-                    <MenuItem onClick={() => handleClickMenu('orders')} selected={pathname === RouterPath.PROFILE && page === 'orders'}>История заказов</MenuItem>
-                    <MenuItem onClick={() => handleClickMenu('settings')} selected={pathname === RouterPath.PROFILE && page === 'settings'}>Редактировать профиль</MenuItem>
-                    <MenuItem onClick={() => {
-                        handleClose();
-                        dispatch(setMaterialDialog({
-                            opened: true,
-                            dialogType: MaterialDialogTypes.LOGOUT
-                        }))
-                    }}>Выйти</MenuItem>
-                </Menu>
             </Box>
         </header>
     );
