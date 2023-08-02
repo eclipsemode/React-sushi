@@ -44,11 +44,11 @@ const Settings: React.FC = () => {
         }
     }, [applyCallback, dispatch, reset])
 
-    const validateSubmit = React.useCallback((): boolean => {
+    const validateSubmit = (): boolean => {
         return watch('name') === (userInfo?.name || '') && watch('surname') === (userInfo?.surname || '') && watch('dateOfBirth') === (formatDateToYyyyMmDd(String(userInfo?.dateOfBirth)) || '')
-        && watch('email') === (userInfo?.email || '') && watch('street') === (userInfo?.street || '') && (watch('house') || null) === (userInfo?.house) && (watch('entrance') || null) === userInfo?.entrance
-        && (watch('floor') || null) === userInfo?.floor && (watch('room') || null) === userInfo?.room
-    }, [userInfo, watch])
+        && watch('email') === (userInfo?.email || '') && watch('street') === (userInfo?.street || '') && (String(watch('house')) || null) === String(userInfo?.house) && (String(watch('entrance')) || null) === String(userInfo?.entrance)
+        && (String(watch('floor')) || null) === String(userInfo?.floor) && (String(watch('room')) || null) === String(userInfo?.room)
+    }
 
     const handleResetButton = (event: React.FormEvent) => {
         event.preventDefault();
