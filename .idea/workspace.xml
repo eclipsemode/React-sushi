@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/__tests__/components/Banner/index.test.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/__tests__/pages/index.test.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/__tests__/store/auth/index.test.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/__tests__/store/city/index.test.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jest.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/utils/formatDateToYyyyMmDd.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Settings/Settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Settings/Settings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/user/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -440,7 +435,18 @@
       <workItem from="1690830757537" duration="1598000" />
       <workItem from="1690834429999" duration="2659000" />
       <workItem from="1690896735119" duration="10468000" />
-      <workItem from="1690916443299" duration="804000" />
+      <workItem from="1690916443299" duration="2312000" />
+      <workItem from="1690979530215" duration="1374000" />
+      <workItem from="1690981088136" duration="464000" />
+      <workItem from="1690982088653" duration="128000" />
+      <workItem from="1690982227275" duration="124000" />
+      <workItem from="1690983228721" duration="396000" />
+      <workItem from="1690983633484" duration="210000" />
+      <workItem from="1690984242108" duration="1688000" />
+      <workItem from="1690986089846" duration="81000" />
+      <workItem from="1690986193745" duration="413000" />
+      <workItem from="1690987797648" duration="689000" />
+      <workItem from="1690988839731" duration="652000" />
     </task>
     <servers />
   </component>

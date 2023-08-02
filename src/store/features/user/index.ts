@@ -4,7 +4,7 @@ import {$api} from "@services/api";
 export interface IRegistrationProps {
     id?: number
     email: string,
-    dateOfBirth: Date,
+    dateOfBirth: string,
     name: string,
     surname: string,
     tel: string,

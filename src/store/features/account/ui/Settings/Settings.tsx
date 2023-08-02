@@ -9,6 +9,7 @@ import Input from "@shared/UI/input";
 import {Box, Skeleton, Stack, Tooltip} from "@mui/material";
 import SimpleButton from "@shared/UI/SimpleButton";
 import Colors from "@shared/utils/Colors";
+import formatDateToYyyyMmDd from "@shared/utils/formatDateToYyyyMmDd";
 
 const Settings: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -23,38 +24,30 @@ const Settings: React.FC = () => {
         formState: {errors}
     } = useForm<Partial<IUserInfo>>({
         defaultValues: {
-            name: userInfo?.name,
-            surname: userInfo?.surname,
-            dateOfBirth: userInfo?.dateOfBirth ? String(userInfo?.dateOfBirth)?.slice(0, 10) : '',
+            name: userInfo?.name || '',
+            surname: userInfo?.surname || '',
+            dateOfBirth: userInfo?.dateOfBirth ? formatDateToYyyyMmDd(userInfo?.dateOfBirth as string) : '',
             tel: userInfo?.tel,
-            email: userInfo?.email,
-            street: userInfo?.street,
-            house: userInfo?.house,
-            entrance: userInfo?.entrance,
-            floor: userInfo?.floor,
-            room: userInfo?.room,
+            email: userInfo?.email || '',
+            street: userInfo?.street || '',
+            house: userInfo?.house || undefined,
+            entrance: userInfo?.entrance || undefined,
+            floor: userInfo?.floor || undefined,
+            room: userInfo?.room || undefined,
         }
     });
 
     React.useEffect(() => {
         if (!!applyCallback) {
-            reset({
-                dateOfBirth: ''
-            });
+            reset();
             dispatch(clearMaterialDialog());
         }
     }, [applyCallback, dispatch, reset])
 
     const validateSubmit = React.useCallback((): boolean => {
-        return ((watch('surname')?.length || 0) > 0 ? watch('surname') : null) === userInfo?.surname
-            && watch('name') === userInfo?.name
-            && String(userInfo?.dateOfBirth)?.slice(0, 10) === (String(watch('dateOfBirth'))?.length > 0 ? watch('dateOfBirth') : '')
-            && userInfo?.email === ((watch('email')?.length || 0) > 0 ? watch('email') : null)
-            && userInfo?.street === ((watch('street')?.length || 0) > 0 ? watch('street') : null)
-            && userInfo?.house === (String(watch('house'))?.length > 0 ? watch('house') : null)
-            && userInfo?.entrance === (String(watch('entrance'))?.length > 0 ? watch('entrance') : null)
-            && userInfo?.floor === (String(watch('floor'))?.length > 0 ? watch('floor') : null)
-            && userInfo?.room === (String(watch('room'))?.length > 0 ? watch('room') : null)
+        return watch('name') === (userInfo?.name || '') && watch('surname') === (userInfo?.surname || '') && watch('dateOfBirth') === (formatDateToYyyyMmDd(String(userInfo?.dateOfBirth)) || '')
+        && watch('email') === (userInfo?.email || '') && watch('street') === (userInfo?.street || '') && (watch('house') || null) === (userInfo?.house) && (watch('entrance') || null) === userInfo?.entrance
+        && (watch('floor') || null) === userInfo?.floor && (watch('room') || null) === userInfo?.room
     }, [userInfo, watch])
 
     const handleResetButton = (event: React.FormEvent) => {
@@ -94,8 +87,7 @@ const Settings: React.FC = () => {
                        type='date'/>
                 <Input error={!!errors.email} register={register} name='email' label='Email'
                        pattern={/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/}/>
-                <Input inputMask={true} error={!!errors.tel} register={register} name='tel' mask='+7 (999) 999-99-99'
-                       maskChar='' disabled label='+7 (xxx) xxx-xx-xx' type='tel' minLength={18} maxLength={18}/>
+                <Input error={!!errors.tel} register={register} name='tel' disabled label='+7 (xxx) xxx-xx-xx' type='tel'/>
                 <Input register={register} name='street' label='Улица'/>
                 <Stack spacing={2}>
                     <Stack direction='row' spacing={2}>
