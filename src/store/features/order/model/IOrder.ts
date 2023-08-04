@@ -1,4 +1,4 @@
-import {PaymentType, TelType} from "@store/features/order/ui/DeliveryForm";
+import {PaymentType} from "@store/features/order/ui/DeliveryForm";
 import { OrderType } from "@store/features/order/ui";
 import {ICartProduct} from "@store/features/cart/api";
 interface IOrderProducts extends Omit<ICartProduct, 'id'>{
@@ -24,7 +24,7 @@ interface IFormData {
   entrance?: number | null,
   floor?: number | null,
   room?: number | null,
-  tel: TelType,
+  tel: string,
   email: string,
   day: "today" | null,
   time: string | null,

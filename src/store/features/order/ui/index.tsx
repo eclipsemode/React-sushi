@@ -1,6 +1,6 @@
 import React from 'react';
 import {CartItem} from '@components/index';
-import {ICartProduct, selectCart, setOrderType} from '@store/features/cart/api';
+import {ICartProduct, selectCart} from '@store/features/cart/api';
 import styles from './index.module.scss';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {DeliveryPrice} from '@store/features/order/utils';
@@ -18,16 +18,19 @@ import {Box, CircularProgress, Stack} from "@mui/material";
 import {clearPromocodeData, fetchPromocodeCheck, setPromocodeError} from "@store/features/promocode/api";
 import InfoIcon from '@mui/icons-material/Info';
 import Divider from '@mui/material/Divider';
+import {selectUser} from "@store/features/user";
 
 export type OrderType = 'delivery' | 'pickup' | null;
 
 const CartOrder: React.FC = () => {
-    const {items, totalPrice, deliveryPrice, orderType} = useAppSelector(selectCart);
+    const {items, totalPrice, deliveryPrice} = useAppSelector(selectCart);
+    const {userInfo} = useAppSelector(selectUser);
     const {deviceType} = useAppSelector(selectAdaptiveServiceSlice);
     const {promocode, promocodeError, promocodeLoadSaveProcess} = useAppSelector(state => state.promocodeReducer);
     const dispatch = useAppDispatch();
     const [promoCodeAccepted, setPromoCodeAccepted] = React.useState<boolean>(false);
     const [promoCodeValue, setPromoCodeValue] = React.useState<string>('');
+    const [orderType, setOrderType] = React.useState<OrderType>(null);
 
     React.useEffect(() => {
         if (!!promocode) {
@@ -160,10 +163,10 @@ const CartOrder: React.FC = () => {
                         <h3>ОФОРМИТЬ ЗАКАЗ</h3>
                     </div>
                     <div className={styles.root__type_buttons}>
-                        <SimpleButton type="button" clickEvent={() => dispatch(setOrderType('delivery'))}>
+                        <SimpleButton type="button" clickEvent={() => setOrderType('delivery')}>
                             Доставка
                         </SimpleButton>
-                        <SimpleButton type="button" clickEvent={() => dispatch(setOrderType('pickup'))}>
+                        <SimpleButton type="button" clickEvent={() => setOrderType('pickup')}>
                             Самовывоз
                         </SimpleButton>
                     </div>
@@ -171,9 +174,9 @@ const CartOrder: React.FC = () => {
             )}
 
             {orderType === 'pickup' ? (
-                <PickupForm clickEvent={() => dispatch(setOrderType(null))}/>
+                <PickupForm clickEvent={() => setOrderType(null)} userInfo={userInfo}/>
             ) : orderType === 'delivery' ? (
-                <DeliveryForm clickEvent={() => dispatch(setOrderType(null))}/>
+                <DeliveryForm clickEvent={() => setOrderType(null)} userInfo={userInfo}/>
             ) : null}
         </div>
     );

@@ -14,17 +14,27 @@ import {setMaterialDialog} from "@store/features/materialDialog/api";
 import {MaterialDialogTypes} from "@store/features/materialDialog/model";
 import {IFormData} from "../../model";
 import {setFormData} from "../../api";
+import {IUserInfo} from "@store/features/user";
 
 interface IDeliveryFormProps {
   clickEvent: () => void;
+  userInfo: IUserInfo
 }
 
 export type PaymentType = "cash" | "card";
-export type TelType = `+${number} (${number}${number}${number}) ${number}${number}${number}-${number}${number}-${number}${number}`;
 
-const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
+const DeliveryForm: React.FC<IDeliveryFormProps> = ({clickEvent, userInfo}) => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<IFormData>();
+  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<IFormData>({
+    defaultValues: {
+      name: userInfo?.name ?? '',
+      email: userInfo?.email ?? '',
+      address: userInfo?.street ?? '',
+      entrance: userInfo?.entrance ?? undefined,
+      floor: userInfo?.floor ?? undefined,
+      room: userInfo?.room ?? undefined
+    }
+  });
   const [utensils, setUtensils] = React.useState<number>(0);
   const [timeStamps] = React.useState<string[]>(calcTime(15));
 
@@ -55,7 +65,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
       <BlockForm>
         <div className={styles.root__title}>
           <h3>Оформление доставки</h3>
-          <SimpleButton type="button" clickEvent={props.clickEvent}>Изменить тип заказа</SimpleButton>
+          <SimpleButton type="button" clickEvent={clickEvent}>Изменить тип заказа</SimpleButton>
         </div>
         <div className={styles.root__content}>
           <fieldset>
@@ -82,7 +92,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = (props) => {
             <label className={styles.root__required}>Телефон</label>
             <Input inputMask={true} name='tel' required={true} register={register} error={!!errors.tel}
                    pattern={/^(\+7|7|8)?[\s-]?\(?[89][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/gm}
-                   mask='+7 (999) 999-99-99' maskChar='' placeholder='+7 (***) *** ** **'/>
+                   mask='+7 (999) 999-99-99' maskChar='' placeholder='+7 (***) *** ** **' defaultValue={userInfo?.tel}/>
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label>E-MAIL</label>

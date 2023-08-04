@@ -24,9 +24,9 @@ const Profile: React.FC = () => {
       {
           userInfo?.street && (
               <div className={styles.root__additional}>
-                <Field title='Подъезд' text={userInfo?.entrance ? userInfo?.entrance : ''}/>
-                <Field title='Этаж' text={userInfo?.floor ? userInfo?.floor : ''}/>
-                <Field title='Квартира' text={userInfo?.room ? userInfo?.room : ''}/>
+                  {userInfo?.entrance && <Field title='Подъезд' text={userInfo?.entrance ? userInfo?.entrance : ''}/>}
+                  {userInfo?.floor && <Field title='Этаж' text={userInfo?.floor ? userInfo?.floor : ''}/>}
+                  {userInfo?.room && <Field title='Квартира' text={userInfo?.room ? userInfo?.room : ''}/>}
               </div>
           )
       }

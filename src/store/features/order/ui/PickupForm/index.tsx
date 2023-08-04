@@ -13,14 +13,21 @@ import Select from "@shared/UI/Select";
 import {IFormData} from "../../model";
 import {setMaterialDialog} from "@store/features/materialDialog/api";
 import {MaterialDialogTypes} from "@store/features/materialDialog/model";
+import {IUserInfo} from "@store/features/user";
 
 interface IPickupProps {
 		clickEvent: () => void;
+		userInfo: IUserInfo
 }
 
-const PickupForm: React.FC<IPickupProps> = (props) => {
+const PickupForm: React.FC<IPickupProps> = ({clickEvent, userInfo}) => {
 		const dispatch = useAppDispatch();
-		const {register, handleSubmit, setValue, formState: {errors}} = useForm<IFormData>();
+		const {register, handleSubmit, setValue, formState: {errors}} = useForm<IFormData>({
+			defaultValues: {
+				name: userInfo?.name ?? '',
+				email: userInfo?.email ?? ''
+			}
+		});
 		const [timeStamps] = React.useState<string[]>(calcTime(15));
 		const [utensils, setUtensils] = React.useState<number>(0);
 
@@ -42,7 +49,7 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
 								<div className={styles.root__title}>
 										<h3>Оформление самовывоза</h3>
 										<h4>По адресу: г. Армавир, ул. Кропоткина 194</h4>
-										<SimpleButton type="button" clickEvent={props.clickEvent}>Изменить тип заказа</SimpleButton>
+										<SimpleButton type="button" clickEvent={clickEvent}>Изменить тип заказа</SimpleButton>
 								</div>
 								<div className={styles.root__content}>
 										<fieldset>
@@ -53,7 +60,7 @@ const PickupForm: React.FC<IPickupProps> = (props) => {
 												<label className={styles.root__required}>Телефон</label>
 												<Input inputMask={true} name='tel' required={true} register={register} error={!!errors.tel}
 															 pattern={/^(\+7|7|8)?[\s-]?\(?[89][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/gm}
-															 mask='+7 (999) 999-99-99' maskChar='' placeholder='+7 (***) *** ** **'/>
+															 mask='+7 (999) 999-99-99' maskChar='' placeholder='+7 (***) *** ** **' defaultValue={userInfo?.tel}/>
 										</fieldset>
 										<fieldset className={styles.root__width_50}>
 												<label>E-MAIL</label>

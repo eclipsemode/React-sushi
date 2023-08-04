@@ -12,7 +12,6 @@ export interface ICartState {
   finalPrice: number;
   deliveryPrice: number;
   totalAmount: number;
-  orderType: 'delivery' | 'pickup' | null
 }
 
 const initialState: ICartState = {
@@ -21,7 +20,6 @@ const initialState: ICartState = {
   finalPrice: 0,
   deliveryPrice: 0,
   totalAmount: 0,
-  orderType: null
 };
 
 export const cartSlice = createSlice({
@@ -61,7 +59,6 @@ export const cartSlice = createSlice({
       state.totalAmount = 0;
       state.totalPrice = 0;
       state.finalPrice = 0;
-      state.orderType = null;
     },
 
     removeItemById: (state, action: PayloadAction<number>) => {
@@ -82,13 +79,10 @@ export const cartSlice = createSlice({
     },
     setFinalPrice: (state, action: PayloadAction<number>) => {
       state.finalPrice = action.payload;
-    },
-    setOrderType: (state, action: PayloadAction<'delivery' | 'pickup' | null>) => {
-      state.orderType = action.payload
     }
   },
 });
 
 export const selectCart = (state: RootState) => state.cartReducer;
-export const { addItem, removeItem, removeAll, removeItemById, updateDeliveryPrice, setOrderType, setFinalPrice } = cartSlice.actions;
+export const { addItem, removeItem, removeAll, removeItemById, updateDeliveryPrice, setFinalPrice } = cartSlice.actions;
 export default cartSlice.reducer;

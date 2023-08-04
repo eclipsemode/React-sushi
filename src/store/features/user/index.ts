@@ -43,7 +43,8 @@ export interface IUserState {
     user: IUser | null,
     userInfo: Partial<IUserInfo> | null
     error: string | undefined | null,
-    status: 'fulfilled' | 'pending' | 'rejected'
+    status: 'fulfilled' | 'pending' | 'rejected',
+    userLoadSaveProcess: boolean
 }
 
 const fetchUserInfo = createAsyncThunk<IUserInfo, void, { rejectValue: string }>(
@@ -87,7 +88,8 @@ const initialState: IUserState = {
     user: null,
     userInfo: null,
     error: null,
-    status: 'pending'
+    status: 'pending',
+    userLoadSaveProcess: false
 };
 
 const userSlice = createSlice({
@@ -106,6 +108,12 @@ const userSlice = createSlice({
             .addCase(fetchUserInfo.pending, (state: IUserState) => {
                 state.error = null;
                 state.status = 'pending';
+                state.userLoadSaveProcess = true;
+            })
+            .addCase(fetchUserInfo.rejected, (state: IUserState) => {
+                state.error = 'error';
+                state.status = 'rejected';
+                state.userLoadSaveProcess = false;
             })
             .addCase(fetchUserInfo.fulfilled, (state: IUserState, action: PayloadAction<IUserInfo>) => {
                 state.userInfo = {
@@ -120,6 +128,7 @@ const userSlice = createSlice({
                     entrance: action.payload.entrance,
                     room: action.payload.room
                 }
+                state.userLoadSaveProcess = false;
                 state.status = 'fulfilled'
             })
     }
