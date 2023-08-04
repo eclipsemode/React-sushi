@@ -67,11 +67,8 @@ const Input = ({
         '& input': {
             color: Colors.$rootText,
         },
-        '& input[type=date]:required:invalid::-webkit-datetime-edit': {
-            color: 'transparent !important'
-        },
-        '& input[type=date]:focus::-webkit-datetime-edit': {
-            color: `${Colors.$rootText} !important`
+        ' input[type=date]::-webkit-calendar-picker-indicator': {
+            filter: 'invert(1)'
         },
         '& > .MuiInput-underline::before': {
             borderColor: Colors.$rootText,
@@ -101,6 +98,9 @@ const Input = ({
             '& ~ div > input': {
                 background: 'none'
             }
+        },
+        '& > label.Mui-disabled': {
+            color: Colors.$infoColor
         },
         '& input.Mui-disabled': {
             WebkitTextFillColor: Colors.$infoColor,
