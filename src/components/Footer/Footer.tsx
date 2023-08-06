@@ -4,15 +4,15 @@ import styles from './Footer.module.scss';
 import { Skeleton, Stack } from '@mui/material';
 import RouterPath from '@shared/utils/menuPath';
 import { useAppSelector } from '@store/hooks';
-import { selectCity } from '@store/features/city';
 import { DeviceType, selectAdaptiveServiceSlice } from '@store/features/adaptive';
 import Link from "next/link";
 import Image from "next/image";
+import {selectLocation} from "@store/features/location/api";
 
 const Footer: React.FC = () => {
     const { deviceType } = useAppSelector(selectAdaptiveServiceSlice);
     const { categories, categoriesStatus } = useAppSelector((state) => state.categoriesReducer);
-    const { city } = useAppSelector(selectCity);
+    const {currentBranch} = useAppSelector(selectLocation);
 
     return (
         <footer id="footer" className={styles.root}>
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
                         <Stack className={styles.center} spacing={1} alignItems="center">
                             <Image src={'/images/logo.png'} width={150} priority height={50} alt="logo" />
                             <span>
-                                город - <span style={{ fontWeight: 'bold' }}>{city}</span>
+                                город - <span style={{ fontWeight: 'bold' }}>{currentBranch}</span>
                             </span>
                             <span>Доставка с 10:00–23:30</span>
                         </Stack>

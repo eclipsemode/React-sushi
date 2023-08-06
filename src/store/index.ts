@@ -11,7 +11,6 @@ import categoriesReducer from '@store/features/categories';
 import ordersReducer from '@store/features/account/api';
 import adaptiveServiceReducer from '@store/features/adaptive';
 import authReducer from '@store/features/auth/api'
-import cityReducer from '@store/features/city';
 import materialDialogReducer from '@store/features/materialDialog/api'
 import orderCreateReducer from '@store/features/order/api'
 import promocodeReducer from '@store/features/promocode/api'
@@ -29,7 +28,6 @@ const rootReducer = combineReducers({
     categoriesReducer,
     ordersReducer,
     adaptiveServiceReducer,
-    cityReducer,
     authReducer,
     materialDialogReducer,
     orderCreateReducer,

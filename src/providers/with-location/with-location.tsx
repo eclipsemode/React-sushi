@@ -1,20 +1,14 @@
-'use client'
-import React from 'react';
-import {usePosition} from "../../hooks/usePosition";
-import {useAppDispatch} from "@store/hooks";
-import {BranchesType, setCurrentBranch} from "@store/features/location/api";
+import StoreLocation from "@providers/with-location/StoreLocation";
 
-const WithLocation = () => {
-    const {city} = usePosition();
-    const dispatch = useAppDispatch();
-    
-    React.useEffect(() => {
-        if (city) {
-            dispatch(setCurrentBranch(city as BranchesType));
-        }
-    }, [city, dispatch])
+async function getBranches() {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}api/branch`, { cache: 'no-cache'});
+    return response.json();
+}
 
-    return <></>
+const WithLocation = async () => {
+    const branches = await getBranches();
+
+    return <StoreLocation branches={branches} />
 };
 
 export default WithLocation;

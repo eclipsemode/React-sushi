@@ -12,15 +12,15 @@ import {ModalAccount} from '@components/index';
 import {DeviceType, selectAdaptiveServiceSlice} from '@store/features/adaptive';
 import {Badge, BottomNavigation, BottomNavigationAction, Box, Stack} from '@mui/material';
 import RouterPath from '@shared/utils/menuPath';
-import {selectCity} from '@store/features/city';
 import {usePathname, useRouter} from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import {selectLocation} from "@store/features/location/api";
 
 const Header: React.FC = () => {
     const router = useRouter();
     const pathname = usePathname();
-    const { city } = useAppSelector(selectCity);
+    const {currentBranch} = useAppSelector(selectLocation);
     const [activeMenu, setActiveMenu] = React.useState<number>(0);
     const { totalPrice, deliveryPrice } = useAppSelector(selectCart);
     const { isAuth, user } = useAppSelector((state) => state.userReducer);
@@ -94,7 +94,7 @@ const Header: React.FC = () => {
                 </Link>
                 <Stack spacing={0.5}>
                     <span className={styles.city}>
-                        город: <span>{city}</span>
+                        город: <span>{currentBranch}</span>
                     </span>
                     <span className={styles.phoneAdditional}>тел: 8 (800) 200-27-92</span>
                     <span className={styles.time}>Доставка 10:00-23:30</span>
@@ -164,7 +164,7 @@ const Header: React.FC = () => {
 
                     <Stack spacing={0.5} textAlign="right">
                         <span className={styles.city}>
-                            город: <span>{city}</span>
+                            город: <span>{currentBranch}</span>
                         </span>
                         <span className={styles.time}>Доставка 10:00-23:30</span>
                     </Stack>
