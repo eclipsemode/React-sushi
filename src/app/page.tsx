@@ -1,29 +1,21 @@
-"use client"
 import Banner from '@components/Banner/Banner';
-import {Categories} from "@components/index";
-import {Skeleton} from "@mui/material";
 import {Sort} from "@store/features/filter/ui";
 import Products from "@store/features/products/ui/Products";
 import React from "react";
-import {useAppSelector} from "@store/hooks";
+import HomeTitle from "@components/HomeTitle";
+import Categories from "@store/features/categories/ui/Categories";
+import HomeInfo from "@components/HomeInfo";
 
-async function Home() {
-    const {categories} = useAppSelector((state) => state.categoriesReducer);
-    const {categoryNumber} = useAppSelector((state) => state.filterReducer);
-
+const Home = () => {
     return (
         <>
             <Banner/>
+            <HomeInfo />
             <div className="content__top">
                 <Categories/>
             </div>
             <section className="content__head">
-                <h2 className="content__title">
-                    {categories.length !== 0 ? (
-                        categories.find((category) => category.id === categoryNumber)?.name
-                    ) : <Skeleton animation="wave" width={150} height={50}/>
-                    }
-                </h2>
+                <HomeTitle/>
                 <Sort/>
             </section>
             <Products/>

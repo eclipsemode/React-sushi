@@ -6,6 +6,7 @@ import WithCategories from "@providers/with-categories/with-categories";
 import WithStore from "@providers/with-store";
 import WithPersist from "@providers/with-persist";
 import WithSnackbar from "@providers/with-snackbar";
+import WithLocation from "@providers/with-location/with-location";
 
 interface IProps {
     children: React.ReactNode
@@ -15,6 +16,7 @@ function Providers({children}: IProps) {
     return <WithStore>
         <WithPersist>
             <WithSnackbar>
+                <WithLocation />
                 <WithCategories/>
                 <WithAdaptive/>
                 <WithAuth/>

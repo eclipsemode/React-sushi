@@ -1,13 +1,10 @@
 import React from 'react';
-import {Box, Stack} from "@mui/material";
+import {Box, Stack} from "@lib/mui";
 import styles from './index.module.scss'
 import PlaceIcon from '@mui/icons-material/Place';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import {useAppSelector} from "@store/hooks";
-import {selectCity} from "@store/features/city";
 
 const Contacts: React.FC = () => {
-    const {city} = useAppSelector(selectCity);
     return (
         <Stack>
             <Box>
@@ -27,6 +24,7 @@ const Contacts: React.FC = () => {
                             <Stack>
                                 <span>Лайм</span>
                                 <span>г. Армавир ул. Кропоткина, 194</span>
+                                <span>тел. 8 (800) 200-27-92</span>
                             </Stack>
                         </Stack>
                     </Box>
@@ -44,7 +42,7 @@ const Contacts: React.FC = () => {
                     <Stack spacing={2}>
                         <h2>О компании</h2>
                         <Stack justifyContent='flex-start' rowGap='10px'>
-                            <span>Лайм суши — это японский-итальянский ресторан быстрого питания. Осуществляем бесплатную доставку в г. {city}, при заказе от 600 рублей в течении 1 часа.</span>
+                            <span>Лайм суши — это японский-итальянский ресторан быстрого питания. Осуществляем бесплатную доставку, при заказе от 600 рублей в течении 1 часа.</span>
                             <span>Товары могут отличаться от фотографий соответствующих Товаров, представленных на сайте.</span>
                         </Stack>
                     </Stack>

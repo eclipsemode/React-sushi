@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@store/index';
 import {IProduct} from "@store/features/products/api";
+import {DeliveryPrice} from "@store/features/order/utils";
 
 export interface ICartProduct extends IProduct{
   amount: number
@@ -71,7 +72,7 @@ export const cartSlice = createSlice({
       }, 0);
     },
     updateDeliveryPrice: (state) => {
-      if (state.totalPrice === 0 || state.totalPrice >= 1200) {
+      if (state.totalPrice === 0 || state.totalPrice >= DeliveryPrice.MIN) {
         state.deliveryPrice = 0
       } else {
         state.deliveryPrice = 100

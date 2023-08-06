@@ -14,10 +14,20 @@ const Loading = () => {
                 transform: 'none',
                 position: 'relative',
                 aspectRatio: '10/4',
-                borderRadius: '15px',
-                marginBottom: '50px'
+                borderRadius: '15px'
             }}/>
-            <Stack direction='row' columnGap='5px' sx={{overflowX: 'hidden', paddingBottom: '5px'}}>
+            {
+                deviceType !== DeviceType.DESKTOP && (
+                    <Skeleton animation='wave' height={81} sx={{
+                        width: '100%',
+                        transform: 'none',
+                        borderRadius: '12px',
+                        position: 'relative',
+                        marginTop: '30px'
+                    }} />
+                )
+            }
+            <Stack direction='row' columnGap='5px' sx={{overflowX: 'hidden', paddingBottom: '5px', marginTop: '30px'}}>
                 {
                     [...new Array(10)].map((_, i) => (
                         <span key={i}>

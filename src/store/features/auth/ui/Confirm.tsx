@@ -31,6 +31,7 @@ const Confirm = ({requestId, tel}: IProps) => {
     const handleFormSubmit: SubmitHandler<IConfirmForm> = async data => {
         try {
             await dispatch(confirmAuth({code: data.code, requestId: reqId})).unwrap();
+            enqueueSnackbar('Вы успешно вошли в аккаунт', { variant: 'success' });
             router.push(RouterPath.HOME);
         } catch (e) {
             enqueueSnackbar('Вы ввели неправильный код', { variant: 'error' });

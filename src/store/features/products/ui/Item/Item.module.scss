@@ -4,7 +4,7 @@
 .root {
   text-align: center;
   background: $header-background;
-  width: 306px;
+  width: 302px;
   height: 386.3px;
   overflow: hidden;
   border-radius: 12px;
@@ -103,4 +103,11 @@
 
 .pizzaButton {
   flex: 1;
+}
+
+
+@media (max-width: 350px) {
+  .root {
+    width: 100%;
+  }
 }

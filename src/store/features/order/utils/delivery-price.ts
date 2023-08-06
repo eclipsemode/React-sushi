@@ -1,5 +1,5 @@
 enum DeliveryPrice {
-  MIN = 1200
+  MIN = 600
 }
 
 export { DeliveryPrice };

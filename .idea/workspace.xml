@@ -5,8 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/HomeInfo/index.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/HomeInfo/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/HomeTitle/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/usePosition.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/providers/with-location/with-location.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/features/location/api/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/input/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/input/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/contacts/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/contacts/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Categories/Categories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/categories/ui/Categories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Categories/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/categories/ui/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Contacts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Contacts/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/mui.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/mui.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/providers/with-providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/with-providers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/MenuButton/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/auth/ui/Confirm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/auth/ui/Confirm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/cart/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/cart/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/utils/delivery-price.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/utils/delivery-price.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/products/ui/Item/Item.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/products/ui/Item/Item.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/products/ui/Products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/products/ui/Products.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,11 +99,11 @@
       <recent name="D:\Frontend\React-sushi\next" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Frontend\React-sushi\src\store\features\categories\ui" />
       <recent name="D:\Frontend\React-sushi\src\app\profile" />
       <recent name="D:\Frontend\React-sushi\src\providers" />
       <recent name="D:\Frontend\React-sushi\src\providers\with-auth" />
       <recent name="D:\Frontend\React-sushi\src\app\auth" />
-      <recent name="D:\Frontend\React-sushi\src\store\features\promocode\middleware" />
     </key>
   </component>
   <component name="RunManager" selected="Jest.Banner tests">
@@ -449,7 +473,16 @@
       <workItem from="1691074076435" duration="1531000" />
       <workItem from="1691091206596" duration="5000" />
       <workItem from="1691157042644" duration="1796000" />
-      <workItem from="1691161132001" duration="2522000" />
+      <workItem from="1691161132001" duration="5924000" />
+      <workItem from="1691176020435" duration="4000" />
+      <workItem from="1691176763177" duration="3845000" />
+      <workItem from="1691222271093" duration="20000" />
+      <workItem from="1691222566905" duration="699000" />
+      <workItem from="1691240718135" duration="851000" />
+      <workItem from="1691318965106" duration="362000" />
+      <workItem from="1691326530421" duration="1294000" />
+      <workItem from="1691334164354" duration="5452000" />
+      <workItem from="1691341591500" duration="3258000" />
     </task>
     <servers />
   </component>

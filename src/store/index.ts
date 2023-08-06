@@ -15,6 +15,7 @@ import cityReducer from '@store/features/city';
 import materialDialogReducer from '@store/features/materialDialog/api'
 import orderCreateReducer from '@store/features/order/api'
 import promocodeReducer from '@store/features/promocode/api'
+import locationReducer from '@store/features/location/api'
 
 import { cartListenerMiddleware } from '@store/features/cart/middleware';
 import { promoCodeMiddleware } from "@store/features/promocode/middleware";
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
     authReducer,
     materialDialogReducer,
     orderCreateReducer,
-    promocodeReducer
+    promocodeReducer,
+    locationReducer
 });
 
 const createNoopStorage = () => {

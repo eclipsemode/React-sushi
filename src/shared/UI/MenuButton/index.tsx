@@ -14,7 +14,7 @@ const MenuButton = ({ image, text, color, active = false, clickEvent }: IProps) 
     return (
         <Stack spacing={1} className={!!active ? styles.rootActive : styles.root} alignItems="center" onClick={clickEvent}>
             <div style={{position: 'relative', height: '30px', width: '100%'}}><Image src={image ?? ''} fill sizes='(max-width: 120px) 100vw' style={{objectFit: 'contain'}} alt={text} loading="lazy" /></div>
-            <span style={{ color }}>{text}</span>
+            <h2 style={{ color, fontSize: '17px', lineHeight: '21px' }}>{text}</h2>
         </Stack>
     );
 };

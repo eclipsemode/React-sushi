@@ -1,0 +1,39 @@
+@import "@assets/styles/variables";
+
+.root {
+  display: none;
+  background: $root-card-background;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.contentTop {
+  display: flex;
+  column-gap: 30px;
+}
+
+.delivery, .tel {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.bottomContent {
+  font-size: 14px;
+}
+
+.tel, .bottomContent {
+  color: $info-color;
+}
+
+@media (max-width: $mediumSize) {
+  .root {
+    display: block;
+  }
+}
