@@ -1,14 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-export type BranchesType = 'Армавир'
-
 export interface IBranches {
     id: number,
-    name: BranchesType
+    name: string
 }
 
 export interface ILocationState {
-    currentBranch: BranchesType,
+    currentBranch: string,
     allBranches: IBranches[],
     branchLoadSaveProcess: boolean
 }
@@ -19,46 +17,17 @@ const initialState: ILocationState = {
     branchLoadSaveProcess: false
 }
 
-// export const getBranches = createAsyncThunk<IBranches[], void>(
-//     'location/getBranches',
-//     async (_, {rejectWithValue}) => {
-//         try {
-//             const res = await $api_guest.get('api/branch/');
-//             return res.data;
-//         } catch (error: any) {
-//             if (error.response && error.response.data.message) {
-//                 return rejectWithValue(error.response.data.message);
-//             } else {
-//                 return rejectWithValue(error.message);
-//             }
-//         }
-//     }
-// )
-
 export const locationSlice = createSlice({
     name: 'location',
     initialState,
     reducers: {
-        setCurrentBranch: (state, action: PayloadAction<BranchesType>) => {
+        setCurrentBranch: (state, action: PayloadAction<string>) => {
             state.currentBranch = action.payload
         },
         setAllBranches: (state, action: PayloadAction<IBranches[]>) => {
             state.allBranches = action.payload
         }
-    },
-    // extraReducers: (builder) => {
-    //     builder
-    //         .addCase(getBranches.pending, (state) => {
-    //             state.branchLoadSaveProcess = true;
-    //         })
-    //         .addCase(getBranches.fulfilled, (state, action: PayloadAction<IBranches[]>) => {
-    //             state.allBranches = action.payload;
-    //             state.branchLoadSaveProcess = false;
-    //         })
-    //         .addCase(getBranches.rejected, (state) => {
-    //             state.branchLoadSaveProcess = false;
-    //         })
-    // }
+    }
 })
 
 export const selectLocation = (state: RootState) => state.locationReducer;

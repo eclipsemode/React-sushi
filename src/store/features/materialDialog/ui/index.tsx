@@ -26,6 +26,7 @@ import ProfileAdminChangePromocode
     from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminChangePromocode";
 import ProfileAdminDeletePromocode
     from "@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminDeletePromocode";
+import HeaderPickCity from "@store/features/materialDialog/ui/materialDialogs/header/HeaderPickCity";
 
 const MaterialDialog = () => {
     const { opened, dialogType } = useAppSelector(selectMaterialDialog);
@@ -60,6 +61,7 @@ const MaterialDialog = () => {
             case MaterialDialogTypes.PROFILE_ADMIN_ADD_PROMOCODE: return <ProfileAdminAddPromocode />
             case MaterialDialogTypes.PROFILE_ADMIN_CHANGE_PROMOCODE: return <ProfileAdminChangePromocode />
             case MaterialDialogTypes.PROFILE_ADMIN_DELETE_PROMOCODE: return <ProfileAdminDeletePromocode />
+            case MaterialDialogTypes.HEADER_PICK_CITY: return <HeaderPickCity />
 
             default: return <></>
         }

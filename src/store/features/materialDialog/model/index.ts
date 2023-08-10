@@ -17,7 +17,9 @@ enum MaterialDialogTypes {
     PROFILE_ADMIN_EDIT_CATEGORY = 'profile admin edit category',
     PROFILE_ADMIN_ADD_PROMOCODE = 'profile admin add promocode',
     PROFILE_ADMIN_DELETE_PROMOCODE = 'profile admin delete promocode',
-    PROFILE_ADMIN_CHANGE_PROMOCODE = 'profile admin change promocode'
+    PROFILE_ADMIN_CHANGE_PROMOCODE = 'profile admin change promocode',
+
+    HEADER_PICK_CITY = 'header pick city'
 }
 
 export { MaterialDialogTypes };

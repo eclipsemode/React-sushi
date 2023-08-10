@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import { SxProps } from "@mui/material";
+import {SxProps} from "@mui/material";
 import Colors from "@shared/utils/Colors";
 
 interface ISimpleButton {
@@ -17,7 +17,7 @@ const SimpleButton: React.FC<ISimpleButton> = ({children, clickEvent, type , var
   const buttonStyle: SxProps = {
     background: variant === 'contained' ? color ?? Colors.$rootTextActive : 'none',
     color: variant === 'contained' ? Colors.$rootText : (color ? color : Colors.$rootTextActive),
-    border: `2px solid ${color ? color : Colors.$rootTextActive}`,
+    border: variant === 'outlined' ? `2px solid ${color ? color : Colors.$rootTextActive}` : 'auto',
     cursor: "pointer",
     position: "relative",
     height: "48px",
@@ -43,8 +43,8 @@ const SimpleButton: React.FC<ISimpleButton> = ({children, clickEvent, type , var
     textDecoration: "none",
     "&:hover": {
       color: Colors.$rootText,
-      background: color ? color : Colors.$rootTextActive,
-      border: `2px solid ${color ? color : Colors.$rootTextActive}`,
+      background: variant !== 'text' ? (color ? color : Colors.$rootTextActive) : 'none',
+      border: variant !== 'text' ? `2px solid ${color ? color : Colors.$rootTextActive}` : 'none',
       filter: variant === 'contained' ? 'brightness(1.1)' : "none"
     },
     '&:disabled': {
