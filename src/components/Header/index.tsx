@@ -37,12 +37,19 @@ const Header: React.FC = () => {
     const {city} = usePosition();
     const [openedPopover, setOpenedPopover] = React.useState<boolean>(false);
     const popoverRef = React.useRef<HTMLSpanElement>(null);
+    const [mounted, setMounted] = React.useState<boolean>(false);
 
     React.useEffect(() => {
-        const branchExists = allBranches.find((branch: IBranches) => branch.name === city);
+        if (!mounted) {
+            const branchExists = allBranches.find((branch: IBranches) => branch.name === city);
 
-        if ( allBranches &&  city && !isAuth && !branchExists) {
-            setOpenedPopover(true)
+            if (allBranches &&  city && !isAuth && (!isAuth || !branchExists)) {
+                setOpenedPopover(true);
+
+                if (!mounted) {
+                    setMounted(true)
+                }
+            }
         }
     }, [allBranches, city, isAuth])
 
@@ -225,8 +232,9 @@ const Header: React.FC = () => {
 
                     <Stack spacing={0.5} textAlign="right">
                         <span className={styles.city}>
-                            город: <span onClick={onCityPickClick}>{currentBranch}</span>
+                            город: <span ref={popoverRef} onClick={onCityPickClick}>{currentBranch}</span>
                         </span>
+                        {renderPopover()}
                         <span className={styles.time}>Доставка 10:00-23:30</span>
                     </Stack>
                 </Stack>
