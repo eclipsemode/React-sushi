@@ -21,6 +21,7 @@ import {MaterialDialogTypes} from "@store/features/materialDialog/model";
 import SimpleButton from "@shared/UI/SimpleButton";
 import Colors from "@shared/utils/Colors";
 import {usePosition} from "../../hooks/usePosition";
+import {checkCookieExpire, setCookie} from "@shared/utils/Cookie";
 
 const Header: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -43,10 +44,11 @@ const Header: React.FC = () => {
         if (!mounted) {
             const branchExists = allBranches.find((branch: IBranches) => branch.name === city);
 
-            if (allBranches &&  city && !isAuth && (!isAuth || !branchExists)) {
+            if (!checkCookieExpire('location-initial') && allBranches &&  city && !isAuth && (!isAuth || !branchExists)) {
                 setOpenedPopover(true);
 
                 if (!mounted) {
+                    setCookie('location-initial', '1', 1);
                     setMounted(true)
                 }
             }

@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/shared/utils/Cookie.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -465,7 +467,10 @@
       <workItem from="1691605897985" duration="811000" />
       <workItem from="1691606871818" duration="6306000" />
       <workItem from="1691682710862" duration="5305000" />
-      <workItem from="1691700062408" duration="1095000" />
+      <workItem from="1691700062408" duration="1149000" />
+      <workItem from="1691701281623" duration="67000" />
+      <workItem from="1691741562093" duration="3003000" />
+      <workItem from="1691759291069" duration="2188000" />
     </task>
     <servers />
   </component>

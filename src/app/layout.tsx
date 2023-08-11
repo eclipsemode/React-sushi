@@ -33,6 +33,14 @@ const RootLayout = ({children}: { children: React.ReactNode }) => {
             <Footer/>
             <ToTopArrow/>
         </Providers>
+
+        <script
+            dangerouslySetInnerHTML={{
+                __html: 'window.fsPromoterConfig = {"zone": "ru", "language": "ru", "chain_id": 5340};',
+            }}
+        />
+        <script src="https://fs.me/pr/init.js" async/>
+
         </body>
         </html>
     )
