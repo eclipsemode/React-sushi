@@ -26,9 +26,8 @@ const RootLayout = ({children}: { children: React.ReactNode }) => {
         <Providers>
             <Header/>
             <main className="content">
-                <div className="container">
+
                     {children}
-                </div>
             </main>
             <Footer/>
             <ToTopArrow/>

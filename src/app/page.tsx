@@ -10,15 +10,17 @@ const Home = () => {
     return (
         <>
             <Banner/>
-            <HomeInfo />
-            <div className="content__top">
-                <Categories/>
+            <div className="container">
+                <HomeInfo/>
+                <div className="content__top">
+                    <Categories/>
+                </div>
+                <section className="content__head">
+                    <HomeTitle/>
+                    <Sort/>
+                </section>
+                <Products/>
             </div>
-            <section className="content__head">
-                <HomeTitle/>
-                <Sort/>
-            </section>
-            <Products/>
         </>
     );
 }
