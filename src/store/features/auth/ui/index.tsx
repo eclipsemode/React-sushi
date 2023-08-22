@@ -38,18 +38,24 @@ const Auth = () => {
     };
 
     return (
-        <div className={styles.root}>
-            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                <Input register={register} className={styles.root__input} name='tel' inputMask={true} mask='+7 (999) 999-99-99' maskChar='' error={!!errors.tel}
-                       validate={(value) => !!value.match(/\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}/)} label='Введите телефон' type='tel' required
-                       endAdornment={!confirm && authLoadSaveProcess ? <CircularProgress size={20} /> : <Box width={20}></Box>}
-                />
-                {!confirm && <>
-                    <Checkbox register={register} style={{width: '100%'}} required name='agreement' checked={true} validate={(value) => value}>Согласен(на) на обработку персональных данных</Checkbox>
-                    <SimpleButton variant='contained' type='submit'>Выслать код</SimpleButton>
-                </>}
-            </form>
-            {confirm && <Confirm requestId={requestId} tel={watch('tel')}/>}
+        <div className='container'>
+            <div className={styles.root}>
+                <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                    <Input register={register} className={styles.root__input} name='tel' inputMask={true}
+                           mask='+7 (999) 999-99-99' maskChar='' error={!!errors.tel}
+                           validate={(value) => !!value.match(/\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}/)}
+                           label='Введите телефон' type='tel' required
+                           endAdornment={!confirm && authLoadSaveProcess ? <CircularProgress size={20}/> :
+                               <Box width={20}></Box>}
+                    />
+                    {!confirm && <>
+                        <Checkbox register={register} style={{width: '100%'}} required name='agreement' checked={true}
+                                  validate={(value) => value}>Согласен(на) на обработку персональных данных</Checkbox>
+                        <SimpleButton variant='contained' type='submit'>Выслать код</SimpleButton>
+                    </>}
+                </form>
+                {confirm && <Confirm requestId={requestId} tel={watch('tel')}/>}
+            </div>
         </div>
     );
 };

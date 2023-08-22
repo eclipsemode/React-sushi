@@ -5,15 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/CardScroll/index.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CardScroll/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/cart/lodaing.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cart/lodaing.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/cart/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cart/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/contacts/loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/contacts/loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/loading.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/mixins/_container.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/mixins/_container.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/products/ui/Item/Item.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/products/ui/Item/Item.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/products/ui/Item/Item.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/products/ui/Item/Item.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/profile/loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Contacts/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Contacts/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HomeInfo/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HomeInfo/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Account.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/auth/ui/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/auth/ui/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/categories/ui/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/categories/ui/index.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -478,7 +482,11 @@
       <workItem from="1691759291069" duration="6692000" />
       <workItem from="1691770551662" duration="2480000" />
       <workItem from="1691782312557" duration="6667000" />
-      <workItem from="1691851777061" duration="5612000" />
+      <workItem from="1691851777061" duration="5644000" />
+      <workItem from="1691875467009" duration="2000" />
+      <workItem from="1692288617033" duration="177000" />
+      <workItem from="1692709921221" duration="3000" />
+      <workItem from="1692718016458" duration="2293000" />
     </task>
     <servers />
   </component>

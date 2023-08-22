@@ -84,6 +84,11 @@ body {
       flex-direction: column-reverse;
       row-gap: 1.5rem;
     }
+
+    @media (min-width: 1100px) {
+      @include Container;
+      margin-top: 30px;
+    }
   }
 }
 

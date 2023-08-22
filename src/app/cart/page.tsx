@@ -7,7 +7,7 @@ import CartOrder from "@store/features/order/ui";
 const Cart: React.FC = () => {
     const { items }: any = useAppSelector((state) => state.cartReducer);
 
-    return <div>{items.length > 0 ? <CartOrder /> : <CartEmpty />}</div>;
+    return <div className='container'>{items.length > 0 ? <CartOrder /> : <CartEmpty />}</div>;
 };
 
 export default Cart;

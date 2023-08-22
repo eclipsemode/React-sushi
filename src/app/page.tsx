@@ -10,11 +10,11 @@ const Home = () => {
     return (
         <>
             <Banner/>
-            <div className="container">
                 <HomeInfo/>
                 <div className="content__top">
                     <Categories/>
                 </div>
+            <div className="container">
                 <section className="content__head">
                     <HomeTitle/>
                     <Sort/>

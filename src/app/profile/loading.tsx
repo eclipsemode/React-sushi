@@ -9,11 +9,11 @@ const Loading = () => {
     const {deviceType} = useAppSelector(selectAdaptiveServiceSlice);
     const {isAuth} = useAppSelector(selectUser);
     const renderNotAuthLoading = () => (
-        <span><Skeleton animation='wave' style={{maxWidth: '450px', width: '100%', height: '250px', transform: 'none', margin: '0 auto'}} /></span>
+        <span className='container'><Skeleton animation='wave' style={{maxWidth: '450px', width: '100%', height: '250px', transform: 'none', margin: '0 auto'}} /></span>
     );
 
     const renderAuthLoading = () => (
-        <Stack rowGap='1rem'>
+        <Stack rowGap='1rem' className='container'>
             <span><Skeleton animation='wave' sx={{transform: 'none', height: '24px', width: '100%'}}/></span>
 
             {

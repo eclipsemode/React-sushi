@@ -8,7 +8,7 @@ const Loading = () => {
     const {deviceType} = useAppSelector(selectAdaptiveServiceSlice);
 
     return (
-        <Stack>
+        <Stack className='container'>
             <Skeleton animation='wave' sx={{
                 width: '100%',
                 transform: 'none',

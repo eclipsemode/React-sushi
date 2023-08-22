@@ -25,8 +25,8 @@ import Link from 'next/link'
 
 const Account: React.FC = () => {
     const [openBackdrop, setOpenBackdrop] = React.useState(true);
-    const { user} = useAppSelector(state => state.userReducer);
-    const { page } = useAppSelector(state => state.ordersReducer);
+    const {user} = useAppSelector(state => state.userReducer);
+    const {page} = useAppSelector(state => state.ordersReducer);
     const {authLoadSaveProcess} = useAppSelector(selectAuth);
     const [selected, setSelected] = React.useState<SelectedType>(page);
     const dispatch = useAppDispatch();
@@ -83,33 +83,35 @@ const Account: React.FC = () => {
     )
 
     return (
-        <div className={styles.root}>
-            <div className={styles.root__head}>
-                <Breadcrumbs className={styles.breadcrumbs}
-                             separator={<NavigateNextIcon fontSize="small"/>}
-                             aria-label="breadcrumb"
-                >
-                    {breadcrumbs}
-                </Breadcrumbs>
-            </div>
-            {
-                authLoadSaveProcess ? <Backdrop
-                        sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                        open={openBackdrop}
-                        onClick={handleClose}
+        <div className='container'>
+            <div className={styles.root}>
+                <div className={styles.root__head}>
+                    <Breadcrumbs className={styles.breadcrumbs}
+                                 separator={<NavigateNextIcon fontSize="small"/>}
+                                 aria-label="breadcrumb"
                     >
-                        <CircularProgress color="inherit"/>
-                    </Backdrop> :
-                    (
-                        <div className={styles.root__body}>
-                            {renderAsideMenu()}
-                            {selected === "profile" && <Profile/>}
-                            {selected === "orders" && <Orders/>}
-                            {selected === "settings" && <Settings/>}
-                            {selected === "admin" && <Admin/>}
-                        </div>
-                    )
-            }
+                        {breadcrumbs}
+                    </Breadcrumbs>
+                </div>
+                {
+                    authLoadSaveProcess ? <Backdrop
+                            sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                            open={openBackdrop}
+                            onClick={handleClose}
+                        >
+                            <CircularProgress color="inherit"/>
+                        </Backdrop> :
+                        (
+                            <div className={styles.root__body}>
+                                {renderAsideMenu()}
+                                {selected === "profile" && <Profile/>}
+                                {selected === "orders" && <Orders/>}
+                                {selected === "settings" && <Settings/>}
+                                {selected === "admin" && <Admin/>}
+                            </div>
+                        )
+                }
+            </div>
         </div>
     );
 };
