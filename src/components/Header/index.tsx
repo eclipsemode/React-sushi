@@ -38,21 +38,17 @@ const Header: React.FC = () => {
     const {city} = usePosition();
     const [openedPopover, setOpenedPopover] = React.useState<boolean>(false);
     const popoverRef = React.useRef<HTMLSpanElement>(null);
-    const [mounted, setMounted] = React.useState<boolean>(false);
 
     React.useEffect(() => {
-        if (!mounted) {
-            const branchExists = allBranches.find((branch: IBranches) => branch.name === city);
 
-            if (!checkCookieExpire('location-initial') && allBranches &&  city && !isAuth && (!isAuth || !branchExists)) {
-                setOpenedPopover(true);
+        const branchExists = allBranches.find((branch: IBranches) => branch.name === city);
 
-                if (!mounted) {
-                    setCookie('location-initial', '1', 1);
-                    setMounted(true)
-                }
-            }
+        if (!checkCookieExpire('location-initial') && allBranches && city && (!isAuth || !branchExists)) {
+
+            setOpenedPopover(true);
+            setCookie('location-initial', '1', 1);
         }
+
     }, [allBranches, city, isAuth])
 
     const handleClosePopover = () => {
@@ -148,7 +144,7 @@ const Header: React.FC = () => {
             }}
         >
             <Stack sx={{padding: '15px'}}>
-                <Typography sx={{ p: 2, color: Colors.$rootText }}>Ваш город {currentBranch}?</Typography>
+                <Typography sx={{p: 2, color: Colors.$rootText}}>Ваш город {currentBranch}?</Typography>
                 <SimpleButton variant='contained' clickEvent={handleClosePopover}>Подтвердить</SimpleButton>
                 <SimpleButton variant='text' clickEvent={onCityPickClick}>Выбрать город</SimpleButton>
             </Stack>
