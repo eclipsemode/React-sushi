@@ -20,6 +20,18 @@ export const metadata = {
 }
 
 const RootLayout = ({children}: { children: React.ReactNode }) => {
+
+    const renderScripts = () => (
+        <>
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: 'window.fsPromoterConfig = {"zone": "ru", "language": "ru", "chain_id": 5340};',
+                }}
+            />
+            <script src="https://fs.me/pr/init.js" async/>
+        </>
+    )
+
     return (
         <html lang="ru">
         <body className={`App`}>
@@ -27,18 +39,13 @@ const RootLayout = ({children}: { children: React.ReactNode }) => {
             <Header/>
             <main className="content">
 
-                    {children}
+                {children}
             </main>
             <Footer/>
             <ToTopArrow/>
         </Providers>
 
-        <script
-            dangerouslySetInnerHTML={{
-                __html: 'window.fsPromoterConfig = {"zone": "ru", "language": "ru", "chain_id": 5340};',
-            }}
-        />
-        <script src="https://fs.me/pr/init.js" async/>
+        {renderScripts()}
 
         </body>
         </html>

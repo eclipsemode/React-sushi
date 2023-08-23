@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/__tests__/store/location/index.test.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__tests__/store/city/index.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,50 +84,76 @@
       <recent name="D:\Frontend\React-sushi\src\app\auth" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.Banner tests">
-    <configuration name="Banner tests" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.Home page tests">
+    <configuration name="Home page tests" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/__tests__/components/Banner/index.test.tsx" />
+      <test-file value="$PROJECT_DIR$/__tests__/pages/index.test.tsx" />
       <test-names>
-        <test-name value="Banner tests" />
+        <test-name value="Home page tests" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Banner tests.Should have alt for all images" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="citySlice reducer (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/__tests__/store/auth/index.test.tsx" />
+      <test-names>
+        <test-name value="citySlice reducer" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="citySlice reducer" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/__tests__/store/city/index.test.tsx" />
+      <test-names>
+        <test-name value="citySlice reducer" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="citySlice reducer.Should test default value (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/__tests__/components/Banner/index.test.tsx" />
+      <test-file value="$PROJECT_DIR$/__tests__/store/location/index.test.tsx" />
       <test-names>
-        <test-name value="Banner tests" />
-        <test-name value="Should have alt for all images" />
+        <test-name value="citySlice reducer" />
+        <test-name value="Should test default value" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="Banner tests.Should have an img" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="citySlice reducer.Should test default value" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/__tests__/components/Banner/index.test.tsx" />
+      <test-file value="$PROJECT_DIR$/__tests__/store/city/index.test.tsx" />
       <test-names>
-        <test-name value="Banner tests" />
-        <test-name value="Should have an img" />
+        <test-name value="citySlice reducer" />
+        <test-name value="Should test default value" />
       </test-names>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.Banner tests" />
-        <item itemvalue="Jest.Banner tests.Should have alt for all images" />
-        <item itemvalue="Jest.Banner tests.Should have an img" />
+        <item itemvalue="Jest.Home page tests" />
+        <item itemvalue="Jest.citySlice reducer (1)" />
+        <item itemvalue="Jest.citySlice reducer.Should test default value (1)" />
+        <item itemvalue="Jest.citySlice reducer.Should test default value" />
+        <item itemvalue="Jest.citySlice reducer" />
       </list>
     </recent_temporary>
   </component>
@@ -477,7 +505,7 @@
       <workItem from="1692709921221" duration="3000" />
       <workItem from="1692718016458" duration="2922000" />
       <workItem from="1692782004176" duration="4000" />
-      <workItem from="1692783585770" duration="986000" />
+      <workItem from="1692783585770" duration="5946000" />
     </task>
     <servers />
   </component>
