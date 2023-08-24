@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/CustomDrawer/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__tests__/pages/index.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/__tests__/pages/index.test.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/Alert/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/Alert/index.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/UI/BlockForm/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/UI/BlockForm/index.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/order/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/api/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/order/model/IOrder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/model/IOrder.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/order/model/OrderDto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/model/OrderDto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/order/ui/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/ui/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CardScroll/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardScroll/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CardScroll/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardScroll/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -518,7 +512,7 @@
       <workItem from="1692812315254" duration="252000" />
       <workItem from="1692883636034" duration="604000" />
       <workItem from="1692884434125" duration="761000" />
-      <workItem from="1692885482476" duration="908000" />
+      <workItem from="1692885482476" duration="6028000" />
     </task>
     <servers />
   </component>

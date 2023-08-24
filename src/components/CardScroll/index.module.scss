@@ -56,7 +56,8 @@
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  height: 176px
+  height: 176px;
+  cursor: pointer;
 }
 
 .card:not(:last-child) {

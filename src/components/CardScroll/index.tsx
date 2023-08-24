@@ -5,12 +5,14 @@ import Image from "next/image";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Colors from "@shared/utils/Colors";
+import CustomDrawer from "@components/CustomDrawer";
 
 interface IProps {
     cards: {
         id: number,
         title: string,
-        img: string
+        img: string,
+        about: string
     }[]
 }
 
@@ -26,31 +28,51 @@ const CardScroll = ({cards}: IProps) => {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.arrowContainer + ' ' + styles.arrowContainer__prev} onClick={() => handleScroll('left', 310)}>
-                <ArrowBackIosIcon sx={{color: Colors.$infoColor, '& > path': {transform: 'translateX(3px)'} }} />
+        <>
+            <div className={styles.container}>
+                <div className={styles.arrowContainer + ' ' + styles.arrowContainer__prev}
+                     onClick={() => handleScroll('left', 310)}>
+                    <ArrowBackIosIcon sx={{color: Colors.$infoColor, '& > path': {transform: 'translateX(3px)'}}}/>
+                </div>
+                <ul className={styles.cards} ref={ulElement}>
+                    {
+                        cards.map(card => (
+
+                            <li key={card.id} className={styles.card}>
+                                <CustomDrawer
+                                    title={card.title}
+                                    description={card.about}
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        justifyContent: 'space-between',
+                                        height: 'inherit'
+                                    }}>
+                                    <>
+                                        <div className={styles.imageContainer}><Image src={card.img} width={500}
+                                                                                      height={176}
+                                                                                      className={styles.image}
+                                                                                      alt='birthday_card'/>
+                                        </div>
+                                        <div style={{zIndex: '1', padding: '20px'}}>
+                                            <h3 className={styles.cardTitle}>{card.title}</h3>
+                                        </div>
+                                        <div className={styles.cardLinkWrapper}>
+                                            <span className={styles.cardLink}>Подробнее</span>
+                                        </div>
+                                    </>
+                                </CustomDrawer>
+                            </li>
+
+                        ))
+                    }
+                </ul>
+                <div className={styles.arrowContainer + ' ' + styles.arrowContainer__next}
+                     onClick={() => handleScroll('right', 310)}>
+                    <ArrowForwardIosIcon sx={{color: Colors.$infoColor}}/>
+                </div>
             </div>
-            <ul className={styles.cards} ref={ulElement}>
-                {
-                    cards.map(card => (
-                        <li key={card.id} className={styles.card}>
-                            <div className={styles.imageContainer}><Image src={card.img} width={500} height={176}
-                                                                          className={styles.image} alt='birthday_card'/>
-                            </div>
-                            <div style={{zIndex: '1', padding: '20px'}}>
-                                <h3 className={styles.cardTitle}>{card.title}</h3>
-                            </div>
-                            <div className={styles.cardLinkWrapper}>
-                                <a href="" className={styles.cardLink}>Подробнее</a>
-                            </div>
-                        </li>
-                    ))
-                }
-            </ul>
-            <div className={styles.arrowContainer + ' ' + styles.arrowContainer__next} onClick={() => handleScroll('right', 310)}>
-                <ArrowForwardIosIcon sx={{color: Colors.$infoColor}} />
-            </div>
-        </div>
+        </>
     );
 };
 
