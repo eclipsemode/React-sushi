@@ -12,6 +12,8 @@
     border-collapse: collapse;
     width: 100%;
     box-shadow: 0 0 30px -10px rgba(0, 0, 0, 0.4);
+    background: $root-card-background;
+    border-radius: 12px;
   }
 
   & thead {
@@ -53,6 +55,7 @@
     max-width: 800px;
     margin: 2em auto;
     width: 100%;
+    background: $root-card-background;
   }
 
   &__type_title {

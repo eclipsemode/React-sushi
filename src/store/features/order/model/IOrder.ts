@@ -13,7 +13,8 @@ interface IOrder extends IFormData{
   products: IOrderProducts[],
   totalPrice: number,
   totalAmount: number,
-  promocode?: string | null
+  promocode?: string | null,
+  branchId: number
 }
 
 type DeliveryTimeType = 1 | 2;

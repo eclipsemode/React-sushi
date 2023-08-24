@@ -38,7 +38,6 @@ const RootLayout = ({children}: { children: React.ReactNode }) => {
         <Providers>
             <Header/>
             <main className="content">
-
                 {children}
             </main>
             <Footer/>

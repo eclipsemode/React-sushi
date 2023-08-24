@@ -10,6 +10,7 @@
   box-sizing: border-box;
   max-width: 800px;
   width: 100%;
+  background: $root-card-background;
 
   &__error {
     color: $main-color;

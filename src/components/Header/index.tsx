@@ -180,9 +180,11 @@ const Header: React.FC = () => {
                                 {user && (
                                     <div>
                                         <p>Добро пожаловать!</p>
-                                        <p>
-                                            {user.name} {user.surname}
-                                        </p>
+                                        {
+                                            user.name
+                                                ? <p>{user.name} {user.surname}</p>
+                                                : <p>Гость</p>
+                                        }
                                     </div>
                                 )}
                                 <PersonIcon width={32} height={32}/>

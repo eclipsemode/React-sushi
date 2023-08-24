@@ -1,11 +1,12 @@
 import {IFormData, IOrder} from "./IOrder";
 import {ICartState} from "@store/features/cart/api";
 import { IUserState } from "@store/features/user";
+import {ILocationState} from "@store/features/location/api";
 
 class OrderDto {
   public order: IOrder;
 
-  constructor(cart: ICartState, user: IUserState, formData: IFormData, promoCode?: string) {
+  constructor(cart: ICartState, user: IUserState, formData: IFormData, promoCode?: string, locationReducer?: ILocationState) {
     this.order = {
       userId: Number(user.user?.id) ?? null,
       products: cart.items.map((product) => ({
@@ -38,7 +39,8 @@ class OrderDto {
       utensils: formData.utensils,
       payment: formData.payment,
       commentary: formData.commentary,
-      promocode: promoCode ?? null
+      promocode: promoCode ?? null,
+      branchId: locationReducer?.allBranches.find(branch => branch.name === locationReducer.currentBranch)?.id || 1
     };
   }
 }

@@ -5,18 +5,19 @@ import OrderDto from "@store/features/order/model/OrderDto";
 import {$api} from "@services/api";
 import {IFormData} from "../model";
 import {IPromocodeState} from "@store/features/promocode/api";
+import {ILocationState} from "@store/features/location/api";
 // import Frontpad from "@services/frontpad";
 
 
 const fetchOrderCreate = createAsyncThunk<void, IFormData, {
     rejectValue: any,
-    state: { userReducer: IUserState, cartReducer: ICartState, promocodeReducer: IPromocodeState }
+    state: { userReducer: IUserState, cartReducer: ICartState, promocodeReducer: IPromocodeState, locationReducer: ILocationState }
 }>(
     'order/fetchOrderCreate',
     async (formData, {rejectWithValue, getState}) => {
         try {
-            const {userReducer, cartReducer, promocodeReducer} = getState();
-            const orderDto = new OrderDto(cartReducer, userReducer, formData, promocodeReducer.promocode?.code);
+            const {userReducer, cartReducer, promocodeReducer, locationReducer} = getState();
+            const orderDto = new OrderDto(cartReducer, userReducer, formData, promocodeReducer.promocode?.code, locationReducer);
             // const frontpadApi = new Frontpad();
             // frontpadApi.newOrder(cartReducer.items, {
             //     name: formData.name,
