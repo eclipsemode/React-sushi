@@ -41,9 +41,8 @@ class FrontpadApi {
 
     public async newOrder(cartItems: ICartProduct[], body?: IOrderFrontpad) {
         try {
-            console.log(`new_order?${this.composeParams(process.env.FRONTPAD_SECRET || '', cartItems, body)}`);
-            return;
-            const res = await $api_frontpad.post(`new_order?${this.composeParams(process.env.FRONTPAD_SECRET || '', cartItems)}`)
+            return `new_order?${this.composeParams(process.env.FRONTPAD_SECRET || '', cartItems, body)}`;
+            const res = await $api_frontpad.post(`new_order?${this.composeParams(process.env.FRONTPAD_SECRET || '', cartItems, body)}`)
             return res.data;
         } catch (e) {
             enqueueSnackbar('Ошибка отправки заказа', {variant: "error"});

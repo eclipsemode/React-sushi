@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/CustomDrawer/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/utils/convertTimeToDateTime.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CardScroll/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardScroll/index.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CardScroll/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardScroll/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/frontpad/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/frontpad/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/model/IOrder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/model/IOrder.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/model/OrderDto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/model/OrderDto.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +65,7 @@
     &quot;nodejs.jest.jest_package&quot;: &quot;D:/Frontend/React-sushi/node_modules/react-scripts&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;D:\\Frontend\\React-sushi\\client\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;watcher.settings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.language&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\Frontend\\React-sushi\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -512,7 +513,11 @@
       <workItem from="1692812315254" duration="252000" />
       <workItem from="1692883636034" duration="604000" />
       <workItem from="1692884434125" duration="761000" />
-      <workItem from="1692885482476" duration="6028000" />
+      <workItem from="1692885482476" duration="7612000" />
+      <workItem from="1692899040818" duration="141000" />
+      <workItem from="1692957722128" duration="3000" />
+      <workItem from="1693052570645" duration="20000" />
+      <workItem from="1693651372962" duration="4342000" />
     </task>
     <servers />
   </component>

@@ -14,7 +14,8 @@ interface IOrder extends IFormData{
   totalPrice: number,
   totalAmount: number,
   promocode?: string | null,
-  branchId: number
+  branchId: number,
+  orderIdFrontpad: number
 }
 
 type DeliveryTimeType = 1 | 2;

@@ -6,7 +6,7 @@ import {ILocationState} from "@store/features/location/api";
 class OrderDto {
   public order: IOrder;
 
-  constructor(cart: ICartState, user: IUserState, formData: IFormData, promoCode?: string, locationReducer?: ILocationState) {
+  constructor(cart: ICartState, orderIdFrontpad: number, user: IUserState, formData: IFormData, promoCode?: string, locationReducer?: ILocationState) {
     this.order = {
       userId: Number(user.user?.id) ?? null,
       products: cart.items.map((product) => ({
@@ -40,7 +40,8 @@ class OrderDto {
       payment: formData.payment,
       commentary: formData.commentary,
       promocode: promoCode ?? null,
-      branchId: locationReducer?.allBranches.find(branch => branch.name === locationReducer.currentBranch)?.id || 1
+      branchId: locationReducer?.allBranches.find(branch => branch.name === locationReducer.currentBranch)?.id || 1,
+      orderIdFrontpad: orderIdFrontpad
     };
   }
 }
