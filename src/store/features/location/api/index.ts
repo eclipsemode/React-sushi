@@ -12,7 +12,7 @@ export interface ILocationState {
 }
 
 const initialState: ILocationState = {
-    currentBranch: 'Армавир',
+    currentBranch: '',
     allBranches: [],
     branchLoadSaveProcess: false
 }

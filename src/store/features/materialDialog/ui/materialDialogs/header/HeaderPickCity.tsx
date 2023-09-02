@@ -15,6 +15,7 @@ import ListItem from "@mui/material/ListItem";
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import ListItemText from "@mui/material/ListItemText";
 import {IBranches, selectLocation, setCurrentBranch} from "@store/features/location/api";
+import {setCookie} from "@shared/utils/Cookie";
 
 const HeaderPickCity = () => {
     const dispatch = useAppDispatch();
@@ -22,7 +23,9 @@ const HeaderPickCity = () => {
     const [branchName, setBranchName] = React.useState<string>(currentBranch);
 
     const callback = () => {
+        const branchData = allBranches.find((branch: IBranches) => branch.name === branchName);
         dispatch(setCurrentBranch(branchName));
+        setCookie('location-initial', branchData.id, 1);
     }
 
     const handleAgree = () => {
