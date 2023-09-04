@@ -89,6 +89,7 @@ const CartItem: React.FC<CartItemProps> = ({obj}) => {
             </td>
         </tr>
     )
+
     return deviceType === DeviceType.DESKTOP ? renderDesktopMenuItem() : renderMobileMenuItem()
 };
 

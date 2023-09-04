@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/shared/utils/readCookie.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/providers/with-location/StoreLocation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/with-location/StoreLocation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/location/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/location/api/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/header/HeaderPickCity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/materialDialog/ui/materialDialogs/header/HeaderPickCity.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Banner/Banner.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Banner/Banner.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CardScroll/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardScroll/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CartItem/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CartItem/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -519,7 +519,10 @@
       <workItem from="1693052570645" duration="20000" />
       <workItem from="1693651372962" duration="4367000" />
       <workItem from="1693657943430" duration="2479000" />
-      <workItem from="1693662093777" duration="2684000" />
+      <workItem from="1693662093777" duration="3122000" />
+      <workItem from="1693679358638" duration="259000" />
+      <workItem from="1693825121471" duration="1724000" />
+      <workItem from="1693860045005" duration="1665000" />
     </task>
     <servers />
   </component>

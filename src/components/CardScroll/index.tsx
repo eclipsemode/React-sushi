@@ -7,13 +7,15 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Colors from "@shared/utils/Colors";
 import CustomDrawer from "@components/CustomDrawer";
 
+type CardType = {
+    id: number,
+    title: string,
+    img: string,
+    about: string
+}
+
 interface IProps {
-    cards: {
-        id: number,
-        title: string,
-        img: string,
-        about: string
-    }[]
+    cards: CardType[]
 }
 
 const CardScroll = ({cards}: IProps) => {

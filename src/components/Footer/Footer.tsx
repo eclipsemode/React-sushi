@@ -82,6 +82,7 @@ const Footer: React.FC = () => {
                                   ))}
                         </Stack>
                     </Stack>
+
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                     <span className={styles.about}>© 2010 - 2023 Ресторан японской кухни "Lime"</span>
                 </Stack>
