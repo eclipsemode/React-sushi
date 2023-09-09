@@ -9,12 +9,14 @@ export type StatusType = 'new' | 'accepted' | 'production' | 'produced' | 'deliv
 
 export interface IOrdersFetched {
   id: number,
+  orderId: number | null,
   createdAt: string,
   updatedAt: string,
   totalPrice: number,
   totalAmount: number,
   type: OrderType,
   name: string,
+  chanel: number,
   address: string | null,
   entrance: number | null,
   floor: number | null,
@@ -30,6 +32,7 @@ export interface IOrdersFetched {
   status: StatusType,
   userId: number,
   products: IOrderProducts[],
+  branchId: number
 }
 
 type statusType = 'PENDING' | 'FULFILLED' | 'REJECTED';

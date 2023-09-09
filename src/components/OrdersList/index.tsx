@@ -19,6 +19,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import {useAppSelector} from "@store/hooks";
 import {DeviceType, selectAdaptiveServiceSlice} from "@store/features/adaptive";
+import {IBranches, selectLocation} from "@store/features/location/api";
 
 interface IOrdersList {
     orders: IOrdersFetched[]
@@ -27,6 +28,7 @@ interface IOrdersList {
 const OrdersList: React.FC<IOrdersList> = ({orders}) => {
     const [expanded, setExpanded] = React.useState<string | false>(false);
     const {deviceType} = useAppSelector(selectAdaptiveServiceSlice);
+    const {allBranches} = useAppSelector(selectLocation);
 
     const handleChange =
         (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -54,6 +56,10 @@ const OrdersList: React.FC<IOrdersList> = ({orders}) => {
         }
     }
 
+    const findBranchName = (id: number): string => {
+        return allBranches.find((branch: IBranches) => branch.id === id).name
+    }
+
     const renderOrders = () => (
         <div style={{width: '100%'}}>
             {
@@ -78,7 +84,7 @@ const OrdersList: React.FC<IOrdersList> = ({orders}) => {
                                     format='DD-MM-YYYY'>{order.createdAt}</Moment> в <Moment
                                     format='HH:mm'>{order.createdAt}</Moment></span></Typography>
                                 <Typography
-                                    sx={{color: Colors.$rootText}}><span><EnvironmentOutlined/> {order.type === 'delivery' ? `Доставка: улица ${order.address}, кв. ${order.room}` : 'Самовывоз: г. Армавир, ул. Кропоткина 194'}</span></Typography>
+                                    sx={{color: Colors.$rootText}}><span><EnvironmentOutlined/> {order.type === 'delivery' ? `Доставка: г. ${findBranchName(order.branchId)}, ул. ${order.address}, кв. ${order.room}` : `Самовывоз: г. ${findBranchName(order.branchId)}, ул. Кропоткина 194`}</span></Typography>
                             </Stack>
                             <Stack sx={{rowGap: '10px'}}>
                                 {renderStatus(order)}
