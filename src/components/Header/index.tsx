@@ -154,6 +154,8 @@ const Header: React.FC = () => {
         </Popover>
     )
 
+
+
     const renderDesktopMenu = () => (
         <header ref={headerRef} className={styles.root}>
             <div className={styles.root__container}>

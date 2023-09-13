@@ -10,13 +10,13 @@ interface IProps {
 }
 
 const StoreLocation = ({branches}: IProps) => {
-
     const {city} = usePosition();
     const dispatch = useAppDispatch();
     const {allBranches} = useAppSelector(selectLocation);
 
     React.useEffect(() => {
         dispatch(setAllBranches(branches));
+        dispatch(setCurrentBranch(branches[0].name))
     }, [branches, dispatch])
 
     React.useEffect(() => {
