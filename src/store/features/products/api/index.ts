@@ -86,7 +86,6 @@ export const createProduct = createAsyncThunk<IProductCreated, ICreateProduct>(
     'products/createProduct',
     async ({name, price, rating, description, image, categoryId, sku, orderIndex, type, size}, {rejectWithValue}) => {
         try {
-            console.log(categoryId)
             const formData = new FormData();
             formData.append('name', name);
             formData.append('price', JSON.stringify(price));

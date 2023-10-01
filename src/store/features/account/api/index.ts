@@ -40,15 +40,23 @@ export type SelectedType = "profile" | "orders" | "settings" | 'admin';
 
 export interface IOrdersReducer {
   status: statusType;
-  page: SelectedType
+  page: SelectedType,
+  count: number
 }
 
-const fetchOrdersByUserId = createAsyncThunk<IOrdersFetched[], void, { state: { userReducer: IUserState } }>(
+export interface IFetchOrdersByUserId {
+  count: number,
+  rows: IOrdersFetched[]
+}
+
+export const AccountOrdersListSize = 10;
+
+const fetchOrdersByUserId = createAsyncThunk<IFetchOrdersByUserId, {page: number, size: number}, { state: { userReducer: IUserState } }>(
   "account/fetchOrdersByUserId",
-  async (_, { rejectWithValue, getState }) => {
+  async ({page, size}, { rejectWithValue, getState }) => {
     try {
       const { userReducer } = getState();
-      const response = await $api.get(`api/order/get/${userReducer.user?.id}`);
+      const response = await $api.get(`api/order/get-by-user?id=${userReducer.user?.id}&page=${page}&size=${size}`);
       return response.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
@@ -62,7 +70,8 @@ const fetchOrdersByUserId = createAsyncThunk<IOrdersFetched[], void, { state: { 
 
 const initialState: IOrdersReducer = {
   status: "PENDING",
-  page: 'profile'
+  page: 'profile',
+  count: 0
 }
 
 export const ordersSlice = createSlice({
@@ -78,7 +87,8 @@ export const ordersSlice = createSlice({
       state.status = "PENDING"
     })
       .addCase(fetchOrdersByUserId.fulfilled, (state: IOrdersReducer, action) => {
-        if (action.payload.length > 0) {
+        state.count = action.payload.count;
+        if (action.payload.rows.length > 0) {
           state.status = "FULFILLED"
         } else {
           state.status = "REJECTED"
