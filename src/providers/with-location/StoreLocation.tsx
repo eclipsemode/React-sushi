@@ -16,7 +16,7 @@ const StoreLocation = ({branches}: IProps) => {
 
     React.useEffect(() => {
         dispatch(setAllBranches(branches));
-        dispatch(setCurrentBranch(branches[0].name))
+        dispatch(setCurrentBranch(branches[0]?.name))
     }, [branches, dispatch])
 
     React.useEffect(() => {

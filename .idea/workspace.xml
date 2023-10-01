@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CardScroll/index.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardScroll/index.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CardScroll/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardScroll/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/providers/with-location/StoreLocation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/with-location/StoreLocation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Products/ProductsListDnD.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Admin/Products/ProductsListDnD.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/products/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/products/api/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -524,7 +527,20 @@
       <workItem from="1694253473941" duration="519000" />
       <workItem from="1694254814673" duration="699000" />
       <workItem from="1694255811021" duration="953000" />
-      <workItem from="1694628556978" duration="693000" />
+      <workItem from="1694628556978" duration="828000" />
+      <workItem from="1695208869696" duration="125000" />
+      <workItem from="1695219725472" duration="95000" />
+      <workItem from="1695219846507" duration="394000" />
+      <workItem from="1695220641255" duration="394000" />
+      <workItem from="1696075022023" duration="6000" />
+      <workItem from="1696077813479" duration="1223000" />
+      <workItem from="1696091491541" duration="4000" />
+      <workItem from="1696092055907" duration="460000" />
+      <workItem from="1696096388990" duration="173000" />
+      <workItem from="1696098339675" duration="169000" />
+      <workItem from="1696098856614" duration="1173000" />
+      <workItem from="1696161286633" duration="790000" />
+      <workItem from="1696163825290" duration="841000" />
     </task>
     <servers />
   </component>

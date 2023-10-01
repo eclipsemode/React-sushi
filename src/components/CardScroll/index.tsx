@@ -51,8 +51,9 @@ const CardScroll = ({cards}: IProps) => {
                                         height: 'inherit'
                                     }}>
                                     <>
-                                        <div className={styles.imageContainer}><Image src={card.img} width={500}
-                                                                                      height={176}
+                                        <div className={styles.imageContainer}><Image priority src={card.img}
+                                                                                      fill
+                                                                                      sizes="(max-width: 290px) 100vw"
                                                                                       className={styles.image}
                                                                                       alt='birthday_card'/>
                                         </div>
