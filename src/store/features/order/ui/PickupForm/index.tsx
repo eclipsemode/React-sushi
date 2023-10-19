@@ -4,7 +4,6 @@ import SimpleButton from "@shared/UI/SimpleButton";
 import {SubmitHandler, useForm} from "react-hook-form";
 import BlockForm from "@shared/UI/BlockForm";
 import Agreement from "../Agreement";
-import {calcTime} from "../../utils/calcTime";
 import {useAppDispatch} from "@store/hooks";
 import {setFormData} from "@store/features/order/api";
 import {MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
@@ -14,6 +13,7 @@ import {IFormData} from "../../model";
 import {setMaterialDialog} from "@store/features/materialDialog/api";
 import {MaterialDialogTypes} from "@store/features/materialDialog/model";
 import {IUserInfo} from "@store/features/user";
+import {useTimeArray} from "@hooks/useTimeArray";
 
 interface IPickupProps {
 		clickEvent: () => void;
@@ -28,8 +28,8 @@ const PickupForm: React.FC<IPickupProps> = ({clickEvent, userInfo}) => {
 				email: userInfo?.email ?? ''
 			}
 		});
-		const [timeStamps] = React.useState<string[]>(calcTime(15));
 		const [utensils, setUtensils] = React.useState<number>(0);
+		const timeStamps = useTimeArray();
 
 		React.useEffect(() => {
 				setValue('utensils', utensils);
@@ -102,7 +102,7 @@ const PickupForm: React.FC<IPickupProps> = ({clickEvent, userInfo}) => {
 												</Select>
 										</fieldset>
 										<fieldset>
-												<label>Коментарий к заказу</label>
+												<label>Комментарий к заказу</label>
 												<textarea {...register('commentary', {maxLength: 99})}
 																	placeholder="Пожалуйста, укажите здесь любую информацию, которая поможет курьеру быстрее доставить Вам заказ!"></textarea>
 										</fieldset>

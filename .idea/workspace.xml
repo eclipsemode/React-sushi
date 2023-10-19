@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86b6d5df-c43d-4d27-9cb2-9476eae1b743" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/hooks/useTimeArray.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OrdersList/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OrdersList/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/account/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/api/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/account/ui/Orders/Orders.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/account/ui/Orders/Orders.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/products/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/products/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/cart/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/cart/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/cart/middleware/cartListenerMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/cart/middleware/cartListenerMiddleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/ui/DeliveryForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/ui/DeliveryForm/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/ui/PickupForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/ui/PickupForm/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/ui/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/order/ui/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/order/utils/calcTime.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +43,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2Hx4EXQ96bNxAc0Mpxg9RXw9r9c" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -545,7 +552,12 @@
       <workItem from="1696185229950" duration="1109000" />
       <workItem from="1696186451682" duration="1541000" />
       <workItem from="1696188839313" duration="289000" />
-      <workItem from="1696189149935" duration="1152000" />
+      <workItem from="1696189149935" duration="1210000" />
+      <workItem from="1696268463724" duration="3973000" />
+      <workItem from="1696693693844" duration="139000" />
+      <workItem from="1696777182126" duration="591000" />
+      <workItem from="1697662509627" duration="417000" />
+      <workItem from="1697716552673" duration="3265000" />
     </task>
     <servers />
   </component>

@@ -31,7 +31,8 @@
       "@services/*": ["./src/services/*"],
       "@shared/*": ["./src/shared/*"],
       "@providers/*": ["./src/providers/*"],
-      "@lib/*": ["./src/lib/*"]
+      "@lib/*": ["./src/lib/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

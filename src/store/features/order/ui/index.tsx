@@ -152,6 +152,7 @@ const CartOrder: React.FC = () => {
                             <Divider sx={{borderColor: Colors.$infoColor}} variant="middle" />
                             <Stack direction='row'><InfoIcon sx={{color: Colors.$infoColor}} /><span style={{fontSize: '14px', marginTop: '5px', color: Colors.$infoColor}}>Сумма скидки промокода в рублях не может превышать 50% от стоимости заказа, в противном случае, сумма промокода будет пересчитана для текущего заказа.</span></Stack>
                             <Stack direction='row'><InfoIcon sx={{color: Colors.$infoColor}} /><span style={{fontSize: '14px', marginTop: '5px', color: Colors.$infoColor}}>Сумма скидки промокода рассчитывается только на основную сумму заказа. Стоимость доставки (при наличии) не входит в сумму заказа.</span></Stack>
+                            <Stack direction='row'><InfoIcon sx={{color: Colors.$infoColor}} /><span style={{fontSize: '14px', marginTop: '5px', color: Colors.$infoColor}}>Сумма заказа с примененным промокодом должна быть выше минимальной суммы заказа ({DeliveryPrice.MIN}₽). В противном случае будет начислена сумма за доставку.</span></Stack>
                         </Stack>
                     )
                 }

@@ -5,7 +5,6 @@ import SimpleButton from "@shared/UI/SimpleButton";
 import Agreement from "../Agreement";
 import {SubmitHandler, useForm} from "react-hook-form";
 import Radio from "@shared/UI/Radio";
-import {calcTime} from "../../utils/calcTime";
 import {useAppDispatch} from "@store/hooks";
 import {MinusCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import Input from "@shared/UI/input";
@@ -15,6 +14,7 @@ import {MaterialDialogTypes} from "@store/features/materialDialog/model";
 import {IFormData} from "../../model";
 import {setFormData} from "../../api";
 import {IUserInfo} from "@store/features/user";
+import {useTimeArray} from "@hooks/useTimeArray";
 
 interface IDeliveryFormProps {
   clickEvent: () => void;
@@ -36,7 +36,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({clickEvent, userInfo}) => {
     }
   });
   const [utensils, setUtensils] = React.useState<number>(0);
-  const [timeStamps] = React.useState<string[]>(calcTime(15));
+  const timeStamps = useTimeArray();
 
   React.useEffect(() => {
     setValue("deliveryTime", 1);

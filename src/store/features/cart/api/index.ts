@@ -77,6 +77,10 @@ export const cartSlice = createSlice({
       } else {
         state.deliveryPrice = 100
       }
+
+      if (state.finalPrice < DeliveryPrice.MIN) {
+        state.deliveryPrice = 100
+      }
     },
     setFinalPrice: (state, action: PayloadAction<number>) => {
       state.finalPrice = action.payload;
