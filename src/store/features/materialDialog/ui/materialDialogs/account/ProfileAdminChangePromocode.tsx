@@ -22,7 +22,7 @@ const ProfileAdminChangePromocode = () => {
         }
     });
     const success = async () => {
-        await dispatch(getAllPromoCodes());
+        await dispatch(getAllPromoCodes({}));
     };
 
     const callback = async (formData: IPromocode) => {
