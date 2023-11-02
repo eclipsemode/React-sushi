@@ -1,10 +1,9 @@
 import React from "react";
 import styles from "./index.module.scss";
 import BlockForm from "@shared/UI/BlockForm";
-import {useAppDispatch, useAppSelector} from "@store/hooks";
+import {useAppSelector} from "@store/hooks";
 import Checkbox from "@shared/UI/Checkbox";
 import {IFormData} from "../../model";
-import {setFinalPrice} from "@store/features/cart/api";
 
 interface IAgreementProps {
   delivery?: boolean;
@@ -13,9 +12,8 @@ interface IAgreementProps {
 }
 
 const Agreement: React.FC<IAgreementProps> = (props) => {
-  const { totalPrice, deliveryPrice, totalAmount } = useAppSelector(state => state.cartReducer);
+  const { totalPrice, deliveryPrice, totalAmount, pizzasDiscount } = useAppSelector(state => state.cartReducer);
   const { promocode } = useAppSelector(state => state.promocodeReducer)
-  const dispatch = useAppDispatch();
   
   const calculateTotalPrice = React.useCallback(() => {
     let newPrice: number;
@@ -33,7 +31,7 @@ const Agreement: React.FC<IAgreementProps> = (props) => {
       }
     }
 
-    return newPrice;
+    return newPrice - pizzasDiscount;
   }, [deliveryPrice, promocode, props.delivery, totalPrice])
 
   const calculateTotalWithPromocode = React.useCallback((price: number) => {
@@ -87,10 +85,6 @@ const Agreement: React.FC<IAgreementProps> = (props) => {
 
   }, [deliveryPrice, promocode?.discount, promocode?.type, props.delivery, totalPrice])
 
-  React.useEffect(() => {
-    dispatch(setFinalPrice(calculateTotalWithPromocode(calculateTotalPrice())))
-  }, [props.delivery, promocode, totalPrice, deliveryPrice, calculateTotalWithPromocode, calculateTotalPrice, dispatch])
-
   return (
     <BlockForm>
       <div className={styles.root}>
@@ -115,6 +109,16 @@ const Agreement: React.FC<IAgreementProps> = (props) => {
                       <div className={styles.delivery}>
                         <span>Промокод</span>
                         <span>-{promocode.type === 'RUB' ? calculatePromocode(calculateTotalPrice()) + '₽' : promocode.discount + '%'}</span>
+                      </div>
+                  )
+              }
+
+              {
+                !!pizzasDiscount &&
+                  (
+                      <div className={styles.delivery}>
+                        <span>Скидка</span>
+                        <span>-{pizzasDiscount + ' ₽'}</span>
                       </div>
                   )
               }

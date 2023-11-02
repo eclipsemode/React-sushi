@@ -5,6 +5,7 @@ import { useAppSelector } from "@store/hooks";
 
 const Fulfilled: React.FC = () => {
     const { products } = useAppSelector(selectProducts);
+
     return (
         <section className="content__items">
             {products.map((product: IProduct[]) => (

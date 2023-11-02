@@ -14,7 +14,6 @@ export interface IProductsState {
     productsStatus: ProductsStatus;
 }
 
-export type ProductType = 'pizza' | 'other'
 
 export interface ICreateProduct {
     name: string,
@@ -33,6 +32,8 @@ export interface IChangeProduct extends Omit<ICreateProduct, 'image'> {
     image: File | null
 }
 
+export type ProductType = 'pizza' | 'other'
+
 export interface IProduct {
     id: number,
     name: string,
@@ -40,7 +41,7 @@ export interface IProduct {
     description: string,
     image: string,
     orderIndex: number | null,
-    type: 'pizza' | 'other',
+    type: ProductType,
     categoryId: number,
     sizeId: number,
     size: string,
