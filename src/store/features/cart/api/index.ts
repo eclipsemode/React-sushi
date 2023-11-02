@@ -20,7 +20,7 @@ const initialState: ICartState = {
     totalPrice: 0,
     deliveryPrice: 0,
     totalAmount: 0,
-    pizzasDiscount: 0
+    pizzasDiscount: 0,
 };
 
 export const cartSlice = createSlice({
@@ -73,13 +73,9 @@ export const cartSlice = createSlice({
             }, 0);
         },
         updateDeliveryPrice: (state) => {
-            if (state.totalPrice === 0 || state.totalPrice >= DeliveryPrice.MIN) {
+            if (state.totalPrice === 0 || state.totalPrice - state.pizzasDiscount >= DeliveryPrice.MIN) {
                 state.deliveryPrice = 0
             } else {
-                state.deliveryPrice = 100
-            }
-
-            if (state.totalPrice < DeliveryPrice.MIN) {
                 state.deliveryPrice = 100
             }
         },
@@ -123,6 +119,6 @@ export const {
     removeAll,
     removeItemById,
     updateDeliveryPrice,
-    setPizzaPromotion
+    setPizzaPromotion,
 } = cartSlice.actions;
 export default cartSlice.reducer;

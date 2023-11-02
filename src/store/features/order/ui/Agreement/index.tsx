@@ -50,33 +50,15 @@ const Agreement: React.FC<IAgreementProps> = (props) => {
         newPrice = price;
       }
     }
-
     return Math.trunc(newPrice);
   }, [deliveryPrice, promocode?.type, props.delivery, totalPrice])
 
   const calculatePromocode = React.useCallback((price: number) => {
+
     let newPrice: number;
 
     if (promocode?.type !== 'percent') {
-
-      if (!!props.delivery) {
-
-        if (price < (totalPrice / 2) + deliveryPrice) {
-          newPrice = totalPrice / 2
-        } else {
-          newPrice = promocode?.discount ?? 0
-        }
-
-      } else {
-
-        if (price < totalPrice / 2) {
-          newPrice = totalPrice / 2
-        } else {
-          newPrice = promocode?.discount ?? 0
-        }
-
-      }
-
+      newPrice = totalPrice - pizzasDiscount - calculateTotalWithPromocode(calculateTotalPrice())
     } else {
       newPrice = price;
     }
@@ -104,21 +86,21 @@ const Agreement: React.FC<IAgreementProps> = (props) => {
               </div>
 
               {
-                  !!promocode &&
+                  !!pizzasDiscount &&
                   (
                       <div className={styles.delivery}>
-                        <span>Промокод</span>
-                        <span>-{promocode.type === 'RUB' ? calculatePromocode(calculateTotalPrice()) + '₽' : promocode.discount + '%'}</span>
+                        <span>Скидка</span>
+                        <span>-{pizzasDiscount + ' ₽'}</span>
                       </div>
                   )
               }
 
               {
-                !!pizzasDiscount &&
+                  !!promocode &&
                   (
                       <div className={styles.delivery}>
-                        <span>Скидка</span>
-                        <span>-{pizzasDiscount + ' ₽'}</span>
+                        <span>Промокод</span>
+                        <span>-{promocode.type === 'RUB' ? calculatePromocode(calculateTotalPrice()) + '₽' : promocode.discount + '%'}</span>
                       </div>
                   )
               }
