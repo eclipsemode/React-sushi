@@ -1,9 +1,9 @@
 @import '@assets/styles/variables';
 
 .root {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
 
   &__price {
     display: flex;
@@ -38,7 +38,6 @@
   &__total {
     margin: 1rem;
 
-
     & h4 {
       font-size: 22px;
       color: $dark;
@@ -68,7 +67,6 @@
   }
 }
 
-
 .delivery {
-  color: #000
+  color: #000;
 }

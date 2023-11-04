@@ -1,2 +1,2 @@
-export * from './sortNames'
-export * from './sortNameTypes'
+export * from './sortNames';
+export * from './sortNameTypes';

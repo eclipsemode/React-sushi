@@ -1,20 +1,20 @@
-"use client"
+'use client';
 import React from 'react';
-import {useAppDispatch} from "@store/hooks";
-import {ICategories, setCategories} from "@store/features/categories";
+import { useAppDispatch } from '@store/hooks';
+import { ICategories, setCategories } from '@store/features/categories';
 
 interface IProps {
-    categories: ICategories[]
+  categories: ICategories[];
 }
 
 const StoreCategories = ({ categories }: IProps) => {
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-    React.useEffect( () => {
-        dispatch(setCategories(categories));
-    }, [categories, dispatch]);
+  React.useEffect(() => {
+    dispatch(setCategories(categories));
+  }, [categories, dispatch]);
 
-    return <></>;
+  return <></>;
 };
 
 export default StoreCategories;

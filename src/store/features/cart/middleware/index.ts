@@ -1,1 +1,1 @@
-export { default as cartListenerMiddleware } from './cartListenerMiddleware'
+export { default as cartListenerMiddleware } from './cartListenerMiddleware';

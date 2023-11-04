@@ -1,5 +1,5 @@
 @import '@assets/styles/variables';
-@import "@assets/styles/mixins/container";
+@import '@assets/styles/mixins/container';
 
 .root {
   width: 100%;
@@ -39,12 +39,11 @@
       color: $root-text;
       transition: color ease-in-out 0.2s;
       font-weight: 600;
-
     }
 
     & a:hover {
       color: $root-textActive;
-      border-bottom: .2em solid $root-textActive;
+      border-bottom: 0.2em solid $root-textActive;
     }
   }
 
@@ -81,7 +80,7 @@
     display: flex;
     column-gap: 1rem;
     align-items: center;
-    border-right: 1px solid rgba(31, 32, 65, .2);;
+    border-right: 1px solid rgba(31, 32, 65, 0.2);
     position: relative;
 
     p {
@@ -119,7 +118,8 @@
     color: $root-text;
   }
 
-  & button:active, button:focus {
+  & button:active,
+  button:focus {
     color: $root-textActive;
   }
 }

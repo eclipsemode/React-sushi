@@ -1,17 +1,12 @@
-"use client"
 import React from 'react';
-import {SnackbarProvider} from "notistack";
+import { SnackbarProvider } from '@lib/notistack';
 
 interface IProps {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
-const WithSnackbar = ({children}: IProps) => {
-    return (
-        <SnackbarProvider maxSnack={3}>
-            {children}
-        </SnackbarProvider>
-    );
+const WithSnackbar = ({ children }: IProps) => {
+  return <SnackbarProvider maxSnack={3}>{children}</SnackbarProvider>;
 };
 
 export default WithSnackbar;

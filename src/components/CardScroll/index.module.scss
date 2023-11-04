@@ -1,5 +1,5 @@
-@import "@assets/styles/variables";
-@import "@assets/styles/mixins/container";
+@import '@assets/styles/variables';
+@import '@assets/styles/mixins/container';
 
 .container {
   @include Container;
@@ -30,7 +30,7 @@
   align-items: center;
   cursor: pointer;
   display: none;
-  transition: background ease-in-out .1s;
+  transition: background ease-in-out 0.1s;
 
   &__next {
     right: 27px;
@@ -95,7 +95,7 @@
 .imageContainer {
   position: absolute;
   width: 100%;
-  height: 100%
+  height: 100%;
 }
 
 .image {
@@ -106,7 +106,7 @@
 }
 
 .imageContainer::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   right: 0;
@@ -116,7 +116,7 @@
 }
 
 .imageContainer::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   right: 0;
@@ -132,17 +132,17 @@
 }
 .cards::-webkit-scrollbar-track {
   border-radius: 10px;
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
 }
-.cards::-webkit-scrollbar-thumb{
+.cards::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
 }
-.cards::-webkit-scrollbar-thumb:hover{
-  background: rgba(0,0,0,0.4);
+.cards::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
 }
-.cards::-webkit-scrollbar-thumb:active{
-  background: rgba(0,0,0,.9);
+.cards::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 0, 0, 0.9);
 }
 
 @media (min-width: 500px) {

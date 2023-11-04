@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@store/index';
-import {SortNameType} from "@store/features/filter/model";
+import { SortNameType } from '@store/features/filter/model';
 
 export enum SortType {
   ORDER_INDEX = 'orderIndex',
@@ -43,6 +43,5 @@ export const filterSlice = createSlice({
 });
 
 export const selectFilter = (state: RootState) => state.filterReducer;
-export const { setCategoryNumber, setSort } =
-  filterSlice.actions;
+export const { setCategoryNumber, setSort } = filterSlice.actions;
 export default filterSlice.reducer;

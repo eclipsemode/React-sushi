@@ -26,11 +26,11 @@
   }
 
   & span:last-child {
-    color: $root-text
+    color: $root-text;
   }
 
   &::after {
-    content: "";
+    content: '';
     background: $root-textHover;
     position: absolute;
     -webkit-transition: all 0.4s ease-in;

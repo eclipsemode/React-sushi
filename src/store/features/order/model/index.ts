@@ -1,2 +1,2 @@
-export * from './OrderDto'
-export * from './IOrder'
+export * from './OrderDto';
+export * from './IOrder';

@@ -10,7 +10,7 @@
   bottom: 0;
 }
 
-.root__input+label {
+.root__input + label {
   display: inline-flex;
   align-items: center;
   user-select: none;
@@ -18,14 +18,14 @@
   color: $root-text;
 }
 
-.root__input+label a {
-    color: $root-textActive;
-    text-decoration: none;
-    opacity: .9;
-    border-bottom: 1px dashed $root-textActive;
-    padding-bottom: 0.1em;
+.root__input + label a {
+  color: $root-textActive;
+  text-decoration: none;
+  opacity: 0.9;
+  border-bottom: 1px dashed $root-textActive;
+  padding-bottom: 0.1em;
 }
-.root__input+label::before {
+.root__input + label::before {
   content: '';
   display: inline-block;
   width: 1.5em;
@@ -40,7 +40,7 @@
   background-size: 50% 50%;
 }
 
-.root__input:checked+label::before {
+.root__input:checked + label::before {
   border-color: $root-textActive;
 }
 
@@ -53,7 +53,7 @@
   pointer-events: none;
 }
 
-.root__input:checked~svg {
+.root__input:checked ~ svg {
   display: block;
 }
 

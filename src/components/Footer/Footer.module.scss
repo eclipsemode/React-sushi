@@ -1,4 +1,4 @@
-@import "@assets/styles/variables";
+@import '@assets/styles/variables';
 @import '@assets/styles/mixins/container';
 
 .root {
@@ -40,7 +40,7 @@
 }
 
 .categories > a:hover {
-  color: $root-textActive
+  color: $root-textActive;
 }
 
 .categories {

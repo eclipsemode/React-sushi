@@ -1,15 +1,15 @@
-@import "@assets/styles/variables";
+@import '@assets/styles/variables';
 
 .root {
   cursor: pointer;
   padding: 5px;
   width: 130px;
   border-radius: 12px;
-  transition: background-color .1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
   & span {
     color: $root-text;
     font-size: 17px;
-    transition: color .1s ease-in-out;
+    transition: color 0.1s ease-in-out;
   }
 
   &:hover {

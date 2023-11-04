@@ -1,1 +1,1 @@
-export * from './with-providers'
+export * from './with-providers';

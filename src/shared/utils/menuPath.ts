@@ -1,14 +1,14 @@
 enum RouterPath {
-    HOME = '/',
-    LOGIN = '/login',
-    AUTH = '/auth',
-    PROFILE = '/profile',
-    CART = '/cart',
-    CONTACTS = '/contacts',
-    REGISTERED = '/registered',
-    REGISTRATION = '/registration',
+  HOME = '/',
+  LOGIN = '/login',
+  AUTH = '/auth',
+  PROFILE = '/profile',
+  CART = '/cart',
+  CONTACTS = '/contacts',
+  REGISTERED = '/registered',
+  REGISTRATION = '/registration',
 
-    CATEGORY = '/?categoryNumber=',
+  CATEGORY = '/?categoryNumber=',
 }
 
 export default RouterPath;

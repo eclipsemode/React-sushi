@@ -1,10 +1,10 @@
-@import "@assets/styles/variables";
+@import '@assets/styles/variables';
 
 .root {
   border: 1px dashed gray;
   border-radius: 4px;
   padding: 0.5rem 1rem;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   background-color: $root-card-background;
   color: $root-text;
   cursor: move;

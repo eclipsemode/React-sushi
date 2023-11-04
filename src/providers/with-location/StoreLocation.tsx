@@ -1,40 +1,54 @@
-'use client'
+'use client';
 import React from 'react';
-import {usePosition} from "../../hooks/usePosition";
-import {useAppDispatch, useAppSelector} from "@store/hooks";
-import {IBranches, selectLocation, setAllBranches, setCurrentBranch} from "@store/features/location/api";
-import readCookie from "@shared/utils/readCookie";
+import { usePosition } from '@hooks/usePosition';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import {
+  IBranches,
+  selectLocation,
+  setAllBranches,
+  setCurrentBranch,
+} from '@store/features/location/api';
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
+
 
 interface IProps {
-    branches: IBranches[]
+  branches: IBranches[];
+  locationInitialCookie: RequestCookie | undefined
 }
 
-const StoreLocation = ({branches}: IProps) => {
-    const {city} = usePosition();
-    const dispatch = useAppDispatch();
-    const {allBranches} = useAppSelector(selectLocation);
+const StoreLocation = ({ branches, locationInitialCookie }: IProps) => {
 
-    React.useEffect(() => {
-        dispatch(setAllBranches(branches));
-        dispatch(setCurrentBranch(branches[0]?.name))
-    }, [branches, dispatch])
+  const { city } = usePosition();
+  const dispatch = useAppDispatch();
+  const { allBranches } = useAppSelector(selectLocation);
 
-    React.useEffect(() => {
-        const locationCookie = readCookie('location-initial');
-        let foundBranchData;
-        if (locationCookie) {
-            foundBranchData = allBranches.find((branch: IBranches) => branch.id === +locationCookie);
-        }
+  React.useEffect(() => {
+    dispatch(setAllBranches(branches));
+    dispatch(setCurrentBranch(branches[0]?.name));
+  }, [branches, dispatch]);
 
-        if (city && allBranches) {
-            const foundCity = branches.find(obj => obj.name.toLowerCase() === city.toLowerCase())?.name;
-            dispatch(setCurrentBranch(foundCity || foundBranchData?.name || branches[0]?.name));
-        }
-    }, [allBranches, branches, city, dispatch])
+  React.useEffect(() => {
+    // const locationCookie = readCookie('location-initial');
+    let foundBranchData;
+    if (locationInitialCookie?.value) {
+      foundBranchData = allBranches.find(
+        (branch: IBranches) => branch.id === +locationInitialCookie.value
+      );
+    }
 
+    if (city && allBranches) {
+      const foundCity = branches.find(
+        (obj) => obj.name.toLowerCase() === city.toLowerCase()
+      )?.name;
+      dispatch(
+        setCurrentBranch(
+          foundCity || foundBranchData?.name || branches[0]?.name
+        )
+      );
+    }
+  }, [allBranches, branches, city, dispatch]);
 
-
-    return <></>
+  return <></>;
 };
 
 export default StoreLocation;

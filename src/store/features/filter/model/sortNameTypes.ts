@@ -1,4 +1,4 @@
-import { SortOrderType, SortType } from "@store/features/filter/api";
+import { SortOrderType, SortType } from '@store/features/filter/api';
 
 type SortNameType = {
   id: number;
@@ -7,4 +7,4 @@ type SortNameType = {
   text: string;
 };
 
-export type { SortNameType }
+export type { SortNameType };

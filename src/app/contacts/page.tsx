@@ -1,8 +1,8 @@
 import React from 'react';
-import Contacts from "@components/Contacts";
+import Contacts from '@components/Contacts';
 
 const ContactsPage: React.FC = () => {
-    return <Contacts/>
+  return <Contacts />;
 };
 
 export default ContactsPage;

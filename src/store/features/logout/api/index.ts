@@ -1,6 +1,6 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { $api } from "@services/api";
-import {setAuth, setUser} from "@store/features/user";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { $api } from '@services/api';
+import { setAuth, setUser } from '@store/features/user';
 
 const fetchUserLogout = createAsyncThunk<void, void>(
   'logout/fetchUserLogout',
@@ -18,6 +18,6 @@ const fetchUserLogout = createAsyncThunk<void, void>(
       }
     }
   }
-)
+);
 
 export { fetchUserLogout };

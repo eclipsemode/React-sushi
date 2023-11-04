@@ -1,4 +1,4 @@
-@import "@assets/styles/variables";
+@import '@assets/styles/variables';
 
 .root {
   display: none;
@@ -19,7 +19,8 @@
   column-gap: 30px;
 }
 
-.delivery, .tel {
+.delivery,
+.tel {
   font-size: 16px;
   font-weight: 700;
 }
@@ -28,7 +29,8 @@
   font-size: 14px;
 }
 
-.tel, .bottomContent {
+.tel,
+.bottomContent {
   color: $info-color;
 }
 

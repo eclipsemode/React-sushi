@@ -1,6 +1,20 @@
-"use client"
-import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
-import {persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, persistStore} from 'redux-persist';
+'use client';
+import {
+  configureStore,
+  ThunkAction,
+  Action,
+  combineReducers,
+} from '@reduxjs/toolkit';
+import {
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  persistStore,
+} from 'redux-persist';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
 import filterReducer from '@store/features/filter/api';
@@ -10,66 +24,73 @@ import userReducer from '@store/features/user';
 import categoriesReducer from '@store/features/categories';
 import ordersReducer from '@store/features/account/api';
 import adaptiveServiceReducer from '@store/features/adaptive';
-import authReducer from '@store/features/auth/api'
-import materialDialogReducer from '@store/features/materialDialog/api'
-import orderCreateReducer from '@store/features/order/api'
-import promocodeReducer from '@store/features/promocode/api'
-import locationReducer from '@store/features/location/api'
+import authReducer from '@store/features/auth/api';
+import materialDialogReducer from '@store/features/materialDialog/api';
+import orderCreateReducer from '@store/features/order/api';
+import promocodeReducer from '@store/features/promocode/api';
+import locationReducer from '@store/features/location/api';
 
 import { cartListenerMiddleware } from '@store/features/cart/middleware';
-import { promoCodeMiddleware } from "@store/features/promocode/middleware";
+import { promoCodeMiddleware } from '@store/features/promocode/middleware';
 import adaptiveServiceListenerMiddleware from '@store/features/adaptive/adaptiveServiceListenerMiddleware';
 
 const rootReducer = combineReducers({
-    filterReducer,
-    productsReducer,
-    cartReducer,
-    userReducer,
-    categoriesReducer,
-    ordersReducer,
-    adaptiveServiceReducer,
-    authReducer,
-    materialDialogReducer,
-    orderCreateReducer,
-    promocodeReducer,
-    locationReducer
+  filterReducer,
+  productsReducer,
+  cartReducer,
+  userReducer,
+  categoriesReducer,
+  ordersReducer,
+  adaptiveServiceReducer,
+  authReducer,
+  materialDialogReducer,
+  orderCreateReducer,
+  promocodeReducer,
+  locationReducer,
 });
 
 const createNoopStorage = () => {
-    return {
-        getItem(_key: string) {
-            return Promise.resolve(null);
-        },
-        setItem(_key: string, value: any) {
-            return Promise.resolve(value);
-        },
-        removeItem(_key: string) {
-            return Promise.resolve();
-        },
-    };
+  return {
+    getItem(_key: string) {
+      return Promise.resolve(null);
+    },
+    setItem(_key: string, value: any) {
+      return Promise.resolve(value);
+    },
+    removeItem(_key: string) {
+      return Promise.resolve();
+    },
+  };
 };
 
-const storage = typeof window !== 'undefined' ? createWebStorage('local') : createNoopStorage();
+const storage =
+  typeof window !== 'undefined'
+    ? createWebStorage('local')
+    : createNoopStorage();
 
 const persistConfig = {
-    key: 'root',
-    version: 1,
-    storage,
-    whitelist: ['cartReducer'],
+  key: 'root',
+  version: 1,
+  storage,
+  whitelist: ['cartReducer'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export function makeStore() {
-    return configureStore({
-        reducer: persistedReducer,
-        middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware({
-                serializableCheck: {
-                    ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-                },
-            }).prepend(cartListenerMiddleware.middleware, promoCodeMiddleware.middleware, adaptiveServiceListenerMiddleware.middleware),
-    });
+  return configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).prepend(
+        cartListenerMiddleware.middleware,
+        promoCodeMiddleware.middleware,
+        adaptiveServiceListenerMiddleware.middleware
+      ),
+  });
 }
 
 export const store = makeStore();
@@ -80,4 +101,9 @@ export type AppDispatch = typeof store.dispatch;
 
 export const persistor = persistStore(store);
 
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;

@@ -80,7 +80,6 @@
   }
 
   &__content > fieldset:nth-of-type(1) {
-
     & > input {
       text-transform: capitalize;
     }
@@ -99,36 +98,35 @@
       display: none;
     }
 
-
     &_outer {
-        border: 2px solid $gray;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        position: absolute;
-        top: -3px;
-        left: 0;
+      border: 2px solid $gray;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: -3px;
+      left: 0;
     }
 
     &_outer_checked {
-        border: 2px solid $root-textActive;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        position: absolute;
-        top: -3px;
-        left: 0;
+      border: 2px solid $root-textActive;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: absolute;
+      top: -3px;
+      left: 0;
     }
 
     &_inner_checked {
-        width: 12px;
-        height: 12px;
-        background: $root-textActive;
-        border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      background: $root-textActive;
+      border-radius: 50%;
     }
 
     & label {
@@ -206,7 +204,7 @@
     appearance: none;
 
     &:focus {
-      box-shadow: inset 0 0 0 2px $root-textActive
+      box-shadow: inset 0 0 0 2px $root-textActive;
     }
   }
 
@@ -231,7 +229,7 @@
   }
 
   &__input_invalid {
-    background: rgba(214, 15, 19, .04);
+    background: rgba(214, 15, 19, 0.04);
     box-shadow: inset 0 -2px 0 0 #d60f14;
   }
 

@@ -1,8 +1,9 @@
-@import "@assets/styles/variables";
+@import '@assets/styles/variables';
 
 .root {
-  &__title, &__subtitle {
-    color: $root-text
+  &__title,
+  &__subtitle {
+    color: $root-text;
   }
 
   &__title {

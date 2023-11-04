@@ -1,1 +1,1 @@
-export * from './delivery-price'
+export * from './delivery-price';
