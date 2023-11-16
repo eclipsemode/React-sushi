@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import MenuPath from '@shared/utils/menuPath';
 
-const CartEmpty: React.FC = () => {
+const Index: React.FC = () => {
   return (
     <div className="cart cart--empty">
       <h2>
@@ -30,4 +30,4 @@ const CartEmpty: React.FC = () => {
   );
 };
 
-export default CartEmpty;
+export default Index;

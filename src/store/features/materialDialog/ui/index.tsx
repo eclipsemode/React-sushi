@@ -15,12 +15,17 @@ import ProfileResetSettings from './materialDialogs/account/ProfileResetSettings
 import ProfileAdminAddProduct from './materialDialogs/account/ProfileAdminAddProduct';
 import ProfileAdminDeleteProduct from './materialDialogs/account/ProfileAdminDeleteProduct';
 import ProfileAdminEditProduct from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditProduct';
-import ProfileAdminDeleteCategory from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminDeleteCategory';
+import ProfileAdminDeleteCategory
+  from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminDeleteCategory';
 import ProfileAdminAddCategory from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddCategory';
-import ProfileAdminEditCategory from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditCategory';
-import ProfileAdminAddPromocode from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddPromocode';
-import ProfileAdminChangePromocode from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminChangePromocode';
-import ProfileAdminDeletePromocode from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminDeletePromocode';
+import ProfileAdminEditCategory
+  from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminEditCategory';
+import ProfileAdminAddPromocode
+  from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddPromocode';
+import ProfileAdminChangePromocode
+  from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminChangePromocode';
+import ProfileAdminDeletePromocode
+  from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminDeletePromocode';
 import HeaderPickCity from '@store/features/materialDialog/ui/materialDialogs/header/HeaderPickCity';
 import React from 'react';
 
@@ -36,11 +41,11 @@ const MaterialDialog = () => {
         opened: false,
         dialogType: null,
         data: null,
-      })
+      }),
     );
   };
 
-  const renderMaterialDialog = (): React.ReactNode => {
+  const renderMaterialDialogItem = (): React.ReactNode => {
     switch (dialogType) {
       case MaterialDialogTypes.LOGOUT:
         return <LogoutMaterialDialog />;
@@ -103,9 +108,9 @@ const MaterialDialog = () => {
       fullScreen={fullScreen}
       open={opened}
       onClose={handleClose}
-      aria-labelledby="responsive-dialog-title"
+      aria-labelledby='responsive-dialog-title'
     >
-      {renderMaterialDialog()}
+      {renderMaterialDialogItem()}
     </Dialog>
   );
 };

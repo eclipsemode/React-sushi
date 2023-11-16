@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import styles from './ToTopArrow.module.scss';
+import styles from './index.module.scss';
 import { Affix } from 'antd';
 import { ArrowUpOutlined } from '@ant-design/icons';
 import { useAppSelector } from '@store/hooks';

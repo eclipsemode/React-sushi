@@ -7,7 +7,7 @@ import {
   changeCategoryOrder,
   fetchCategories,
   ICategories,
-} from '@store/features/categories';
+} from '@store/features/categories/api';
 import { setMaterialDialog } from '@store/features/materialDialog/api';
 import { MaterialDialogTypes } from '@store/features/materialDialog/model';
 

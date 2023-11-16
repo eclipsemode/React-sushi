@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Stack } from '@lib/mui';
+import { Box, Stack } from '@shared/lib/mui';
 import styles from './index.module.scss';
 import PlaceIcon from '@mui/icons-material/Place';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';

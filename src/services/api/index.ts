@@ -72,4 +72,7 @@ const authInterceptorResError = async (error: any) => {
 $api.interceptors.request.use(authInterceptor, authInterceptorReqError);
 $api.interceptors.response.use(authInterceptor, authInterceptorResError);
 
+$api_frontpad.interceptors.request.use(authInterceptor, authInterceptorReqError);
+$api_frontpad.interceptors.response.use(authInterceptor, authInterceptorResError);
+
 export { $api, $api_guest, $api_frontpad };

@@ -41,7 +41,7 @@ const CartItem: React.FC<CartItemProps> = ({ obj }) => {
         setMaterialDialog({
           opened: true,
           dialogType: MaterialDialogTypes.CLEAR_CART,
-        })
+        }),
       );
     } else {
       dispatch(removeItem(obj.sizeId));
@@ -54,7 +54,7 @@ const CartItem: React.FC<CartItemProps> = ({ obj }) => {
         setMaterialDialog({
           opened: true,
           dialogType: MaterialDialogTypes.CLEAR_CART,
-        })
+        }),
       );
     } else {
       dispatch(removeItemById(obj.sizeId));
@@ -69,7 +69,7 @@ const CartItem: React.FC<CartItemProps> = ({ obj }) => {
           width={200}
           height={133}
           src={process.env.REACT_APP_API_URL + obj.image}
-          alt="productImg"
+          alt='productImg'
         />
         <h5>
           {obj.name} {obj.type === 'pizza' && obj.size}
@@ -101,9 +101,9 @@ const CartItem: React.FC<CartItemProps> = ({ obj }) => {
         <img
           width={100}
           src={process.env.REACT_APP_API_URL + obj.image}
-          alt="productImg"
+          alt='productImg'
         />
-        <Stack justifyContent="space-between">
+        <Stack justifyContent='space-between'>
           <Stack>
             <h5>
               {obj.name} {obj.type === 'pizza' && obj.size}

@@ -6,7 +6,7 @@ import React from 'react';
 // import { AiOutlineClose } from 'react-icons/ai';
 // import { useAppDispatch } from "app/hooks";
 
-const Search: React.FC = () => {
+const Index: React.FC = () => {
   return <div></div>;
   // const [searchValueLocal, setSearchValueLocal] = React.useState<string>('');
   // const dispatch = useAppDispatch();
@@ -53,4 +53,4 @@ const Search: React.FC = () => {
   // );
 };
 
-export default Search;
+export default Index;

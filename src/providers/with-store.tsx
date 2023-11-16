@@ -1,5 +1,5 @@
 import { store } from '@store/index';
-import { Provider } from '@lib/react-redux';
+import { Provider } from '@shared/lib/react-redux';
 import React from 'react';
 
 interface IProps {

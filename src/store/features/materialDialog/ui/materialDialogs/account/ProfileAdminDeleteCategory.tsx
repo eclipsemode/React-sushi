@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
-import { deleteCategory, fetchCategories } from '@store/features/categories';
+import { deleteCategory, fetchCategories } from '@store/features/categories/api';
 
 const ProfileAdminDeleteCategory = () => {
   const dispatch = useAppDispatch();

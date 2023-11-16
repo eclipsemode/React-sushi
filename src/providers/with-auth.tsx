@@ -5,7 +5,11 @@ import { fetchAuth } from '@store/features/auth/api';
 import { fetchUserInfo, selectUser } from '@store/features/user';
 import { enqueueSnackbar } from 'notistack';
 
-const WithAuth = () => {
+interface IProps {
+  children: React.ReactNode
+}
+
+const WithAuth = ({children}: IProps) => {
   const dispatch = useAppDispatch();
   const { isAuth } = useAppSelector(selectUser);
 
@@ -28,7 +32,7 @@ const WithAuth = () => {
     }
   }, [dispatch, isAuth]);
 
-  return <></>;
+  return <>{children}</>;
 };
 
 export default WithAuth;

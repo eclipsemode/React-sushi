@@ -3,7 +3,11 @@ import React from 'react';
 import { useAppDispatch } from '@store/hooks';
 import { setCurrentWindowInnerWidth } from '@store/features/adaptive';
 
-const WithAdaptive = () => {
+interface IProps {
+  children: React.ReactNode
+}
+
+const WithAdaptive = ({children}: IProps) => {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
@@ -21,7 +25,7 @@ const WithAdaptive = () => {
     };
   }, [dispatch]);
 
-  return <></>;
+  return <>{children}</>;
 };
 
 export default WithAdaptive;

@@ -13,10 +13,11 @@ import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
 interface IProps {
   branches: IBranches[];
-  locationInitialCookie: RequestCookie | undefined
+  locationInitialCookie: RequestCookie | undefined,
+  children: React.ReactNode
 }
 
-const StoreLocation = ({ branches, locationInitialCookie }: IProps) => {
+const WithLocation = ({ branches, locationInitialCookie, children}: IProps) => {
 
   const { city } = usePosition();
   const dispatch = useAppDispatch();
@@ -28,7 +29,6 @@ const StoreLocation = ({ branches, locationInitialCookie }: IProps) => {
   }, [branches, dispatch]);
 
   React.useEffect(() => {
-    // const locationCookie = readCookie('location-initial');
     let foundBranchData;
     if (locationInitialCookie?.value) {
       foundBranchData = allBranches.find(
@@ -48,7 +48,7 @@ const StoreLocation = ({ branches, locationInitialCookie }: IProps) => {
     }
   }, [allBranches, branches, city, dispatch]);
 
-  return <></>;
+  return <>{children}</>;
 };
 
-export default StoreLocation;
+export default WithLocation;

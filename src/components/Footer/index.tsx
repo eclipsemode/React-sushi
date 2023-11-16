@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import styles from './Footer.module.scss';
+import styles from './index.module.scss';
 import { Skeleton, Stack } from '@mui/material';
 import RouterPath from '@shared/utils/menuPath';
 import { useAppSelector } from '@store/hooks';
@@ -127,7 +127,7 @@ const Footer: React.FC = () => {
             </Stack>
           </Stack>
           <span className={styles.about}>
-            © 2010 - 2023 Ресторан японской кухни &quot;Lime&quot;
+            © 2010 - 2024 Ресторан японской кухни &quot;Lime&quot;
           </span>
         </Stack>
       </div>

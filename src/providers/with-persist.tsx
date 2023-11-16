@@ -1,6 +1,6 @@
 import React from 'react';
 import { persistor } from '@store/index';
-import { PersistGate } from '@lib/redux-persist';
+import { PersistGate } from '@shared/lib/redux-persist';
 import { PulseLoader } from 'react-spinners';
 
 interface IProps {

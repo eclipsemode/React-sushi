@@ -6,7 +6,7 @@ import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { changeCategory, fetchCategories } from '@store/features/categories';
+import { changeCategory, fetchCategories } from '@store/features/categories/api';
 import { enqueueSnackbar } from 'notistack';
 import {
   selectMaterialDialog,

@@ -1,6 +1,5 @@
-FROM node:18-alpine
+FROM node:20.9.0-alpine
 RUN apk add --no-cache python3 py3-pip make g++
-ENV TZ Europe/Moscow
 WORKDIR /app
 COPY . .
 RUN yarn install --production

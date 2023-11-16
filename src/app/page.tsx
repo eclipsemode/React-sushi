@@ -1,9 +1,9 @@
-import Banner from '@components/Banner/Banner';
+import Banner from '@components/Banner';
 import { Sort } from '@store/features/filter/ui';
 import Products from '@store/features/products/ui/Products';
 import React from 'react';
 import HomeTitle from '@components/HomeTitle';
-import Categories from '@store/features/categories/ui/Categories';
+import Categories from '@store/features/categories/ui';
 import HomeInfo from '@components/HomeInfo';
 
 const Home = () => {
@@ -11,11 +11,11 @@ const Home = () => {
     <>
       <Banner />
       <HomeInfo />
-      <div className="content__top">
+      <div className='content__top'>
         <Categories />
       </div>
-      <div className="container">
-        <section className="content__head">
+      <div className='container'>
+        <section className='content__head'>
           <HomeTitle />
           <Sort />
         </section>

@@ -6,7 +6,7 @@ import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Colors from '@shared/utils/Colors';
 import SimpleButton from '@shared/UI/SimpleButton';
 import Input from '@shared/UI/input';
-import { createCategory, fetchCategories } from '@store/features/categories';
+import { createCategory, fetchCategories } from '@store/features/categories/api';
 import InputFile from '@shared/UI/InputFile';
 import { SubmitHandler, useForm } from 'react-hook-form';
 

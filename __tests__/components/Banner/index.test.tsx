@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import Banner from '@components/Banner/Banner';
+import Index from '@components/Banner';
 import '@testing-library/jest-dom';
 
-describe('Banner tests', () => {
+describe('Index tests', () => {
   beforeAll(() => {
-    render(<Banner />);
+    render(<Index />);
   });
   // it('Should be defined', () => {
-  //     render(<Banner />);
+  //     render(<Index />);
   //
   //     const header = screen.getByRole('heading');
   //     const headerText = 'Тест'

@@ -21,7 +21,7 @@ import filterReducer from '@store/features/filter/api';
 import productsReducer from '@store/features/products/api';
 import cartReducer from '@store/features/cart/api';
 import userReducer from '@store/features/user';
-import categoriesReducer from '@store/features/categories';
+import categoriesReducer from '@store/features/categories/api';
 import ordersReducer from '@store/features/account/api';
 import adaptiveServiceReducer from '@store/features/adaptive';
 import authReducer from '@store/features/auth/api';

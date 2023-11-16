@@ -2,8 +2,11 @@ import '@assets/styles/app.scss';
 import React from 'react';
 import Providers from '@providers/with-providers';
 import Header from '@components/Header';
-import Footer from '@components/Footer/Footer';
-import ToTopArrow from '@components/ToTopArrow/ToTopArrow';
+import Footer from '@components/Footer';
+import ToTopArrow from '@components/ToTopArrow';
+import composeScripts from '@shared/utils/composeScripts';
+import { FoodSoulScript } from '@app/(scripts)/_foodSoul';
+import MaterialDialog from '@store/features/materialDialog/ui';
 
 export const metadata = {
   title: 'Лайм - доставка суши и пиццы',
@@ -20,17 +23,14 @@ export const metadata = {
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  const renderScripts = () => (
-    <>
-      <script
-        dangerouslySetInnerHTML={{
-          __html:
-            'window.fsPromoterConfig = {"zone": "ru", "language": "ru", "chain_id": 5340};',
-        }}
-      />
-      <script src="https://fs.me/pr/init.js" async />
-    </>
-  );
+  const Scripts = composeScripts([
+    FoodSoulScript
+  ])
+
+  const Globals = composeScripts([
+    MaterialDialog,
+    ToTopArrow
+  ])
 
   return (
     <html lang="ru">
@@ -39,10 +39,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <Header />
           <main className="content">{children}</main>
           <Footer />
-          <ToTopArrow />
+          <Globals />
         </Providers>
-
-        {renderScripts()}
+        <Scripts />
       </body>
     </html>
   );

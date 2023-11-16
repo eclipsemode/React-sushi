@@ -3,7 +3,7 @@ import React from 'react';
 import { Result } from 'antd';
 import SimpleButton from '@shared/UI/SimpleButton';
 import RouterPath from '@shared/utils/menuPath';
-import styles from './NotFoundBlock.module.scss';
+import styles from './index.module.scss';
 import { useRouter } from 'next/navigation';
 
 const NotFoundBlock: React.FC = () => {
