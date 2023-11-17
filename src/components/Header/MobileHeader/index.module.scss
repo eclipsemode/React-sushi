@@ -1,0 +1,58 @@
+@import '@assets/styles/variables';
+@import '@assets/styles/mixins/container';
+
+.mobileTopMenu {
+  padding-top: 10px;
+}
+
+.city {
+  font-size: 16px;
+  color: $info-color;
+
+  > span {
+    color: $root-text;
+    cursor: pointer;
+    border-bottom: 1px dashed $root-text;
+  }
+
+  > span:hover {
+    border-bottom: none;
+  }
+}
+
+.time {
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.mobileHeader {
+  width: 100%;
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.5);
+
+  & > div {
+    background-color: $root-header--1;
+    height: 68px;
+  }
+
+  & button {
+    color: $root-text;
+  }
+
+  & button:active,
+  button:focus {
+    color: $root-textActive;
+  }
+}
+
+.mobileButtonActive {
+  color: $root-textActive !important;
+}
+
+.mobileButton {
+  &:focus {
+    color: $root-text !important;
+  }
+}
