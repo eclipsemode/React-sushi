@@ -112,7 +112,7 @@ const Account: React.FC = () => {
   );
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <div className={styles.root}>
         <div className={styles.root__head}>
           <Breadcrumbs

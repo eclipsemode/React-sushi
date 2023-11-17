@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 
 const HomeInfo = () => {
   return (
-    <div className="container">
+    <div className={styles.container}>
       <div className={styles.root}>
         <div className={styles.block}>
           <div className={styles.contentTop}>

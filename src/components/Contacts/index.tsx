@@ -6,7 +6,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const Contacts: React.FC = () => {
   return (
-    <Stack className="container">
+    <Stack className={styles.container}>
       <Box>
         <iframe
           className={styles.map}

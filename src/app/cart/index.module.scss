@@ -1,0 +1,5 @@
+@import '@assets/styles/mixins/container';
+
+.container {
+  @include Container;
+}

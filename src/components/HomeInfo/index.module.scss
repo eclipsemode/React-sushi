@@ -1,4 +1,9 @@
 @import '@assets/styles/variables';
+@import '@assets/styles/mixins/container';
+
+.container {
+  @include Container;
+}
 
 .root {
   display: none;

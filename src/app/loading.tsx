@@ -6,12 +6,14 @@ import {
   selectAdaptiveServiceSlice,
 } from '@store/features/adaptive';
 import { useAppSelector } from '@store/hooks';
+import productsStyle from '@store/features/products/ui/Fulfilled/index.module.scss'
+import styles from './index.module.scss'
 
 const Loading = () => {
   const { deviceType } = useAppSelector(selectAdaptiveServiceSlice);
 
   return (
-    <Stack className="container">
+    <Stack className={styles.container}>
       <Skeleton
         animation="wave"
         sx={{
@@ -74,7 +76,7 @@ const Loading = () => {
           sx={{ transform: 'none' }}
         />
       </Stack>
-      <section className="content__items">
+      <section className={productsStyle.products}>
         {[...new Array(4)].map((_, index) => (
           <Skeleton
             variant="rectangular"

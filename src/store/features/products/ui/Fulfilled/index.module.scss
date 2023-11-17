@@ -1,0 +1,25 @@
+@import '@assets/styles/variables';
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 55px;
+  justify-items: center;
+
+  & > div {
+    background: $root-header--1;
+  }
+
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 1055px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 735px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

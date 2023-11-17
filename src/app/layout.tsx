@@ -7,6 +7,7 @@ import ToTopArrow from '@components/ToTopArrow';
 import composeScripts from '@shared/utils/composeScripts';
 import { FoodSoulScript } from '@app/(scripts)/_foodSoul';
 import MaterialDialog from '@store/features/materialDialog/ui';
+import styles from './index.module.scss';
 
 export const metadata = {
   title: 'Лайм - доставка суши и пиццы',
@@ -34,10 +35,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <html lang="ru">
-      <body className={`App`}>
+      <body className={styles.App}>
         <Providers>
           <Header />
-          <main className="content">{children}</main>
+          <main className={styles.content}>{children}</main>
           <Footer />
           <Globals />
         </Providers>

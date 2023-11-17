@@ -1,10 +1,11 @@
 'use client';
 import React from 'react';
 import { Skeleton, Stack } from '@mui/material';
+import styles from './index.module.scss'
 
 const Loading = () => {
   return (
-    <Stack rowGap="40px" className="container">
+    <Stack rowGap="40px" className={styles.container}>
       <span>
         <Skeleton
           animation="wave"

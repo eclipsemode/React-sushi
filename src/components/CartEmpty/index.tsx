@@ -3,10 +3,11 @@ import SimpleButton from '@shared/UI/SimpleButton';
 import Image from 'next/image';
 import Link from 'next/link';
 import MenuPath from '@shared/utils/menuPath';
+import styles from './index.module.scss'
 
-const Index: React.FC = () => {
+const CartEmpty: React.FC = () => {
   return (
-    <div className="cart cart--empty">
+    <div className={styles.cartEmpty}>
       <h2>
         Корзина пустая <span>😕</span>
       </h2>
@@ -30,4 +31,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default CartEmpty;

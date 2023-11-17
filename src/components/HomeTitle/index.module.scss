@@ -1,0 +1,14 @@
+@import '@assets/styles/variables';
+
+.content {
+  padding: 100px 0;
+  flex: 1;
+
+  &__title {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-weight: 800;
+    font-size: 36px;
+    color: $root-text;
+  }
+}

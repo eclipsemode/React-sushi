@@ -1,9 +1,10 @@
 import React from 'react';
 import { Skeleton } from '@mui/material';
+import styles from './index.module.scss'
 
 const Pending: React.FC = () => {
   return (
-    <section className="content__items">
+    <section className={styles.products}>
       {[...new Array(4)].map((_, index) => (
         <Skeleton
           variant="rectangular"

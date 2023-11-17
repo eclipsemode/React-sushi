@@ -5,17 +5,18 @@ import React from 'react';
 import HomeTitle from '@components/HomeTitle';
 import Categories from '@store/features/categories/ui';
 import HomeInfo from '@components/HomeInfo';
+import styles from './index.module.scss'
 
 const Home = () => {
   return (
     <>
       <Banner />
       <HomeInfo />
-      <div className='content__top'>
+      <div className={styles.content__top}>
         <Categories />
       </div>
-      <div className='container'>
-        <section className='content__head'>
+      <div className={styles.container}>
+        <section className={styles.content__head}>
           <HomeTitle />
           <Sort />
         </section>
