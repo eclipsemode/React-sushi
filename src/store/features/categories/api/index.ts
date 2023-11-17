@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { $api } from '@services/api';
-
-type CategoriesStatusType = 'fulfilled' | 'pending' | 'rejected';
+import { AsyncThunkStatus } from '@store/model/asyncThunkModel';
 
 export interface ICategories {
   id: number;
@@ -28,7 +27,7 @@ interface IChangeCategoryOrder {
 
 export interface ICategoryState {
   categories: ICategories[];
-  categoriesStatus: CategoriesStatusType;
+  categoriesStatus: AsyncThunkStatus;
 }
 
 export const fetchCategories = createAsyncThunk<

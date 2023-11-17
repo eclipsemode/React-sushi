@@ -1,0 +1,13 @@
+@import '@assets/styles/variables';
+
+.tel {
+  font-size: 22px;
+}
+
+.links > a {
+  font-size: 22px;
+
+  &:hover {
+    color: $root-textActive;
+  }
+}

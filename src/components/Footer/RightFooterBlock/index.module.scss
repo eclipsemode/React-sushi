@@ -1,0 +1,20 @@
+@import '@assets/styles/variables';
+.categories {
+  min-width: 225px;
+}
+
+.categories > a {
+  font-size: 18px;
+}
+
+.categories > a:hover {
+  color: $root-textActive;
+}
+
+.categories {
+  max-height: 145px;
+  flex-wrap: wrap-reverse;
+  text-align: left;
+  column-gap: 50px;
+  row-gap: 10px;
+}

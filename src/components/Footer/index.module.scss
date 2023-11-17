@@ -11,42 +11,6 @@
   font-size: 20px;
 }
 
-.tel {
-  font-size: 22px;
-}
-
-.links > a {
-  font-size: 22px;
-
-  &:hover {
-    color: $root-textActive;
-  }
-}
-
-.center {
-  text-align: center;
-
-  & > span {
-    font-size: 18px;
-  }
-}
-
-.categories {
-  min-width: 225px;
-}
-
-.categories > a {
-  font-size: 18px;
-}
-
-.categories > a:hover {
-  color: $root-textActive;
-}
-
-.categories {
-  max-height: 145px;
-  flex-wrap: wrap-reverse;
-  text-align: left;
-  column-gap: 50px;
-  row-gap: 10px;
+.container {
+  @include Container;
 }

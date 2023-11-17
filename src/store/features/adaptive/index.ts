@@ -12,14 +12,15 @@ export enum DeviceType {
   TABLET = 'tablet',
   MOBILE = 'mobile',
 }
+
 export interface IInitialState {
   currentWindowInnerWidth: number | undefined;
-  deviceType: DeviceType | undefined;
+  deviceType: DeviceType;
 }
 
 const initialState: IInitialState = {
   currentWindowInnerWidth: undefined,
-  deviceType: undefined,
+  deviceType: DeviceType.DESKTOP,
 };
 
 const adaptiveServiceSlice = createSlice({
@@ -46,8 +47,7 @@ const adaptiveServiceSlice = createSlice({
   },
 });
 
-export const selectAdaptiveServiceSlice = (state: RootState) =>
-  state.adaptiveServiceReducer;
+export const selectAdaptiveServiceSlice = (state: RootState) => state.adaptiveServiceReducer;
 
 export const { setDeviceType, setCurrentWindowInnerWidth } =
   adaptiveServiceSlice.actions;
