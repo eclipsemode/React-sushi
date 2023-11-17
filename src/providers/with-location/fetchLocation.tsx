@@ -1,5 +1,4 @@
 import WithLocation from '@providers/with-location/index';
-import { cookies } from 'next/headers'
 import { IBranches } from '@store/features/location/api';
 import React from 'react';
 
@@ -15,11 +14,9 @@ interface IProps {
 }
 
 const FetchLocation = async ({children}: IProps) => {
-  const cookieStore = cookies()
   const branches = await getBranches();
-  const locationInitialCookie = cookieStore.get('location-initial')
 
-  return <WithLocation branches={branches} locationInitialCookie={locationInitialCookie}>{children}</WithLocation>;
+  return <WithLocation branches={branches}>{children}</WithLocation>;
 };
 
 export default FetchLocation;

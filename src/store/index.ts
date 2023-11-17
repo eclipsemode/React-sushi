@@ -68,14 +68,14 @@ const storage =
     ? createWebStorage('local')
     : createNoopStorage();
 
-const persistConfig = {
-  key: 'root',
+const persistConfigCart = {
+  key: 'lime_persisted',
   version: 1,
   storage,
-  whitelist: ['cartReducer'],
+  whitelist: ['cartReducer', 'locationReducer'],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfigCart, rootReducer);
 
 export function makeStore() {
   return configureStore({
