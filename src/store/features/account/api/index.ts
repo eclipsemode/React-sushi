@@ -119,6 +119,8 @@ export const ordersSlice = createSlice({
 
 export { fetchOrdersByUserId };
 
+export const selectAccountOrders = (state: RootState) => state.ordersReducer as IOrdersReducer;
+
 export const { setPage } = ordersSlice.actions;
 
 export default ordersSlice.reducer;

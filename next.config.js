@@ -7,6 +7,7 @@ const nextConfig = {
     FRONTPAD_API_URL: process.env.FRONTPAD_API_URL,
     WEBHOOK_FRONTPAD_STATUS: process.env.WEBHOOK_FRONTPAD_STATUS,
     DADATA_TOKEN: process.env.DADATA_TOKEN,
+    DADATA_SECRET: process.env.DADATA_SECRET
   },
   images: {
     remotePatterns: [

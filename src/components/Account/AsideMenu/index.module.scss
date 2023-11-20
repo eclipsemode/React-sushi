@@ -1,0 +1,66 @@
+@import '@assets/styles/variables';
+
+.root {
+  min-height: 500px;
+  height: auto;
+  background: $root-card-background;
+  border-right: 3px solid rgba(31, 32, 65, 0.1);
+  padding: 8px 0;
+  border-radius: 4px;
+  min-width: 300px;
+
+  & li {
+    display: flex;
+    align-items: center;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-size: 20px;
+    column-gap: 0.5rem;
+  }
+
+  & li svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  &__selected {
+    background: $root-textActive;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: 0;
+      height: 100%;
+      width: 3px;
+      background: $root-textHover;
+    }
+  }
+
+  & li:hover:not(.root__selected) {
+    background: $root-textHover;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: 0;
+      height: 100%;
+      width: 3px;
+      background: $root-textActive;
+    }
+  }
+}
+
+@media (max-width: $mediumSize) {
+  .root {
+    min-height: auto;
+    min-width: auto;
+  }
+
+  .root li {
+    justify-content: center;
+  }
+}

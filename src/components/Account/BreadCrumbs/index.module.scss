@@ -1,0 +1,23 @@
+@import '@assets/styles/variables';
+
+.root {
+  display: flex;
+  column-gap: 0.5rem;
+  font-size: 2em;
+
+  & > p {
+    color: $header-color;
+  }
+}
+
+.breadcrumbs {
+  color: $root-text !important;
+
+  & a:hover {
+    border-bottom: 1px solid $root-text;
+  }
+
+  & p {
+    color: $root-textActive;
+  }
+}

@@ -45,13 +45,12 @@ export const usePosition = () => {
             'Content-Type': 'application/json',
             Accept: 'application/json',
             Authorization: 'Token ' + process.env.DADATA_TOKEN,
+            'X-Secret': `${process.env.DADATA_SECRET}`
           },
           body: JSON.stringify({ lat: latitude, lon: longitude }),
         };
-        fetch(
-          'https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address',
-          options
-        )
+
+        fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address', options)
           .then((response) => response.json())
           .then((result) => result.suggestions[0].data)
           .then((result: any) =>

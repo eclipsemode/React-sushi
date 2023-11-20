@@ -16,11 +16,11 @@ function Providers({ children }: IProps) {
   const Provider = composeReactComponents([
     WithStore,
     WithPersist,
+    WithAuth,
     WithSnackbar,
     FetchCategories,
     FetchLocation,
     WithAdaptive,
-    WithAuth
   ]);
 
   return (

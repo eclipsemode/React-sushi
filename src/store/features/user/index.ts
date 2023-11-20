@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { $api } from '@services/api';
 import {RootState} from '@store/index';
+import { AsyncThunkStatus } from '@store/model/asyncThunkModel';
 
 export interface IRegistrationProps {
   id?: number;
@@ -44,7 +45,7 @@ export interface IUserState {
   user: IUser | null;
   userInfo: Partial<IUserInfo> | null;
   error: string | undefined | null;
-  status: 'fulfilled' | 'pending' | 'rejected';
+  status: AsyncThunkStatus;
   userLoadSaveProcess: boolean;
 }
 

@@ -1,0 +1,26 @@
+.root {
+  width: 100%;
+  &__buttons {
+    column-gap: 15px;
+    justify-content: space-around;
+
+    & > div {
+      max-width: 230px;
+      width: 100%;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    row-gap: 15px;
+  }
+}
+
+.skeleton__button {
+  transform: none !important;
+  height: 48px !important;
+  width: 230px;
+  border-radius: 50px !important;
+}

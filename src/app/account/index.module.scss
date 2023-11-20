@@ -1,0 +1,36 @@
+@import '@assets/styles/variables';
+@import '@assets/styles/mixins/container';
+
+.layout {
+  &__container {
+    @include Container;
+  }
+
+  &__innerContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+
+  &__body {
+    display: flex;
+    column-gap: 1rem;
+  }
+
+  &__section {
+    max-width: none;
+    margin: 0;
+    flex: 2 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.6em;
+  }
+}
+
+@media (max-width: $mediumSize) {
+  .layout__body {
+    flex-direction: column;
+    row-gap: 15px;
+  }
+}
