@@ -9,12 +9,16 @@ import SimpleButton from '@shared/UI/SimpleButton';
 import { setMaterialDialog } from '../../api';
 import { useAppDispatch } from '@store/hooks';
 import { fetchUserLogout } from '@store/features/logout/api';
+import { useRouter } from 'next/navigation';
+import menuPath from '@shared/utils/menuPath';
 
 const LogoutMaterialDialog = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const callback = () => {
     dispatch(fetchUserLogout());
+    router.push(menuPath.HOME);
   };
 
   const handleAgree = () => {

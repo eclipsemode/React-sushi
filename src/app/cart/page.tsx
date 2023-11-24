@@ -2,7 +2,7 @@
 import React from 'react';
 import CartEmpty from '@components/CartEmpty';
 import { useAppSelector } from '@store/hooks';
-import CartOrder from '@store/features/order/ui';
+import CartOrder from '@components/Cart';
 import styles from './index.module.scss'
 
 const Cart: React.FC = () => {

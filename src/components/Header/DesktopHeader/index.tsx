@@ -75,7 +75,7 @@ const DesktopHeader = ({openedPopover, popoverRef, handleClosePopover, currentBr
             height={50}
             src={'/images/logo.png'}
             priority
-            alt="Item logo"
+            alt="Index logo"
           />
         </Link>
         <Stack spacing={0.5}>
@@ -100,7 +100,7 @@ const DesktopHeader = ({openedPopover, popoverRef, handleClosePopover, currentBr
           </li>
         </ul>
         <div className={styles.root__info}>
-          <Link href={RouterPath.PROFILE}>
+          <Link href={RouterPath.ACCOUNT_MAIN}>
             {isAuth ? (
               <div
                 className={styles.root__auth}

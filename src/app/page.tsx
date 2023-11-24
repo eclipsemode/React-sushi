@@ -1,11 +1,11 @@
 import Banner from '@components/Banner';
-import { Sort } from '@store/features/filter/ui';
-import Products from '@store/features/products/ui/Products';
+import Products from '@components/Products';
 import React from 'react';
 import HomeTitle from '@components/HomeTitle';
-import Categories from '@store/features/categories/ui';
+import Categories from '@components/Categories';
 import HomeInfo from '@components/HomeInfo';
 import styles from './index.module.scss'
+import Filter from '@components/Filter';
 
 const Home = () => {
   return (
@@ -18,7 +18,7 @@ const Home = () => {
       <div className={styles.container}>
         <section className={styles.content__head}>
           <HomeTitle />
-          <Sort />
+          <Filter/>
         </section>
         <Products />
       </div>

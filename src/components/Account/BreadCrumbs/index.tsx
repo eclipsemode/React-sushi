@@ -18,7 +18,7 @@ const BreadCrumbs = ({ authLoadSaveProcess }: IProps) => {
     <Link key={1} href={RouterPath.HOME}>
       Главная
     </Link>,
-    <Link key={2} href={RouterPath.PROFILE}>
+    <Link key={2} href={RouterPath.ACCOUNT_MAIN}>
       Аккаунт
     </Link>,
     <Typography key={3}>

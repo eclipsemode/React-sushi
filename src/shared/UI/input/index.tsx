@@ -1,7 +1,7 @@
 import { InputAdornment, SxProps, TextField } from '@mui/material';
 import Colors from '@shared/utils/Colors';
 import { ValidationRule } from 'react-hook-form';
-import InputMask from 'react-input-mask';
+import InputMask from 'react-input-mask'
 import React, { CSSProperties, PropsWithChildren } from 'react';
 
 interface IProps {

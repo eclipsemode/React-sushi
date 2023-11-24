@@ -28,7 +28,7 @@ const MobileHeader = ({openedPopover, popoverRef, handleAgreePopover, handleClos
       case RouterPath.CART:
         setActiveMenu(2);
         break;
-      case RouterPath.PROFILE:
+      case RouterPath.ACCOUNT_MAIN:
         setActiveMenu(3);
         break;
       case RouterPath.CONTACTS:
@@ -65,7 +65,7 @@ const MobileHeader = ({openedPopover, popoverRef, handleAgreePopover, handleClos
               width={150}
               height={50}
               src={'/images/logo.png'}
-              alt="Item logo"
+              alt="Index logo"
             />
           </Link>
 
@@ -97,7 +97,7 @@ const MobileHeader = ({openedPopover, popoverRef, handleAgreePopover, handleClos
                 router.push(RouterPath.CART);
                 break;
               case 3:
-                router.push(RouterPath.PROFILE);
+                router.push(RouterPath.ACCOUNT_MAIN);
                 break;
               default:
                 router.push(RouterPath.HOME);

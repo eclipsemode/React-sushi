@@ -1,11 +1,8 @@
 import React from 'react';
+import Admin from '@components/Account/Admin';
 
 const Page = () => {
-  return (
-    <div>
-      This is Admin page
-    </div>
-  );
+  return <Admin/>
 };
 
 export default Page;

@@ -16,7 +16,7 @@ import {
   getProducts,
   ICreateProduct,
 } from '@store/features/products/api';
-import Input from '@shared/UI/input';
+import Input from '../../../../../../shared/UI/Input';
 import React, { CSSProperties } from 'react';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';

@@ -34,10 +34,10 @@ const Index: React.FC = () => {
   // return (
   // <div className={styles.root}>
   //     <BsSearch className={styles.icon} />
-  //     <input
+  //     <Input
   //         value={searchValueLocal}
   //         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSearchInput(e.target.value)}
-  //         className={styles.input}
+  //         className={styles.Input}
   //         type="text"
   //         placeholder="Поиск..."
   //         ref={searchRef}

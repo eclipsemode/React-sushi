@@ -6,7 +6,7 @@ import {
   selectAdaptiveServiceSlice,
 } from '@store/features/adaptive';
 import { useAppSelector } from '@store/hooks';
-import productsStyle from '@store/features/products/ui/Fulfilled/index.module.scss'
+import productsStyle from '@components/Products/Fulfilled/index.module.scss'
 import styles from './index.module.scss'
 
 const Loading = () => {

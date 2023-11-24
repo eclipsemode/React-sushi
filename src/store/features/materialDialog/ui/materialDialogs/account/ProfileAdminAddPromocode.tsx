@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
-import Input from '../../../../../../shared/UI/input';
+import Input from '../../../../../../shared/UI/Input';
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
 import { useAppDispatch } from '@store/hooks';

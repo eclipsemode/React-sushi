@@ -1,6 +1,6 @@
 import React from 'react';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import Input from '../../../../../../shared/UI/input';
+import Input from '../../../../../../shared/UI/Input';
 import InputFile from '@shared/UI/InputFile';
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';

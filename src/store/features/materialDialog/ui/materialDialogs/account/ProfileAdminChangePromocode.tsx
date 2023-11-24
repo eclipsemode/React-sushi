@@ -14,7 +14,7 @@ import {
   selectMaterialDialog,
   setMaterialDialog,
 } from '@store/features/materialDialog/api';
-import Input from '@shared/UI/input';
+import Input from '../../../../../../shared/UI/Input';
 import styles from '../index.module.scss';
 
 const ProfileAdminChangePromocode = () => {

@@ -16,7 +16,7 @@ import Colors from '@shared/utils/Colors';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { changeProduct, getProducts } from '@store/features/products/api';
 import { enqueueSnackbar } from 'notistack';
-import Input from '@shared/UI/input';
+import Input from '../../../../../../shared/UI/Input';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { ICreateProductForm } from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddProduct';

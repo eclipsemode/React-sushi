@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '../../../shared/UI/input';
+import Input from '../../../shared/UI/Input';
 import { Stack } from '@mui/material';
 import styles from './index.module.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
