@@ -40,6 +40,7 @@ class FrontpadApi {
 
   public async newOrder(cartItems: ICartProduct[], body?: IOrderFrontpad) {
     try {
+      // TEMPORARY MOCK DATA
       return `new_order?${this.composeParams(
         process.env.FRONTPAD_SECRET || '',
         cartItems,
