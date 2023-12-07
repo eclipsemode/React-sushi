@@ -7,9 +7,13 @@
   margin: 0 auto;
 }
 
-.card {
-}
-
 .search {
   margin-bottom: 20px !important;
+}
+
+
+.wrapper {
+  margin-top: 20px;
+  display: flex;flex-direction: column;
+  row-gap: 20px;
 }

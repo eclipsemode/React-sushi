@@ -1,5 +1,7 @@
+@import "@assets/styles/variables";
 .root {
   row-gap: 10px;
+  cursor: pointer;
 }
 
 .title {
@@ -7,5 +9,8 @@
   margin: 0 auto;
 }
 
-.card {
+.wrapper {
+  margin-top: 20px;
+  display: flex;flex-direction: column;
+  row-gap: 20px;
 }
