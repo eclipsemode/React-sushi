@@ -14,6 +14,7 @@ const Home = () => {
       <HomeInfo />
       <div className={styles.content__top}>
         <Categories />
+          <p>test</p>
       </div>
       <div className={styles.container}>
         <section className={styles.content__head}>
