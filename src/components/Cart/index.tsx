@@ -16,7 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Colors from '@shared/utils/Colors';
 import { setMaterialDialog } from '@store/features/materialDialog/api';
 import { MaterialDialogTypes } from '@store/features/materialDialog/model';
-import Input from '../../shared/UI/Input';
+import CustomInput from "@shared/UI/CustomInput";
 import { Box, CircularProgress, Stack } from '@mui/material';
 import {
   clearPromocodeData,
@@ -148,7 +148,7 @@ const CartOrder: React.FC = () => {
         </div>
         <div className={styles.root__type_buttons}>
           <Box sx={{ maxWidth: '300px' }}>
-            <Input
+            <CustomInput
               error={promocodeError}
               value={promoCodeValue || ''}
               disabled={promoCodeAccepted}

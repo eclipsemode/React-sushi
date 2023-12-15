@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { enqueueSnackbar } from 'notistack';
 import SimpleButton from '@shared/UI/SimpleButton';
-import Input from '../../shared/UI/Input';
+import CustomInput from "@shared/UI/CustomInput";
 import { signIn } from '@store/features/auth/api';
 import Confirm from './Confirm';
 import Checkbox from '@shared/UI/Checkbox';
@@ -46,7 +46,7 @@ const Auth = () => {
     <div className="container">
       <div className={styles.root}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <Input
+          <CustomInput
             register={register}
             className={styles.root__input}
             name="tel"

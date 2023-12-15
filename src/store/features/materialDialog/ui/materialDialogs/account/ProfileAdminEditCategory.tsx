@@ -1,6 +1,6 @@
 import React from 'react';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import Input from '../../../../../../shared/UI/Input';
+import CustomInput from "@shared/UI/CustomInput";
 import InputFile from '@shared/UI/InputFile';
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
@@ -84,7 +84,7 @@ const ProfileAdminEditCategory = () => {
               alt="category-image"
             />
           </div>
-          <Input register={register} name="name" required />
+          <CustomInput register={register} name="name" required />
           <InputFile register={register} name="image" />
         </DialogContent>
         <DialogActions sx={{ justifyContent: 'center' }}>

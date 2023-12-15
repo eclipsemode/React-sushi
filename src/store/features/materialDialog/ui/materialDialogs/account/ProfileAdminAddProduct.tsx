@@ -16,7 +16,7 @@ import {
   getProducts,
   ICreateProduct,
 } from '@store/features/products/api';
-import Input from '../../../../../../shared/UI/Input';
+import CustomInput from "@shared/UI/CustomInput";
 import React, { CSSProperties } from 'react';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -147,7 +147,7 @@ const ProfileAdminAddProduct = () => {
       <form onSubmit={handleSubmit(handleAgree)} onReset={handleDisagree}>
         <DialogContent>
           {renderSelectType()}
-          <Input
+          <CustomInput
             required={true}
             label="Название"
             type="text"
@@ -156,7 +156,7 @@ const ProfileAdminAddProduct = () => {
             style={rowStyle}
           />
           {watch('type') !== 'pizza' && (
-            <Input
+            <CustomInput
               required={true}
               label="Цена"
               type="number"
@@ -165,7 +165,7 @@ const ProfileAdminAddProduct = () => {
               style={rowStyle}
             />
           )}
-          <Input
+          <CustomInput
             required={true}
             label="Рейтинг"
             type="number"
@@ -173,7 +173,7 @@ const ProfileAdminAddProduct = () => {
             name="rating"
             style={rowStyle}
           />
-          <Input
+          <CustomInput
             required={true}
             label="Описание"
             type="text"
@@ -209,7 +209,7 @@ const ProfileAdminAddProduct = () => {
           </Select>
 
           {watch('type') !== 'pizza' && (
-            <Input
+            <CustomInput
               label="Артикул"
               type="text"
               register={register}
@@ -228,21 +228,21 @@ const ProfileAdminAddProduct = () => {
                 <span style={{ color: Colors.$rootText, fontSize: '16px' }}>
                   {i}.
                 </span>
-                <Input
+                <CustomInput
                   required={true}
                   label="Размер"
                   type="text"
                   register={register}
                   name={`size${i}`}
                 />
-                <Input
+                <CustomInput
                   required={true}
                   label="Цена"
                   type="number"
                   register={register}
                   name={`price${i}`}
                 />
-                <Input
+                <CustomInput
                   label="Артикул"
                   type="text"
                   register={register}

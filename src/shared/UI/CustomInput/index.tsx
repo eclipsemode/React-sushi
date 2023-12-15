@@ -31,7 +31,7 @@ interface IProps {
   defaultValue?: string | number | Date | null;
 }
 
-const Input = ({
+const CustomInput = ({
   variant = 'standard',
   label,
   error,
@@ -183,4 +183,4 @@ const Input = ({
   return !inputMask ? renderInput() : renderMaskInput();
 };
 
-export default Input;
+export default CustomInput;

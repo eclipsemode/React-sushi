@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Radio from '@shared/UI/Radio';
 import { useAppDispatch } from '@store/hooks';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import Input from '../../../shared/UI/Input';
+import CustomInput from "@shared/UI/CustomInput";
 import Select from '@shared/UI/Select';
 import { setMaterialDialog } from '@store/features/materialDialog/api';
 import { MaterialDialogTypes } from '@store/features/materialDialog/model';
@@ -87,7 +87,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
         <div className={styles.root__content}>
           <fieldset>
             <label className={styles.root__required}>Имя</label>
-            <Input
+            <CustomInput
               register={register}
               name="name"
               error={!!errors.name}
@@ -97,7 +97,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
           </fieldset>
           <fieldset>
             <label className={styles.root__required}>Адрес</label>
-            <Input
+            <CustomInput
               register={register}
               name="address"
               error={!!errors.address}
@@ -107,7 +107,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Подъезд</label>
-            <Input
+            <CustomInput
               register={register}
               name="entrance"
               type="number"
@@ -117,7 +117,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Этаж</label>
-            <Input
+            <CustomInput
               register={register}
               name="floor"
               type="number"
@@ -127,7 +127,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
           </fieldset>
           <fieldset className={styles.root__width_33}>
             <label>Квартира</label>
-            <Input
+            <CustomInput
               register={register}
               name="room"
               type="number"
@@ -137,7 +137,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label className={styles.root__required}>Телефон</label>
-            <Input
+            <CustomInput
               inputMask={true}
               name="tel"
               required={true}
@@ -154,7 +154,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label>E-MAIL</label>
-            <Input
+            <CustomInput
               register={register}
               name="email"
               error={!!errors.email}

@@ -5,10 +5,10 @@ import { setMaterialDialog } from '@store/features/materialDialog/api';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Colors from '@shared/utils/Colors';
 import SimpleButton from '@shared/UI/SimpleButton';
-import Input from '../../../../../../shared/UI/Input';
 import { createCategory, fetchCategories } from '@store/features/categories/api';
 import InputFile from '@shared/UI/InputFile';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import CustomInput from "@shared/UI/CustomInput";
 
 export interface ICreateCategoryForm {
   image: FileList;
@@ -64,7 +64,7 @@ const ProfileAdminAddCategory = () => {
       </DialogTitle>
       <form onSubmit={handleSubmit(handleAgree)} onReset={handleDisagree}>
         <DialogContent>
-          <Input register={register} name="name" required />
+          <CustomInput register={register} name="name" required />
           <InputFile register={register} name="image" required />
         </DialogContent>
         <DialogActions sx={{ justifyContent: 'center' }}>

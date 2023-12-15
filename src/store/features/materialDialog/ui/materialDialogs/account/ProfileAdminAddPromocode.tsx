@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
-import Input from '../../../../../../shared/UI/Input';
+import CustomInput from "@shared/UI/CustomInput";
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
 import { useAppDispatch } from '@store/hooks';
@@ -71,7 +71,7 @@ const ProfileAdminAddPromocode = () => {
       </DialogTitle>
       <form onSubmit={handleSubmit(handleAgree)} onReset={handleDisagree}>
         <DialogContent>
-          <Input register={register} name="code" label="Код" required />
+          <CustomInput register={register} name="code" label="Код" required />
           <Select
             register={register}
             name="type"
@@ -86,7 +86,7 @@ const ProfileAdminAddPromocode = () => {
             <option value={PromoCodeTypeEnum.RUB}>Рубли</option>
             <option value={PromoCodeTypeEnum.percent}>Проценты</option>
           </Select>
-          <Input
+          <CustomInput
             register={register}
             name="discount"
             label="Скидка"
@@ -94,7 +94,7 @@ const ProfileAdminAddPromocode = () => {
             className={styles.row}
             required
           />
-          <Input
+          <CustomInput
             register={register}
             name="limit"
             label="Лимит"

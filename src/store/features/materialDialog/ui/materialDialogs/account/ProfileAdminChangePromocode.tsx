@@ -14,7 +14,7 @@ import {
   selectMaterialDialog,
   setMaterialDialog,
 } from '@store/features/materialDialog/api';
-import Input from '../../../../../../shared/UI/Input';
+import CustomInput from "@shared/UI/CustomInput";
 import styles from '../index.module.scss';
 
 const ProfileAdminChangePromocode = () => {
@@ -76,14 +76,14 @@ const ProfileAdminChangePromocode = () => {
       </DialogTitle>
       <form onSubmit={handleSubmit(handleAgree)} onReset={handleDisagree}>
         <DialogContent>
-          <Input
+          <CustomInput
             register={register}
             name="code"
             required
             disabled
             label="Код"
           />
-          <Input
+          <CustomInput
             register={register}
             name="type"
             required
@@ -91,7 +91,7 @@ const ProfileAdminChangePromocode = () => {
             label="Тип"
             className={styles.row}
           />
-          <Input
+          <CustomInput
             register={register}
             name="discount"
             required
@@ -99,7 +99,7 @@ const ProfileAdminChangePromocode = () => {
             label="Скидка"
             className={styles.row}
           />
-          <Input
+          <CustomInput
             register={register}
             name="limit"
             type="number"

@@ -7,7 +7,7 @@ import Agreement from '../Agreement';
 import { useAppDispatch } from '@store/hooks';
 import { setFormData } from '@store/features/order/api';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import Input from '../../../shared/UI/Input';
+import CustomInput from "@shared/UI/CustomInput";
 import Select from '@shared/UI/Select';
 import { IFormData} from '@store/features/order/model';
 import { setMaterialDialog } from '@store/features/materialDialog/api';
@@ -67,7 +67,7 @@ const PickupForm: React.FC<IPickupProps> = ({ clickEvent, userInfo }) => {
         <div className={styles.root__content}>
           <fieldset>
             <label className={styles.root__required}>Имя</label>
-            <Input
+            <CustomInput
               name="name"
               required={true}
               maxLength={16}
@@ -77,7 +77,7 @@ const PickupForm: React.FC<IPickupProps> = ({ clickEvent, userInfo }) => {
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label className={styles.root__required}>Телефон</label>
-            <Input
+            <CustomInput
               inputMask={true}
               name="tel"
               required={true}
@@ -94,7 +94,7 @@ const PickupForm: React.FC<IPickupProps> = ({ clickEvent, userInfo }) => {
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label>E-MAIL</label>
-            <Input
+            <CustomInput
               name="email"
               register={register}
               error={!!errors.email}

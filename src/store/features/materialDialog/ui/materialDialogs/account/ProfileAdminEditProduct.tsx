@@ -16,7 +16,7 @@ import Colors from '@shared/utils/Colors';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { changeProduct, getProducts } from '@store/features/products/api';
 import { enqueueSnackbar } from 'notistack';
-import Input from '../../../../../../shared/UI/Input';
+import CustomInput from "@shared/UI/CustomInput";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { ICreateProductForm } from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddProduct';
@@ -152,7 +152,7 @@ const ProfileAdminEditProduct = () => {
       <form onSubmit={handleSubmit(handleAgree)} onReset={handleDisagree}>
         <DialogContent>
           {renderSelectType()}
-          <Input
+          <CustomInput
             required={true}
             label="Название"
             type="text"
@@ -161,7 +161,7 @@ const ProfileAdminEditProduct = () => {
             style={rowStyle}
           />
           {watch('type') !== 'pizza' && (
-            <Input
+            <CustomInput
               required={true}
               label="Цена"
               type="number"
@@ -170,7 +170,7 @@ const ProfileAdminEditProduct = () => {
               style={rowStyle}
             />
           )}
-          <Input
+          <CustomInput
             required={true}
             label="Рейтинг"
             type="number"
@@ -178,7 +178,7 @@ const ProfileAdminEditProduct = () => {
             name="rating"
             style={rowStyle}
           />
-          <Input
+          <CustomInput
             required={true}
             label="Описание"
             type="text"
@@ -206,7 +206,7 @@ const ProfileAdminEditProduct = () => {
           </Select>
 
           {watch('type') !== 'pizza' && (
-            <Input
+            <CustomInput
               label="Артикул"
               type="text"
               register={register}
@@ -225,21 +225,21 @@ const ProfileAdminEditProduct = () => {
                 <span style={{ color: Colors.$rootText, fontSize: '16px' }}>
                   {i}.
                 </span>
-                <Input
+                <CustomInput
                   required={true}
                   label="Размер"
                   type="text"
                   register={register}
                   name={`size${i}`}
                 />
-                <Input
+                <CustomInput
                   required={true}
                   label="Цена"
                   type="number"
                   register={register}
                   name={`price${i}`}
                 />
-                <Input
+                <CustomInput
                   label="Артикул"
                   type="text"
                   register={register}
