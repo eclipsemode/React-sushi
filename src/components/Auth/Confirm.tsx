@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '../../shared/UI/Input';
+import CustomInput from '@shared/UI/CustomInput';
 import SimpleButton from '@shared/UI/SimpleButton';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { enqueueSnackbar } from 'notistack';
@@ -78,7 +78,7 @@ const Confirm = ({ requestId, tel }: IProps) => {
         direction="row"
         sx={{ alignItems: 'flex-end', columnGap: '10px', width: '100%' }}
       >
-        <Input
+        <CustomInput
           register={register}
           name="code"
           inputMask={true}

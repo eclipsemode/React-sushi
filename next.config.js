@@ -1,3 +1,6 @@
+const path = require('path');
+require('dotenv').config({path: path.resolve(__dirname, `../.env.${process.env.NODE_ENV}`)})
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
@@ -12,8 +15,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: 'localhost',
-        port: '5000',
+        hostname: process.env.DB_HOST,
+        port: process.env.SERVER_PORT,
         pathname: '/**',
       },
     ],

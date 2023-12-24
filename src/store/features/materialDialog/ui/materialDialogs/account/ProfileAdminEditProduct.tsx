@@ -14,7 +14,7 @@ import {
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { changeProduct, getProducts } from '@store/features/products/api';
+import {changeProduct, getProducts, IProduct} from '@store/features/products/api';
 import { enqueueSnackbar } from 'notistack';
 import CustomInput from "@shared/UI/CustomInput";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
@@ -27,9 +27,13 @@ const rowStyle: CSSProperties = {
   marginTop: '10px',
 };
 
+interface IData {
+  data: IProduct[]
+}
+
 const ProfileAdminEditProduct = () => {
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector(selectMaterialDialog);
+  const { data } = useAppSelector<IData>(selectMaterialDialog as any);
   const { categories } = useAppSelector((state) => state.categoriesReducer);
   const { register, reset, handleSubmit, watch } = useForm<ICreateProductForm>({
     defaultValues: {
@@ -61,9 +65,10 @@ const ProfileAdminEditProduct = () => {
     try {
       const fileImage: File | null = dataForm.image.item(0);
       if (dataForm.type === 'pizza') {
-        const newPrice: number[] = [];
-        const newSku: string[] = [];
-        const newSize: string[] = [];
+        let newPrice: number[] = [];
+        let newSku: string[] = [];
+        let newSize: string[] = [];
+
         for (let i = 1; i < amountPizzaSize + 1; i++) {
           // @ts-ignore
           newPrice.push(+dataForm[`price${i}`]);
@@ -84,11 +89,12 @@ const ProfileAdminEditProduct = () => {
           })
         ).unwrap();
       } else {
+        const priceArr = [dataForm.price1]
         await dispatch(
           changeProduct({
             ...dataForm,
-            id: (!!data && data[0].id) || 0,
-            price: [dataForm.price1],
+            id: data[0].id || 0,
+            price: priceArr,
             image: fileImage,
           })
         ).unwrap();

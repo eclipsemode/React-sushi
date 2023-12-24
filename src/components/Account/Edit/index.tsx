@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '../../../shared/UI/Input';
+import CustomInput from '@shared/UI/CustomInput';
 import { Stack } from '@mui/material';
 import styles from './index.module.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -107,7 +107,7 @@ const Edit = ({ userInfo, applyCallback }: IProps) => {
         name='settings'
         className={styles.root__form}
       >
-        <Input
+        <CustomInput
           error={!!errors.name}
           register={register}
           name='name'
@@ -115,20 +115,20 @@ const Edit = ({ userInfo, applyCallback }: IProps) => {
           maxLength={20}
           validate={(value: string) => !!value.match(/^[a-zа-яё\s]+$/iu)}
         />
-        <Input
+        <CustomInput
           register={register}
           name='surname'
           label='Фамилия'
           maxLength={20}
         />
-        <Input
+        <CustomInput
           error={!!errors.dateOfBirth}
           register={register}
           name='dateOfBirth'
           label=' '
           type='date'
         />
-        <Input
+        <CustomInput
           error={!!errors.email}
           register={register}
           name='email'
@@ -137,7 +137,7 @@ const Edit = ({ userInfo, applyCallback }: IProps) => {
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           }
         />
-        <Input
+        <CustomInput
           error={!!errors.tel}
           register={register}
           name='tel'
@@ -145,11 +145,11 @@ const Edit = ({ userInfo, applyCallback }: IProps) => {
           label='+7 (xxx) xxx-xx-xx'
           type='tel'
         />
-        <Input register={register} name='street' label='Улица' />
+        <CustomInput register={register} name='street' label='Улица' />
         <Stack spacing={2}>
           <Stack direction='row' spacing={2}>
-            <Input register={register} name='house' label='Дом' type='number' />
-            <Input
+            <CustomInput register={register} name='house' label='Дом' type='number' />
+            <CustomInput
               register={register}
               name='entrance'
               label='Подьезд'
@@ -157,13 +157,13 @@ const Edit = ({ userInfo, applyCallback }: IProps) => {
             />
           </Stack>
           <Stack direction='row' spacing={2}>
-            <Input
+            <CustomInput
               register={register}
               name='floor'
               label='Этаж'
               type='number'
             />
-            <Input
+            <CustomInput
               register={register}
               name='room'
               label='Квартира'

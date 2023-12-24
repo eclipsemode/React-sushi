@@ -13,7 +13,7 @@ import {
 import { Pagination, Skeleton } from '@mui/material';
 import Colors from '@shared/utils/Colors';
 import { enqueueSnackbar } from 'notistack';
-import { Input } from '@shared/UI';
+import CustomInput from '@shared/UI/CustomInput';
 import debounce from 'lodash.debounce';
 
 const PromoCodeListDnD = () => {
@@ -121,7 +121,7 @@ const PromoCodeListDnD = () => {
 
   return (
     <>
-      <Input
+      <CustomInput
         className={styles.search}
         label="Поиск по промокоду"
         onChangeEvent={(value) => handleSearch(value)}
