@@ -5,6 +5,10 @@
   padding-top: 10px;
 }
 
+.innerContainer {
+  padding: $padding-inner;
+}
+
 .city {
   font-size: 16px;
   color: $info-color;

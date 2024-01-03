@@ -1,6 +1,10 @@
 @import '@assets/styles/variables';
 @import '@assets/styles/mixins/authorisation';
 
+.wrapper {
+  padding: $padding-inner;
+}
+
 .root {
   max-width: 450px;
   width: 100%;

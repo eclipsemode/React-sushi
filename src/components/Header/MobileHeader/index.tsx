@@ -53,7 +53,7 @@ const MobileHeader = ({openedPopover, popoverRef, handleAgreePopover, handleClos
 
   return (
     <header>
-      <div className="container">
+      <div className={styles.innerContainer}>
         <Stack
           className={styles.mobileTopMenu}
           direction="row"

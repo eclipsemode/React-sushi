@@ -43,7 +43,7 @@ const Auth = () => {
   };
 
   return (
-    <div className="container">
+    <div className={styles.wrapper}>
       <div className={styles.root}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <CustomInput
