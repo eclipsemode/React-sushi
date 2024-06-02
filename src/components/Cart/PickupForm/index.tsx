@@ -7,17 +7,17 @@ import Agreement from '../Agreement';
 import { useAppDispatch } from '@store/hooks';
 import { setFormData } from '@store/features/order/api';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import CustomInput from "@shared/UI/CustomInput";
+import CustomInput from '@shared/UI/CustomInput';
 import Select from '@shared/UI/Select';
-import { IFormData} from '@store/features/order/model';
+import { IFormData } from '@store/features/order/model';
 import { setMaterialDialog } from '@store/features/materialDialog/api';
 import { MaterialDialogTypes } from '@store/features/materialDialog/model';
-import { IUserInfo } from '@store/features/user';
 import { useTimeArray } from '@hooks/useTimeArray';
+import { IUser } from '@store/features/user/model';
 
 interface IPickupProps {
   clickEvent: () => void;
-  userInfo: Partial<IUserInfo> | null;
+  userInfo: Partial<IUser> | null;
 }
 
 const PickupForm: React.FC<IPickupProps> = ({ clickEvent, userInfo }) => {
@@ -29,15 +29,15 @@ const PickupForm: React.FC<IPickupProps> = ({ clickEvent, userInfo }) => {
     formState: { errors },
   } = useForm<IFormData>({
     defaultValues: {
-      name: userInfo?.name ?? '',
-      email: userInfo?.email ?? '',
+      clientName: userInfo?.profile?.name,
+      clientEmail: userInfo?.profile?.email,
     },
   });
   const [utensils, setUtensils] = React.useState<number>(0);
   const timeStamps = useTimeArray();
 
   React.useEffect(() => {
-    setValue('utensils', utensils);
+    setValue('utensils', utensils.toString());
   }, [utensils, setValue]);
 
   const onSubmit: SubmitHandler<IFormData> = (data) => {
@@ -68,21 +68,21 @@ const PickupForm: React.FC<IPickupProps> = ({ clickEvent, userInfo }) => {
           <fieldset>
             <label className={styles.root__required}>Имя</label>
             <CustomInput
-              name="name"
+              name="clientName"
               required={true}
               maxLength={16}
               register={register}
-              error={!!errors.name}
+              error={!!errors.clientName}
             />
           </fieldset>
           <fieldset className={styles.root__width_50}>
             <label className={styles.root__required}>Телефон</label>
             <CustomInput
               inputMask={true}
-              name="tel"
+              name="clientTel"
               required={true}
               register={register}
-              error={!!errors.tel}
+              error={!!errors.clientTel}
               pattern={
                 /^(\+7|7|8)?[\s-]?\(?[89][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/gm
               }
@@ -95,9 +95,9 @@ const PickupForm: React.FC<IPickupProps> = ({ clickEvent, userInfo }) => {
           <fieldset className={styles.root__width_50}>
             <label>E-MAIL</label>
             <CustomInput
-              name="email"
+              name="clientEmail"
               register={register}
-              error={!!errors.email}
+              error={!!errors.clientEmail}
               pattern={
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
               }
@@ -159,10 +159,10 @@ const PickupForm: React.FC<IPickupProps> = ({ clickEvent, userInfo }) => {
           <fieldset>
             <label>Оплата</label>
             <Select register={register} name="payment" required={true}>
-              <option className={styles.option} value="cash">
+              <option className={styles.option} value="CASH">
                 Наличными
               </option>
-              <option className={styles.option} value="card">
+              <option className={styles.option} value="CARD">
                 Картой
               </option>
             </Select>

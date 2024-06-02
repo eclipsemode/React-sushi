@@ -5,32 +5,47 @@ import RouterPath from '@shared/utils/menuPath';
 import Image from 'next/image';
 import { Badge, Stack } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
-import { ModalAccount } from '@components/index';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PhoneIcon from '@mui/icons-material/Phone';
-import PopoverLocation, { IPopoverLocationProps } from '@components/Header/PopoverLocation';
+import PopoverLocation, {
+  IPopoverLocationProps,
+} from '@components/Header/PopoverLocation';
 import { useRouter } from 'next/navigation';
-import { IUser } from '@store/features/user';
+import { IUser } from '@store/features/user/model';
+import ModalAccount from '@components/ModalAccount';
 
 interface IProps extends IPopoverLocationProps {
-  totalPrice: number,
-  isAuth: boolean,
-  user: IUser | null
+  totalPrice: number;
+  isAuth: boolean;
+  user: IUser | null;
 }
 
-const DesktopHeader = ({openedPopover, popoverRef, handleClosePopover, currentBranch, handleAgreePopover, onCityPickClick, totalPrice, isAuth, user}: IProps) => {
+const DesktopHeader = ({
+  openedPopover,
+  popoverRef,
+  handleClosePopover,
+  currentBranch,
+  handleAgreePopover,
+  onCityPickClick,
+  totalPrice,
+  isAuth,
+  user,
+}: IProps) => {
   const router = useRouter();
   const headerRef = React.useRef<HTMLDivElement>(null);
   const modalRef = React.useRef<HTMLDivElement>(null);
   const [accModal, setAccModal] = React.useState<boolean>(false);
 
-  const renderPopover = () => <PopoverLocation
-    openedPopover={openedPopover}
-    popoverRef={popoverRef}
-    handleClosePopover={handleClosePopover}
-    currentBranch={currentBranch}
-    handleAgreePopover={handleAgreePopover}
-    onCityPickClick={onCityPickClick} />
+  const renderPopover = () => (
+    <PopoverLocation
+      openedPopover={openedPopover}
+      popoverRef={popoverRef}
+      handleClosePopover={handleClosePopover}
+      currentBranch={currentBranch}
+      handleAgreePopover={handleAgreePopover}
+      onCityPickClick={onCityPickClick}
+    />
+  );
 
   const isHandleClassName = React.useCallback(() => {
     window.scrollY > 0
@@ -74,7 +89,7 @@ const DesktopHeader = ({openedPopover, popoverRef, handleClosePopover, currentBr
             width={150}
             height={50}
             src={'/images/logo.png'}
-            priority
+            priority={true}
             alt="Index logo"
           />
         </Link>
@@ -82,7 +97,7 @@ const DesktopHeader = ({openedPopover, popoverRef, handleClosePopover, currentBr
           <span className={styles.city}>
             город:{' '}
             <span ref={popoverRef} onClick={onCityPickClick}>
-              {currentBranch}
+              {currentBranch?.name}
             </span>
           </span>
           {renderPopover()}
@@ -106,17 +121,15 @@ const DesktopHeader = ({openedPopover, popoverRef, handleClosePopover, currentBr
                 className={styles.root__auth}
                 onClick={(e: React.MouseEvent) => accHandle(e)}
               >
-                {user && (
+                {user?.profile?.name ? (
                   <div>
                     <p>Добро пожаловать!</p>
-                    {user.name ? (
-                      <p>
-                        {user.name} {user.surname}
-                      </p>
-                    ) : (
-                      <p>Гость</p>
-                    )}
+                    <p>
+                      {user.profile.name} {user.profile.surname}
+                    </p>
                   </div>
+                ) : (
+                  <p style={{ fontSize: 18 }}>Гость</p>
                 )}
                 <PersonIcon width={32} height={32} />
                 {accModal && <ModalAccount modalRef={modalRef} />}

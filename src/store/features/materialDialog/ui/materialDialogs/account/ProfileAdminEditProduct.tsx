@@ -14,23 +14,25 @@ import {
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {changeProduct, getProducts, IProduct} from '@store/features/products/api';
+import { changeProduct, getProducts } from '@store/features/products/api';
 import { enqueueSnackbar } from 'notistack';
-import CustomInput from "@shared/UI/CustomInput";
+import CustomInput from '@shared/UI/CustomInput';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { ICreateProductForm } from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddProduct';
 import Select from '@shared/UI/Select';
 import InputFile from '@shared/UI/InputFile';
+import { IProduct } from '@store/features/products/model';
 
 const rowStyle: CSSProperties = {
   marginTop: '10px',
 };
 
 interface IData {
-  data: IProduct[]
+  data: IProduct[];
 }
 
+// TODO Исправить компонент
 const ProfileAdminEditProduct = () => {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector<IData>(selectMaterialDialog as any);
@@ -89,7 +91,7 @@ const ProfileAdminEditProduct = () => {
           })
         ).unwrap();
       } else {
-        const priceArr = [dataForm.price1]
+        const priceArr = [dataForm.price1];
         await dispatch(
           changeProduct({
             ...dataForm,

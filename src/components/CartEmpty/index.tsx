@@ -3,7 +3,7 @@ import SimpleButton from '@shared/UI/SimpleButton';
 import Image from 'next/image';
 import Link from 'next/link';
 import MenuPath from '@shared/utils/menuPath';
-import styles from './index.module.scss'
+import styles from './index.module.scss';
 
 const CartEmpty: React.FC = () => {
   return (

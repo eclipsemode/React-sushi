@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { addItem, ICartProduct, removeItem } from '@store/features/cart/api';
+import { addItem, removeItem } from '@store/features/cart/api';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { ICartProduct } from '@store/features/cart/model';
 
 type AddToCartButtonProps = {
   product: ICartProduct;
@@ -10,44 +11,53 @@ type AddToCartButtonProps = {
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
   const dispatch = useAppDispatch();
-  const cartItem = useAppSelector((state) =>
-    state.cartReducer.items.find(
-      (obj: ICartProduct) => obj.sizeId === product.sizeId
-    )
-  );
-  let amount = !cartItem ? 0 : cartItem.amount;
+  const { products } = useAppSelector((state) => state.cartReducer);
+
+  const currentProduct = products?.find((x) => x.id === product.id);
+  const currentProductAmount =
+    currentProduct?.productSize.find((x) => x.id === product.productSize[0].id)
+      ?.amount || 0;
+
   const handleAddItem = () => {
     dispatch(addItem(product));
   };
 
   const handleRemoveItem = () => {
-    dispatch(removeItem(product.sizeId));
+    dispatch(removeItem(product.productSize[0].id));
   };
 
   const handleAddProduct = () => {
     dispatch(addItem(product));
   };
 
-  return amount > 0 ? (
+  const renderMinusPlusButton = () => (
     <div className={styles.root__amountBlock}>
       <MinusCircleOutlined
         style={{ fontSize: '24px' }}
         className={styles.root__minus}
         onClick={() => handleRemoveItem()}
       />
-      <span>{amount}</span>
+      <span>{currentProductAmount}</span>
       <PlusCircleOutlined
         style={{ fontSize: '24px' }}
         className={styles.root__plus}
         onClick={() => handleAddItem()}
       />
     </div>
-  ) : (
-    <button className={styles.root} onClick={() => handleAddProduct()}>
+  );
+
+  const renderSingleButton = () => (
+    <button className={styles.root} onClick={handleAddProduct}>
       <span>Добавить</span>
-      <span>{amount === 0 ? '+' : 'x' + amount}</span>
+      <span>
+        {currentProductAmount === 0 ? '+' : 'x' + currentProductAmount}
+      </span>
     </button>
   );
+
+  return currentProductAmount > 0
+    ? renderMinusPlusButton()
+    : renderSingleButton();
 };
 
 export default AddToCartButton;

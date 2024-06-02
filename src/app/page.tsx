@@ -4,7 +4,7 @@ import React from 'react';
 import HomeTitle from '@components/HomeTitle';
 import Categories from '@components/Categories';
 import HomeInfo from '@components/HomeInfo';
-import styles from './index.module.scss'
+import styles from './index.module.scss';
 import Filter from '@components/Filter';
 
 const Home = () => {
@@ -18,7 +18,7 @@ const Home = () => {
       <div className={styles.container}>
         <section className={styles.content__head}>
           <HomeTitle />
-          <Filter/>
+          <Filter />
         </section>
         <Products />
       </div>

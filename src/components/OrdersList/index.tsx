@@ -1,6 +1,5 @@
 import React from 'react';
 import { Divider as DividerAnt } from 'antd';
-import { IOrdersFetched } from '@store/features/account/api';
 import Moment from 'react-moment';
 import styles from './index.module.scss';
 import {
@@ -26,23 +25,25 @@ import {
   DeviceType,
   selectAdaptiveServiceSlice,
 } from '@store/features/adaptive';
-import { IBranches, selectLocation } from '@store/features/location/api';
+import { selectBranch } from '@store/features/branch/api';
+import { IOrder } from '@store/features/order/model';
 
-interface IOrdersList {
-  orders: IOrdersFetched[];
+interface IProps {
+  orders: IOrder[];
 }
 
-const OrdersList: React.FC<IOrdersList> = ({ orders }) => {
+// TODO Исправить ошибки
+const OrdersList = ({ orders }: IProps) => {
   const [expanded, setExpanded] = React.useState<string | false>(false);
   const { deviceType } = useAppSelector(selectAdaptiveServiceSlice);
-  const { allBranches } = useAppSelector(selectLocation);
+  const { currentBranch } = useAppSelector(selectBranch);
 
   const handleChange =
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
 
-  const renderStatus = (order: IOrdersFetched) => {
+  const renderStatus = (order) => {
     switch (order.status) {
       case 'new':
         return (
@@ -83,10 +84,6 @@ const OrdersList: React.FC<IOrdersList> = ({ orders }) => {
           <Chip className={styles.status} label="В обработке" color="info" />
         );
     }
-  };
-
-  const findBranchName = (id: number): string => {
-    return allBranches.find((branch: IBranches) => branch.id === id)?.name || '';
   };
 
   const renderOrders = () => (
@@ -134,13 +131,9 @@ const OrdersList: React.FC<IOrdersList> = ({ orders }) => {
               <Typography sx={{ color: Colors.$rootText }}>
                 <span>
                   <EnvironmentOutlined />{' '}
-                  {order.type === 'delivery'
-                    ? `Доставка: г. ${findBranchName(order.branchId)}, ул. ${
-                        order.address
-                      }, кв. ${order.room}`
-                    : `Самовывоз: г. ${findBranchName(
-                        order.branchId
-                      )}, ул. Кропоткина 194`}
+                  {order.type === 'DELIVERY'
+                    ? `Доставка: г. ${currentBranch?.name}, ул. ${order.clientAddress}, кв. ${order.clientRoom}`
+                    : `Самовывоз: г. ${currentBranch?.name}, ул. Кропоткина 194`}
                 </span>
               </Typography>
             </Stack>
@@ -159,7 +152,7 @@ const OrdersList: React.FC<IOrdersList> = ({ orders }) => {
               className={styles.root__data}
               sx={{ color: Colors.$rootText }}
             >
-              {order.name}
+              {order.clientName}
             </Typography>
             <DividerAnt orientation="left" className={styles.divider}>
               Телефон
@@ -168,9 +161,9 @@ const OrdersList: React.FC<IOrdersList> = ({ orders }) => {
               className={styles.root__data}
               sx={{ color: Colors.$rootText }}
             >
-              {order.tel}
+              {order.clientTel}
             </Typography>
-            {order.type === 'delivery' && (
+            {order.type === 'DELIVERY' && (
               <>
                 <DividerAnt orientation="left" className={styles.divider}>
                   Адресс
@@ -178,17 +171,19 @@ const OrdersList: React.FC<IOrdersList> = ({ orders }) => {
                 <Typography
                   className={styles.root__data}
                   sx={{ color: Colors.$rootText }}
-                >{`${order.address} ${
-                  order.entrance ? ', подъезд ' + order.entrance : ''
-                } ${order.floor ? ', этаж ' + order.floor : ''} ${
-                  order.room ? ', кв. ' + order.room : ''
+                >{`${order.clientAddress} ${
+                  order.clientEntrance
+                    ? ', подъезд ' + order.clientEntrance
+                    : ''
+                } ${order.clientFloor ? ', этаж ' + order.clientFloor : ''} ${
+                  order.clientRoom ? ', кв. ' + order.clientRoom : ''
                 }`}</Typography>
               </>
             )}
             <DividerAnt orientation="left" className={styles.divider}>
               Время
             </DividerAnt>
-            {!order.day ? (
+            {!order.date ? (
               <Typography
                 className={styles.root__data}
                 sx={{ color: Colors.$rootText }}
@@ -212,7 +207,7 @@ const OrdersList: React.FC<IOrdersList> = ({ orders }) => {
               className={styles.root__data}
               sx={{ color: Colors.$rootText }}
             >
-              {order.payment === 'cash' ? 'Наличными' : 'Картой'}
+              {order.payment === 'CASH' ? 'Наличными' : 'Картой'}
             </Typography>
 
             <DividerAnt orientation="left" className={styles.divider}>
@@ -227,16 +222,18 @@ const OrdersList: React.FC<IOrdersList> = ({ orders }) => {
 
             <br />
 
-            {order.products.map((product, index) => (
+            {order.orderProducts?.map((product, index: number) => (
               <List
-                key={product.sizeId + product.name}
+                key={product.id}
                 sx={{ width: '100%', bgcolor: 'transparent' }}
               >
                 <ListItem alignItems="flex-start">
                   <ListItemAvatar>
                     <Avatar
                       alt="Remy Sharp"
-                      src={process.env.REACT_APP_API_URL + product.image}
+                      src={
+                        process.env.REACT_APP_API_URL + (product?.image || '')
+                      }
                     />
                   </ListItemAvatar>
                   <ListItemText
@@ -268,7 +265,7 @@ const OrdersList: React.FC<IOrdersList> = ({ orders }) => {
                     }
                   />
                 </ListItem>
-                {index !== order.products.length - 1 && (
+                {index !== (order.orderProducts?.length || 0) - 1 && (
                   <Divider
                     variant="inset"
                     sx={{ borderColor: Colors.$infoColor }}

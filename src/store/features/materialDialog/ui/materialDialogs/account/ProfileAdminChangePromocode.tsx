@@ -7,15 +7,15 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import {
   changePromoCode,
   getAllPromoCodes,
-  IPromocode,
 } from '@store/features/promocode/api';
 import { enqueueSnackbar } from 'notistack';
 import {
   selectMaterialDialog,
   setMaterialDialog,
 } from '@store/features/materialDialog/api';
-import CustomInput from "@shared/UI/CustomInput";
+import CustomInput from '@shared/UI/CustomInput';
 import styles from '../index.module.scss';
+import { IPromocode } from '@store/features/promocode/model';
 
 const ProfileAdminChangePromocode = () => {
   const dispatch = useAppDispatch();
@@ -34,12 +34,7 @@ const ProfileAdminChangePromocode = () => {
 
   const callback = async (formData: IPromocode) => {
     try {
-      await dispatch(
-        changePromoCode({
-          code: data.code,
-          newValue: !formData.limit ? 'infinite' : formData.limit,
-        })
-      ).unwrap();
+      await dispatch(changePromoCode(formData)).unwrap();
       enqueueSnackbar('Промокод успешно добавлен!', { variant: 'success' });
     } catch (e) {
       console.error(e);

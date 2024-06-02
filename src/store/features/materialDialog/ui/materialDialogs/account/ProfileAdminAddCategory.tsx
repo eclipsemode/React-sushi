@@ -5,10 +5,10 @@ import { setMaterialDialog } from '@store/features/materialDialog/api';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Colors from '@shared/utils/Colors';
 import SimpleButton from '@shared/UI/SimpleButton';
-import { createCategory, fetchCategories } from '@store/features/categories/api';
+import { createCategory, getCategories } from '@store/features/categories/api';
 import InputFile from '@shared/UI/InputFile';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import CustomInput from "@shared/UI/CustomInput";
+import CustomInput from '@shared/UI/CustomInput';
 
 export interface ICreateCategoryForm {
   image: FileList;
@@ -19,7 +19,7 @@ const ProfileAdminAddCategory = () => {
   const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm<ICreateCategoryForm>();
   const success = async () => {
-    await dispatch(fetchCategories());
+    await dispatch(getCategories());
   };
 
   const callback = async (formData: ICreateCategoryForm) => {

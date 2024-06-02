@@ -5,19 +5,19 @@ import DragAndDropItem from '@shared/UI/DragAndDrop';
 import styles from './index.module.scss';
 import {
   changeCategoryOrder,
-  fetchCategories,
-  ICategories,
+  getCategories,
 } from '@store/features/categories/api';
 import { setMaterialDialog } from '@store/features/materialDialog/api';
 import { MaterialDialogTypes } from '@store/features/materialDialog/model';
+import { ICategory } from '@store/features/categories/model';
 
 const CategoriesListDnD = () => {
   const dispatch = useAppDispatch();
   const { categories } = useAppSelector((state) => state.categoriesReducer);
-  const [cards, setCards] = React.useState<ICategories[]>([]);
+  const [cards, setCards] = React.useState<ICategory[]>([]);
 
   const handleDeleteCategory = React.useCallback(
-    (id: number) => {
+    (id: string) => {
       dispatch(
         setMaterialDialog({
           opened: true,
@@ -29,12 +29,9 @@ const CategoriesListDnD = () => {
     [dispatch]
   );
 
-  const filterCards = (arr: ICategories[]) => {
+  const filterCards = (arr: ICategory[]) => {
     return arr.map((item) => {
-      return {
-        id: item.id,
-        orderIndex: item.orderIndex,
-      };
+      return item.id;
     });
   };
 
@@ -44,11 +41,11 @@ const CategoriesListDnD = () => {
 
   const moveItem = React.useCallback(
     (dragIndex: number, hoverIndex: number) => {
-      setCards((prevCards: ICategories[]) =>
+      setCards((prevCards: ICategory[]) =>
         update(prevCards, {
           $splice: [
             [dragIndex, 1],
-            [hoverIndex, 0, prevCards[dragIndex] as ICategories],
+            [hoverIndex, 0, prevCards[dragIndex] as ICategory],
           ],
         })
       );
@@ -57,12 +54,12 @@ const CategoriesListDnD = () => {
   );
 
   const renderCard = React.useCallback(
-    (card: ICategories, index: number) => {
+    (card: ICategory, index: number) => {
       return (
         <div
           onDrop={async () => {
             await dispatch(changeCategoryOrder(filterCards(cards)));
-            await dispatch(fetchCategories());
+            await dispatch(getCategories());
           }}
           key={card.id}
         >

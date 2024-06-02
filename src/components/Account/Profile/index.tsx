@@ -1,54 +1,69 @@
+'use client';
 import React from 'react';
 import Field from '@shared/UI/Field';
 import formatDateToString from '@shared/utils/formatDateToString';
 import styles from './index.module.scss';
-import { IUserInfo } from '@store/features/user';
+import { useAppSelector } from '@store/hooks';
+import { selectUser } from '@store/features/user/api';
 
-interface IProps {
-  userInfo: Partial<IUserInfo> | null;
-}
+const Profile = () => {
+  const { user } = useAppSelector(selectUser);
 
-const Profile = ({ userInfo }: IProps) => {
+  const renderEmptyProfile = () => (
+    <div>
+      <p>Вы еще не вводили данные</p>
+    </div>
+  );
 
-  return (
+  const renderUserProfile = () => (
     <div className={styles.root}>
-      {userInfo?.name && <Field title='Имя' text={userInfo.name} />}
-      {userInfo?.surname && <Field title='Фамилия' text={userInfo.surname} />}
-      {userInfo?.dateOfBirth && (
+      {user?.profile.name && <Field title="Имя" text={user.profile.name} />}
+      {user?.profile.surname && (
+        <Field title="Фамилия" text={user.profile.surname} />
+      )}
+      {user?.profile.dateOfBirth && (
         <Field
-          title='Дата рождения'
-          text={formatDateToString(new Date(userInfo.dateOfBirth))}
+          title="Дата рождения"
+          text={formatDateToString(new Date(user.profile.dateOfBirth))}
         />
       )}
-      {userInfo?.email && <Field title='Email' text={userInfo.email} />}
-      {userInfo?.tel && <Field title='Телефон' text={userInfo.tel} />}
-      {userInfo?.street && (
+      {user?.profile.email && <Field title="Email" text={user.profile.email} />}
+      {user?.tel && <Field title="Телефон" text={user.tel} />}
+      {user?.profile.street && (
         <Field
-          title='Улица'
-          text={userInfo.street + (userInfo.house ? `, ${userInfo.house}` : '')}
+          title="Улица"
+          text={
+            user.profile.street +
+            (user.profile.house ? `, ${user.profile.house}` : '')
+          }
         />
       )}
-      {userInfo?.street && (
+      {user?.profile.street && (
         <div className={styles.root__additional}>
-          {userInfo?.entrance && (
+          {user?.profile.entrance && (
             <Field
-              title='Подъезд'
-              text={userInfo?.entrance ? userInfo?.entrance : ''}
+              title="Подъезд"
+              text={user?.profile.entrance ? user?.profile.entrance : ''}
             />
           )}
-          {userInfo?.floor && (
-            <Field title='Этаж' text={userInfo?.floor ? userInfo?.floor : ''} />
-          )}
-          {userInfo?.room && (
+          {user?.profile.floor && (
             <Field
-              title='Квартира'
-              text={userInfo?.room ? userInfo?.room : ''}
+              title="Этаж"
+              text={user?.profile.floor ? user?.profile.floor : ''}
+            />
+          )}
+          {user?.profile.room && (
+            <Field
+              title="Квартира"
+              text={user?.profile.room ? user?.profile.room : ''}
             />
           )}
         </div>
       )}
     </div>
   );
+
+  return user?.profile ? renderUserProfile() : renderEmptyProfile();
 };
 
 export default Profile;

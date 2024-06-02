@@ -1,6 +1,5 @@
 import React from 'react';
-import { CartItem } from '@components/index';
-import { ICartProduct, selectCart } from '@store/features/cart/api';
+import { selectCart } from '@store/features/cart/api';
 import styles from './index.module.scss';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { DeliveryPrice } from '@store/features/order/utils';
@@ -16,7 +15,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Colors from '@shared/utils/Colors';
 import { setMaterialDialog } from '@store/features/materialDialog/api';
 import { MaterialDialogTypes } from '@store/features/materialDialog/model';
-import CustomInput from "@shared/UI/CustomInput";
+import CustomInput from '@shared/UI/CustomInput';
 import { Box, CircularProgress, Stack } from '@mui/material';
 import {
   clearPromocodeData,
@@ -25,13 +24,14 @@ import {
 } from '@store/features/promocode/api';
 import InfoIcon from '@mui/icons-material/Info';
 import Divider from '@mui/material/Divider';
-import { selectUser } from '@store/features/user';
-
-export type OrderType = 'delivery' | 'pickup' | null;
+import { selectUser } from '@store/features/user/api';
+import { TOrderType } from '@store/features/order/model';
+import CartItem from '@components/CartItem';
 
 const CartOrder: React.FC = () => {
-  const { items, totalPrice, deliveryPrice, pizzasDiscount } = useAppSelector(selectCart);
-  const { userInfo } = useAppSelector(selectUser);
+  const { products, totalPrice, deliveryPrice, pizzasDiscount } =
+    useAppSelector(selectCart);
+  const { user } = useAppSelector(selectUser);
   const { deviceType } = useAppSelector(selectAdaptiveServiceSlice);
   const { promocode, promocodeError, promocodeLoadSaveProcess } =
     useAppSelector((state) => state.promocodeReducer);
@@ -39,7 +39,7 @@ const CartOrder: React.FC = () => {
   const [promoCodeAccepted, setPromoCodeAccepted] =
     React.useState<boolean>(false);
   const [promoCodeValue, setPromoCodeValue] = React.useState<string>('');
-  const [orderType, setOrderType] = React.useState<OrderType>(null);
+  const [orderType, setOrderType] = React.useState<TOrderType | null>(null);
 
   React.useEffect(() => {
     if (promocode) {
@@ -64,7 +64,7 @@ const CartOrder: React.FC = () => {
         dispatch(fetchPromocodeCheck(promoCodeValue)).unwrap();
       }
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
   };
 
@@ -85,17 +85,17 @@ const CartOrder: React.FC = () => {
 
   const getTotalPriceWithPizzasDiscount = () => {
     return totalPrice - pizzasDiscount;
-  }
+  };
 
   const renderDiscount = (text: string) => (
     <div className={styles.discount}>
       <span>Действует акция: {text}</span>
     </div>
-  )
+  );
 
   return (
     <div className={styles.root}>
-      {deliveryPrice !== 0 && orderType !== 'pickup' && (
+      {deliveryPrice !== 0 && orderType !== 'PICKUP' && (
         <Alert type="error">
           Внимание! Для бесплатной доставки сумма заказа должны быть не менее{' '}
           {DeliveryPrice.MIN} ₽.
@@ -109,9 +109,17 @@ const CartOrder: React.FC = () => {
             : renderMobileTableHeader()}
         </thead>
         <tbody>
-          {items.map((obj: ICartProduct) => (
-            <CartItem key={obj.sizeId} obj={obj} />
-          ))}
+          {products.flatMap((obj) =>
+            obj.productSize.map((x) => (
+              <CartItem
+                key={x.id}
+                obj={{
+                  ...obj,
+                  productSize: [x],
+                }}
+              />
+            ))
+          )}
         </tbody>
         <tfoot>
           <tr>
@@ -136,7 +144,8 @@ const CartOrder: React.FC = () => {
                   Сумма заказа: {getTotalPriceWithPizzasDiscount()} ₽
                 </h4>
               </div>
-              {!!pizzasDiscount && renderDiscount('3-я пицца наименьшая по стоимости в подарок!')}
+              {!!pizzasDiscount &&
+                renderDiscount('3-я пицца наименьшая по стоимости в подарок!')}
             </td>
           </tr>
         </tfoot>
@@ -254,13 +263,13 @@ const CartOrder: React.FC = () => {
           <div className={styles.root__type_buttons}>
             <SimpleButton
               type="button"
-              clickEvent={() => setOrderType('delivery')}
+              clickEvent={() => setOrderType('DELIVERY')}
             >
               Доставка
             </SimpleButton>
             <SimpleButton
               type="button"
-              clickEvent={() => setOrderType('pickup')}
+              clickEvent={() => setOrderType('PICKUP')}
             >
               Самовывоз
             </SimpleButton>
@@ -268,13 +277,10 @@ const CartOrder: React.FC = () => {
         </div>
       )}
 
-      {orderType === 'pickup' ? (
-        <PickupForm clickEvent={() => setOrderType(null)} userInfo={userInfo} />
-      ) : orderType === 'delivery' ? (
-        <DeliveryForm
-          clickEvent={() => setOrderType(null)}
-          userInfo={userInfo}
-        />
+      {orderType === 'PICKUP' ? (
+        <PickupForm clickEvent={() => setOrderType(null)} userInfo={user} />
+      ) : orderType === 'DELIVERY' ? (
+        <DeliveryForm clickEvent={() => setOrderType(null)} userInfo={user} />
       ) : null}
     </div>
   );

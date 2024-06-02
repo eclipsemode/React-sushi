@@ -1,3 +1,3 @@
-type AsyncThunkStatus = 'fulfilled' | 'pending' | 'rejected';
+type TAsyncThunkStatus = 'fulfilled' | 'pending' | 'rejected';
 
-export type {AsyncThunkStatus};
+export type { TAsyncThunkStatus };

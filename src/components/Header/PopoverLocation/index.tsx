@@ -1,22 +1,26 @@
 import React from 'react';
 import Colors from '@shared/utils/Colors';
 import SimpleButton from '@shared/UI/SimpleButton';
-import {
-  Popover,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Popover, Stack, Typography } from '@mui/material';
+import { IBranch } from '@store/features/branch/api';
 
 export interface IPopoverLocationProps {
-  openedPopover: boolean,
-  popoverRef: React.RefObject<HTMLSpanElement>,
-  handleClosePopover: () => void,
-  currentBranch: string,
-  handleAgreePopover: () => void,
-  onCityPickClick: () => void
+  openedPopover: boolean;
+  popoverRef: React.RefObject<HTMLSpanElement>;
+  handleClosePopover: () => void;
+  currentBranch: IBranch | null;
+  handleAgreePopover: () => void;
+  onCityPickClick: () => void;
 }
 
-const PopoverLocation = ({openedPopover, popoverRef, handleClosePopover, currentBranch, handleAgreePopover, onCityPickClick}: IPopoverLocationProps) => {
+const PopoverLocation = ({
+  openedPopover,
+  popoverRef,
+  handleClosePopover,
+  currentBranch,
+  handleAgreePopover,
+  onCityPickClick,
+}: IPopoverLocationProps) => {
   return (
     <Popover
       sx={{
@@ -40,7 +44,7 @@ const PopoverLocation = ({openedPopover, popoverRef, handleClosePopover, current
     >
       <Stack sx={{ padding: '15px' }}>
         <Typography sx={{ p: 2, color: Colors.$rootText }}>
-          Ваш город {currentBranch}?
+          Ваш город {currentBranch?.name}?
         </Typography>
         <SimpleButton variant="contained" clickEvent={handleAgreePopover}>
           Подтвердить

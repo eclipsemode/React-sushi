@@ -2,7 +2,7 @@
 import React from 'react';
 import AsideMenu from '@components/Account/AsideMenu';
 import { useAppSelector } from '@store/hooks';
-import { selectUser } from '@store/features/user';
+import { selectUser } from '@store/features/user/api';
 import { selectAuth } from '@store/features/auth/api';
 import BreadCrumbs from '@components/Account/BreadCrumbs';
 import styles from './index.module.scss';
@@ -13,7 +13,8 @@ interface IProps {
 }
 
 export default function Layout({ children }: IProps) {
-  const { user, isAuth } = useAppSelector(selectUser);
+  const { user } = useAppSelector(selectUser);
+  const { isAuth } = useAppSelector(selectAuth);
   const { authLoadSaveProcess } = useAppSelector(selectAuth);
 
   return isAuth ? (
@@ -25,8 +26,9 @@ export default function Layout({ children }: IProps) {
           <AsideMenu isAdmin={user?.role === 'ADMIN'} />
           <section className={styles.layout__section}>{children}</section>
         </div>
-
       </div>
     </div>
-  ) : <Auth/>
+  ) : (
+    <Auth />
+  );
 }

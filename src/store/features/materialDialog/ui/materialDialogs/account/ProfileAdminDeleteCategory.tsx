@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
-import { deleteCategory, fetchCategories } from '@store/features/categories/api';
+import { deleteCategory, getCategories } from '@store/features/categories/api';
 
 const ProfileAdminDeleteCategory = () => {
   const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ const ProfileAdminDeleteCategory = () => {
   const callback = async () => {
     try {
       await dispatch(deleteCategory(data.id)).unwrap();
-      await dispatch(fetchCategories());
+      await dispatch(getCategories());
       enqueueSnackbar('Категория успешно удалена!', { variant: 'success' });
     } catch (e) {
       enqueueSnackbar('Ошибка удаления, попробуйте позднее', {

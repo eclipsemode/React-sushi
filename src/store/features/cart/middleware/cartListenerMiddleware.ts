@@ -3,16 +3,18 @@ import {
   addItem,
   removeAll,
   removeItem,
-  removeItemById,
+  removeItemBySizeId,
   setPizzaPromotion,
   updateDeliveryPrice,
+  calculatePriceAndAmount,
 } from '@store/features/cart/api';
 
 const cartListenerMiddleware = createListenerMiddleware();
 
 cartListenerMiddleware.startListening({
-  matcher: isAnyOf(addItem, removeItem, removeAll, removeItemById),
+  matcher: isAnyOf(addItem, removeItem, removeAll, removeItemBySizeId),
   effect: (_action, listenerApi) => {
+    listenerApi.dispatch(calculatePriceAndAmount());
     listenerApi.dispatch(setPizzaPromotion());
     listenerApi.dispatch(updateDeliveryPrice());
   },

@@ -1,15 +1,17 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUserState } from '@store/features/user';
+import { IUserState } from '@store/features/user/api';
 import { ICartState } from '@store/features/cart/api';
 import OrderDto from '@store/features/order/model/OrderDto';
 import { $api } from '@services/api';
-import { IFormData } from '../model';
+import { IFormData, IOrder } from '../model';
 import { IPromocodeState } from '@store/features/promocode/api';
-import { ILocationState } from '@store/features/location/api';
 import Frontpad from '@services/frontpad';
 import convertTimeToDateTime from '@shared/utils/convertTimeToDateTime';
+import { IBranchState } from '@store/features/branch/api';
 
-const fetchOrderCreate = createAsyncThunk<
+export const AccountOrdersListSize = 10;
+
+export const createOrder = createAsyncThunk<
   void,
   IFormData,
   {
@@ -18,46 +20,49 @@ const fetchOrderCreate = createAsyncThunk<
       userReducer: IUserState;
       cartReducer: ICartState;
       promocodeReducer: IPromocodeState;
-      locationReducer: ILocationState;
+      branchReducer: IBranchState;
     };
   }
->('order/fetchOrderCreate', async (formData, { rejectWithValue, getState }) => {
+>('order/createOrder', async (formData, { rejectWithValue, getState }) => {
   try {
-    const { userReducer, cartReducer, promocodeReducer, locationReducer } =
+    const { userReducer, cartReducer, promocodeReducer, branchReducer } =
       getState();
-    const currentBranchData = locationReducer.allBranches.find(
-      (branch) => branch.name === locationReducer.currentBranch
-    );
+    const { currentBranch } = branchReducer;
     const frontpadApi = new Frontpad();
-    const frontpadApiResponse = await frontpadApi.newOrder(cartReducer.items, {
-      name: formData.name,
-      ...(formData.address && { street: formData.address }),
-      phone: formData.tel,
-      hook_status: ['1', '3', '13', '12', '4', '11', '10'],
-      hook_url: process.env.WEBHOOK_FRONTPAD_STATUS,
-      street: formData.address || '',
-      ...(formData.entrance && { pod: formData.entrance }),
-      ...(formData.floor && { et: formData.floor }),
-      ...(formData.room && { apart: formData.room }),
-      ...(formData.email && { mail: formData.email }),
-      ...(formData.commentary && { descr: formData.commentary }),
-      pay: formData.payment === 'cash' ? 1 : 1228,
-      person: formData.utensils || 0,
-      ...(locationReducer.currentBranch !== 'Армавир' && {
-        affiliate: currentBranchData?.id,
-      }),
-      channel: 2030,
-      ...(formData.time && { datetime: convertTimeToDateTime(formData.time) }),
-    });
+    const frontpadApiResponse = await frontpadApi.newOrder(
+      cartReducer.products,
+      {
+        name: formData.clientName,
+        ...(formData.clientAddress && { street: formData.clientAddress }),
+        phone: formData.clientTel,
+        hook_status: ['1', '3', '13', '12', '4', '11', '10'],
+        hook_url: process.env.WEBHOOK_FRONTPAD_STATUS,
+        ...(formData.clientEntrance && { pod: +formData.clientEntrance }),
+        ...(formData.clientFloor && { et: +formData.clientFloor }),
+        ...(formData.clientRoom && { apart: +formData.clientRoom }),
+        ...(formData.clientEmail && { mail: formData.clientEmail }),
+        ...(formData.commentary && { descr: formData.commentary }),
+        pay: formData.payment === 'CASH' ? 1 : 1228,
+        person: +formData.utensils || 0,
+        // TODO исправить определение филилала
+        // ...(locationReducer.currentBranch !== 'Армавир' && {
+        //   affiliate: currentBranchData?.id,
+        // }),
+        channel: 2030,
+        ...(formData.time && {
+          datetime: convertTimeToDateTime(formData.time),
+        }),
+      }
+    );
     const orderDto = new OrderDto(
       cartReducer,
-      frontpadApiResponse.data?.order_id || 0,
+      frontpadApiResponse.data?.order_id || null,
       userReducer,
       formData,
-      promocodeReducer.promocode?.code,
-      locationReducer
+      promocodeReducer.promocode?.id,
+      branchReducer
     );
-    const response = await $api.post('api/order/create', orderDto.order);
+    const response = await $api.post('api/order', orderDto.order);
     return response.data;
   } catch (error: any) {
     if (error.response && error.response.data.message) {
@@ -68,20 +73,45 @@ const fetchOrderCreate = createAsyncThunk<
   }
 });
 
-export interface IOrderCreate {
+export const getOrdersByUserId = createAsyncThunk<
+  IOrder[],
+  { page: number; size: number },
+  { state: { userReducer: IUserState } }
+>(
+  'account/getOrdersByUserId',
+  async ({ page, size }, { rejectWithValue, getState }) => {
+    try {
+      const { userReducer } = getState();
+      const response = await $api.get(
+        `api/order/user?userId=${userReducer.user?.id}&page=${page}&size=${size}`
+      );
+      return response.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export interface IOrderState {
   orderCreateLoadProcess: boolean;
   formData: IFormData | null;
   orderError: boolean;
+  userOrders: IOrder[];
 }
 
-const initialState: IOrderCreate = {
+const initialState: IOrderState = {
   orderCreateLoadProcess: false,
   formData: null,
   orderError: false,
+  userOrders: [],
 };
 
-const orderCreateSlice = createSlice({
-  name: 'orderCreateReducer',
+const orderSlice = createSlice({
+  name: 'order',
   initialState,
   reducers: {
     setFormData: (state, action: PayloadAction<IFormData | null>) => {
@@ -97,23 +127,36 @@ const orderCreateSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchOrderCreate.pending, (state) => {
+      .addCase(createOrder.pending, (state) => {
         state.orderError = false;
         state.orderCreateLoadProcess = true;
       })
-      .addCase(fetchOrderCreate.fulfilled, (state) => {
+      .addCase(createOrder.fulfilled, (state) => {
         state.orderError = false;
         state.orderCreateLoadProcess = false;
       })
-      .addCase(fetchOrderCreate.rejected, (state) => {
+      .addCase(createOrder.rejected, (state) => {
         state.orderError = true;
+        state.orderCreateLoadProcess = false;
+      })
+
+      .addCase(getOrdersByUserId.pending, (state) => {
+        state.orderCreateLoadProcess = true;
+      })
+      .addCase(
+        getOrdersByUserId.fulfilled,
+        (state, action: PayloadAction<IOrder[]>) => {
+          state.userOrders = action.payload;
+          state.orderCreateLoadProcess = false;
+        }
+      )
+      .addCase(getOrdersByUserId.rejected, (state) => {
+        state.userOrders = [];
         state.orderCreateLoadProcess = false;
       });
   },
 });
 
-export const { setFormData, clearOrderData } = orderCreateSlice.actions;
+export const { setFormData, clearOrderData } = orderSlice.actions;
 
-export { fetchOrderCreate };
-
-export default orderCreateSlice.reducer;
+export default orderSlice.reducer;

@@ -7,17 +7,23 @@ import {
 import Colors from '@shared/utils/Colors';
 import SimpleButton from '@shared/UI/SimpleButton';
 import { setMaterialDialog } from '../../api';
-import { useAppDispatch } from '@store/hooks';
-import { fetchUserLogout } from '@store/features/logout/api';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { useRouter } from 'next/navigation';
 import menuPath from '@shared/utils/menuPath';
+import { selectUser } from '@store/features/user/api';
+import { logout } from '@store/features/auth/api';
 
 const LogoutMaterialDialog = () => {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector(selectUser);
   const router = useRouter();
 
   const callback = () => {
-    dispatch(fetchUserLogout());
+    dispatch(
+      logout({
+        userId: user?.id || '',
+      })
+    );
     router.push(menuPath.HOME);
   };
 

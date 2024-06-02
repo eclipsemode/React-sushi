@@ -1,6 +1,7 @@
 @import '@assets/styles/variables';
 
 .root {
+  min-width: fit-content;
   background: $root-card-background;
   width: 100%;
   height: fit-content;

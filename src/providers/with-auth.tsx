@@ -1,8 +1,8 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { fetchAuth } from '@store/features/auth/api';
-import { fetchUserInfo, selectUser } from '@store/features/user';
+import { refreshToken, selectAuth } from '@store/features/auth/api';
+import { getUserData } from '@store/features/user/api';
 import { enqueueSnackbar } from 'notistack';
 
 interface IProps {
@@ -11,20 +11,18 @@ interface IProps {
 
 const WithAuth = ({ children }: IProps) => {
   const dispatch = useAppDispatch();
-  const { isAuth } = useAppSelector(selectUser);
+  const { authUserId } = useAppSelector(selectAuth);
   const mounted = React.useRef(false);
 
-  React.useEffect(() => {
-    if (!mounted.current) {
-      if (localStorage.getItem('accessToken')) {
-        dispatch(fetchAuth());
-      }
-      mounted.current = true;
-    }
+  useEffect(() => {
+    if (!mounted.current) dispatch(refreshToken());
 
-    if (isAuth) {
-      dispatch(fetchUserInfo())
-        .unwrap()
+    mounted.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (authUserId) {
+      dispatch(getUserData())
         .then()
         .catch(() => {
           enqueueSnackbar('Ошибка загрузки данных пользователя', {
@@ -32,8 +30,7 @@ const WithAuth = ({ children }: IProps) => {
           });
         });
     }
-
-  }, [dispatch, isAuth]);
+  }, [authUserId]);
 
   return <>{children}</>;
 };

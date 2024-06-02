@@ -7,21 +7,19 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Radio from '@shared/UI/Radio';
 import { useAppDispatch } from '@store/hooks';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import CustomInput from "@shared/UI/CustomInput";
+import CustomInput from '@shared/UI/CustomInput';
 import Select from '@shared/UI/Select';
 import { setMaterialDialog } from '@store/features/materialDialog/api';
 import { MaterialDialogTypes } from '@store/features/materialDialog/model';
 import { IFormData } from '@store/features/order/model';
 import { setFormData } from '@store/features/order/api';
-import { IUserInfo } from '@store/features/user';
 import { useTimeArray } from '@hooks/useTimeArray';
+import { IUser } from '@store/features/user/model';
 
 interface IDeliveryFormProps {
   clickEvent: () => void;
-  userInfo: Partial<IUserInfo> | null;
+  userInfo: Partial<IUser> | null;
 }
-
-export type PaymentType = 'cash' | 'card';
 
 const DeliveryForm: React.FC<IDeliveryFormProps> = ({
   clickEvent,
@@ -36,12 +34,12 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
     formState: { errors },
   } = useForm<IFormData>({
     defaultValues: {
-      name: userInfo?.name ?? '',
-      email: userInfo?.email ?? '',
-      address: userInfo?.street ?? '',
-      entrance: userInfo?.entrance ?? undefined,
-      floor: userInfo?.floor ?? undefined,
-      room: userInfo?.room ?? undefined,
+      clientName: userInfo?.profile?.name,
+      clientEmail: userInfo?.profile?.email,
+      clientAddress: userInfo?.profile?.street,
+      clientEntrance: userInfo?.profile?.entrance?.toString(),
+      clientFloor: userInfo?.profile?.floor?.toString(),
+      clientRoom: userInfo?.profile?.room?.toString(),
     },
   });
   const [utensils, setUtensils] = React.useState<number>(0);
@@ -49,13 +47,13 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
 
   React.useEffect(() => {
     setValue('deliveryTime', 1);
-    setValue('entrance', null);
-    setValue('floor', null);
-    setValue('room', null);
+    setValue('clientEntrance', '');
+    setValue('clientFloor', '');
+    setValue('clientRoom', '');
   }, [setValue]);
 
   React.useEffect(() => {
-    setValue('utensils', utensils);
+    setValue('utensils', String(utensils));
   }, [utensils, setValue]);
   const onSubmit: SubmitHandler<IFormData> = (data) => {
     if (Number(data.deliveryTime) === 1) {
@@ -89,8 +87,8 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
             <label className={styles.root__required}>Имя</label>
             <CustomInput
               register={register}
-              name="name"
-              error={!!errors.name}
+              name="clientName"
+              error={!!errors.clientName}
               required={true}
               maxLength={16}
             />
@@ -99,8 +97,8 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
             <label className={styles.root__required}>Адрес</label>
             <CustomInput
               register={register}
-              name="address"
-              error={!!errors.address}
+              name="clientAddress"
+              error={!!errors.clientAddress}
               required={true}
               maxLength={24}
             />
@@ -109,9 +107,9 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
             <label>Подъезд</label>
             <CustomInput
               register={register}
-              name="entrance"
+              name="clientEntrance"
               type="number"
-              error={!!errors.entrance}
+              error={!!errors.clientEntrance}
               maxLength={2}
             />
           </fieldset>
@@ -119,9 +117,9 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
             <label>Этаж</label>
             <CustomInput
               register={register}
-              name="floor"
+              name="clientFloor"
               type="number"
-              error={!!errors.floor}
+              error={!!errors.clientFloor}
               maxLength={2}
             />
           </fieldset>
@@ -129,9 +127,9 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
             <label>Квартира</label>
             <CustomInput
               register={register}
-              name="room"
+              name="clientRoom"
               type="number"
-              error={!!errors.room}
+              error={!!errors.clientRoom}
               maxLength={4}
             />
           </fieldset>
@@ -139,10 +137,10 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
             <label className={styles.root__required}>Телефон</label>
             <CustomInput
               inputMask={true}
-              name="tel"
+              name="clientTel"
               required={true}
               register={register}
-              error={!!errors.tel}
+              error={!!errors.clientTel}
               pattern={
                 /^(\+7|7|8)?[\s-]?\(?[89][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/gm
               }
@@ -156,8 +154,8 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
             <label>E-MAIL</label>
             <CustomInput
               register={register}
-              name="email"
-              error={!!errors.email}
+              name="clientEmail"
+              error={!!errors.clientEmail}
               pattern={
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
               }
@@ -240,8 +238,8 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
           <fieldset>
             <label>Оплата</label>
             <Select register={register} name="payment" required={true}>
-              <option value="cash">Наличными</option>
-              <option value="card">Картой</option>
+              <option value="CASH">Наличными</option>
+              <option value="CARD">Картой</option>
             </Select>
           </fieldset>
           <fieldset>

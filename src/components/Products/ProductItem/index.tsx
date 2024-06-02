@@ -1,14 +1,15 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { IProduct } from '@store/features/products/api';
 import { AddToCartButton } from '@shared/UI';
 import { ButtonGroup, SxProps } from '@mui/material';
 import Button from '@mui/material/Button';
 import Colors from '@shared/utils/Colors';
 import Image from 'next/image';
+import { IProduct } from '@store/features/products/model';
+import { ICartProductSize } from '@store/features/cart/model';
 
 interface IProps {
-  product: IProduct[];
+  product: IProduct;
 }
 
 const ButtonGroupStyles: SxProps = {
@@ -23,10 +24,34 @@ const ButtonGroupStyles: SxProps = {
 };
 
 const ProductItem = ({ product }: IProps) => {
-  const [selectedSize, setSelectedSize] = React.useState<number>(
-    product[0]?.sizeId
+  const [selectedSizeId, setSelectedSizeId] = React.useState<string>(
+    product.productSize[0].id
   );
-  const foundProduct = product.find((item) => item.sizeId === selectedSize);
+
+  const renderSizeButtons = () => (
+    <ButtonGroup
+      sx={ButtonGroupStyles}
+      variant="contained"
+      aria-label="outlined primary button group"
+    >
+      {product.productSize.map((item) => (
+        <Button
+          key={item.id}
+          sx={{
+            background:
+              selectedSizeId === item.id
+                ? `${Colors.$rootTextActive} !important`
+                : 'auto',
+          }}
+          className={styles.pizzaButton}
+          onClick={() => setSelectedSizeId(item.id)}
+        >
+          {item.name}
+        </Button>
+      ))}
+    </ButtonGroup>
+  );
+
   return (
     <div className={styles.root}>
       <Image
@@ -36,49 +61,38 @@ const ProductItem = ({ product }: IProps) => {
         placeholder="blur"
         blurDataURL="data:images/blur.png"
         className={styles.image}
-        src={process.env.REACT_APP_API_URL + product[0]?.image}
-        alt={product[0]?.name}
+        src={
+          product.image
+            ? `${process.env.REACT_APP_API_URL}/images/products/${product.image}`
+            : '/images/logo_short.png'
+        }
+        alt={product.name}
       />
       <div className={styles.root__content}>
-        {product.length > 1 && (
-          <ButtonGroup
-            sx={ButtonGroupStyles}
-            variant="contained"
-            aria-label="outlined primary button group"
-          >
-            {product.map((item) => (
-              <Button
-                key={item.sizeId}
-                sx={{
-                  background:
-                    selectedSize === item.sizeId
-                      ? `${Colors.$rootTextActive} !important`
-                      : 'auto',
-                }}
-                className={styles.pizzaButton}
-                onClick={() => setSelectedSize(item.sizeId)}
-              >
-                {item.size}
-              </Button>
-            ))}
-          </ButtonGroup>
-        )}
-        <h4 className={styles.title}>{product[0]?.name}</h4>
+        {product.productSize.length > 1 && renderSizeButtons()}
+        <h4 className={styles.title}>{product.name}</h4>
         <div className={styles.root__description}>
-          <p>{product[0]?.description}</p>
+          <p>{product.description}</p>
         </div>
         <div className={styles.bottom}>
           <div className={styles.price}>
-            {product.find((item) => item.sizeId === selectedSize)?.price} ₽
+            {
+              product.productSize.find((item) => item.id === selectedSizeId)
+                ?.price
+            }{' '}
+            ₽
           </div>
-          {foundProduct && (
-            <AddToCartButton
-              product={{
-                ...foundProduct,
-                amount: 0,
-              }}
-            />
-          )}
+
+          <AddToCartButton
+            product={{
+              ...product,
+              productSize: [
+                product.productSize.find(
+                  (x) => x.id === selectedSizeId
+                ) as ICartProductSize,
+              ],
+            }}
+          />
         </div>
       </div>
     </div>

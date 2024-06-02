@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
-import CustomInput from "@shared/UI/CustomInput";
+import CustomInput from '@shared/UI/CustomInput';
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
 import { useAppDispatch } from '@store/hooks';
@@ -15,11 +15,13 @@ import { setMaterialDialog } from '@store/features/materialDialog/api';
 import {
   createPromoCode,
   getAllPromoCodes,
-  IPromocodeCreate,
-  PromoCodeTypeEnum,
 } from '@store/features/promocode/api';
 import Select from '@shared/UI/Select';
 import styles from '../index.module.scss';
+import {
+  IPromocodeCreate,
+  PromoCodeTypeEnum,
+} from '@store/features/promocode/model';
 
 const ProfileAdminAddPromocode = () => {
   const dispatch = useAppDispatch();
@@ -33,7 +35,7 @@ const ProfileAdminAddPromocode = () => {
       await dispatch(
         createPromoCode({
           ...formData,
-          limit: !formData.limit ? 'infinite' : formData.limit,
+          limit: !formData.limit ? 9999 : formData.limit,
         })
       ).unwrap();
       enqueueSnackbar('Промокод успешно добавлен!', { variant: 'success' });

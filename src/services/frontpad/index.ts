@@ -1,6 +1,6 @@
 import { enqueueSnackbar } from 'notistack';
 import { $api_frontpad } from '@services/api';
-import { ICartProduct } from '@store/features/cart/api';
+import { ICartProduct } from '@store/features/cart/model';
 
 interface IOrderFrontpad {
   product_mod?: string[];
@@ -101,12 +101,14 @@ class FrontpadApi {
       product_kol: [],
     };
 
-    cartItems.map((item) => {
-      if (item.sku) {
-        newObj.product.push(item.sku);
+    for (const product of cartItems) {
+      for (const productSize of product.productSize) {
+        if (productSize.sku) {
+          newObj.product.push(productSize.sku);
+          newObj.product_kol.push(productSize.amount.toString());
+        }
       }
-      newObj.product_kol.push(String(item.amount));
-    });
+    }
 
     return newObj;
   }

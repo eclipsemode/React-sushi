@@ -15,23 +15,22 @@ import ListItem from '@mui/material/ListItem';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import ListItemText from '@mui/material/ListItemText';
 import {
-  IBranches,
-  selectLocation,
+  IBranch,
+  selectBranch,
   setCurrentBranch,
-} from '@store/features/location/api';
+} from '@store/features/branch/api';
 import { setCookie } from '@shared/utils/Cookie';
 
 const HeaderPickCity = () => {
   const dispatch = useAppDispatch();
-  const { currentBranch, allBranches } = useAppSelector(selectLocation);
-  const [branchName, setBranchName] = React.useState<string>(currentBranch);
+  const { currentBranch, allBranches } = useAppSelector(selectBranch);
+  const [branch, setBranch] = React.useState<IBranch | null>(currentBranch);
 
   const callback = () => {
-    const branchData = allBranches.find(
-      (branch: IBranches) => branch.name === branchName
-    );
-    dispatch(setCurrentBranch(branchName));
-    setCookie('location-initial', branchData.id, 1);
+    if (branch) {
+      dispatch(setCurrentBranch(branch));
+      setCookie('branch-initial', branch.id, 1);
+    }
   };
 
   const handleAgree = () => {
@@ -66,29 +65,29 @@ const HeaderPickCity = () => {
           }}
           aria-label="contacts"
         >
-          {allBranches.map((branch: IBranches) =>
-            branch.name === branchName ? (
-              <ListItem key={branch.id} disablePadding>
+          {allBranches.map((obj) =>
+            obj.name === branch?.name ? (
+              <ListItem key={obj.id} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
                     <LocationCityIcon sx={{ color: Colors.$rootTextActive }} />
                   </ListItemIcon>
                   <ListItemText
-                    primary={branch.name}
+                    primary={obj.name}
                     sx={{ color: Colors.$rootTextActive }}
                   />
                 </ListItemButton>
               </ListItem>
             ) : (
               <ListItem
-                key={branch.id}
-                onClick={() => setBranchName(branch.name)}
+                key={obj.id}
+                onClick={() => setBranch(obj)}
                 disablePadding
               >
                 <ListItemButton>
                   <ListItemText
                     inset
-                    primary={branch.name}
+                    primary={obj.name}
                     sx={{ color: Colors.$rootText }}
                   />
                 </ListItemButton>

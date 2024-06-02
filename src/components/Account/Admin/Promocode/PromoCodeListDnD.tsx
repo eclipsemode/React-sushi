@@ -5,16 +5,13 @@ import { MaterialDialogTypes } from '@store/features/materialDialog/model';
 import update from 'immutability-helper';
 import DragAndDropItem from '@shared/UI/DragAndDrop';
 import styles from './index.module.scss';
-import {
-  getAllPromoCodes,
-  IPromocode,
-  PromoCodeListSize,
-} from '@store/features/promocode/api';
+import { getAllPromoCodes } from '@store/features/promocode/api';
 import { Pagination, Skeleton } from '@mui/material';
 import Colors from '@shared/utils/Colors';
 import { enqueueSnackbar } from 'notistack';
 import CustomInput from '@shared/UI/CustomInput';
 import debounce from 'lodash.debounce';
+import { IPromocode, PromoCodeListSize } from '@store/features/promocode/model';
 
 const PromoCodeListDnD = () => {
   const dispatch = useAppDispatch();
@@ -23,12 +20,12 @@ const PromoCodeListDnD = () => {
   const [cards, setCards] = React.useState<IPromocode[]>([]);
 
   const handleDeletePromoCode = React.useCallback(
-    (code: string) => {
+    (id: string) => {
       dispatch(
         setMaterialDialog({
           opened: true,
           dialogType: MaterialDialogTypes.PROFILE_ADMIN_DELETE_PROMOCODE,
-          data: { code },
+          data: { id },
         })
       );
     },
@@ -78,7 +75,7 @@ const PromoCodeListDnD = () => {
             id={card.id}
             text={card.code}
             moveItem={moveItem}
-            deleteEvent={() => handleDeletePromoCode(card.code)}
+            deleteEvent={() => handleDeletePromoCode(card.id)}
             editEvent={() => {
               dispatch(
                 setMaterialDialog({
@@ -130,7 +127,7 @@ const PromoCodeListDnD = () => {
         renderSkeleton()
       ) : (
         <div className={styles.card}>
-          {cards.map((card, i) => renderCard(card, i))}
+          {cards?.map((card, i) => renderCard(card, i))}
         </div>
       )}
       <Pagination

@@ -1,21 +1,24 @@
+'use client';
 import React from 'react';
 import CustomInput from '@shared/UI/CustomInput';
 import { Stack } from '@mui/material';
 import styles from './index.module.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { IUserInfo } from '@store/features/user';
 import formatDateToYyyyMmDd from '@shared/utils/formatDateToYyyyMmDd';
-import { useAppDispatch } from '@store/hooks';
-import { clearMaterialDialog, setMaterialDialog } from '@store/features/materialDialog/api';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import {
+  clearMaterialDialog,
+  selectMaterialDialog,
+  setMaterialDialog,
+} from '@store/features/materialDialog/api';
 import { MaterialDialogTypes } from '@store/features/materialDialog/model';
 import ActionBlock from '@components/Account/Edit/ActionBlock';
+import { selectUser } from '@store/features/user/api';
+import { IUserProfile } from '@store/features/user/model';
 
-interface IProps {
-  userInfo: Partial<IUserInfo> | null,
-  applyCallback: boolean | undefined
-}
-
-const Edit = ({ userInfo, applyCallback }: IProps) => {
+const Edit = () => {
+  const { user } = useAppSelector(selectUser);
+  const { applyCallback } = useAppSelector(selectMaterialDialog);
   const dispatch = useAppDispatch();
   const {
     register,
@@ -23,20 +26,19 @@ const Edit = ({ userInfo, applyCallback }: IProps) => {
     reset,
     watch,
     formState: { errors, defaultValues },
-  } = useForm<Partial<IUserInfo>>({
+  } = useForm<Partial<IUserProfile>>({
     defaultValues: {
-      name: userInfo?.name || '',
-      surname: userInfo?.surname || '',
-      dateOfBirth: userInfo?.dateOfBirth
-        ? formatDateToYyyyMmDd(userInfo?.dateOfBirth as string)
+      name: user?.profile?.name,
+      surname: user?.profile?.surname,
+      dateOfBirth: user?.profile?.dateOfBirth
+        ? formatDateToYyyyMmDd(user?.profile.dateOfBirth as string)
         : '',
-      tel: userInfo?.tel,
-      email: userInfo?.email || '',
-      street: userInfo?.street || '',
-      house: userInfo?.house || undefined,
-      entrance: userInfo?.entrance || undefined,
-      floor: userInfo?.floor || undefined,
-      room: userInfo?.room || undefined,
+      email: user?.profile?.email,
+      street: user?.profile?.street,
+      house: user?.profile?.house,
+      entrance: user?.profile?.entrance,
+      floor: user?.profile?.floor,
+      room: user?.profile?.room,
     },
   });
 
@@ -53,21 +55,21 @@ const Edit = ({ userInfo, applyCallback }: IProps) => {
       setMaterialDialog({
         opened: true,
         dialogType: MaterialDialogTypes.PROFILE_SETTINGS_RESET,
-      }),
+      })
     );
   };
 
-  const onSubmit: SubmitHandler<Partial<IUserInfo>> = ({
-                                                         email,
-                                                         name,
-                                                         surname,
-                                                         dateOfBirth,
-                                                         street,
-                                                         house,
-                                                         floor,
-                                                         entrance,
-                                                         room,
-                                                       }) => {
+  const onSubmit: SubmitHandler<Partial<IUserProfile>> = ({
+    email,
+    name,
+    surname,
+    dateOfBirth,
+    street,
+    house,
+    floor,
+    entrance,
+    room,
+  }) => {
     dispatch(
       setMaterialDialog({
         opened: true,
@@ -83,95 +85,92 @@ const Edit = ({ userInfo, applyCallback }: IProps) => {
           entrance,
           room,
         },
-      }),
+      })
     );
   };
 
   const validateButtons = () =>
-    defaultValues?.name !== watch('name')
-    || defaultValues?.surname !== watch('surname')
-    || defaultValues?.dateOfBirth !== watch('dateOfBirth')
-    || defaultValues?.email !== watch('email')
-    || defaultValues?.street !== watch('street')
-    || (defaultValues?.house || '') !== (watch('house') || '')
-    || (defaultValues?.floor || '') !== (watch('floor') || '')
-    || (defaultValues?.entrance || '') !== (watch('entrance') || '')
-    || (defaultValues?.room || '') !== (watch('room') || '');
-
+    defaultValues?.name !== watch('name') ||
+    defaultValues?.surname !== watch('surname') ||
+    defaultValues?.dateOfBirth !== watch('dateOfBirth') ||
+    defaultValues?.email !== watch('email') ||
+    defaultValues?.street !== watch('street') ||
+    (defaultValues?.house || '') !== (watch('house') || '') ||
+    (defaultValues?.floor || '') !== (watch('floor') || '') ||
+    (defaultValues?.entrance || '') !== (watch('entrance') || '') ||
+    (defaultValues?.room || '') !== (watch('room') || '');
 
   return (
     <div className={styles.root}>
       <form
         onReset={(event) => handleResetButton(event)}
         onSubmit={handleSubmit(onSubmit)}
-        name='settings'
+        name="settings"
         className={styles.root__form}
       >
         <CustomInput
           error={!!errors.name}
           register={register}
-          name='name'
-          label='Имя'
+          name="name"
+          label="Имя"
           maxLength={20}
           validate={(value: string) => !!value.match(/^[a-zа-яё\s]+$/iu)}
         />
         <CustomInput
           register={register}
-          name='surname'
-          label='Фамилия'
+          name="surname"
+          label="Фамилия"
           maxLength={20}
         />
         <CustomInput
           error={!!errors.dateOfBirth}
           register={register}
-          name='dateOfBirth'
-          label=' '
-          type='date'
+          name="dateOfBirth"
+          label=" "
+          type="date"
         />
         <CustomInput
           error={!!errors.email}
           register={register}
-          name='email'
-          label='Email'
+          name="email"
+          label="Email"
           pattern={
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           }
         />
-        <CustomInput
-          error={!!errors.tel}
-          register={register}
-          name='tel'
-          disabled
-          label='+7 (xxx) xxx-xx-xx'
-          type='tel'
-        />
-        <CustomInput register={register} name='street' label='Улица' />
+        <CustomInput name="tel" disabled label={user?.tel} type="tel" />
+        <CustomInput register={register} name="street" label="Улица" />
         <Stack spacing={2}>
-          <Stack direction='row' spacing={2}>
-            <CustomInput register={register} name='house' label='Дом' type='number' />
+          <Stack direction="row" spacing={2}>
             <CustomInput
               register={register}
-              name='entrance'
-              label='Подьезд'
-              type='number'
+              name="house"
+              label="Дом"
+              type="number"
+            />
+            <CustomInput
+              register={register}
+              name="entrance"
+              label="Подьезд"
+              type="number"
             />
           </Stack>
-          <Stack direction='row' spacing={2}>
+          <Stack direction="row" spacing={2}>
             <CustomInput
               register={register}
-              name='floor'
-              label='Этаж'
-              type='number'
+              name="floor"
+              label="Этаж"
+              type="number"
             />
             <CustomInput
               register={register}
-              name='room'
-              label='Квартира'
-              type='number'
+              name="room"
+              label="Квартира"
+              type="number"
             />
           </Stack>
         </Stack>
-        <Stack direction='row' className={styles.root__buttons}>
+        <Stack direction="row" className={styles.root__buttons}>
           <ActionBlock validate={!validateButtons()} />
         </Stack>
       </form>

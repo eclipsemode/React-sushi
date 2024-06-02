@@ -1,5 +1,11 @@
 import React from 'react';
-import { Badge, BottomNavigation, BottomNavigationAction, Box, Stack } from '@mui/material';
+import {
+  Badge,
+  BottomNavigation,
+  BottomNavigationAction,
+  Box,
+  Stack,
+} from '@mui/material';
 import styles from './index.module.scss';
 import Link from 'next/link';
 import RouterPath from '@shared/utils/menuPath';
@@ -9,13 +15,23 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import { usePathname, useRouter } from 'next/navigation';
-import PopoverLocation, { IPopoverLocationProps } from '@components/Header/PopoverLocation';
+import PopoverLocation, {
+  IPopoverLocationProps,
+} from '@components/Header/PopoverLocation';
 
 interface IProps extends IPopoverLocationProps {
-  totalPrice: number
+  totalPrice: number;
 }
 
-const MobileHeader = ({openedPopover, popoverRef, handleAgreePopover, handleClosePopover, onCityPickClick, currentBranch, totalPrice}: IProps) => {
+const MobileHeader = ({
+  openedPopover,
+  popoverRef,
+  handleAgreePopover,
+  handleClosePopover,
+  onCityPickClick,
+  currentBranch,
+  totalPrice,
+}: IProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const [activeMenu, setActiveMenu] = React.useState<number>(0);
@@ -43,13 +59,16 @@ const MobileHeader = ({openedPopover, popoverRef, handleAgreePopover, handleClos
     setActiveMenuByLocation();
   }, [router, setActiveMenuByLocation]);
 
-  const renderPopover = () => <PopoverLocation
-    openedPopover={openedPopover}
-    popoverRef={popoverRef}
-    handleClosePopover={handleClosePopover}
-    currentBranch={currentBranch}
-    handleAgreePopover={handleAgreePopover}
-    onCityPickClick={onCityPickClick} />
+  const renderPopover = () => (
+    <PopoverLocation
+      openedPopover={openedPopover}
+      popoverRef={popoverRef}
+      handleClosePopover={handleClosePopover}
+      currentBranch={currentBranch}
+      handleAgreePopover={handleAgreePopover}
+      onCityPickClick={onCityPickClick}
+    />
+  );
 
   return (
     <header>
@@ -64,6 +83,7 @@ const MobileHeader = ({openedPopover, popoverRef, handleAgreePopover, handleClos
             <Image
               width={150}
               height={50}
+              priority={true}
               src={'/images/logo.png'}
               alt="Index logo"
             />
@@ -73,7 +93,7 @@ const MobileHeader = ({openedPopover, popoverRef, handleAgreePopover, handleClos
             <span className={styles.city}>
               город:{' '}
               <span ref={popoverRef} onClick={onCityPickClick}>
-                {currentBranch}
+                {currentBranch?.name}
               </span>
             </span>
             {renderPopover()}

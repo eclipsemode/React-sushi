@@ -1,12 +1,12 @@
 import React from 'react';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import CustomInput from "@shared/UI/CustomInput";
+import CustomInput from '@shared/UI/CustomInput';
 import InputFile from '@shared/UI/InputFile';
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { changeCategory, fetchCategories } from '@store/features/categories/api';
+import { changeCategory, getCategories } from '@store/features/categories/api';
 import { enqueueSnackbar } from 'notistack';
 import {
   selectMaterialDialog,
@@ -24,7 +24,7 @@ const ProfileAdminEditCategory = () => {
     },
   });
   const success = async () => {
-    await dispatch(fetchCategories());
+    await dispatch(getCategories());
   };
 
   const callback = async (formData: ICreateCategoryForm) => {

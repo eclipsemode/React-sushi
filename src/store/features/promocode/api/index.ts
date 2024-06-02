@@ -7,33 +7,13 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import { $api, $api_guest } from '@services/api';
-
-type PromoCodeLimitType = 'infinite' | number;
-
-export enum PromoCodeTypeEnum {
-  RUB = 'RUB',
-  percent = 'percent',
-}
-
-export interface IPromocode {
-  id: number;
-  code: string;
-  type: PromoCodeTypeEnum;
-  discount: number;
-  limit: PromoCodeLimitType;
-}
-
-export interface IPromocodeWithPagination {
-  count: number;
-  rows: IPromocode[];
-}
-
-export interface IPromocodeCreate extends Omit<IPromocode, 'id'> {}
-interface IChangePromocode extends Pick<IPromocode, 'code'> {
-  newValue: PromoCodeLimitType;
-}
-
-export const PromoCodeListSize = 10;
+import {
+  IChangePromocode,
+  IPromocode,
+  IPromocodeCreate,
+  IPromocodeWithPagination,
+  PromoCodeListSize,
+} from '@store/features/promocode/model';
 
 export const fetchPromocodeCheck = createAsyncThunk<
   Awaited<any>,
@@ -41,9 +21,8 @@ export const fetchPromocodeCheck = createAsyncThunk<
   { rejectValue: any }
 >('promocode/fetchPromocodeCheck', async (code, { rejectWithValue }) => {
   try {
-    const { data } = await $api_guest.post<Awaited<IPromocode>>(
-      'api/promocode/check',
-      { code }
+    const { data } = await $api_guest.get<Awaited<IPromocode>>(
+      `api/promo-code/check/${code}`
     );
     return data;
   } catch (error: any) {
@@ -63,7 +42,7 @@ export const getAllPromoCodes = createAsyncThunk<
   async ({ page = 1, match = '' }, { rejectWithValue }) => {
     try {
       const res = await $api.get(
-        `api/promocode/get?page=${page}&size=${PromoCodeListSize}&match=${match}`
+        `api/promo-code?page=${page}&size=${PromoCodeListSize}&match=${match}`
       );
       return res.data;
     } catch (error: any) {
@@ -80,7 +59,7 @@ export const createPromoCode = createAsyncThunk<IPromocode, IPromocodeCreate>(
   'promocode/createPromoCode',
   async ({ code, discount, type, limit }, { rejectWithValue }) => {
     try {
-      const res = await $api.post('api/promocode/create', {
+      const res = await $api.post('api/promo-code', {
         code,
         discount,
         type,
@@ -99,9 +78,9 @@ export const createPromoCode = createAsyncThunk<IPromocode, IPromocodeCreate>(
 
 export const deletePromocode = createAsyncThunk<string, string>(
   'promocode/deletePromocode',
-  async (code, { rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     try {
-      const res = await $api.post('api/promocode/delete', { code });
+      const res = await $api.delete(`api/promo-code/${id}`);
       return res.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
@@ -115,9 +94,14 @@ export const deletePromocode = createAsyncThunk<string, string>(
 
 export const changePromoCode = createAsyncThunk<IPromocode, IChangePromocode>(
   'promocode/changePromoCode',
-  async ({ code, newValue }, { rejectWithValue }) => {
+  async ({ id, code, type, limit, discount }, { rejectWithValue }) => {
     try {
-      const res = await $api.put('api/promocode/change', { code, newValue });
+      const res = await $api.patch(`api/promo-code/${id}`, {
+        code,
+        type,
+        limit,
+        discount,
+      });
       return res.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
@@ -168,7 +152,7 @@ const isisRejectedAction = isRejected(
 );
 
 const promoCodeSlice = createSlice({
-  name: 'promocodeReducer',
+  name: 'promocode',
   initialState,
   reducers: {
     setPromocodeError: (state, action: PayloadAction<boolean>) => {

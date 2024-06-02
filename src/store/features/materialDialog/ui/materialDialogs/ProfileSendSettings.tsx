@@ -9,7 +9,7 @@ import Colors from '@shared/utils/Colors';
 import { selectMaterialDialog, setMaterialDialog } from '../../api';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { enqueueSnackbar } from 'notistack';
-import { fetchPatchUserInfo, fetchUserInfo } from '@store/features/user';
+import { fetchPatchUserInfo, getUserData } from '@store/features/user/api';
 
 const ProfileSendSettings = () => {
   const dispatch = useAppDispatch();
@@ -41,7 +41,7 @@ const ProfileSendSettings = () => {
           room,
         })
       ).unwrap();
-      await dispatch(fetchUserInfo());
+      await dispatch(getUserData());
       enqueueSnackbar('Данные успешно изменены!', { variant: 'success' });
     } catch (e) {
       enqueueSnackbar('Ошибка изменения данных!', { variant: 'error' });

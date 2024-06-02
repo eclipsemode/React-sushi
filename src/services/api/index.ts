@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 interface IAuthResponse {
   accessToken: string;
@@ -6,12 +6,18 @@ interface IAuthResponse {
   user: {
     accessToken: string;
     refreshToken: string;
-    id: number;
+    id: string;
     role: string;
     name: string;
     surname: string;
   };
 }
+
+const logDev = (message: string) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.log(message);
+  }
+};
 
 const $api = axios.create({
   withCredentials: true,
@@ -39,9 +45,8 @@ const $api_frontpad = axios.create({
 
 const authInterceptor = async (config: any) => {
   if (config.headers) {
-    config.headers.Authorization = `Bearer ${localStorage.getItem(
-      'accessToken'
-    )}`;
+    const token = localStorage.getItem('accessToken');
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 };
@@ -49,30 +54,45 @@ const authInterceptor = async (config: any) => {
 const authInterceptorReqError = async (error: AxiosError) =>
   Promise.reject(error);
 
-const authInterceptorResError = async (error: any) => {
-  const originalRequest = error.config;
-  if (error.response.status === 401 && error.config && !error.config._isRetry) {
-    originalRequest._isRetry = true;
+const authInterceptorResError = async (
+  error: AxiosError
+): Promise<AxiosError> => {
+  if (axios.isAxiosError(error)) {
+    const originalRequest = error.config as AxiosRequestConfig;
+    const { message } = error;
+    const { method, url } = originalRequest as AxiosRequestConfig;
+    const { status, statusText } = (error.response as AxiosResponse) ?? {};
+
     try {
-      const response = await axios.get<IAuthResponse>(
-        `${process.env.REACT_APP_API_URL}/api/user/refresh`,
+      const res = await axios.get<IAuthResponse>(
+        `${process.env.REACT_APP_API_URL}api/auth/refresh`,
         {
           withCredentials: true,
         }
       );
-      localStorage.setItem('token', response.data.accessToken);
+      const { accessToken } = res.data;
+
+      localStorage.setItem('accessToken', accessToken);
       return $api.request(originalRequest);
     } catch (e) {
-      console.log('Не авторизован.');
+      logDev(
+        `🚨 [API] ${method?.toUpperCase()} ${url} | Error ${status} ${message} (${statusText})`
+      );
     }
   }
-  throw error;
+  return Promise.reject(error);
 };
 
 $api.interceptors.request.use(authInterceptor, authInterceptorReqError);
 $api.interceptors.response.use(authInterceptor, authInterceptorResError);
 
-$api_frontpad.interceptors.request.use(authInterceptor, authInterceptorReqError);
-$api_frontpad.interceptors.response.use(authInterceptor, authInterceptorResError);
+$api_frontpad.interceptors.request.use(
+  authInterceptor,
+  authInterceptorReqError
+);
+$api_frontpad.interceptors.response.use(
+  authInterceptor,
+  authInterceptorResError
+);
 
 export { $api, $api_guest, $api_frontpad };

@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { enqueueSnackbar } from 'notistack';
 import SimpleButton from '@shared/UI/SimpleButton';
-import CustomInput from "@shared/UI/CustomInput";
+import CustomInput from '@shared/UI/CustomInput';
 import { signIn } from '@store/features/auth/api';
 import Confirm from './Confirm';
 import Checkbox from '@shared/UI/Checkbox';
@@ -34,8 +34,8 @@ const Auth = () => {
 
   const onSubmit: SubmitHandler<IAuthForm> = async (data) => {
     try {
-      const id = await dispatch(signIn(data.tel)).unwrap();
-      setRequestId(id);
+      const requestId = await dispatch(signIn(data.tel)).unwrap();
+      setRequestId(requestId);
       setConfirm(true);
     } catch (e) {
       enqueueSnackbar('Вы ввели неверные данные', { variant: 'error' });

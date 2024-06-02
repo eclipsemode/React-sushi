@@ -24,7 +24,7 @@ const ProfileAdminDeletePromocode = () => {
 
   const callback = async () => {
     try {
-      await dispatch(deletePromocode(data.code)).unwrap();
+      await dispatch(deletePromocode(data.id)).unwrap();
       await dispatch(getAllPromoCodes({})).unwrap();
       enqueueSnackbar('Промокод успешно удален!', { variant: 'success' });
     } catch (e) {

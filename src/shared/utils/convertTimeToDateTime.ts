@@ -1,10 +1,18 @@
-export default function convertTimeToDateTime(time: string) {
+export default function convertTimeToDateTime(
+  time: string,
+  day: 'today' | 'tomorrow' = 'today'
+) {
   const [hours, minutes] = time.split(':');
-  const now = new Date();
+  const date = new Date();
+
+  if (day === 'tomorrow') {
+    date.setDate(date.getDate() + 1);
+  }
+
   const dateTime = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate(),
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
     +hours,
     +minutes
   );

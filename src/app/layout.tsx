@@ -1,7 +1,7 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import '@assets/styles/app.scss';
-import styles from './index.module.scss'
+import styles from './index.module.scss';
 import composeScripts from '@shared/utils/composeScripts';
 import { FoodSoulScript } from '@app/(scripts)/_foodSoul';
 import MaterialDialog from '@store/features/materialDialog/ui';
@@ -10,7 +10,7 @@ import Providers from '@providers/index';
 import Header from '@components/Header';
 import Footer from '@components/Footer';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Лайм - доставка суши и пиццы',
@@ -24,33 +24,28 @@ export const metadata: Metadata = {
     google: 'google',
     yandex: 'yandex',
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const Scripts = composeScripts([
-    FoodSoulScript
-  ])
+  const Scripts = composeScripts([FoodSoulScript]);
 
-  const Globals = composeScripts([
-    MaterialDialog,
-    ToTopArrow
-  ])
+  const Globals = composeScripts([MaterialDialog, ToTopArrow]);
 
   return (
     <html lang="ru">
-    <body className={inter.className + ' ' + styles.App}>
-    <Providers>
-      <Header />
-      <main className={styles.content}>{children}</main>
-      <Footer />
-      <Globals />
-    </Providers>
-    <Scripts />
-    </body>
+      <body className={inter.className + ' ' + styles.App}>
+        <Providers>
+          <Header />
+          <main className={styles.content}>{children}</main>
+          <Footer />
+          <Globals />
+        </Providers>
+        <Scripts />
+      </body>
     </html>
   );
 }

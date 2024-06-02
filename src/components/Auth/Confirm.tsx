@@ -4,7 +4,7 @@ import SimpleButton from '@shared/UI/SimpleButton';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { enqueueSnackbar } from 'notistack';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { confirmAuth, signIn } from '@store/features/auth/api';
+import { confirmAuth, IConfirmAuth, signIn } from '@store/features/auth/api';
 import { useRouter } from 'next/navigation';
 import RouterPath from '@shared/utils/menuPath';
 import styles from './index.module.scss';
@@ -13,10 +13,6 @@ import { Box, CircularProgress, Stack } from '@mui/material';
 interface IProps {
   requestId: string;
   tel: string;
-}
-
-interface IConfirmForm {
-  code: number;
 }
 
 const Confirm = ({ requestId, tel }: IProps) => {
@@ -30,12 +26,14 @@ const Confirm = ({ requestId, tel }: IProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IConfirmForm>();
+  } = useForm<Omit<IConfirmAuth, 'requestId'>>();
 
-  const handleFormSubmit: SubmitHandler<IConfirmForm> = async (data) => {
+  const handleFormSubmit: SubmitHandler<
+    Omit<IConfirmAuth, 'requestId'>
+  > = async (data) => {
     try {
       await dispatch(
-        confirmAuth({ code: data.code, requestId: reqId })
+        confirmAuth({ code: Number(data.code), requestId: reqId })
       ).unwrap();
       enqueueSnackbar('Вы успешно вошли в аккаунт', { variant: 'success' });
       router.push(RouterPath.HOME);
@@ -61,8 +59,8 @@ const Confirm = ({ requestId, tel }: IProps) => {
       return;
     } else {
       try {
-        const id = await dispatch(signIn(tel)).unwrap();
-        setNewReqId(id);
+        const requestId = await dispatch(signIn(tel)).unwrap();
+        setNewReqId(requestId);
         setTime(60);
       } catch (e) {
         enqueueSnackbar('Произошла ошибка, попробуйте позднее', {

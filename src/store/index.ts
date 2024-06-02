@@ -20,15 +20,14 @@ import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 import filterReducer from '@store/features/filter/api';
 import productsReducer from '@store/features/products/api';
 import cartReducer from '@store/features/cart/api';
-import userReducer from '@store/features/user';
+import userReducer from '@store/features/user/api';
 import categoriesReducer from '@store/features/categories/api';
-import ordersReducer from '@store/features/account/api';
 import adaptiveServiceReducer from '@store/features/adaptive';
 import authReducer from '@store/features/auth/api';
 import materialDialogReducer from '@store/features/materialDialog/api';
-import orderCreateReducer from '@store/features/order/api';
+import orderReducer from '@store/features/order/api';
 import promocodeReducer from '@store/features/promocode/api';
-import locationReducer from '@store/features/location/api';
+import branchReducer from '@store/features/branch/api';
 
 import { cartListenerMiddleware } from '@store/features/cart/middleware';
 import { promoCodeMiddleware } from '@store/features/promocode/middleware';
@@ -40,13 +39,12 @@ const rootReducer = combineReducers({
   cartReducer,
   userReducer,
   categoriesReducer,
-  ordersReducer,
   adaptiveServiceReducer,
   authReducer,
   materialDialogReducer,
-  orderCreateReducer,
+  orderReducer,
   promocodeReducer,
-  locationReducer,
+  branchReducer,
 });
 
 const createNoopStorage = () => {
@@ -72,7 +70,7 @@ const persistConfigCart = {
   key: 'lime_persisted',
   version: 1,
   storage,
-  whitelist: ['cartReducer', 'locationReducer'],
+  whitelist: ['cartReducer', 'branchReducer'],
 };
 
 const persistedReducer = persistReducer(persistConfigCart, rootReducer);

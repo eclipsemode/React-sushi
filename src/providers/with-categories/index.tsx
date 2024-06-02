@@ -1,18 +1,21 @@
 'use client';
-import React from 'react';
 import { useAppDispatch } from '@store/hooks';
-import { ICategories, setCategories } from '@store/features/categories/api';
+import { setCategories } from '@store/features/categories/api';
+import { ReactNode, useLayoutEffect } from 'react';
+import { setCategoryId } from '@store/features/filter/api';
+import { ICategory } from '@store/features/categories/model';
 
 interface IProps {
-  children: React.ReactNode;
-  categories: ICategories[];
+  children: ReactNode;
+  categories: ICategory[];
 }
 
 const WithCategories = ({ categories, children }: IProps) => {
   const dispatch = useAppDispatch();
 
-  React.useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(setCategories(categories));
+    dispatch(setCategoryId(categories[0].id || ''));
   }, [categories, dispatch]);
 
   return <>{children}</>;

@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './index.module.scss';
 
 import { selectFilter, setSort } from '@store/features/filter/api';
-import { SortNameType } from '@store/features/filter/model';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { SortNameType } from '@store/features/filter/model';
 
 type PopupProps = {
   popupHidden: boolean;
@@ -13,16 +13,16 @@ type PopupProps = {
 };
 
 const Popup: React.FC<PopupProps> = ({
-                                       popupHidden,
-                                       sortNames,
-                                       handlePopup,
-                                       popupRef,
-                                     }) => {
+  popupHidden,
+  sortNames,
+  handlePopup,
+  popupRef,
+}) => {
   const { sortId } = useAppSelector(selectFilter);
   const dispatch = useAppDispatch();
 
   const handleSortType = (id: number) => {
-    const sortObj = sortNames.find((obj: SortNameType) => obj.id === id);
+    const sortObj = sortNames.find((obj) => obj.id === id);
 
     if (!sortObj) return;
 
@@ -34,7 +34,7 @@ const Popup: React.FC<PopupProps> = ({
   return (
     <div ref={popupRef} hidden={popupHidden} className={styles.root}>
       <ul>
-        {sortNames.map((obj: SortNameType) => (
+        {sortNames.map((obj) => (
           <li
             key={obj.id}
             className={sortId === obj.id ? styles.root__active : ''}

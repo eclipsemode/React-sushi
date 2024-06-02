@@ -6,25 +6,24 @@ import styles from './index.module.scss';
 import {
   changeProductsOrder,
   getProducts,
-  IProduct,
-  IProductOrderChange,
   selectProducts,
 } from '@store/features/products/api';
 import { enqueueSnackbar } from 'notistack';
 import { Stack } from '@mui/material';
 import { setMaterialDialog } from '@store/features/materialDialog/api';
 import { MaterialDialogTypes } from '@store/features/materialDialog/model';
+import { IProduct, IProductOrderChange } from '@store/features/products/model';
 
 const ProductsListDnD = () => {
   const dispatch = useAppDispatch();
   const { products } = useAppSelector(selectProducts);
   const { categories } = useAppSelector((state) => state.categoriesReducer);
-  const [cards, setCards] = React.useState<IProduct[][]>([]);
+  const [cards, setCards] = React.useState<IProduct[]>([]);
 
-  const parseCards = (cards: IProduct[][]) => {
+  const parseCards = (cards: IProduct[]) => {
     const newCards: IProductOrderChange[] = cards.map((card, index) => {
       return {
-        id: card.at(0)?.id || 0,
+        id: card.id,
         orderIndex: index + 1,
       };
     });
@@ -47,11 +46,11 @@ const ProductsListDnD = () => {
 
   const moveItem = React.useCallback(
     (dragIndex: number, hoverIndex: number) => {
-      setCards((prevCards: IProduct[][]) =>
+      setCards((prevCards: IProduct[]) =>
         update(prevCards, {
           $splice: [
             [dragIndex, 1],
-            [hoverIndex, 0, prevCards[dragIndex] as IProduct[]],
+            [hoverIndex, 0, prevCards[dragIndex] as IProduct],
           ],
         })
       );
@@ -60,16 +59,16 @@ const ProductsListDnD = () => {
   );
 
   const renderCard = React.useCallback(
-    (card: IProduct[], index: number) => {
+    (card: IProduct, index: number) => {
       return (
         <div
           onDrop={() => dispatch(changeProductsOrder(parseCards(cards)))}
-          key={card[0].id}
+          key={card.id}
         >
           <DragAndDropItem
             index={index}
-            id={card[0].id}
-            text={card[0].name}
+            id={card.id}
+            text={card.name}
             moveItem={moveItem}
             editEvent={() => {
               dispatch(
@@ -101,8 +100,7 @@ const ProductsListDnD = () => {
       <h3 className={styles.title}>{category.name}</h3>
       <div className={styles.card}>
         {cards.map(
-          (card, i) =>
-            category.id === card[0]?.categoryId && renderCard(card, i)
+          (card, i) => category.id === card.categoryId && renderCard(card, i)
         )}
       </div>
     </Stack>

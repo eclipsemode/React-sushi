@@ -9,13 +9,13 @@ import {
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
 import { removeAll } from '@store/features/cart/api';
-import { clearOrderData, fetchOrderCreate } from '@store/features/order/api';
+import { clearOrderData, createOrder } from '@store/features/order/api';
 import { MaterialDialogTypes } from '../../model';
 import { enqueueSnackbar } from 'notistack';
 
 const SendOrderMaterialDialog = () => {
   const dispatch = useAppDispatch();
-  const { formData } = useAppSelector((state) => state.orderCreateReducer);
+  const { formData } = useAppSelector((state) => state.orderReducer);
   const { dialogType } = useAppSelector(selectMaterialDialog);
 
   const success = () => {
@@ -27,46 +27,46 @@ const SendOrderMaterialDialog = () => {
     try {
       if (dialogType === MaterialDialogTypes.SEND_ORDER_DELIVERY) {
         await dispatch(
-          fetchOrderCreate({
-            name: formData?.name || '',
-            address: formData?.address,
-            entrance: formData?.entrance,
-            floor: formData?.floor,
-            room: formData?.room,
-            tel: formData?.tel || '+7 (918) 000-00-00',
-            email: formData?.email || '',
+          createOrder({
+            clientName: formData?.clientName || '',
+            clientAddress: formData?.clientAddress,
+            clientEntrance: formData?.clientEntrance,
+            clientFloor: formData?.clientFloor,
+            clientRoom: formData?.clientRoom,
+            clientTel: formData?.clientTel || '',
+            clientEmail: formData?.clientEmail,
             day: formData?.day ?? null,
             time: formData?.time ?? null,
-            utensils: formData?.utensils ?? 0,
-            payment: formData?.payment || 'cash',
-            commentary: formData?.commentary ?? null,
+            utensils: formData?.utensils ?? '0',
+            payment: formData?.payment || 'CASH',
+            commentary: formData?.commentary ?? '',
             deliveryTime: formData?.deliveryTime,
             agreement_1: formData?.agreement_1,
             agreement_2: formData?.agreement_2,
             agreement_3: formData?.agreement_3,
-            type: 'delivery',
+            type: 'DELIVERY',
           })
         ).unwrap();
       } else {
         await dispatch(
-          fetchOrderCreate({
-            name: formData?.name || '',
-            address: formData?.address,
-            entrance: formData?.entrance,
-            floor: formData?.floor,
-            room: formData?.room,
-            tel: formData?.tel || '+7 (918) 000-00-00',
-            email: formData?.email || '',
+          createOrder({
+            clientName: formData?.clientName || '',
+            clientAddress: formData?.clientAddress,
+            clientEntrance: formData?.clientEntrance,
+            clientFloor: formData?.clientFloor,
+            clientRoom: formData?.clientRoom,
+            clientTel: formData?.clientTel || '',
+            clientEmail: formData?.clientEmail,
             day: formData?.day ?? null,
             time: formData?.time ?? null,
-            utensils: formData?.utensils ?? 0,
-            payment: formData?.payment || 'cash',
-            commentary: formData?.commentary ?? null,
+            utensils: formData?.utensils ?? '0',
+            payment: formData?.payment || 'CASH',
+            commentary: formData?.commentary ?? '',
             deliveryTime: formData?.deliveryTime,
             agreement_1: formData?.agreement_1,
             agreement_2: formData?.agreement_2,
             agreement_3: formData?.agreement_3,
-            type: 'pickup',
+            type: 'PICKUP',
           })
         ).unwrap();
       }

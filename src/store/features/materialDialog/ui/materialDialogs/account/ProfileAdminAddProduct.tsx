@@ -11,20 +11,20 @@ import {
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {
-  createProduct,
-  getProducts,
-  ICreateProduct,
-} from '@store/features/products/api';
-import CustomInput from "@shared/UI/CustomInput";
+import { createProduct, getProducts } from '@store/features/products/api';
+import CustomInput from '@shared/UI/CustomInput';
 import React, { CSSProperties } from 'react';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Select from '@shared/UI/Select';
 import InputFile from '@shared/UI/InputFile';
+import { ICreateProduct } from '@store/features/products/model';
 
 export interface ICreateProductForm
-  extends Omit<ICreateProduct, 'image' | 'price'> {
+  extends Omit<
+    ICreateProduct,
+    'image' | 'productPrices' | 'productSizes' | 'productSkus'
+  > {
   image: FileList;
   price1: number;
   price2: number;
@@ -44,8 +44,7 @@ const rowStyle: CSSProperties = {
 const ProfileAdminAddProduct = () => {
   const dispatch = useAppDispatch();
   const { categories } = useAppSelector((state) => state.categoriesReducer);
-  const { register, reset, handleSubmit, watch } =
-    useForm<ICreateProductForm>();
+  const { register, reset, handleSubmit } = useForm<ICreateProductForm>();
   const [amountPizzaSize, setAmountPizzaSize] = React.useState<number>(1);
   const success = () => {
     dispatch(getProducts());
@@ -54,42 +53,32 @@ const ProfileAdminAddProduct = () => {
   const callback = async (data: ICreateProductForm) => {
     try {
       const fileImage: File | null = data.image.item(0);
-      if (fileImage) {
-        if (data.type === 'pizza') {
-          const newPrice: number[] = [];
-          const newSku: string[] = [];
-          const newSize: string[] = [];
-          for (let i = 1; i < amountPizzaSize + 1; i++) {
-            // @ts-ignore
-            newPrice.push(+data[`price${i}`]);
-            // @ts-ignore
-            newSku.push(data[`sku${i}`] ? data[`sku${i}`] : null);
-            // @ts-ignore
-            newSize.push(data[`size${i}`]);
-          }
 
-          await dispatch(
-            createProduct({
-              ...data,
-              price: newPrice,
-              sku: newSku.length > 0 ? newSku : null,
-              size: newSize.length > 0 ? newSize : null,
-              image: fileImage,
-            })
-          ).unwrap();
-        } else {
-          const newSku: string[] = data.sku ? [String(data.sku)] : [];
-          await dispatch(
-            createProduct({
-              ...data,
-              price: [data.price1],
-              image: fileImage,
-              sku: newSku,
-            })
-          ).unwrap();
-        }
-      }
+      const productSizes = [data.size1, data.size2, data.size3].filter(
+        (x) => x !== undefined
+      );
+      const productPrices = [data.price1, data.price2, data.price3].filter(
+        (x) => x !== undefined
+      );
+      const productSkus = [data.sku1, data.sku2, data.sku3].filter(
+        (x) => x !== undefined
+      );
+
+      const reqData: ICreateProduct = {
+        isPizza: data.isPizza,
+        name: data.name,
+        description: data.description,
+        categoryId: data.categoryId,
+        ...(fileImage && { image: fileImage }),
+        rating: Number(data.rating),
+        productSizes,
+        productPrices,
+        productSkus,
+      };
+
+      await dispatch(createProduct(reqData)).unwrap();
       reset();
+      success();
       enqueueSnackbar('Позиция успешно добавлена!', { variant: 'success' });
     } catch (e) {
       console.error(e);
@@ -97,7 +86,6 @@ const ProfileAdminAddProduct = () => {
         variant: 'error',
       });
     }
-    success();
   };
 
   const handleAgree: SubmitHandler<ICreateProductForm> = async (
@@ -123,9 +111,9 @@ const ProfileAdminAddProduct = () => {
 
   const renderSelectType = () => (
     <Box sx={{ minWidth: 120 }}>
-      <Select register={register} name="type" defaultValue="other">
-        <option value={'other'}>Другое</option>
-        <option value={'pizza'}>Пицца</option>
+      <Select register={register} name="isPizza" defaultValue="false">
+        <option value={'false'}>Другое</option>
+        <option value={'true'}>Пицца</option>
       </Select>
     </Box>
   );
@@ -155,18 +143,7 @@ const ProfileAdminAddProduct = () => {
             name="name"
             style={rowStyle}
           />
-          {watch('type') !== 'pizza' && (
-            <CustomInput
-              required={true}
-              label="Цена"
-              type="number"
-              register={register}
-              name="price1"
-              style={rowStyle}
-            />
-          )}
           <CustomInput
-            required={true}
             label="Рейтинг"
             type="number"
             register={register}
@@ -208,61 +185,51 @@ const ProfileAdminAddProduct = () => {
             </>
           </Select>
 
-          {watch('type') !== 'pizza' && (
-            <CustomInput
-              label="Артикул"
-              type="text"
-              register={register}
-              name="sku"
+          {getAmountPizzaSizeArr().map((i) => (
+            <Stack
+              key={i}
+              direction="row"
+              sx={{ columnGap: '10px', alignItems: 'flex-end' }}
               style={rowStyle}
-            />
-          )}
-          {watch('type') === 'pizza' &&
-            getAmountPizzaSizeArr().map((i) => (
-              <Stack
-                key={i}
-                direction="row"
-                sx={{ columnGap: '10px', alignItems: 'flex-end' }}
-                style={rowStyle}
-              >
-                <span style={{ color: Colors.$rootText, fontSize: '16px' }}>
-                  {i}.
-                </span>
-                <CustomInput
-                  required={true}
-                  label="Размер"
-                  type="text"
-                  register={register}
-                  name={`size${i}`}
-                />
-                <CustomInput
-                  required={true}
-                  label="Цена"
-                  type="number"
-                  register={register}
-                  name={`price${i}`}
-                />
-                <CustomInput
-                  label="Артикул"
-                  type="text"
-                  register={register}
-                  name={`sku${i}`}
-                />
-                <RemoveCircleOutlineIcon
-                  color="error"
-                  sx={{
-                    cursor: amountPizzaSize === 1 ? 'not-allowed' : 'pointer',
-                    opacity: amountPizzaSize === 1 ? '0.5' : '1',
-                  }}
-                  onClick={() => {
-                    if (amountPizzaSize === 1) return;
-                    setAmountPizzaSize((prevState) => prevState - 1);
-                  }}
-                />
-              </Stack>
-            ))}
+            >
+              <span style={{ color: Colors.$rootText, fontSize: '16px' }}>
+                {i}.
+              </span>
+              <CustomInput
+                required={true}
+                label="Размер"
+                type="text"
+                register={register}
+                name={`size${i}`}
+              />
+              <CustomInput
+                required={true}
+                label="Цена"
+                type="number"
+                register={register}
+                name={`price${i}`}
+              />
+              <CustomInput
+                label="Артикул"
+                type="text"
+                register={register}
+                name={`sku${i}`}
+              />
+              <RemoveCircleOutlineIcon
+                color="error"
+                sx={{
+                  cursor: amountPizzaSize === 1 ? 'not-allowed' : 'pointer',
+                  opacity: amountPizzaSize === 1 ? '0.5' : '1',
+                }}
+                onClick={() => {
+                  if (amountPizzaSize === 1) return;
+                  setAmountPizzaSize((prevState) => prevState - 1);
+                }}
+              />
+            </Stack>
+          ))}
 
-          {watch('type') === 'pizza' && amountPizzaSize < 3 && (
+          {amountPizzaSize < 3 && (
             <Stack
               direction="row"
               sx={{ alignItems: 'center', columnGap: '10px' }}
