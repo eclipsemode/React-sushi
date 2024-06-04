@@ -3,12 +3,13 @@ import React from 'react';
 import Field from '@shared/UI/Field';
 import formatDateToString from '@shared/utils/formatDateToString';
 import styles from './index.module.scss';
-import { useAppSelector } from '@store/hooks';
-import { selectUser } from '@store/features/user/api';
+import { IUser } from '@store/features/user/model';
 
-const Profile = () => {
-  const { user } = useAppSelector(selectUser);
+interface IProps {
+  user: IUser;
+}
 
+const Profile = ({ user }: IProps) => {
   const renderEmptyProfile = () => (
     <div>
       <p>Вы еще не вводили данные</p>
@@ -27,7 +28,6 @@ const Profile = () => {
           text={formatDateToString(new Date(user.profile.dateOfBirth))}
         />
       )}
-      {user?.profile.email && <Field title="Email" text={user.profile.email} />}
       {user?.tel && <Field title="Телефон" text={user.tel} />}
       {user?.profile.street && (
         <Field
@@ -63,7 +63,7 @@ const Profile = () => {
     </div>
   );
 
-  return user?.profile ? renderUserProfile() : renderEmptyProfile();
+  return user.profile ? renderUserProfile() : renderEmptyProfile();
 };
 
 export default Profile;

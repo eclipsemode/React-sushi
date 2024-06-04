@@ -6,7 +6,6 @@ import { selectUser } from '@store/features/user/api';
 import { selectAuth } from '@store/features/auth/api';
 import BreadCrumbs from '@components/Account/BreadCrumbs';
 import styles from './index.module.scss';
-import Auth from '@components/Auth';
 
 interface IProps {
   children: React.ReactNode;
@@ -14,10 +13,9 @@ interface IProps {
 
 export default function Layout({ children }: IProps) {
   const { user } = useAppSelector(selectUser);
-  const { isAuth } = useAppSelector(selectAuth);
   const { authLoadSaveProcess } = useAppSelector(selectAuth);
 
-  return isAuth ? (
+  return (
     <div className={styles.layout__container}>
       <div className={styles.layout__innerContainer}>
         <BreadCrumbs authLoadSaveProcess={authLoadSaveProcess} />
@@ -28,7 +26,5 @@ export default function Layout({ children }: IProps) {
         </div>
       </div>
     </div>
-  ) : (
-    <Auth />
   );
 }

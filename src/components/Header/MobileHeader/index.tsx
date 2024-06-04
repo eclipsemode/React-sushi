@@ -18,6 +18,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import PopoverLocation, {
   IPopoverLocationProps,
 } from '@components/Header/PopoverLocation';
+import { useAppSelector } from '@store/hooks';
+import { selectAuth } from '@store/features/auth/api';
 
 interface IProps extends IPopoverLocationProps {
   totalPrice: number;
@@ -34,6 +36,7 @@ const MobileHeader = ({
 }: IProps) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { isAuth } = useAppSelector(selectAuth);
   const [activeMenu, setActiveMenu] = React.useState<number>(0);
 
   const setActiveMenuByLocation = React.useCallback(() => {
@@ -117,7 +120,12 @@ const MobileHeader = ({
                 router.push(RouterPath.CART);
                 break;
               case 3:
-                router.push(RouterPath.ACCOUNT_MAIN);
+                if (isAuth) {
+                  router.push(RouterPath.ACCOUNT_MAIN);
+                } else {
+                  router.push(RouterPath.AUTH);
+                }
+
                 break;
               default:
                 router.push(RouterPath.HOME);

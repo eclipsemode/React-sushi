@@ -115,8 +115,8 @@ const DesktopHeader = ({
           </li>
         </ul>
         <div className={styles.root__info}>
-          <Link href={RouterPath.ACCOUNT_MAIN}>
-            {isAuth ? (
+          {isAuth ? (
+            <Link href={RouterPath.ACCOUNT_MAIN}>
               <div
                 className={styles.root__auth}
                 onClick={(e: React.MouseEvent) => accHandle(e)}
@@ -134,13 +134,15 @@ const DesktopHeader = ({
                 <PersonIcon width={32} height={32} />
                 {accModal && <ModalAccount modalRef={modalRef} />}
               </div>
-            ) : (
+            </Link>
+          ) : (
+            <Link href={RouterPath.AUTH}>
               <div className={styles.root__auth}>
                 <span>Войти в аккаунт</span>
                 <PersonIcon width={32} height={32} />
               </div>
-            )}
-          </Link>
+            </Link>
+          )}
 
           <Badge
             badgeContent={totalPrice > 0 ? totalPrice + '₽' : null}

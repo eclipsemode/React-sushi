@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import CustomInput from '@shared/UI/CustomInput';
 import { Stack } from '@mui/material';
 import styles from './index.module.scss';
@@ -13,13 +13,16 @@ import {
 } from '@store/features/materialDialog/api';
 import { MaterialDialogTypes } from '@store/features/materialDialog/model';
 import ActionBlock from '@components/Account/Edit/ActionBlock';
-import { selectUser } from '@store/features/user/api';
-import { IUserProfile } from '@store/features/user/model';
+import { IUser, IUserProfile } from '@store/features/user/model';
 
-const Edit = () => {
-  const { user } = useAppSelector(selectUser);
+interface IProps {
+  user: IUser;
+}
+
+const Edit = ({ user }: IProps) => {
   const { applyCallback } = useAppSelector(selectMaterialDialog);
   const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -27,6 +30,7 @@ const Edit = () => {
     watch,
     formState: { errors, defaultValues },
   } = useForm<Partial<IUserProfile>>({
+    mode: 'onBlur',
     defaultValues: {
       name: user?.profile?.name,
       surname: user?.profile?.surname,
@@ -42,7 +46,7 @@ const Edit = () => {
     },
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (applyCallback) {
       reset();
       dispatch(clearMaterialDialog());
@@ -93,7 +97,6 @@ const Edit = () => {
     defaultValues?.name !== watch('name') ||
     defaultValues?.surname !== watch('surname') ||
     defaultValues?.dateOfBirth !== watch('dateOfBirth') ||
-    defaultValues?.email !== watch('email') ||
     defaultValues?.street !== watch('street') ||
     (defaultValues?.house || '') !== (watch('house') || '') ||
     (defaultValues?.floor || '') !== (watch('floor') || '') ||
@@ -128,15 +131,6 @@ const Edit = () => {
           name="dateOfBirth"
           label=" "
           type="date"
-        />
-        <CustomInput
-          error={!!errors.email}
-          register={register}
-          name="email"
-          label="Email"
-          pattern={
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          }
         />
         <CustomInput name="tel" disabled label={user?.tel} type="tel" />
         <CustomInput register={register} name="street" label="Улица" />

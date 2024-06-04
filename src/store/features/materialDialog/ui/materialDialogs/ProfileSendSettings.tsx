@@ -10,10 +10,13 @@ import { selectMaterialDialog, setMaterialDialog } from '../../api';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { enqueueSnackbar } from 'notistack';
 import { fetchPatchUserInfo, getUserData } from '@store/features/user/api';
+import { useRouter } from 'next/navigation';
+import menuPath from '@shared/utils/menuPath';
 
 const ProfileSendSettings = () => {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector(selectMaterialDialog);
+  const router = useRouter();
   const {
     email,
     name,
@@ -43,6 +46,7 @@ const ProfileSendSettings = () => {
       ).unwrap();
       await dispatch(getUserData());
       enqueueSnackbar('Данные успешно изменены!', { variant: 'success' });
+      router.push(menuPath.ACCOUNT_MAIN);
     } catch (e) {
       enqueueSnackbar('Ошибка изменения данных!', { variant: 'error' });
     }

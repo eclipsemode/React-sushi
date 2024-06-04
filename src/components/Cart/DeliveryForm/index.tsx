@@ -133,7 +133,7 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
               maxLength={4}
             />
           </fieldset>
-          <fieldset className={styles.root__width_50}>
+          <fieldset>
             <label className={styles.root__required}>Телефон</label>
             <CustomInput
               inputMask={true}
@@ -148,18 +148,6 @@ const DeliveryForm: React.FC<IDeliveryFormProps> = ({
               maskChar=""
               placeholder="+7 (***) *** ** **"
               defaultValue={userInfo?.tel}
-            />
-          </fieldset>
-          <fieldset className={styles.root__width_50}>
-            <label>E-MAIL</label>
-            <CustomInput
-              register={register}
-              name="clientEmail"
-              error={!!errors.clientEmail}
-              pattern={
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-              }
-              placeholder="@"
             />
           </fieldset>
           <fieldset

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Skeleton } from '@mui/material';
 
-const Lodaing = () => {
+const Loading = () => {
   return (
     <div className="container">
       <span>
@@ -14,4 +14,4 @@ const Lodaing = () => {
   );
 };
 
-export default Lodaing;
+export default Loading;
