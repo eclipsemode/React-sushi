@@ -15,7 +15,9 @@ const WithAuth = ({ children }: IProps) => {
   const mounted = React.useRef(false);
 
   useEffect(() => {
-    if (!mounted.current) dispatch(refreshToken());
+    if (!mounted.current) {
+      dispatch(refreshToken());
+    }
 
     mounted.current = true;
   }, []);

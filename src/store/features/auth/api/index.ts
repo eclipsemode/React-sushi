@@ -37,11 +37,12 @@ export const refreshToken = createAsyncThunk<IConfirmAuthResponse, void>(
   async (_, { rejectWithValue }) => {
     try {
       const response = await $api_guest.get('api/auth/refresh');
+      if (!response.data) return;
       localStorage.setItem('accessToken', response.data.accessToken);
       return response.data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
       }
@@ -140,8 +141,10 @@ const authSlice = createSlice({
       .addCase(
         refreshToken.fulfilled,
         (state, action: PayloadAction<IConfirmAuthResponse>) => {
-          state.authUserId = action.payload.userId;
-          state.isAuth = true;
+          if (action.payload) {
+            state.authUserId = action.payload.userId;
+            state.isAuth = true;
+          }
         }
       )
 
