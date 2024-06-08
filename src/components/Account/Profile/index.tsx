@@ -4,6 +4,7 @@ import Field from '@shared/UI/Field';
 import formatDateToString from '@shared/utils/formatDateToString';
 import styles from './index.module.scss';
 import { IUser } from '@store/features/user/model';
+import { Empty } from 'antd';
 
 interface IProps {
   user: IUser;
@@ -11,11 +12,11 @@ interface IProps {
 
 const Profile = ({ user }: IProps) => {
   const renderEmptyProfile = () => (
-    <div>
+    <div className={styles.root__empty}>
+      <Empty description={false} />
       <p>Вы еще не вводили данные</p>
     </div>
   );
-
   const renderUserProfile = () => (
     <div className={styles.root}>
       {user?.profile.name && <Field title="Имя" text={user.profile.name} />}

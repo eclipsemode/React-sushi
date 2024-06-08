@@ -129,7 +129,10 @@ const DesktopHeader = ({
                     </p>
                   </div>
                 ) : (
-                  <p style={{ fontSize: 18 }}>Гость</p>
+                  <div>
+                    <p>Добро пожаловать!</p>
+                    <p style={{ fontSize: 18 }}>Гость</p>
+                  </div>
                 )}
                 <PersonIcon width={32} height={32} />
                 {accModal && <ModalAccount modalRef={modalRef} />}

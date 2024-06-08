@@ -13,3 +13,14 @@
     flex: 1;
   }
 }
+
+.root__empty {
+  flex: 1 2;
+  margin-top: 5em;
+  width: 100%;
+
+  & p {
+    font-size: 2em;
+    text-align: center;
+  }
+}

@@ -15,7 +15,7 @@ const WithCategories = ({ categories, children }: IProps) => {
 
   useLayoutEffect(() => {
     dispatch(setCategories(categories));
-    dispatch(setCategoryId(categories[0].id || ''));
+    dispatch(setCategoryId(categories[0]?.id || ''));
   }, [categories, dispatch]);
 
   return <>{children}</>;
