@@ -39,7 +39,8 @@ const Footer: React.FC = () => {
           </Stack>
 
           <span className={styles.about}>
-            © 2010 - 2024 Ресторан японской кухни &quot;Lime&quot;
+            © 2017 - {new Date().getFullYear()} Ресторан японской кухни
+            &quot;Lime&quot;
           </span>
         </Stack>
       </div>
