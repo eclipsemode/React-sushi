@@ -19,6 +19,14 @@ interface IProps {
   user: IUser;
 }
 
+export interface IEditProfile
+  extends Omit<
+    IUserProfile,
+    'id' | 'createdAt' | 'updatedAt' | 'userDateOfBirth' | 'userId'
+  > {
+  dateOfBirth: string;
+}
+
 const Edit = ({ user }: IProps) => {
   const { applyCallback } = useAppSelector(selectMaterialDialog);
   const dispatch = useAppDispatch();
@@ -29,13 +37,13 @@ const Edit = ({ user }: IProps) => {
     reset,
     watch,
     formState: { errors, defaultValues },
-  } = useForm<Partial<IUserProfile>>({
+  } = useForm<IEditProfile>({
     mode: 'onBlur',
     defaultValues: {
       name: user?.profile?.name,
       surname: user?.profile?.surname,
-      dateOfBirth: user?.profile?.dateOfBirth
-        ? formatDateToYyyyMmDd(user?.profile.dateOfBirth as string)
+      dateOfBirth: user.profile?.userDateOfBirth?.date
+        ? formatDateToYyyyMmDd(user?.profile.userDateOfBirth.date.toString())
         : '',
       email: user?.profile?.email,
       street: user?.profile?.street,
@@ -63,11 +71,10 @@ const Edit = ({ user }: IProps) => {
     );
   };
 
-  const onSubmit: SubmitHandler<Partial<IUserProfile>> = ({
+  const onSubmit: SubmitHandler<Omit<IEditProfile, 'dateOfBirth'>> = ({
     email,
     name,
     surname,
-    dateOfBirth,
     street,
     house,
     floor,
@@ -82,7 +89,6 @@ const Edit = ({ user }: IProps) => {
           email,
           name,
           surname,
-          dateOfBirth,
           street,
           house,
           floor,

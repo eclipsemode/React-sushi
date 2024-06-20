@@ -17,17 +17,7 @@ const ProfileSendSettings = () => {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector(selectMaterialDialog);
   const router = useRouter();
-  const {
-    email,
-    name,
-    surname,
-    dateOfBirth,
-    street,
-    house,
-    floor,
-    entrance,
-    room,
-  } = data;
+  const { email, name, surname, street, house, floor, entrance, room } = data;
 
   const callback = async () => {
     try {
@@ -36,7 +26,6 @@ const ProfileSendSettings = () => {
           email,
           name,
           surname,
-          dateOfBirth,
           street,
           house,
           floor,

@@ -29,7 +29,7 @@ const fetchPatchUserInfo = createAsyncThunk<
 >(
   'user/fetchPatchUserInfo',
   async (
-    { email, name, surname, dateOfBirth, street, house, floor, entrance, room },
+    { email, name, surname, street, house, floor, entrance, room },
     { getState, rejectWithValue }
   ) => {
     try {
@@ -39,7 +39,6 @@ const fetchPatchUserInfo = createAsyncThunk<
           email,
           name,
           surname,
-          dateOfBirth: new Date(dateOfBirth),
           street,
           house,
           floor,

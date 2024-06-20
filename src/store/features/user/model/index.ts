@@ -3,7 +3,6 @@ import { IOrder } from '@store/features/order/model';
 export interface IRegistrationProps {
   id?: string;
   email: string;
-  dateOfBirth: string;
   name: string;
   surname: string;
   tel: string;
@@ -12,6 +11,7 @@ export interface IRegistrationProps {
   floor: string | number;
   entrance: string | number;
   room: string | number;
+  userDateOfBirth?: IUserDateOfBirth;
 }
 
 export type TUserRole = 'USER' | 'ADMIN';
@@ -41,7 +41,7 @@ export interface IUserProfile {
   id: string;
   userId: string;
   email?: string;
-  dateOfBirth?: string;
+  userDateOfBirth?: IUserDateOfBirth;
   name?: string;
   surname?: string;
   street?: string;
@@ -49,6 +49,14 @@ export interface IUserProfile {
   floor?: string;
   entrance?: string;
   room?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface IUserDateOfBirth {
+  id: string;
+  profileId: string;
+  date: Date;
   createdAt?: Date;
   updatedAt?: Date;
 }

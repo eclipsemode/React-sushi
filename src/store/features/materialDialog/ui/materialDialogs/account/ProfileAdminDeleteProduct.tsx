@@ -17,7 +17,7 @@ const ProfileAdminDeleteProduct = () => {
 
   const callback = async () => {
     try {
-      await dispatch(deleteProduct((!!data && data[0].id) || 0)).unwrap();
+      await dispatch(deleteProduct((!!data && data.id) || 0)).unwrap();
       await dispatch(getProducts()).unwrap();
       enqueueSnackbar('Продукт успешно удален!', { variant: 'success' });
     } catch (e) {

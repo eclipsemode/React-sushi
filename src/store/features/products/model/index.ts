@@ -15,12 +15,12 @@ export interface ICreateProduct
   productSkus: string[];
 }
 
-export interface IChangeProduct extends Omit<ICreateProduct, 'image'> {
-  image: File | null;
-}
+// export interface IChangeProduct extends Omit<ICreateProduct, 'image'> {
+//   image: File | null;
+// }
 
 export interface IProductSize {
-  id: string;
+  readonly id?: string;
   productId: string;
   name: string;
   price: number;
@@ -29,7 +29,7 @@ export interface IProductSize {
 }
 
 export interface IProduct {
-  id: string;
+  readonly id?: string;
   isPizza: boolean;
   productSize: IProductSize[];
   name: string;

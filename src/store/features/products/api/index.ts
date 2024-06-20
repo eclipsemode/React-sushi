@@ -3,7 +3,6 @@ import { RootState } from '@store/index';
 import { $api } from '@services/api';
 import { SortOrderType, SortType } from '@store/features/filter/model';
 import {
-  IChangeProduct,
   ICreateProduct,
   IProduct,
   IProductOrderChange,
@@ -133,64 +132,22 @@ export const changeProductsOrder = createAsyncThunk<
 
 export const changeProduct = createAsyncThunk<
   void,
-  Record<'id', number> & IChangeProduct
->(
-  'products/changeProduct',
-  async (
-    {
-      id,
-      name,
-      price,
-      rating,
-      description,
-      image,
-      categoryId,
-      sku,
-      orderIndex,
-      type,
-      size,
-    },
-    { rejectWithValue }
-  ) => {
-    try {
-      const formData = new FormData();
-      formData.append('id', String(id));
-      formData.append('name', name);
-      formData.append('price', JSON.stringify(price));
-      formData.append('rating', String(rating));
-      formData.append('description', description);
-      if (image) {
-        formData.append('image', image);
-      }
-      formData.append('categoryId', String(categoryId));
-      if (size) {
-        formData.append('size', JSON.stringify(size));
-      }
-      if (sku) {
-        formData.append('sku', JSON.stringify(sku));
-      }
-      if (orderIndex) {
-        formData.append('orderIndex', String(orderIndex));
-      }
-      if (type) {
-        formData.append('type', type);
-      }
-
-      const response = await $api.put('api/product', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      return response.data;
-    } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
-      } else {
-        return rejectWithValue(error.message);
-      }
+  Omit<IProduct, 'image' | 'createdAt'>
+>('products/changeProduct', async (formData, { rejectWithValue }) => {
+  try {
+    const response = await $api.patch(
+      `api/product/${formData.id || ''}`,
+      formData
+    );
+    return response.data;
+  } catch (error: any) {
+    if (error.response && error.response.data.message) {
+      return rejectWithValue(error.response.data.message);
+    } else {
+      return rejectWithValue(error.message);
     }
   }
-);
+});
 
 export interface IProductsState {
   products: IProduct[];
