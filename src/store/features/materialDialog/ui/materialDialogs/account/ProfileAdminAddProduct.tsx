@@ -17,8 +17,8 @@ import React, { CSSProperties } from 'react';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Select from '@shared/UI/Select';
-import InputFile from '@shared/UI/InputFile';
 import { ICreateProduct } from '@store/features/products/model';
+import ImagePicker from '@components/Account/Admin/Products/ImagePicker';
 
 export interface ICreateProductForm
   extends Omit<
@@ -44,7 +44,13 @@ const rowStyle: CSSProperties = {
 const ProfileAdminAddProduct = () => {
   const dispatch = useAppDispatch();
   const { categories } = useAppSelector((state) => state.categoriesReducer);
-  const { register, reset, handleSubmit } = useForm<ICreateProductForm>();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<ICreateProductForm>();
   const [amountPizzaSize, setAmountPizzaSize] = React.useState<number>(1);
   const success = () => {
     dispatch(getProducts());
@@ -134,6 +140,11 @@ const ProfileAdminAddProduct = () => {
       </DialogTitle>
       <form onSubmit={handleSubmit(handleAgree)} onReset={handleDisagree}>
         <DialogContent>
+          <ImagePicker
+            imgFileList={watch('image')}
+            error={errors.image}
+            register={register}
+          />
           {renderSelectType()}
           <CustomInput
             required={true}
@@ -158,13 +169,6 @@ const ProfileAdminAddProduct = () => {
             name="description"
             style={rowStyle}
           />
-          <InputFile
-            required={true}
-            register={register}
-            name="image"
-            style={{ marginTop: '20px' }}
-          />
-
           <Select
             required={true}
             register={register}

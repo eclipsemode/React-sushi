@@ -2,13 +2,16 @@ import React, { CSSProperties } from 'react';
 import { Stack } from '@mui/material';
 import Colors from '@shared/utils/Colors';
 import styles from './index.module.scss';
+import { UseFormRegister } from 'react-hook-form';
 
 interface IProps {
-  register?: any;
+  register?: UseFormRegister<any>;
   required?: boolean;
-  name?: string;
+  name: string;
   style?: CSSProperties;
 }
+
+export const MAX_SIZE_FILE = 5242047;
 
 const InputFile = ({ register, required = false, name, style }: IProps) => {
   return (
@@ -17,13 +20,16 @@ const InputFile = ({ register, required = false, name, style }: IProps) => {
       style={style}
       className={styles.root}
     >
-      <span style={{ color: Colors.$rootText, fontSize: '18px' }}>
-        Изображение
-      </span>
       <input
         required={required}
         type="file"
-        {...register(name)}
+        accept="image/*"
+        size={MAX_SIZE_FILE}
+        {...(register
+          ? register(name, {
+              validate: (value: FileList) => value[0].size < MAX_SIZE_FILE,
+            })
+          : null)}
         style={{ color: Colors.$rootText }}
       />
     </Stack>

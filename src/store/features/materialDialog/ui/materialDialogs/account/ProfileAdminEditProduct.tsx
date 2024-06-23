@@ -14,15 +14,19 @@ import {
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { changeProduct, getProducts } from '@store/features/products/api';
+import {
+  changeProduct,
+  getProducts,
+  updateProductImage,
+} from '@store/features/products/api';
 import { enqueueSnackbar } from 'notistack';
 import CustomInput from '@shared/UI/CustomInput';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Select from '@shared/UI/Select';
-import InputFile from '@shared/UI/InputFile';
 import { IProduct, IProductSize } from '@store/features/products/model';
 import { ICreateProductForm } from '@store/features/materialDialog/ui/materialDialogs/account/ProfileAdminAddProduct';
+import ImagePicker from '@components/Account/Admin/Products/ImagePicker';
 
 const rowStyle: CSSProperties = {
   marginTop: '10px',
@@ -32,51 +36,49 @@ const ProfileAdminEditProduct = () => {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector(selectMaterialDialog) as { data: IProduct };
   const { categories } = useAppSelector((state) => state.categoriesReducer);
-  const { register, reset, handleSubmit, watch, setValue } =
-    useForm<ICreateProductForm>({
-      defaultValues: {
-        name: (!!data && data.name) || '',
-        price1:
-          (!!data &&
-            data.productSize.length >= 1 &&
-            data.productSize[0].price) ||
-          undefined,
-        price2:
-          (!!data &&
-            data.productSize.length > 1 &&
-            data.productSize[1].price) ||
-          undefined,
-        price3:
-          (!!data &&
-            data.productSize.length > 2 &&
-            data.productSize[2].price) ||
-          undefined,
-        isPizza: (!!data && data.isPizza) || false,
-        sku1:
-          (!!data && data.productSize.length >= 1 && data.productSize[0].sku) ||
-          '',
-        sku2:
-          (!!data && data.productSize.length > 1 && data.productSize[1].sku) ||
-          '',
-        sku3:
-          (!!data && data.productSize.length > 2 && data.productSize[2].sku) ||
-          '',
-        size1:
-          (!!data &&
-            data.productSize.length >= 1 &&
-            data.productSize[0].name) ||
-          '',
-        size2:
-          (!!data && data.productSize.length > 1 && data.productSize[1].name) ||
-          '',
-        size3:
-          (!!data && data.productSize.length > 2 && data.productSize[2].name) ||
-          '',
-        rating: (!!data && data.rating) || undefined,
-        description: (!!data && data.description) || '',
-        categoryId: (!!data && data.categoryId) || undefined,
-      },
-    });
+  const {
+    register,
+    reset,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<ICreateProductForm>({
+    defaultValues: {
+      name: (!!data && data.name) || '',
+      price1:
+        (!!data && data.productSize.length >= 1 && data.productSize[0].price) ||
+        undefined,
+      price2:
+        (!!data && data.productSize.length > 1 && data.productSize[1].price) ||
+        undefined,
+      price3:
+        (!!data && data.productSize.length > 2 && data.productSize[2].price) ||
+        undefined,
+      isPizza: (!!data && data.isPizza) || false,
+      sku1:
+        (!!data && data.productSize.length >= 1 && data.productSize[0].sku) ||
+        '',
+      sku2:
+        (!!data && data.productSize.length > 1 && data.productSize[1].sku) ||
+        '',
+      sku3:
+        (!!data && data.productSize.length > 2 && data.productSize[2].sku) ||
+        '',
+      size1:
+        (!!data && data.productSize.length >= 1 && data.productSize[0].name) ||
+        '',
+      size2:
+        (!!data && data.productSize.length > 1 && data.productSize[1].name) ||
+        '',
+      size3:
+        (!!data && data.productSize.length > 2 && data.productSize[2].name) ||
+        '',
+      rating: (!!data && data.rating) || undefined,
+      description: (!!data && data.description) || '',
+      categoryId: (!!data && data.categoryId) || undefined,
+    },
+  });
   const [amountPizzaSize, setAmountPizzaSize] = React.useState<number>(
     (!!data && data.productSize.length) || 1
   );
@@ -114,43 +116,10 @@ const ProfileAdminEditProduct = () => {
         productSize: newProductSize,
       };
 
+      const image = dataForm.image.item(0);
       await dispatch(changeProduct(productChanged)).unwrap();
-      // const fileImage: File | null = dataForm.image.item(0);
-      // if (dataForm.isPizza) {
-      //   let newPrice: number[] = [];
-      //   let newSku: string[] = [];
-      //   let newSize: string[] = [];
-      //
-      //   for (let i = 1; i < amountPizzaSize + 1; i++) {
-      //     // @ts-ignore
-      //     newPrice.push(+dataForm[`price${i}`]);
-      //     // @ts-ignore
-      //     newSku.push(dataForm[`sku${i}`] ? dataForm[`sku${i}`] : null);
-      //     // @ts-ignore
-      //     newSize.push(dataForm[`size${i}`]);
-      //   }
-      //
-      //   await dispatch(
-      //     changeProduct({
-      //       ...dataForm,
-      //       id: (!!data && data.id) || '',
-      //       price: newPrice,
-      //       sku: newSku.length > 0 ? newSku : null,
-      //       size: newSize.length > 0 ? newSize : null,
-      //       image: fileImage,
-      //     })
-      //   ).unwrap();
-      // } else {
-      //   const priceArr = [dataForm.price1];
-      //   await dispatch(
-      //     changeProduct({
-      //       ...dataForm,
-      //       id: data[0].id || 0,
-      //       price: priceArr,
-      //       image: fileImage,
-      //     })
-      //   ).unwrap();
-      // }
+      if (image)
+        await dispatch(updateProductImage({ image, id: data.id || '' }));
 
       reset();
       enqueueSnackbar('Позиция успешно изменена!', { variant: 'success' });
@@ -209,6 +178,12 @@ const ProfileAdminEditProduct = () => {
       </DialogTitle>
       <form onSubmit={handleSubmit(handleAgree)} onReset={handleDisagree}>
         <DialogContent>
+          <ImagePicker
+            imgFileList={watch('image')}
+            register={register}
+            error={errors.image}
+            defaultValueSrc={`${process.env.REACT_APP_API_URL}images/products/${data.image}`}
+          />
           {renderSelectType()}
           <CustomInput
             required={true}
@@ -243,11 +218,6 @@ const ProfileAdminEditProduct = () => {
             register={register}
             name="description"
             style={rowStyle}
-          />
-          <InputFile
-            register={register}
-            name="image"
-            style={{ marginTop: '20px' }}
           />
 
           <Select

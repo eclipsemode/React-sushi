@@ -23,7 +23,7 @@ const ProductsListDnD = () => {
   const parseCards = (cards: IProduct[]) => {
     const newCards: IProductOrderChange[] = cards.map((card, index) => {
       return {
-        id: card.id,
+        id: card.id || '',
         orderIndex: index + 1,
       };
     });

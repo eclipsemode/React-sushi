@@ -149,6 +149,29 @@ export const changeProduct = createAsyncThunk<
   }
 });
 
+export const updateProductImage = createAsyncThunk<
+  IProduct,
+  { image: File; id: string }
+>('products/updateProductImage', async ({ image, id }, { rejectWithValue }) => {
+  try {
+    const formData = new FormData();
+
+    formData.append('image', image);
+    const response = await $api.put(`api/product/image/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error: any) {
+    if (error.response && error.response.data.message) {
+      return rejectWithValue(error.response.data.message);
+    } else {
+      return rejectWithValue(error.message);
+    }
+  }
+});
+
 export interface IProductsState {
   products: IProduct[];
   productsStatus: ProductsStatus;
@@ -187,6 +210,15 @@ const productsSlice = createSlice({
         state.productsStatus = ProductsStatus.FULFILLED;
       })
       .addCase(createProduct.rejected, (state) => {
+        state.productsStatus = ProductsStatus.REJECTED;
+      })
+      .addCase(updateProductImage.pending, (state) => {
+        state.productsStatus = ProductsStatus.PENDING;
+      })
+      .addCase(updateProductImage.fulfilled, (state) => {
+        state.productsStatus = ProductsStatus.FULFILLED;
+      })
+      .addCase(updateProductImage.rejected, (state) => {
         state.productsStatus = ProductsStatus.REJECTED;
       })
       .addCase(getProducts.pending, (state) => {

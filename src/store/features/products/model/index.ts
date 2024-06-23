@@ -15,10 +15,6 @@ export interface ICreateProduct
   productSkus: string[];
 }
 
-// export interface IChangeProduct extends Omit<ICreateProduct, 'image'> {
-//   image: File | null;
-// }
-
 export interface IProductSize {
   readonly id?: string;
   productId: string;
