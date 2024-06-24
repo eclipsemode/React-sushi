@@ -86,9 +86,9 @@ const ProfileAdminAddProduct = () => {
       reset();
       success();
       enqueueSnackbar('Позиция успешно добавлена!', { variant: 'success' });
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
-      enqueueSnackbar('Ошибка добавления товара, попробуйте позднее', {
+      enqueueSnackbar(e.description, {
         variant: 'error',
       });
     }

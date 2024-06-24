@@ -46,7 +46,7 @@ const $api_frontpad = axios.create({
 const authInterceptor = async (config: any) => {
   if (config.headers) {
     const token = localStorage.getItem('accessToken');
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = token ? `Bearer ${token}` : '';
   }
   return config;
 };
@@ -73,7 +73,7 @@ const authInterceptorResError = async (
       const { accessToken } = res.data;
 
       localStorage.setItem('accessToken', accessToken);
-      return $api.request(originalRequest);
+      // return $api.request(originalRequest);
     } catch (e) {
       logDev(
         `🚨 [API] ${method?.toUpperCase()} ${url} | Error ${status} ${message} (${statusText})`
