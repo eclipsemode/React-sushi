@@ -9,6 +9,7 @@ interface IProps {
   error?: FieldError;
   register: UseFormRegister<any>;
   defaultValueSrc?: string;
+  required?: boolean;
 }
 
 const DEFAULT_IMAGE = '/images/product/image_placeholder.png';
@@ -18,6 +19,7 @@ const ImagePicker = ({
   error,
   register,
   defaultValueSrc,
+  required = true,
 }: IProps) => {
   const [imgSrc, setImgSrc] = useState<string>(
     defaultValueSrc ? defaultValueSrc : DEFAULT_IMAGE
@@ -25,7 +27,7 @@ const ImagePicker = ({
 
   useEffect(() => {
     const file = imgFileList ? imgFileList[0] : null;
-    if (file && file.size > MAX_SIZE_FILE) {
+    if (file && file?.size > MAX_SIZE_FILE) {
       enqueueSnackbar('Превышен лимит загрузки изображения', {
         variant: 'error',
       });
@@ -67,7 +69,7 @@ const ImagePicker = ({
         style={{ objectFit: 'cover', borderRadius: 8 }}
       />
       <InputFile
-        required={true}
+        required={required}
         register={register}
         name="image"
         style={{ marginTop: '20px' }}

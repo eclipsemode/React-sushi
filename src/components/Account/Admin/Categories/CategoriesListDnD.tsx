@@ -10,6 +10,7 @@ import {
 import { setMaterialDialog } from '@store/features/materialDialog/api';
 import { MaterialDialogTypes } from '@store/features/materialDialog/model';
 import { ICategory } from '@store/features/categories/model';
+import { enqueueSnackbar } from 'notistack';
 
 const CategoriesListDnD = () => {
   const dispatch = useAppDispatch();
@@ -58,8 +59,15 @@ const CategoriesListDnD = () => {
       return (
         <div
           onDrop={async () => {
-            await dispatch(changeCategoryOrder(filterCards(cards)));
-            await dispatch(getCategories());
+            try {
+              await dispatch(changeCategoryOrder(filterCards(cards))).unwrap();
+              await dispatch(getCategories());
+            } catch (e: any) {
+              console.error(e);
+              enqueueSnackbar(e.description, {
+                variant: 'error',
+              });
+            }
           }}
           key={card.id}
         >

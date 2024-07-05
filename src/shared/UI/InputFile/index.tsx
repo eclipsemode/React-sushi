@@ -27,7 +27,8 @@ const InputFile = ({ register, required = false, name, style }: IProps) => {
         size={MAX_SIZE_FILE}
         {...(register
           ? register(name, {
-              validate: (value: FileList) => value[0].size < MAX_SIZE_FILE,
+              validate: (value: FileList) =>
+                value[0] ? value[0]?.size < MAX_SIZE_FILE : true,
             })
           : null)}
         style={{ color: Colors.$rootText }}

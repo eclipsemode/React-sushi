@@ -63,7 +63,9 @@ const ProfileAdminAddCategory = () => {
         Введите название категории
       </DialogTitle>
       <form onSubmit={handleSubmit(handleAgree)} onReset={handleDisagree}>
-        <DialogContent>
+        <DialogContent
+          style={{ display: 'flex', flexDirection: 'column', rowGap: 20 }}
+        >
           <CustomInput register={register} name="name" required />
           <InputFile register={register} name="image" required />
         </DialogContent>

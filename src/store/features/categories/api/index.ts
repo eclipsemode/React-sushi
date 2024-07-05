@@ -63,16 +63,31 @@ export const deleteCategory = createAsyncThunk<void, ICategory['id']>(
   }
 );
 
-export const changeCategory = createAsyncThunk<void, IChangeCategory>(
-  'categories/changeCategory',
-  async ({ id, name, image }, { rejectWithValue }) => {
+export const changeCategory = createAsyncThunk<
+  void,
+  Pick<IChangeCategory, 'id' | 'name'>
+>('categories/changeCategory', async ({ id, name }, { rejectWithValue }) => {
+  try {
+    const res = await $api.patch(`api/category/${id}`, { name });
+    return res.data;
+  } catch (error: any) {
+    if (error.response && error.response.data.message) {
+      return rejectWithValue(error.response.data.message);
+    } else {
+      return rejectWithValue(error.message);
+    }
+  }
+});
+export const changeCategoryImage = createAsyncThunk<
+  void,
+  Pick<IChangeCategory, 'id' | 'image'>
+>(
+  `categories/changeCategoryName`,
+  async ({ id, image }, { rejectWithValue }) => {
     try {
       const formData = new FormData();
-      formData.append('name', name);
-      if (image) {
-        formData.append('image', image);
-      }
-      const res = await $api.patch(`api/category/${id}`, formData, {
+      formData.append('image', image);
+      const res = await $api.patch(`api/category/${id}/image`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -92,15 +107,13 @@ export const changeCategoryOrder = createAsyncThunk<void, string[]>(
   'categories/changeCategoryOrder',
   async (categoryArr, { rejectWithValue }) => {
     try {
-      const res = await $api.patch('api/category/change-order', {
-        data: categoryArr,
-      });
+      const res = await $api.post('api/category/change-order', categoryArr);
       return res.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
-        return rejectWithValue(error.message);
+        return rejectWithValue(error.response.data);
       }
     }
   }
