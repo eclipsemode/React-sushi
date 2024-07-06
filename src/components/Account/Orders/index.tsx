@@ -18,7 +18,7 @@ const Orders = () => {
   const { userOrders } = useAppSelector((state) => state.orderReducer);
   const dispatch = useAppDispatch();
   const [orders, setOrders] = React.useState<IOrder[]>();
-  const { isAuth } = useAppSelector(selectAuth);
+  const { authUserId } = useAppSelector(selectAuth);
 
   async function getOrders(page: number = 1) {
     try {
@@ -34,8 +34,8 @@ const Orders = () => {
   }
 
   React.useEffect(() => {
-    if (isAuth) getOrders();
-  }, [isAuth]);
+    if (authUserId) getOrders().then();
+  }, [authUserId]);
 
   return (
     <Stack sx={{ width: '100%' }}>

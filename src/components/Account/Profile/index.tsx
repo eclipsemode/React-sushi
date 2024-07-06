@@ -23,10 +23,10 @@ const Profile = ({ user }: IProps) => {
       {user?.profile.surname && (
         <Field title="Фамилия" text={user.profile.surname} />
       )}
-      {user?.profile.dateOfBirth && (
+      {user?.profile.userDateOfBirth?.date && (
         <Field
           title="Дата рождения"
-          text={formatDateToString(new Date(user.profile.dateOfBirth))}
+          text={formatDateToString(new Date(user.profile.userDateOfBirth.date))}
         />
       )}
       {user?.tel && <Field title="Телефон" text={user.tel} />}

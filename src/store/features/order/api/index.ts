@@ -8,6 +8,7 @@ import { IPromocodeState } from '@store/features/promocode/api';
 import Frontpad from '@services/frontpad';
 import convertTimeToDateTime from '@shared/utils/convertTimeToDateTime';
 import { IBranchState } from '@store/features/branch/api';
+import { IAuthState } from '@store/features/auth/api';
 
 export const AccountOrdersListSize = 10;
 
@@ -28,6 +29,7 @@ export const createOrder = createAsyncThunk<
     const { userReducer, cartReducer, promocodeReducer, branchReducer } =
       getState();
     const { currentBranch } = branchReducer;
+    console.log(currentBranch);
     const frontpadApi = new Frontpad();
     const frontpadApiResponse = await frontpadApi.newOrder(
       cartReducer.products,
@@ -76,14 +78,14 @@ export const createOrder = createAsyncThunk<
 export const getOrdersByUserId = createAsyncThunk<
   IOrder[],
   { page: number; size: number },
-  { state: { userReducer: IUserState } }
+  { state: { authReducer: IAuthState } }
 >(
   'account/getOrdersByUserId',
   async ({ page, size }, { rejectWithValue, getState }) => {
     try {
-      const { userReducer } = getState();
+      const { authReducer } = getState();
       const response = await $api.get(
-        `api/order/user?userId=${userReducer.user?.id}&page=${page}&size=${size}`
+        `api/order/user?userId=${authReducer.authUserId}&page=${page}&size=${size}`
       );
       return response.data;
     } catch (error: any) {

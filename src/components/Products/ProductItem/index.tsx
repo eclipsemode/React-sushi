@@ -25,7 +25,7 @@ const ButtonGroupStyles: SxProps = {
 
 const ProductItem = ({ product }: IProps) => {
   const [selectedSizeId, setSelectedSizeId] = React.useState<string>(
-    product.productSize[0].id
+    product.productSize[0].id || ''
   );
 
   const renderSizeButtons = () => (
@@ -44,7 +44,7 @@ const ProductItem = ({ product }: IProps) => {
                 : 'auto',
           }}
           className={styles.pizzaButton}
-          onClick={() => setSelectedSizeId(item.id)}
+          onClick={() => setSelectedSizeId(item.id || '')}
         >
           {item.name}
         </Button>

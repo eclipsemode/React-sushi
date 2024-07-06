@@ -27,6 +27,7 @@ import {
 } from '@store/features/adaptive';
 import { selectBranch } from '@store/features/branch/api';
 import { IOrder } from '@store/features/order/model';
+import checkDateIsToday from '@shared/utils/checkDateIsToday';
 
 interface IProps {
   orders: IOrder[];
@@ -43,7 +44,7 @@ const OrdersList = ({ orders }: IProps) => {
       setExpanded(isExpanded ? panel : false);
     };
 
-  const renderStatus = (order) => {
+  const renderStatus = (order: IOrder) => {
     switch (order.status) {
       case 'new':
         return (
@@ -183,7 +184,7 @@ const OrdersList = ({ orders }: IProps) => {
             <DividerAnt orientation="left" className={styles.divider}>
               Время
             </DividerAnt>
-            {!order.date ? (
+            {!order.preOrderDate ? (
               <Typography
                 className={styles.root__data}
                 sx={{ color: Colors.$rootText }}
@@ -195,8 +196,11 @@ const OrdersList = ({ orders }: IProps) => {
                 className={styles.root__data}
                 sx={{ color: Colors.$rootText }}
               >
-                {order.day === 'today' && 'Сегодня'}{' '}
-                {order.time && 'в ' + order.time}
+                {checkDateIsToday(order.preOrderDate)
+                  ? 'Сегодня'
+                  : new Date(order.preOrderDate).toLocaleDateString()}{' '}
+                {order.preOrderDate &&
+                  'в ' + new Date(order.preOrderDate).toLocaleTimeString()}
               </Typography>
             )}
 
@@ -232,14 +236,17 @@ const OrdersList = ({ orders }: IProps) => {
                     <Avatar
                       alt="Remy Sharp"
                       src={
-                        process.env.REACT_APP_API_URL + (product?.image || '')
+                        product?.image
+                          ? `${process.env.REACT_APP_API_URL}/images/products/${product.image}`
+                          : ''
                       }
                     />
                   </ListItemAvatar>
                   <ListItemText
                     sx={{ color: Colors.$rootText }}
                     primary={
-                      product.name + (product.size ? ' ' + product.size : '')
+                      product.name +
+                      (product.productSize ? ' ' + product.productSize : '')
                     }
                     secondary={
                       <React.Fragment>
