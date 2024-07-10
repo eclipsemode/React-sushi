@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Divider as DividerAnt } from 'antd';
 import Moment from 'react-moment';
 import styles from './index.module.scss';
@@ -33,7 +33,6 @@ interface IProps {
   orders: IOrder[];
 }
 
-// TODO Исправить ошибки
 const OrdersList = ({ orders }: IProps) => {
   const [expanded, setExpanded] = React.useState<string | false>(false);
   const { deviceType } = useAppSelector(selectAdaptiveServiceSlice);
@@ -86,6 +85,10 @@ const OrdersList = ({ orders }: IProps) => {
         );
     }
   };
+
+  useEffect(() => {
+    console.log(orders);
+  }, []);
 
   const renderOrders = () => (
     <div style={{ width: '100%' }}>
@@ -246,7 +249,10 @@ const OrdersList = ({ orders }: IProps) => {
                     sx={{ color: Colors.$rootText }}
                     primary={
                       product.name +
-                      (product.productSize ? ' ' + product.productSize : '')
+                      (product.productSize && product.isPizza
+                        ? ' ' + product.productSize
+                        : '') +
+                      ` - ${product.amount}шт.`
                     }
                     secondary={
                       <React.Fragment>
@@ -265,7 +271,7 @@ const OrdersList = ({ orders }: IProps) => {
                             fontSize: '12px',
                           }}
                         >
-                          Стоимость: {product.amount} * {product.price} ₽ ={' '}
+                          Стоимость: {product.amount}шт * {product.price} ₽ ={' '}
                           {order.totalPrice} ₽
                         </span>
                       </React.Fragment>
