@@ -46,21 +46,25 @@ const Orders = () => {
     return Math.floor(count);
   };
 
+  const renderPagination = () => (
+    <Pagination
+      onChange={(_, page) => getOrders(page)}
+      count={getPages()}
+      sx={{
+        justifyContent: 'center',
+        display: 'flex',
+        marginTop: '10px',
+        ' button, .MuiPaginationItem-root': { color: Colors.$rootText },
+      }}
+    />
+  );
+
   return (
     <Stack sx={{ width: '100%' }}>
       {orders && orders.length > 0 ? (
         <>
           <OrdersList orders={orders} />
-          <Pagination
-            onChange={(_, page) => getOrders(page)}
-            count={getPages()}
-            sx={{
-              justifyContent: 'center',
-              display: 'flex',
-              marginTop: '10px',
-              ' button, .MuiPaginationItem-root': { color: Colors.$rootText },
-            }}
-          />
+          {ordersCount > 0 && renderPagination()}
         </>
       ) : (
         <div className={styles.root__empty}>

@@ -63,7 +63,7 @@ export const createPromoCode = createAsyncThunk<IPromocode, IPromocodeCreate>(
         code,
         discount,
         type,
-        limit,
+        limit: +limit,
       });
       return res.data;
     } catch (error: any) {
@@ -99,7 +99,7 @@ export const changePromoCode = createAsyncThunk<IPromocode, IChangePromocode>(
       const res = await $api.patch(`api/promo-code/${id}`, {
         code,
         type,
-        limit,
+        limit: +limit,
         discount,
       });
       return res.data;
@@ -188,8 +188,8 @@ const promoCodeSlice = createSlice({
       .addCase(
         getAllPromoCodes.fulfilled,
         (state, action: PayloadAction<IPromocodeWithPagination>) => {
-          state.promocodesList = action.payload.rows;
-          state.promocodesCount = action.payload.count;
+          state.promocodesList = action.payload.list;
+          state.promocodesCount = action.payload._count;
         }
       )
       .addCase(getAllPromoCodes.rejected, (state) => {

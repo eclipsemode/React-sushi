@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import SimpleButton from '@shared/UI/SimpleButton';
 import Colors from '@shared/utils/Colors';
@@ -19,13 +19,13 @@ import { IPromocode } from '@store/features/promocode/model';
 
 const ProfileAdminChangePromocode = () => {
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector(selectMaterialDialog);
+  const { data } = useAppSelector(selectMaterialDialog) as { data: IPromocode };
   const { register, handleSubmit } = useForm<IPromocode>({
     defaultValues: {
       code: data.code || '',
       type: data.type || '',
       discount: data.discount || undefined,
-      limit: data.limit || '',
+      limit: data.limit || 9999,
     },
   });
   const success = async () => {
@@ -34,7 +34,12 @@ const ProfileAdminChangePromocode = () => {
 
   const callback = async (formData: IPromocode) => {
     try {
-      await dispatch(changePromoCode(formData)).unwrap();
+      await dispatch(
+        changePromoCode({
+          ...formData,
+          id: data.id,
+        })
+      ).unwrap();
       enqueueSnackbar('Промокод успешно добавлен!', { variant: 'success' });
     } catch (e) {
       console.error(e);

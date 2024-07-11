@@ -12,8 +12,8 @@ export interface IPromocode {
 }
 
 export interface IPromocodeWithPagination {
-  count: number;
-  rows: IPromocode[];
+  _count: number;
+  list: IPromocode[];
 }
 
 export interface IPromocodeCreate extends Omit<IPromocode, 'id'> {}
