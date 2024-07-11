@@ -54,6 +54,11 @@ export interface IOrder {
   readonly createdAt?: Date;
 }
 
+export interface IGetAllOrdersByUserId {
+  orders: IOrder[];
+  _count: number;
+}
+
 type DeliveryTimeType = 1 | 2;
 
 export interface IFormData

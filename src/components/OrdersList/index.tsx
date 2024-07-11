@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Divider as DividerAnt } from 'antd';
 import Moment from 'react-moment';
 import styles from './index.module.scss';
@@ -85,10 +85,6 @@ const OrdersList = ({ orders }: IProps) => {
         );
     }
   };
-
-  useEffect(() => {
-    console.log(orders);
-  }, []);
 
   const renderOrders = () => (
     <div style={{ width: '100%' }}>

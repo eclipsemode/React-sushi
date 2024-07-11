@@ -3,7 +3,7 @@ import { IUserState } from '@store/features/user/api';
 import { ICartState } from '@store/features/cart/api';
 import OrderDto from '@store/features/order/model/OrderDto';
 import { $api } from '@services/api';
-import { IFormData, IOrder } from '../model';
+import { IFormData, IGetAllOrdersByUserId, IOrder } from '../model';
 import { IPromocodeState } from '@store/features/promocode/api';
 import Frontpad from '@services/frontpad';
 import convertTimeToDateTime from '@shared/utils/convertTimeToDateTime';
@@ -76,7 +76,7 @@ export const createOrder = createAsyncThunk<
 });
 
 export const getOrdersByUserId = createAsyncThunk<
-  IOrder[],
+  IGetAllOrdersByUserId,
   { page: number; size: number },
   { state: { authReducer: IAuthState } }
 >(
@@ -103,6 +103,7 @@ export interface IOrderState {
   formData: IFormData | null;
   orderError: boolean;
   userOrders: IOrder[];
+  ordersCount: number;
 }
 
 const initialState: IOrderState = {
@@ -110,6 +111,7 @@ const initialState: IOrderState = {
   formData: null,
   orderError: false,
   userOrders: [],
+  ordersCount: 0,
 };
 
 const orderSlice = createSlice({
@@ -147,8 +149,9 @@ const orderSlice = createSlice({
       })
       .addCase(
         getOrdersByUserId.fulfilled,
-        (state, action: PayloadAction<IOrder[]>) => {
-          state.userOrders = action.payload;
+        (state, action: PayloadAction<IGetAllOrdersByUserId>) => {
+          state.ordersCount = action.payload._count;
+          state.userOrders = action.payload.orders;
           state.orderCreateLoadProcess = false;
         }
       )

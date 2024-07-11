@@ -15,7 +15,7 @@ import {
 import { selectAuth } from '@store/features/auth/api';
 
 const Orders = () => {
-  const { userOrders } = useAppSelector((state) => state.orderReducer);
+  const { ordersCount } = useAppSelector((state) => state.orderReducer);
   const dispatch = useAppDispatch();
   const [orders, setOrders] = React.useState<IOrder[]>();
   const { authUserId } = useAppSelector(selectAuth);
@@ -25,7 +25,7 @@ const Orders = () => {
       const ordersRes = await dispatch(
         getOrdersByUserId({ page, size: AccountOrdersListSize })
       ).unwrap();
-      setOrders(ordersRes);
+      setOrders(ordersRes.orders);
     } catch (e) {
       enqueueSnackbar('Ошибка загрузки истории заказов', {
         variant: 'error',
@@ -37,6 +37,15 @@ const Orders = () => {
     if (authUserId) getOrders().then();
   }, [authUserId]);
 
+  const getPages = () => {
+    let count = ordersCount / AccountOrdersListSize;
+    const countRemain = ordersCount % AccountOrdersListSize;
+
+    if (countRemain > 0) count++;
+
+    return Math.floor(count);
+  };
+
   return (
     <Stack sx={{ width: '100%' }}>
       {orders && orders.length > 0 ? (
@@ -44,13 +53,7 @@ const Orders = () => {
           <OrdersList orders={orders} />
           <Pagination
             onChange={(_, page) => getOrders(page)}
-            count={
-              userOrders.length % AccountOrdersListSize === 0
-                ? userOrders.length / AccountOrdersListSize
-                : parseInt(
-                    String(userOrders.length / AccountOrdersListSize + 1)
-                  )
-            }
+            count={getPages()}
             sx={{
               justifyContent: 'center',
               display: 'flex',
