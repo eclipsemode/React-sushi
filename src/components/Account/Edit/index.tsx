@@ -71,7 +71,7 @@ const Edit = ({ user }: IProps) => {
     );
   };
 
-  const onSubmit: SubmitHandler<Omit<IEditProfile, 'dateOfBirth'>> = ({
+  const onSubmit: SubmitHandler<IEditProfile> = ({
     email,
     name,
     surname,
@@ -80,6 +80,7 @@ const Edit = ({ user }: IProps) => {
     floor,
     entrance,
     room,
+    dateOfBirth,
   }) => {
     dispatch(
       setMaterialDialog({
@@ -94,6 +95,7 @@ const Edit = ({ user }: IProps) => {
           floor,
           entrance,
           room,
+          date: defaultValues?.dateOfBirth === dateOfBirth ? null : dateOfBirth,
         },
       })
     );

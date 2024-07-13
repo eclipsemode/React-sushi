@@ -1,5 +1,7 @@
 const path = require('path');
-require('dotenv').config({path: path.resolve(__dirname, `../.env.${process.env.NODE_ENV}`)})
+require('dotenv').config({
+  path: path.resolve(__dirname, `../.env.${process.env.NODE_ENV}`),
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -9,7 +11,7 @@ const nextConfig = {
     FRONTPAD_SECRET: process.env.FRONTPAD_SECRET,
     WEBHOOK_FRONTPAD_STATUS: process.env.WEBHOOK_FRONTPAD_STATUS,
     DADATA_TOKEN: process.env.DADATA_TOKEN,
-    DADATA_SECRET: process.env.DADATA_SECRET
+    DADATA_SECRET: process.env.DADATA_SECRET,
   },
   images: {
     remotePatterns: [
@@ -21,6 +23,6 @@ const nextConfig = {
       },
     ],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

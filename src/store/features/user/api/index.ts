@@ -56,6 +56,26 @@ const fetchPatchUserInfo = createAsyncThunk<
   }
 );
 
+const patchUserDate = createAsyncThunk<void, Date, { state: RootState }>(
+  'user/patchUserDate',
+  async (date, { getState, rejectWithValue }) => {
+    try {
+      const { authReducer } = getState();
+      if (authReducer.isAuth) {
+        await $api.patch(`api/user/${authReducer?.authUserId}/date`, {
+          date,
+        });
+      }
+    } catch (error: any) {
+      if (error.response && error.response.data.description) {
+        return rejectWithValue(error.response.data.description);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 export interface IUserState {
   user: IUser | null;
   error: string | undefined | null;
@@ -101,7 +121,7 @@ const userSlice = createSlice({
   },
 });
 
-export { getUserData, fetchPatchUserInfo };
+export { getUserData, fetchPatchUserInfo, patchUserDate };
 
 export const selectUser = (state: RootState) => state.userReducer;
 export const { setUser } = userSlice.actions;
