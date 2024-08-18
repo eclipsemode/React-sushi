@@ -9,6 +9,7 @@ export interface ICartState {
   deliveryPrice: number;
   totalAmount: number;
   pizzasDiscount: number;
+  discountTextArr: string[];
 }
 
 const initialState: ICartState = {
@@ -17,6 +18,7 @@ const initialState: ICartState = {
   deliveryPrice: 0,
   totalAmount: 0,
   pizzasDiscount: 0,
+  discountTextArr: [],
 };
 
 const cartSlice = createSlice({
@@ -161,6 +163,8 @@ const cartSlice = createSlice({
         (previousValue, currentValue) => previousValue + currentValue,
         0
       );
+
+      // TODO: При использовании в будущем реализовать метод добавляющий текст акции в discountTextArr
 
       state.pizzasDiscount = discountPrice;
     },

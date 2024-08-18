@@ -29,8 +29,13 @@ import { TOrderType } from '@store/features/order/model';
 import CartItem from '@components/CartItem';
 
 const CartOrder: React.FC = () => {
-  const { products, totalPrice, deliveryPrice, pizzasDiscount } =
-    useAppSelector(selectCart);
+  const {
+    products,
+    totalPrice,
+    deliveryPrice,
+    pizzasDiscount,
+    discountTextArr,
+  } = useAppSelector(selectCart);
   const { user } = useAppSelector(selectUser);
   const { deviceType } = useAppSelector(selectAdaptiveServiceSlice);
   const { promocode, promocodeError, promocodeLoadSaveProcess } =
@@ -87,9 +92,12 @@ const CartOrder: React.FC = () => {
     return totalPrice - pizzasDiscount;
   };
 
-  const renderDiscount = (text: string) => (
+  const renderDiscount = (arr: string[]) => (
     <div className={styles.discount}>
-      <span>Действует акция: {text}</span>
+      <span>Текущие акции: </span>
+      {arr.map((txt) => (
+        <p key={txt}> - {txt}</p>
+      ))}
     </div>
   );
 
@@ -144,8 +152,8 @@ const CartOrder: React.FC = () => {
                   Сумма заказа: {getTotalPriceWithPizzasDiscount()} ₽
                 </h4>
               </div>
-              {!!pizzasDiscount &&
-                renderDiscount('3-я пицца наименьшая по стоимости в подарок!')}
+              {(discountTextArr?.length || 0) > 0 &&
+                renderDiscount(discountTextArr)}
             </td>
           </tr>
         </tfoot>
