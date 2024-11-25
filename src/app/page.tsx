@@ -8,22 +8,22 @@ import styles from './index.module.scss';
 import Filter from '@components/Filter';
 
 const Home = () => {
-  return (
-    <>
-      <Banner />
-      <HomeInfo />
-      <div className={styles.content__top}>
-        <Categories />
-      </div>
-      <div className={styles.container}>
-        <section className={styles.content__head}>
-          <HomeTitle />
-          <Filter />
-        </section>
-        <Products />
-      </div>
-    </>
-  );
+    return (
+        <>
+            <Banner/>
+            <HomeInfo/>
+            <div className={styles.content__top}>
+                <Categories/>
+            </div>
+            <div className={styles.container}>
+                <section className={styles.content__head}>
+                    <HomeTitle/>
+                    <Filter/>
+                </section>
+                <Products/>
+            </div>
+        </>
+    );
 };
 
 export default Home;

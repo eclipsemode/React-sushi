@@ -21,9 +21,6 @@ interface IProps extends IPopoverLocationProps {
 }
 
 const DesktopHeader = ({
-  openedPopover,
-  popoverRef,
-  handleClosePopover,
   currentBranch,
   handleAgreePopover,
   onCityPickClick,
@@ -38,9 +35,6 @@ const DesktopHeader = ({
 
   const renderPopover = () => (
     <PopoverLocation
-      openedPopover={openedPopover}
-      popoverRef={popoverRef}
-      handleClosePopover={handleClosePopover}
       currentBranch={currentBranch}
       handleAgreePopover={handleAgreePopover}
       onCityPickClick={onCityPickClick}
@@ -96,7 +90,7 @@ const DesktopHeader = ({
         <Stack spacing={0.5}>
           <span className={styles.city}>
             город:{' '}
-            <span ref={popoverRef} onClick={onCityPickClick}>
+            <span onClick={onCityPickClick}>
               {currentBranch?.name}
             </span>
           </span>

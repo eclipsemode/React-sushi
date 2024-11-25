@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import '@app/globals.scss'
 import '@assets/styles/app.scss';
 import styles from './index.module.scss';
 import composeScripts from '@shared/utils/composeScripts';

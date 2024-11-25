@@ -26,10 +26,7 @@ interface IProps extends IPopoverLocationProps {
 }
 
 const MobileHeader = ({
-  openedPopover,
-  popoverRef,
   handleAgreePopover,
-  handleClosePopover,
   onCityPickClick,
   currentBranch,
   totalPrice,
@@ -64,9 +61,6 @@ const MobileHeader = ({
 
   const renderPopover = () => (
     <PopoverLocation
-      openedPopover={openedPopover}
-      popoverRef={popoverRef}
-      handleClosePopover={handleClosePopover}
       currentBranch={currentBranch}
       handleAgreePopover={handleAgreePopover}
       onCityPickClick={onCityPickClick}
@@ -95,7 +89,7 @@ const MobileHeader = ({
           <Stack spacing={0.5} textAlign="right">
             <span className={styles.city}>
               город:{' '}
-              <span ref={popoverRef} onClick={onCityPickClick}>
+              <span onClick={onCityPickClick}>
                 {currentBranch?.name}
               </span>
             </span>
