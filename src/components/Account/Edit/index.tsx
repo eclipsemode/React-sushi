@@ -138,9 +138,10 @@ const Edit = ({ user }: IProps) => {
           register={register}
           name="dateOfBirth"
           label=" "
+          maskType={'date'}
           type="date"
         />
-        <CustomInput name="tel" disabled label={user?.tel} type="tel" />
+        <CustomInput maskType={'phone'} name="tel" disabled label={user?.tel} type="tel" />
         <CustomInput register={register} name="street" label="Улица" />
         <Stack spacing={2}>
           <Stack direction="row" spacing={2}>

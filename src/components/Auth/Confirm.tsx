@@ -81,11 +81,10 @@ const Confirm = ({ requestId, tel }: IProps) => {
           name="code"
           inputMask={true}
           label="Введите код"
-          maskChar=""
-          mask="9999"
           value={code}
           onChangeEvent={setCode}
           error={!!errors.code}
+          maskType={'code'}
           validate={(value) => value.length === 4}
           endAdornment={
             authLoadSaveProcess ? (

@@ -51,8 +51,6 @@ const Auth = () => {
             className={styles.root__input}
             name="tel"
             inputMask={true}
-            mask="+7 (999) 999-99-99"
-            maskChar=""
             error={!!errors.tel}
             validate={(value) =>
               !!value.match(/\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}/)
@@ -60,6 +58,7 @@ const Auth = () => {
             label="Введите телефон"
             type="tel"
             required
+            maskType={'phone'}
             endAdornment={
               !confirm && authLoadSaveProcess ? (
                 <CircularProgress size={20} />
